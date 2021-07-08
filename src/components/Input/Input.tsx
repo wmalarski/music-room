@@ -4,7 +4,8 @@ const Input = (
   props: DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  >
-): JSX.Element => <input {...props} />;
+  >,
+  ref: React.LegacyRef<HTMLInputElement>
+): JSX.Element => <input {...props} ref={ref} />;
 
-export default Input;
+export default React.forwardRef(Input);
