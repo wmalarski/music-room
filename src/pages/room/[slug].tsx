@@ -1,12 +1,9 @@
+import fetch from "cross-fetch";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../../atoms/Layout/Layout";
-import {
-  selectRoles,
-  SelectRolesReturn,
-} from "../../services/data/roles/selectRoles";
-import { supabase } from "../../services/supabase";
+import { SelectRolesReturn } from "../../services/data/roles/selectRoles";
 
 export type RoomPageProps = {
   roles: SelectRolesReturn[];
@@ -26,26 +23,20 @@ const RoomPage = ({ roles }: RoomPageProps): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
   params: { slug } = {},
-  req,
 }) => {
   const roomSlug = Array.isArray(slug) ? slug.join("") : slug;
-  if (!roomSlug) return { notFound: true };
-
-  const { user } = await supabase.auth.api.getUserByCookie(req);
-  console.log("user", user);
-  if (!user) return { notFound: true };
-
-  const roles = await selectRoles({
-    queryKey: [
-      "roles",
-      {
-        roomSlug,
-        userId: user.id,
-      },
-    ],
-  });
-
-  return { props: { roles } };
+  console.log("getServerSideProps", roomSlug);
+  try {
+    const response = await fetch(
+      `${process.env.API_URL}/data/roles?slug=${roomSlug}`
+    );
+    const roles = await response.json();
+    console.log("roles", roles);
+    return { props: { roles } };
+  } catch (error: any) {
+    console.log("error", error);
+    return { notFound: true };
+  }
 };
 
 export default RoomPage;
