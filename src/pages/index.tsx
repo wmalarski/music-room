@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import Layout from "../components/Layout/Layout";
+import Layout from "../atoms/Layout/Layout";
 import { useUserContext } from "../molecules/auth/UserContext";
 import CreateRoom from "../molecules/createRoom/CreateRoom/CreateRoom";
 import SignIn from "../molecules/signIn/SignIn/SignIn";

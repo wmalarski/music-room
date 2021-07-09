@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../../components/Input/Input";
+import Input from "../../../atoms/Input/Input";
 
 export type SignUpFormData = {
   email: string;

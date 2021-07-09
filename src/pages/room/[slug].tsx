@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../atoms/Layout/Layout";
 import {
   selectRoles,
   SelectRolesReturn,
