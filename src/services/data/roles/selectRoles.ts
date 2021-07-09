@@ -6,6 +6,7 @@ import {
   UseQueryResult,
 } from "react-query";
 import { supabase } from "../../supabase";
+import { Profile, Role, Room } from "../types";
 
 export type SelectRolesArgs = {
   userId: string;
@@ -15,11 +16,9 @@ export type SelectRolesArgs = {
 export type SelectRolesKey = ["roles", SelectRolesArgs];
 
 export type SelectRolesReturn = {
-  id: number;
-  user_id: string;
-  room_id: number;
-  slug: string;
-  role: string;
+  profile_id: Pick<Profile, "user_id" | "id">;
+  room_id: Pick<Room, "slug" | "id">;
+  role: Role["role"];
 };
 
 export const selectRoles = async ({
@@ -27,9 +26,11 @@ export const selectRoles = async ({
 }: QueryFunctionContext<SelectRolesKey>): Promise<SelectRolesReturn[]> => {
   const { data, error } = await supabase
     .from<SelectRolesReturn>("roles")
-    .select("id, profile_id ( user_id ), room_id, room_id ( slug ), role")
-    .eq("user_id", userId)
-    .eq("slug", roomSlug);
+    .select("profile_id ( id, user_id ), room_id ( id, slug ), role")
+    .match({
+      "profile_id.user_id": userId,
+      "room_id.slug": roomSlug,
+    });
 
   if (error || !data) throw error;
 
