@@ -1,6 +1,6 @@
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
 import { useSelectMessages } from "../../../services/data/messages/selectMessages";
-import { useSubscribeToMessage } from "../../../services/data/messages/subscribeToMessage";
+import { useSubscribeToMessages } from "../../../services/data/messages/subscribeToMessages";
 import { RoomRole } from "../../../services/data/types";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatView from "../ChatView/ChatView";
@@ -12,7 +12,7 @@ export type ChatRoomProps = {
 };
 
 const ChatRoom = ({ profileId, roomId }: ChatRoomProps): JSX.Element => {
-  useSubscribeToMessage({ roomId });
+  useSubscribeToMessages({ roomId });
 
   const { data: pages, fetchNextPage } = useSelectMessages({ roomId });
 

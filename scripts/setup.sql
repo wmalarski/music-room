@@ -43,6 +43,7 @@ CREATE TABLE actions (
   profile_id BIGINT NOT NULL REFERENCES profiles,
   messages_id BIGINT NOT NULL REFERENCES messages,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
   like_at TIMESTAMP DEFAULT NULL,
   dislike_at TIMESTAMP DEFAULT NULL,
 );
@@ -90,3 +91,9 @@ DROP TRIGGER IF EXISTS profile_room_author on public.rooms;
 CREATE TRIGGER profile_room_author
 AFTER INSERT ON public.rooms
 FOR EACH ROW EXECUTE PROCEDURE insert_role_and_controls_for_room();
+
+---- Updated_at ----
+create extension if not exists moddatetime schema extensions;
+
+create trigger handle_updated_at before update on actions 
+  for each row execute procedure moddatetime (updated_at);

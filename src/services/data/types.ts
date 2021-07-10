@@ -3,6 +3,7 @@ export type Actions = {
   profile_id: number;
   message_id: number;
   created_at: string;
+  updated_at: string;
   like_at: string;
   dislike_at: string;
 };

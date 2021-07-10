@@ -26,9 +26,11 @@ const RoomContainer = ({
   return (
     <>
       {profileId && roleTypes && roomId && (
-        <ChatRoom profileId={profileId} roles={roleTypes} roomId={roomId} />
+        <>
+          <ChatRoom profileId={profileId} roles={roleTypes} roomId={roomId} />
+          <Player roomId={roomId} profileId={profileId} />
+        </>
       )}
-      {roomId && <Player roomId={roomId} />}
     </>
   );
 };

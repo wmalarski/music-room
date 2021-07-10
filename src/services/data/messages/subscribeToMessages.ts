@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { InfiniteData, useQueryClient } from "react-query";
 import { supabase } from "../../supabase";
 import { Message } from "../types";
+import { selectCurrentMessageKey } from "./selectCurrentMessage";
 import { selectMessagesKey } from "./selectMessages";
 
 export type SubscribeToMessageArgs = {
@@ -20,6 +21,15 @@ const insertMessage =
     };
   };
 
+const updateMessage =
+  (message: Message) =>
+  (data?: InfiniteData<Message[]>): InfiniteData<Message[]> => ({
+    pages: (data?.pages ?? []).map((page) =>
+      page.map((msg) => (msg.id === message.id ? message : msg))
+    ),
+    pageParams: data?.pageParams ?? [],
+  });
+
 const deleteMessage =
   (messageId: number) =>
   (data?: InfiniteData<Message[]>): InfiniteData<Message[]> => {
@@ -34,7 +44,7 @@ const deleteMessage =
     return { pageParams, pages };
   };
 
-export const useSubscribeToMessage = ({
+export const useSubscribeToMessages = ({
   roomId,
 }: SubscribeToMessageArgs): void => {
   const queryClient = useQueryClient();
@@ -48,6 +58,15 @@ export const useSubscribeToMessage = ({
           insertMessage(message)
         )
       )
+      .on("UPDATE", ({ new: message }) => {
+        queryClient.invalidateQueries(
+          selectCurrentMessageKey({ roomId: message.room_id })
+        );
+        queryClient.setQueryData<InfiniteData<Message[]>>(
+          selectMessagesKey({ roomId }),
+          updateMessage(message)
+        );
+      })
       .on("DELETE", (payload) =>
         queryClient.setQueryData<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId }),
