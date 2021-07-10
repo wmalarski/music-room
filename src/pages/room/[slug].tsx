@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../../atoms/Layout/Layout";
 import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
@@ -11,20 +10,18 @@ import { supabase } from "../../services/supabase";
 export type RoomPageProps = {
   roomRoles: RoomRole[];
   roomId: number;
+  roomName: string;
   profileId: number;
 };
 
 const RoomPage = ({
   profileId,
   roomId,
+  roomName,
   roomRoles,
 }: RoomPageProps): JSX.Element => {
-  const router = useRouter();
-  const { slug } = router.query;
-  const roomSlug = Array.isArray(slug) ? undefined : slug;
-
   return (
-    <Layout appTitle={roomSlug}>
+    <Layout appTitle={roomName}>
       <ChatRoom profileId={profileId} roles={roomRoles} roomId={roomId} />
       <Player roomId={roomId} profileId={profileId} />
     </Layout>
@@ -39,7 +36,6 @@ export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
   if (!roomSlug) return { notFound: true };
 
   const { user } = await supabase.auth.api.getUserByCookie(req);
-  console.log("user", user);
   if (!user) return { notFound: true };
 
   const roles = await selectRoles({
@@ -52,11 +48,14 @@ export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
     ],
   });
 
+  const firstRoom = roles?.[0].room_id;
+
   return {
     props: {
-      roomRoles: roles?.map(({ role }) => role),
-      roomId: roles?.[0].room_id.id,
-      profileId: roles?.[0].profile_id.id,
+      roomRoles: roles.map(({ role }) => role),
+      roomId: firstRoom.id,
+      roomName: firstRoom.name,
+      profileId: roles[0].profile_id.id,
     },
   };
 };

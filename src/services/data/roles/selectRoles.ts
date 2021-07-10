@@ -17,7 +17,7 @@ export type SelectRolesKey = ["roles", SelectRolesArgs];
 
 export type SelectRolesReturn = {
   profile_id: Pick<Profile, "user_id" | "id">;
-  room_id: Pick<Room, "slug" | "id">;
+  room_id: Pick<Room, "slug" | "id" | "name">;
   role: Role["role"];
 };
 
@@ -26,7 +26,7 @@ export const selectRoles = async ({
 }: QueryFunctionContext<SelectRolesKey>): Promise<SelectRolesReturn[]> => {
   const { data, error } = await supabase
     .from<SelectRolesReturn>("roles")
-    .select("profile_id ( id, user_id ), room_id ( id, slug ), role")
+    .select("profile_id ( id, user_id ), room_id ( id, slug, name ), role")
     .match({
       "profile_id.user_id": userId,
       "room_id.slug": roomSlug,
