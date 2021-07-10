@@ -19,12 +19,14 @@ Primary.args = {
       data: { kind: "message#0.0.1", url: "URL1" },
       id: 1,
       profile_id: 1,
+      room_id: 1,
     },
     {
       created_at: new Date().toLocaleTimeString(),
       data: { kind: "message#0.0.1", url: "URL2" },
       id: 2,
       profile_id: 1,
+      room_id: 1,
     },
   ],
 };

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { InfiniteData, useQueryClient } from "react-query";
 import { supabase } from "../../supabase";
 import { Message } from "../types";
-import { selectMessagesKey, SelectMessagesReturn } from "./selectMessages";
+import { selectMessagesKey } from "./selectMessages";
 
 export type SubscribeToMessageArgs = {
   roomId: number;
@@ -10,9 +10,7 @@ export type SubscribeToMessageArgs = {
 
 const insertMessage =
   (message: Message) =>
-  (
-    data?: InfiniteData<SelectMessagesReturn[]>
-  ): InfiniteData<SelectMessagesReturn[]> => {
+  (data?: InfiniteData<Message[]>): InfiniteData<Message[]> => {
     const [firstPage, ...pages] = data?.pages ?? [[]];
     return {
       pages: [[message, ...firstPage], ...pages],
@@ -24,9 +22,7 @@ const insertMessage =
 
 const deleteMessage =
   (messageId: number) =>
-  (
-    data?: InfiniteData<SelectMessagesReturn[]>
-  ): InfiniteData<SelectMessagesReturn[]> => {
+  (data?: InfiniteData<Message[]>): InfiniteData<Message[]> => {
     const pages = (data?.pages ?? [[]]).map((page) =>
       page.filter((message) => message.id !== messageId)
     );
@@ -47,13 +43,13 @@ export const useSubscribeToMessage = ({
     const subscription = supabase
       .from<Message>("messages")
       .on("INSERT", ({ new: message }) =>
-        queryClient.setQueryData<InfiniteData<SelectMessagesReturn[]>>(
+        queryClient.setQueryData<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId }),
           insertMessage(message)
         )
       )
       .on("DELETE", (payload) =>
-        queryClient.setQueryData<InfiniteData<SelectMessagesReturn[]>>(
+        queryClient.setQueryData<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId }),
           deleteMessage(payload.old.id)
         )

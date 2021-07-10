@@ -1,9 +1,9 @@
 import React from "react";
-import { SelectMessagesReturn } from "../../../services/data/messages/selectMessages";
+import { Message } from "../../../services/data/types";
 import ChatMessage from "../ChatMessage/ChatMessage";
 
 export type ChatViewProps = {
-  messages?: SelectMessagesReturn[];
+  messages?: Message[];
   onLoadMore?: () => void;
 };
 

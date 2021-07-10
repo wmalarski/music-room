@@ -20,17 +20,13 @@ export const selectMessagesKey = (
   args: SelectMessagesArgs
 ): SelectMessagesKey => ["messages", args];
 
-export type SelectMessagesReturn = Omit<Message, "room_id">;
-
 export const selectMessages = async ({
   queryKey: [, { roomId }],
   pageParam = 0,
-}: QueryFunctionContext<SelectMessagesKey>): Promise<
-  SelectMessagesReturn[]
-> => {
+}: QueryFunctionContext<SelectMessagesKey>): Promise<Message[]> => {
   const { data, error } = await supabase
-    .from<SelectMessagesReturn>("messages")
-    .select("id, created_at, ended_at, data, profile_id")
+    .from<Message>("messages")
+    .select("*")
     .match({ room_id: roomId })
     .order("created_at", { ascending: false })
     .range(pageParam, pageParam + MESSAGES_PAGE_LIMIT);
@@ -43,13 +39,13 @@ export const selectMessages = async ({
 export const useSelectMessages = (
   args: SelectMessagesArgs,
   options?: UseInfiniteQueryOptions<
-    SelectMessagesReturn[],
+    Message[],
     PostgrestError,
-    SelectMessagesReturn[],
-    SelectMessagesReturn[],
+    Message[],
+    Message[],
     SelectMessagesKey
   >
-): UseInfiniteQueryResult<SelectMessagesReturn[], PostgrestError> =>
+): UseInfiniteQueryResult<Message[], PostgrestError> =>
   useInfiniteQuery(selectMessagesKey(args), selectMessages, {
     ...options,
     getNextPageParam: (_, pages) =>

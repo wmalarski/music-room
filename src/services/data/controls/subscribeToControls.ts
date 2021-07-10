@@ -8,7 +8,7 @@ export type SubscribeToControlsArgs = {
   roomId: number;
 };
 
-export const useSubscribeToMessage = ({
+export const useSubscribeToControls = ({
   roomId,
 }: SubscribeToControlsArgs): void => {
   const queryClient = useQueryClient();

@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
+import Player from "../../molecules/player/Player/Player";
 import { useSelectRoles } from "../../services/data/roles/selectRoles";
 
 export type RoomContainerProps = {
@@ -27,6 +28,7 @@ const RoomContainer = ({
       {profileId && roleTypes && roomId && (
         <ChatRoom profileId={profileId} roles={roleTypes} roomId={roomId} />
       )}
+      {roomId && <Player roomId={roomId} />}
     </>
   );
 };

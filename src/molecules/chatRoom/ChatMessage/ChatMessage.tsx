@@ -1,7 +1,7 @@
-import { SelectMessagesReturn } from "../../../services/data/messages/selectMessages";
+import { Message } from "../../../services/data/types";
 
 export type ChatMessageProps = {
-  message: SelectMessagesReturn;
+  message: Message;
 };
 
 const ChatMessage = ({ message }: ChatMessageProps): JSX.Element => {
