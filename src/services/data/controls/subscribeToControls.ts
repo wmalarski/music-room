@@ -15,7 +15,7 @@ export const useSubscribeToControls = ({
 
   useEffect(() => {
     const subscription = supabase
-      .from<Controls>("messages")
+      .from<Controls>("controls")
       .on("*", ({ new: newControls = null }) =>
         queryClient.setQueryData<Controls | null>(
           selectControlsKey({ roomId }),
