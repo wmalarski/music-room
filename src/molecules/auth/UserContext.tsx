@@ -28,9 +28,16 @@ export const UserContextProvider = ({
   const [user, setUser] = useState<User | null>(supabase.auth.user());
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((_, session) =>
-      setUser(session?.user ?? null)
-    );
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      await fetch("/api/auth", {
+        method: "POST",
+        headers: new Headers({ "Content-Type": "application/json" }),
+        credentials: "same-origin",
+        body: JSON.stringify({ event, session }),
+      });
+
+      setUser(session?.user ?? null);
+    });
     return () => data?.unsubscribe?.();
   }, []);
 
