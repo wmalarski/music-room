@@ -47,7 +47,7 @@ export type Role = {
 };
 
 export type RoomData = {
-  kind: string;
+  kind: "room#0.0.1";
 };
 
 export type Room = {
