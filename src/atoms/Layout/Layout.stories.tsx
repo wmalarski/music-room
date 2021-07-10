@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "./Layout";
 
 export default {
-  title: "Components/Layout",
+  title: "Atoms/Layout",
   component: Layout,
 } as ComponentMeta<typeof Layout>;
 

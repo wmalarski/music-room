@@ -14,6 +14,11 @@ export type SelectProfileArgs = {
 
 export type SelectProfileKey = ["profile", SelectProfileArgs];
 
+export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
+  "profile",
+  args,
+];
+
 export const selectProfile = async ({
   queryKey: [, { userId }],
 }: QueryFunctionContext<SelectProfileKey>): Promise<Profile> => {
@@ -27,11 +32,6 @@ export const selectProfile = async ({
 
   return data;
 };
-
-export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
-  "profile",
-  args,
-];
 
 export const useSelectProfile = (
   args: SelectProfileArgs,

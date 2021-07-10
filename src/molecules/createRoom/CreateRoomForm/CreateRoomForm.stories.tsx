@@ -3,7 +3,7 @@ import React from "react";
 import CreateRoomForm from "./CreateRoomForm";
 
 export default {
-  title: "Molecules/CreateRoomForm",
+  title: "Molecules/CreateRoom/CreateRoomForm",
   component: CreateRoomForm,
   argTypes: {
     onSubmit: { action: "onSubmit" },

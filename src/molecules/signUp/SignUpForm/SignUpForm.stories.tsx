@@ -3,7 +3,7 @@ import React from "react";
 import SignUpForm from "./SignUpForm";
 
 export default {
-  title: "Molecules/SignUpForm",
+  title: "Molecules/SignUp/SignUpForm",
   component: SignUpForm,
   argTypes: {
     onSubmit: { action: "onSubmit" },

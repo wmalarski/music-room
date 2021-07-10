@@ -16,7 +16,8 @@ export type Controls = {
 };
 
 export type MessageData = {
-  kind: string;
+  kind: "message#0.0.1";
+  url: string;
 };
 
 export type Message = {

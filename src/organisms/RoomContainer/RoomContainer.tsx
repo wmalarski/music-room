@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
+import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
 import { useSelectRoles } from "../../services/data/roles/selectRoles";
 
 export type RoomContainerProps = {
@@ -22,13 +23,11 @@ const RoomContainer = ({
   );
 
   return (
-    <div>
-      {JSON.stringify(
-        { profileId, roleTypes, roomId, roomSlug, userId },
-        null,
-        2
+    <>
+      {profileId && roleTypes && roomId && (
+        <ChatRoom profileId={profileId} roles={roleTypes} roomId={roomId} />
       )}
-    </div>
+    </>
   );
 };
 
