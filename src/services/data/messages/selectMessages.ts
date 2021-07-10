@@ -30,7 +30,7 @@ export const selectMessages = async ({
 > => {
   const { data, error } = await supabase
     .from<SelectMessagesReturn>("messages")
-    .select("id, created_at, data, profile_id")
+    .select("id, created_at, ended_at, data, profile_id")
     .match({ room_id: roomId })
     .order("created_at", { ascending: false })
     .range(pageParam, pageParam + MESSAGES_PAGE_LIMIT);

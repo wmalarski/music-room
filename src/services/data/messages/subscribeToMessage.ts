@@ -4,7 +4,7 @@ import { supabase } from "../../supabase";
 import { Message } from "../types";
 import { selectMessagesKey, SelectMessagesReturn } from "./selectMessages";
 
-export type UseSubscribeToMessageArgs = {
+export type SubscribeToMessageArgs = {
   roomId: number;
 };
 
@@ -40,7 +40,7 @@ const deleteMessage =
 
 export const useSubscribeToMessage = ({
   roomId,
-}: UseSubscribeToMessageArgs): void => {
+}: SubscribeToMessageArgs): void => {
   const queryClient = useQueryClient();
 
   useEffect(() => {

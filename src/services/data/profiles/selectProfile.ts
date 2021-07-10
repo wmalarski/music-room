@@ -21,14 +21,14 @@ export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
 
 export const selectProfile = async ({
   queryKey: [, { userId }],
-}: QueryFunctionContext<SelectProfileKey>): Promise<Profile> => {
+}: QueryFunctionContext<SelectProfileKey>): Promise<Profile | null> => {
   const { data, error } = await supabase
     .from<Profile>("profiles")
     .select("id, name, user_id")
     .eq("user_id", userId)
     .single();
 
-  if (error || !data) throw error;
+  if (error) throw error;
 
   return data;
 };

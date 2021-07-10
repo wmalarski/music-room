@@ -13,6 +13,7 @@ export type Controls = {
   muted: boolean;
   volume: number;
   pause: boolean;
+  speaker_id: number;
 };
 
 export type MessageData = {
@@ -25,6 +26,7 @@ export type Message = {
   profile_id: number;
   room_id: number;
   created_at: string;
+  ended_at?: string;
   data: MessageData;
 };
 
