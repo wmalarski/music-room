@@ -4,15 +4,17 @@ import { useSubscribeToControls } from "../../../services/data/controls/subscrib
 import { useUpdateControls } from "../../../services/data/controls/updateControls";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useUpdateMessage } from "../../../services/data/messages/updateMessage";
+import { RoomProfile } from "../../../services/data/types";
 import PlayerControls from "../PlayerControls/PlayerControls";
 import PlayerView from "../PlayerView/PlayerView";
 
 export type PlayerProps = {
-  profileId: number;
-  roomId: number;
+  room: RoomProfile;
 };
 
-const Player = ({ roomId, profileId }: PlayerProps): JSX.Element => {
+const Player = ({
+  room: { room_id: roomId, profile_id: profileId },
+}: PlayerProps): JSX.Element => {
   const { data: controls } = useSelectControls({ roomId });
   const { mutate: updateControls } = useUpdateControls();
   useSubscribeToControls({ roomId });

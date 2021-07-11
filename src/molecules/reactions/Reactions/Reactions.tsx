@@ -2,14 +2,16 @@ import React from "react";
 import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
+import { RoomProfile } from "../../../services/data/types";
 import ReactionsButtons from "../ReactionButtons/ReactionButtons";
 
 export type ReactionsProps = {
-  roomId: number;
-  profileId: number;
+  room: RoomProfile;
 };
 
-const Reactions = ({ roomId, profileId }: ReactionsProps): JSX.Element => {
+const Reactions = ({
+  room: { room_id: roomId, profile_id: profileId },
+}: ReactionsProps): JSX.Element => {
   const { data: currentMessage } = useSelectCurrentMessage({ roomId });
 
   const { mutate: upsertMessage } = useUpsertAction();

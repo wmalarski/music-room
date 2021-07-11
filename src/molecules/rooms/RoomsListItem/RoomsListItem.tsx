@@ -1,8 +1,8 @@
-import { RoomRoles } from "../../../services/data/types";
+import { RoomProfile } from "../../../services/data/types";
 
 export type RoomsListItemProps = {
-  room: RoomRoles;
-  onClick: (room: RoomRoles) => void;
+  room: RoomProfile;
+  onClick: (room: RoomProfile) => void;
 };
 
 const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => {

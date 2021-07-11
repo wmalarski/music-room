@@ -1,10 +1,10 @@
 import React from "react";
-import { RoomRoles } from "../../../services/data/types";
+import { RoomProfile } from "../../../services/data/types";
 import RoomsListItem from "../RoomsListItem/RoomsListItem";
 
 export type RoomsListProps = {
-  rooms?: RoomRoles[];
-  onRoomClick: (room: RoomRoles) => void;
+  rooms?: RoomProfile[];
+  onRoomClick: (room: RoomProfile) => void;
 };
 
 const RoomsList = ({ rooms, onRoomClick }: RoomsListProps): JSX.Element => {

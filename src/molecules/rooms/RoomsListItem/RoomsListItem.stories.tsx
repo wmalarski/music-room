@@ -16,8 +16,12 @@ Primary.args = {
   room: {
     author_id: 1,
     data: { kind: "room#0.0.1" },
-    id: 2,
-    name: "Second",
-    slug: "second",
+    hash: "d",
+    profile_id: 1,
+    room_id: 1,
+    room_name: "",
+    user_id: "",
+    name: "First",
+    slug: "first",
   },
 };

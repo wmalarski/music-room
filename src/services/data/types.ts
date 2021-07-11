@@ -59,11 +59,14 @@ export type Room = {
   hash: string;
 };
 
-export type RoomRoles = {
+export type RoomProfile = {
   profile_id: number;
   name: string;
   user_id: string;
   room_id: number;
   room_name: string;
   slug: string;
+  hash: string;
+  author_id: number;
+  data: RoomData;
 };

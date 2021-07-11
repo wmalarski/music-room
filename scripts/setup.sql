@@ -17,7 +17,8 @@ CREATE TABLE rooms (
   author_id BIGINT NOT NULL REFERENCES profiles,
   name TEXT NOT NULL,
   slug TEXT NOT NULL UNIQUE,
-  data JSON NOT NULL
+  data JSON NOT NULL,
+  hash TEXT NOT NULL DEFAULT MD5(random()::text)
 );
 
 CREATE TABLE controls (
@@ -99,14 +100,17 @@ create trigger handle_updated_at before update on actions
   for each row execute procedure moddatetime (updated_at);
 
 ---- roomRoles view ----
-create view roomRoles as
+create or replace view room_roles as
   select 
     profiles.id as profile_id, 
     profiles.name, 
     profiles.user_id as user_id, 
     rooms.id as room_id, 
     rooms.name as room_name, 
-    rooms.slug 
+    rooms.slug,
+    rooms.hash,
+    rooms.author_id,
+    rooms.data
   from 
     profiles 
     inner join (select distinct room_id, profile_id from roles) as uniqueRoles 
