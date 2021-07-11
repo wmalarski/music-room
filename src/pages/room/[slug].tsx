@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "../../atoms/Layout/Layout";
 import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
 import Player from "../../molecules/player/Player/Player";
+import Reactions from "../../molecules/reactions/Reactions/Reactions";
 import { selectRoles } from "../../services/data/roles/selectRoles";
 import { RoomRole } from "../../services/data/types";
 import { supabase } from "../../services/supabase";
@@ -24,6 +25,7 @@ const RoomPage = ({
     <Layout appTitle={roomName}>
       <ChatRoom profileId={profileId} roles={roomRoles} roomId={roomId} />
       <Player roomId={roomId} profileId={profileId} />
+      <Reactions profileId={profileId} roomId={roomId} />
     </Layout>
   );
 };

@@ -1,11 +1,11 @@
-export type Actions = {
+export type Action = {
   id: number;
   profile_id: number;
   message_id: number;
   created_at: string;
   updated_at: string;
-  like_at: string;
-  dislike_at: string;
+  like_at: string | null;
+  dislike_at: string | null;
 };
 
 export type Controls = {

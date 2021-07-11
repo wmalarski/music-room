@@ -5,5 +5,9 @@
     "source.fixAll.eslint": true,
     "source.fixAll": true
   },
-  "cSpell.words": ["Postgrest", "supabase"]
+  "cSpell.words": [
+    "Postgrest",
+    "Upsert",
+    "supabase"
+  ]
 }
