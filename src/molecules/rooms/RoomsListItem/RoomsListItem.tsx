@@ -1,15 +1,15 @@
-import { Room } from "../../../services/data/types";
+import { RoomRoles } from "../../../services/data/types";
 
 export type RoomsListItemProps = {
-  room: Room;
-  onClick: (room: Room) => void;
+  room: RoomRoles;
+  onClick: (room: RoomRoles) => void;
 };
 
 const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => {
   return (
     <>
       <pre>{JSON.stringify(room, null, 2)}</pre>
-      <button onClick={() => onClick(room)}>{`Go to ${room.name}`}</button>
+      <button onClick={() => onClick(room)}>{`Go to ${room.room_name}`}</button>
     </>
   );
 };

@@ -3,8 +3,10 @@ import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
+  useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
+import { selectRoomRolesAllKey } from "../roomRoles/selectRoomRoles";
 import { Room, RoomData } from "../types";
 
 export type InsertRoomArgs = {
@@ -27,5 +29,13 @@ export const insertRoom = async (args: InsertRoomArgs): Promise<Room> => {
 
 export const useInsertRoom = (
   options?: UseMutationOptions<Room, PostgrestError, InsertRoomArgs>
-): UseMutationResult<Room, PostgrestError, InsertRoomArgs> =>
-  useMutation(insertRoom, options);
+): UseMutationResult<Room, PostgrestError, InsertRoomArgs> => {
+  const queryClient = useQueryClient();
+  return useMutation(insertRoom, {
+    ...options,
+    onSuccess: (room, ...args) => {
+      queryClient.invalidateQueries(selectRoomRolesAllKey());
+      options?.onSuccess?.(room, ...args);
+    },
+  });
+};

@@ -6,31 +6,21 @@ import {
   UseQueryResult,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { Profile, Role, Room } from "../types";
+import { Role } from "../types";
 
 export type SelectRolesArgs = {
-  userId: string;
-  roomSlug: string;
+  roomId: number;
 };
 
 export type SelectRolesKey = ["roles", SelectRolesArgs];
 
-export type SelectRolesReturn = {
-  profile_id: Pick<Profile, "user_id" | "id">;
-  room_id: Pick<Room, "slug" | "id" | "name">;
-  role: Role["role"];
-};
-
 export const selectRoles = async ({
-  queryKey: [, { userId, roomSlug }],
-}: QueryFunctionContext<SelectRolesKey>): Promise<SelectRolesReturn[]> => {
+  queryKey: [, { roomId }],
+}: QueryFunctionContext<SelectRolesKey>): Promise<Role[]> => {
   const { data, error } = await supabase
-    .from<SelectRolesReturn>("roles")
-    .select("profile_id ( id, user_id ), room_id ( id, slug, name ), role")
-    .match({
-      "profile_id.user_id": userId,
-      "room_id.slug": roomSlug,
-    });
+    .from<Role>("roles")
+    .select("*")
+    .eq("room_id", roomId);
 
   if (error || !data) throw error;
 
@@ -44,11 +34,6 @@ export const selectRolesKey = (args: SelectRolesArgs): SelectRolesKey => [
 
 export const useSelectRoles = (
   args: SelectRolesArgs,
-  options?: UseQueryOptions<
-    SelectRolesReturn[],
-    PostgrestError,
-    SelectRolesReturn[],
-    SelectRolesKey
-  >
-): UseQueryResult<SelectRolesReturn[], PostgrestError> =>
+  options?: UseQueryOptions<Role[], PostgrestError, Role[], SelectRolesKey>
+): UseQueryResult<Role[], PostgrestError> =>
   useQuery(selectRolesKey(args), selectRoles, options);

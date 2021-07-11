@@ -97,3 +97,19 @@ create extension if not exists moddatetime schema extensions;
 
 create trigger handle_updated_at before update on actions 
   for each row execute procedure moddatetime (updated_at);
+
+---- roomRoles view ----
+create view roomRoles as
+  select 
+    profiles.id as profile_id, 
+    profiles.name, 
+    profiles.user_id as user_id, 
+    rooms.id as room_id, 
+    rooms.name as room_name, 
+    rooms.slug 
+  from 
+    profiles 
+    inner join (select distinct room_id, profile_id from roles) as uniqueRoles 
+      on profiles.id = uniqueRoles.profile_id 
+    inner join rooms 
+      on uniqueRoles.room_id = rooms.id;

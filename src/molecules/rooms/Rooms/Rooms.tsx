@@ -1,7 +1,7 @@
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
-import { useSelectProfileRoles } from "../../../services/data/roles/selectProfileRoles";
+import React from "react";
+import { useSelectRoomRoles } from "../../../services/data/roomRoles/selectRoomRoles";
 import RoomsList from "../RoomsList/RoomsList";
 
 export type RoomsProps = {
@@ -11,8 +11,7 @@ export type RoomsProps = {
 const Rooms = ({ user }: RoomsProps): JSX.Element => {
   const router = useRouter();
 
-  const { data: roles } = useSelectProfileRoles({ userId: user.id });
-  const rooms = useMemo(() => roles?.map((role) => role.room_id), [roles]);
+  const { data: rooms } = useSelectRoomRoles({ user_id: user.id });
 
   return (
     <RoomsList

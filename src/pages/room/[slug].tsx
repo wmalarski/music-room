@@ -4,12 +4,10 @@ import Layout from "../../atoms/Layout/Layout";
 import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
 import Player from "../../molecules/player/Player/Player";
 import Reactions from "../../molecules/reactions/Reactions/Reactions";
-import { selectRoles } from "../../services/data/roles/selectRoles";
-import { RoomRole } from "../../services/data/types";
+import { selectRoomRoles } from "../../services/data/roomRoles/selectRoomRoles";
 import { supabase } from "../../services/supabase";
 
 export type RoomPageProps = {
-  roomRoles: RoomRole[];
   roomId: number;
   roomName: string;
   profileId: number;
@@ -19,11 +17,10 @@ const RoomPage = ({
   profileId,
   roomId,
   roomName,
-  roomRoles,
 }: RoomPageProps): JSX.Element => {
   return (
     <Layout appTitle={roomName}>
-      <ChatRoom profileId={profileId} roles={roomRoles} roomId={roomId} />
+      <ChatRoom profileId={profileId} roomId={roomId} />
       <Player roomId={roomId} profileId={profileId} />
       <Reactions profileId={profileId} roomId={roomId} />
     </Layout>
@@ -35,29 +32,38 @@ export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
   req,
 }) => {
   const roomSlug = Array.isArray(slug) ? undefined : slug;
+  console.log("roomSlug", roomSlug);
   if (!roomSlug) return { notFound: true };
 
   const { user } = await supabase.auth.api.getUserByCookie(req);
+  console.log("user", user);
   if (!user) return { notFound: true };
 
-  const roles = await selectRoles({
+  console.log("roles", {
+    slug: roomSlug,
+    user_id: user.id,
+  });
+
+  const roles = await selectRoomRoles({
     queryKey: [
-      "roles",
+      "roomRoles",
       {
-        roomSlug,
-        userId: user.id,
+        slug: roomSlug,
+        user_id: user.id,
       },
     ],
   });
 
-  const firstRoom = roles?.[0].room_id;
+  console.log("roles", roles);
+
+  const firstRoom = roles?.[0];
+  if (!firstRoom) return { notFound: true };
 
   return {
     props: {
-      roomRoles: roles.map(({ role }) => role),
-      roomId: firstRoom.id,
-      roomName: firstRoom.name,
-      profileId: roles[0].profile_id.id,
+      roomId: firstRoom.room_id,
+      roomName: firstRoom.room_name,
+      profileId: firstRoom.profile_id,
     },
   };
 };
