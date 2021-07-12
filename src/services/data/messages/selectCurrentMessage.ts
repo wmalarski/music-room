@@ -30,12 +30,11 @@ export const selectCurrentMessage = async ({
     .is("ended_at", null)
     .eq("room_id", roomId)
     .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+    .limit(1);
 
   if (error) throw error;
 
-  return data;
+  return data?.[0] ?? null;
 };
 
 export const useSelectCurrentMessage = (

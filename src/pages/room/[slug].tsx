@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import Layout from "../../atoms/Layout/Layout";
 import ChatRoom from "../../molecules/chatRoom/ChatRoom/ChatRoom";
+import InviteLink from "../../molecules/inviteLink/InviteLink/InviteLink";
 import Player from "../../molecules/player/Player/Player";
 import Reactions from "../../molecules/reactions/Reactions/Reactions";
 import { selectRoomProfiles } from "../../services/data/roomProfiles/selectRoomProfiles";
@@ -18,6 +19,7 @@ const RoomPage = ({ room }: RoomPageProps): JSX.Element => {
       <ChatRoom room={room} />
       <Player room={room} />
       <Reactions room={room} />
+      <InviteLink room={room} />
     </Layout>
   );
 };
