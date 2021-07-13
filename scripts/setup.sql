@@ -111,10 +111,9 @@ create or replace view room_roles as
     rooms.slug,
     rooms.hash,
     rooms.author_id,
-    rooms.data
+    rooms.data,
+    roles.role
   from 
     profiles 
-    inner join (select distinct room_id, profile_id from roles) as uniqueRoles 
-      on profiles.id = uniqueRoles.profile_id 
-    inner join rooms 
-      on uniqueRoles.room_id = rooms.id;
+    inner join roles on profiles.id = roles.profile_id 
+    inner join rooms on roles.room_id = rooms.id;

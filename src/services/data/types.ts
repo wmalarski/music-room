@@ -69,4 +69,5 @@ export type RoomProfile = {
   hash: string;
   author_id: number;
   data: RoomData;
+  role: RoomRole;
 };
