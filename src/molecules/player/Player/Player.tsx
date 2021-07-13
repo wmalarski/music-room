@@ -4,22 +4,18 @@ import { useSubscribeToControls } from "../../../services/data/controls/subscrib
 import { useUpdateControls } from "../../../services/data/controls/updateControls";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useUpdateMessage } from "../../../services/data/messages/updateMessage";
-import { RoomProfile } from "../../../services/data/types";
+import { useRoomContext } from "../../../utils/room/RoomContext";
 import PlayerControls from "../PlayerControls/PlayerControls";
 import PlayerView from "../PlayerView/PlayerView";
 
-export type PlayerProps = {
-  room: RoomProfile;
-};
+const Player = (): JSX.Element => {
+  const { room_id, profile_id } = useRoomContext();
 
-const Player = ({
-  room: { room_id: roomId, profile_id: profileId },
-}: PlayerProps): JSX.Element => {
-  const { data: controls } = useSelectControls({ roomId });
+  const { data: controls } = useSelectControls({ roomId: room_id });
   const { mutate: updateControls } = useUpdateControls();
-  useSubscribeToControls({ roomId });
+  useSubscribeToControls({ roomId: room_id });
 
-  const { data: currentMessage } = useSelectCurrentMessage({ roomId });
+  const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
   const { mutate: updateMessage } = useUpdateMessage();
 
   return (
@@ -27,7 +23,7 @@ const Player = ({
       {controls && (
         <PlayerControls
           controls={controls}
-          profileId={profileId}
+          profileId={profile_id}
           onChange={updateControls}
         />
       )}

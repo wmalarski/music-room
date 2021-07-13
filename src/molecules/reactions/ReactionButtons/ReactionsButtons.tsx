@@ -13,32 +13,30 @@ export type ReactionsButtonsProps = {
 const ReactionsButtons = ({
   action,
   onChange,
-}: ReactionsButtonsProps): JSX.Element => {
-  return (
-    <>
-      <pre>{JSON.stringify(action, null, 2)}</pre>
-      <button
-        onClick={() =>
-          onChange({
-            likeAt: action?.like_at ? null : new Date().toISOString(),
-            dislikeAt: null,
-          })
-        }
-      >
-        {action?.like_at ? "Remove like" : "Like"}
-      </button>
-      <button
-        onClick={() =>
-          onChange({
-            likeAt: null,
-            dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
-          })
-        }
-      >
-        {action?.dislike_at ? "Remove Dislike" : "Dislike"}
-      </button>
-    </>
-  );
-};
+}: ReactionsButtonsProps): JSX.Element => (
+  <>
+    <pre>{JSON.stringify(action, null, 2)}</pre>
+    <button
+      onClick={() =>
+        onChange({
+          likeAt: action?.like_at ? null : new Date().toISOString(),
+          dislikeAt: null,
+        })
+      }
+    >
+      {action?.like_at ? "Remove like" : "Like"}
+    </button>
+    <button
+      onClick={() =>
+        onChange({
+          likeAt: null,
+          dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
+        })
+      }
+    >
+      {action?.dislike_at ? "Remove Dislike" : "Dislike"}
+    </button>
+  </>
+);
 
 export default ReactionsButtons;

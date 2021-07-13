@@ -7,14 +7,12 @@ export type RoomsListProps = {
   onRoomClick: (room: RoomProfile) => void;
 };
 
-const RoomsList = ({ rooms, onRoomClick }: RoomsListProps): JSX.Element => {
-  return (
-    <>
-      {rooms?.map((room) => (
-        <RoomsListItem key={room.room_id} room={room} onClick={onRoomClick} />
-      ))}
-    </>
-  );
-};
+const RoomsList = ({ rooms, onRoomClick }: RoomsListProps): JSX.Element => (
+  <>
+    {rooms?.map((room) => (
+      <RoomsListItem key={room.room_id} room={room} onClick={onRoomClick} />
+    ))}
+  </>
+);
 
 export default RoomsList;

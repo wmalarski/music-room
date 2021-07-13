@@ -9,19 +9,17 @@ export type PlayerViewProps = {
 const PlayerView = ({
   message,
   onMessageEnd,
-}: PlayerViewProps): JSX.Element => {
-  return (
-    <>
-      <h2>{message.data.url}</h2>
-      <button
-        onClick={() =>
-          onMessageEnd({ id: message.id, ended_at: new Date().toISOString() })
-        }
-      >
-        End Message
-      </button>
-    </>
-  );
-};
+}: PlayerViewProps): JSX.Element => (
+  <>
+    <h2>{message.data.url}</h2>
+    <button
+      onClick={() =>
+        onMessageEnd({ id: message.id, ended_at: new Date().toISOString() })
+      }
+    >
+      End Message
+    </button>
+  </>
+);
 
 export default PlayerView;

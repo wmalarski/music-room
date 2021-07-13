@@ -7,15 +7,13 @@ export type ChatViewProps = {
   onLoadMore?: () => void;
 };
 
-const ChatView = ({ messages, onLoadMore }: ChatViewProps): JSX.Element => {
-  return (
-    <>
-      {[...(messages ?? [])].reverse().map((message) => (
-        <ChatMessage key={message.id} message={message} />
-      ))}
-      <button onClick={onLoadMore}>Load More</button>
-    </>
-  );
-};
+const ChatView = ({ messages, onLoadMore }: ChatViewProps): JSX.Element => (
+  <>
+    {[...(messages ?? [])].reverse().map((message) => (
+      <ChatMessage key={message.id} message={message} />
+    ))}
+    <button onClick={onLoadMore}>Load More</button>
+  </>
+);
 
 export default ChatView;

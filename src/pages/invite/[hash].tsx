@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import Layout from "../../atoms/Layout/Layout";
-import { useUserContext } from "../../molecules/auth/UserContext";
 import InviteAccept from "../../molecules/inviteAccept/InviteAccept/InviteAccept";
 import SignIn from "../../molecules/signIn/SignIn/SignIn";
 import SignOut from "../../molecules/signOut/SignOut/SignOut";
@@ -9,6 +8,7 @@ import SignUp from "../../molecules/signUp/SignUp/SignUp";
 import { useSelectProfile } from "../../services/data/profiles/selectProfile";
 import { selectRooms } from "../../services/data/rooms/selectRooms";
 import { Room } from "../../services/data/types";
+import { useUserContext } from "../../utils/auth/UserContext";
 
 export type InvitePageProps = {
   room: Room;

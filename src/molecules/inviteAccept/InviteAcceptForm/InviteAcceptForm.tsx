@@ -8,13 +8,11 @@ export type InviteAcceptFormProps = {
 const InviteAcceptForm = ({
   room,
   onAcceptClicked,
-}: InviteAcceptFormProps): JSX.Element => {
-  return (
-    <div>
-      <p>Invite to {room.name}</p>
-      <button onClick={onAcceptClicked}>Accept</button>
-    </div>
-  );
-};
+}: InviteAcceptFormProps): JSX.Element => (
+  <div>
+    <p>Invite to {room.name}</p>
+    <button onClick={onAcceptClicked}>Accept</button>
+  </div>
+);
 
 export default InviteAcceptForm;

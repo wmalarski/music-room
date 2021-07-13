@@ -5,13 +5,11 @@ export type RoomsListItemProps = {
   onClick: (room: RoomProfile) => void;
 };
 
-const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => {
-  return (
-    <>
-      <pre>{JSON.stringify(room, null, 2)}</pre>
-      <button onClick={() => onClick(room)}>{`Go to ${room.room_name}`}</button>
-    </>
-  );
-};
+const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => (
+  <>
+    <pre>{JSON.stringify(room, null, 2)}</pre>
+    <button onClick={() => onClick(room)}>{`Go to ${room.room_name}`}</button>
+  </>
+);
 
 export default RoomsListItem;

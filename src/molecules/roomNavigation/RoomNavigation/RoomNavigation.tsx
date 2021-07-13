@@ -1,19 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { RoomProfile } from "../../../services/data/types";
+import { useRoomContext } from "../../../utils/room/RoomContext";
 import RoomNavigationBar from "../RoomNavigationBar/RoomNavigationBar";
 
-export type RoomNavigationProps = {
-  room: RoomProfile;
-};
-
-const RoomNavigation = ({ room }: RoomNavigationProps): JSX.Element => {
+const RoomNavigation = (): JSX.Element => {
   const router = useRouter();
+  const { slug } = useRoomContext();
 
   return (
     <RoomNavigationBar
-      onRoomClicked={() => router.push(`/room/${room.slug}`)}
-      onSettingsClicked={() => router.push(`/room/${room.slug}/settings`)}
+      onRoomClicked={() => router.push(`/room/${slug}`)}
+      onSettingsClicked={() => router.push(`/room/${slug}/settings`)}
     />
   );
 };

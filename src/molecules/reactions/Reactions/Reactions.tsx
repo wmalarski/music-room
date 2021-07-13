@@ -2,21 +2,17 @@ import React from "react";
 import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
-import { RoomProfile } from "../../../services/data/types";
+import { useRoomContext } from "../../../utils/room/RoomContext";
 import ReactionsButtons from "../ReactionButtons/ReactionsButtons";
 
-export type ReactionsProps = {
-  room: RoomProfile;
-};
+const Reactions = (): JSX.Element => {
+  const { room_id, profile_id } = useRoomContext();
 
-const Reactions = ({
-  room: { room_id: roomId, profile_id: profileId },
-}: ReactionsProps): JSX.Element => {
-  const { data: currentMessage } = useSelectCurrentMessage({ roomId });
+  const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
 
   const { mutate: upsertMessage } = useUpsertAction();
   const { data: action = null } = useSelectAction({
-    profileId,
+    profileId: profile_id,
     messageId: currentMessage?.id ?? null,
   });
 
@@ -27,7 +23,7 @@ const Reactions = ({
         currentMessage &&
         upsertMessage({
           message_id: currentMessage.id,
-          profile_id: profileId,
+          profile_id,
           id: action?.id ?? undefined,
           dislike_at: data.dislikeAt,
           like_at: data.likeAt,

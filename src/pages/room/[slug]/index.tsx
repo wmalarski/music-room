@@ -11,33 +11,34 @@ import SignOut from "../../../molecules/signOut/SignOut/SignOut";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
+import { RoomContextProvider } from "../../../utils/room/RoomContext";
 
 export type RoomPageProps = {
   room: RoomProfile;
 };
 
-const RoomPage = ({ room }: RoomPageProps): JSX.Element => {
-  return (
+const RoomPage = ({ room }: RoomPageProps): JSX.Element => (
+  <RoomContextProvider room={room}>
     <Layout
       appTitle={room.room_name}
       header={
         <Navigation
           right={
             <>
-              <RoomNavigation room={room} />
+              <RoomNavigation />
               <SignOut />
             </>
           }
         />
       }
     >
-      <ChatRoom room={room} />
-      <Player room={room} />
-      <Reactions room={room} />
-      <InviteLink room={room} />
+      <ChatRoom />
+      <Player />
+      <Reactions />
+      <InviteLink />
     </Layout>
-  );
-};
+  </RoomContextProvider>
+);
 
 export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
   params: { slug } = {},

@@ -1,20 +1,16 @@
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
 import { useSelectMessages } from "../../../services/data/messages/selectMessages";
 import { useSubscribeToMessages } from "../../../services/data/messages/subscribeToMessages";
-import { RoomProfile } from "../../../services/data/types";
+import { useRoomContext } from "../../../utils/room/RoomContext";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatView from "../ChatView/ChatView";
 
-export type ChatRoomProps = {
-  room: RoomProfile;
-};
+const ChatRoom = (): JSX.Element => {
+  const { profile_id, room_id } = useRoomContext();
 
-const ChatRoom = ({
-  room: { profile_id: profileId, room_id: roomId },
-}: ChatRoomProps): JSX.Element => {
-  useSubscribeToMessages({ roomId });
+  useSubscribeToMessages({ roomId: room_id });
 
-  const { data: pages, fetchNextPage } = useSelectMessages({ roomId });
+  const { data: pages, fetchNextPage } = useSelectMessages({ roomId: room_id });
 
   const { mutate: insertMessage } = useInsertMessage();
 
@@ -24,8 +20,8 @@ const ChatRoom = ({
       <ChatInput
         onSubmit={({ url }) =>
           insertMessage({
-            profile_id: profileId,
-            room_id: roomId,
+            profile_id,
+            room_id,
             data: { kind: "message#0.0.1", url },
           })
         }
