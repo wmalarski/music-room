@@ -5,13 +5,9 @@ import {
   UseMutationResult,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { Message, MessageData } from "../types";
+import { Message } from "../types";
 
-export type InsertMessageArgs = {
-  profile_id: number;
-  room_id: number;
-  data: MessageData;
-};
+export type InsertMessageArgs = Omit<Message, "id" | "created_at" | "ended_at">;
 
 export const insertMessage = async (
   args: InsertMessageArgs

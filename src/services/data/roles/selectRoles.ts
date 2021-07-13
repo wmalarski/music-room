@@ -8,29 +8,27 @@ import {
 import { supabase } from "../../supabase";
 import { Role } from "../types";
 
-export type SelectRolesArgs = {
-  roomId: number;
-};
+export type SelectRolesArgs = Partial<Role>;
 
 export type SelectRolesKey = ["roles", SelectRolesArgs];
-
-export const selectRoles = async ({
-  queryKey: [, { roomId }],
-}: QueryFunctionContext<SelectRolesKey>): Promise<Role[]> => {
-  const { data, error } = await supabase
-    .from<Role>("roles")
-    .select("*")
-    .eq("room_id", roomId);
-
-  if (error || !data) throw error;
-
-  return data;
-};
 
 export const selectRolesKey = (args: SelectRolesArgs): SelectRolesKey => [
   "roles",
   args,
 ];
+
+export const selectRoles = async ({
+  queryKey: [, args],
+}: QueryFunctionContext<SelectRolesKey>): Promise<Role[]> => {
+  const { data, error } = await Object.entries(args).reduce(
+    (prev, [key, value]) => prev.eq(key as keyof Role, value),
+    supabase.from<Role>("roles").select("*")
+  );
+
+  if (error || !data) throw error;
+
+  return data;
+};
 
 export const useSelectRoles = (
   args: SelectRolesArgs,

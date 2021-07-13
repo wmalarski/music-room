@@ -7,14 +7,9 @@ import {
 } from "react-query";
 import { supabase } from "../../supabase";
 import { selectRoomProfilesAllKey } from "../roomProfiles/selectRoomProfiles";
-import { Room, RoomData } from "../types";
+import { Room } from "../types";
 
-export type InsertRoomArgs = {
-  author_id: number;
-  name: string;
-  slug: string;
-  data: RoomData;
-};
+export type InsertRoomArgs = Omit<Room, "id" | "hash">;
 
 export const insertRoom = async (args: InsertRoomArgs): Promise<Room> => {
   const { data, error } = await supabase

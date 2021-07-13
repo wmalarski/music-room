@@ -9,9 +9,7 @@ import {
 import { supabase } from "../../supabase";
 import { RoomProfile } from "../types";
 
-export type SelectRoomProfilesArgs = Partial<
-  Pick<RoomProfile, "room_id" | "slug" | "user_id">
->;
+export type SelectRoomProfilesArgs = Partial<RoomProfile>;
 
 export type SelectRoomProfilesKey = ["roomProfiles", SelectRoomProfilesArgs];
 
