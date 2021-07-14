@@ -13,7 +13,7 @@ export type SelectRoomProfilesArgs = Partial<RoomProfile>;
 
 export type SelectRoomProfilesKey = ["roomProfiles", SelectRoomProfilesArgs];
 
-export const selectRoomProfilesAllKey = (): QueryKey => ["roomProfiles"];
+export const selectAllRoomProfilesKey = (): QueryKey => ["roomProfiles"];
 
 export const selectRoomProfilesKey = (
   args: SelectRoomProfilesArgs

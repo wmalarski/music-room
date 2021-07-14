@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import Navigation from "../../../molecules/navigation/Navigation/Navigation";
 import RoomNavigation from "../../../molecules/roomNavigation/RoomNavigation/RoomNavigation";
+import RoomSettings from "../../../molecules/roomSettings/RoomSettings/RoomSettings";
 import SignOut from "../../../molecules/signOut/SignOut/SignOut";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
@@ -28,7 +29,7 @@ const RoomSettingsPage = ({ room }: RoomSettingsProps): JSX.Element => (
         />
       }
     >
-      <pre>{JSON.stringify(room, null, 2)}</pre>
+      <RoomSettings />
     </Layout>
   </RoomContextProvider>
 );

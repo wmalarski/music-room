@@ -1,6 +1,7 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import {
   QueryFunctionContext,
+  QueryKey,
   useQuery,
   UseQueryOptions,
   UseQueryResult,
@@ -24,6 +25,8 @@ export const selectRooms = async ({
 
   return data;
 };
+
+export const selectAllRoomsKey = (): QueryKey => ["rooms"];
 
 export const selectRoomsKey = (args: SelectRoomsArgs): SelectRoomsKey => [
   "rooms",

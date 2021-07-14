@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectRoomProfilesAllKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
 import { Role } from "../types";
 import { selectRolesKey } from "./selectRoles";
 
@@ -31,7 +31,7 @@ export const useInsertRole = (
   return useMutation(insertRole, {
     ...options,
     onSuccess: (role, ...args) => {
-      queryClient.invalidateQueries(selectRoomProfilesAllKey());
+      queryClient.invalidateQueries(selectAllRoomProfilesKey());
       queryClient.invalidateQueries(
         selectRolesKey({
           profile_id: role.profile_id,
