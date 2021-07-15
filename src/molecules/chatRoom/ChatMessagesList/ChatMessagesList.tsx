@@ -2,12 +2,15 @@ import React from "react";
 import { Message } from "../../../services/data/types";
 import ChatMessage from "../ChatMessage/ChatMessage";
 
-export type ChatViewProps = {
+export type ChatMessagesListProps = {
   messages?: Message[];
   onLoadMore?: () => void;
 };
 
-const ChatView = ({ messages, onLoadMore }: ChatViewProps): JSX.Element => (
+const ChatMessagesList = ({
+  messages,
+  onLoadMore,
+}: ChatMessagesListProps): JSX.Element => (
   <>
     {[...(messages ?? [])].reverse().map((message) => (
       <ChatMessage key={message.id} message={message} />
@@ -16,4 +19,4 @@ const ChatView = ({ messages, onLoadMore }: ChatViewProps): JSX.Element => (
   </>
 );
 
-export default ChatView;
+export default ChatMessagesList;

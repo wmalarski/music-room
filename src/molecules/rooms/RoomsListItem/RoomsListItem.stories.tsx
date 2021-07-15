@@ -23,5 +23,6 @@ Primary.args = {
     user_id: "",
     name: "First",
     slug: "first",
+    role: "user",
   },
 };

@@ -1,12 +1,9 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import ChatRoom from "../../../molecules/chatRoom/ChatRoom/ChatRoom";
-import InviteLink from "../../../molecules/inviteLink/InviteLink/InviteLink";
-import Navigation from "../../../molecules/navigation/Navigation/Navigation";
 import Player from "../../../molecules/player/Player/Player";
 import Reactions from "../../../molecules/reactions/Reactions/Reactions";
-import RoomNavigation from "../../../molecules/roomNavigation/RoomNavigation/RoomNavigation";
-import SignOut from "../../../molecules/signOut/SignOut/SignOut";
+import ChatView from "../../../organisms/ChatView/ChatView";
+import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
@@ -21,23 +18,9 @@ const RoomPage = ({ room }: RoomPageProps): JSX.Element => (
   <RoomContextProvider room={room}>
     <RoomLayout
       appTitle={room.room_name}
-      header={
-        <Navigation
-          right={
-            <>
-              <RoomNavigation />
-              <SignOut />
-            </>
-          }
-        />
-      }
+      header={<RoomHeader />}
       left={<Player />}
-      right={
-        <>
-          <InviteLink />
-          <ChatRoom />
-        </>
-      }
+      right={<ChatView />}
       bottom={<Reactions />}
     />
   </RoomContextProvider>

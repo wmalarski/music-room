@@ -24,6 +24,7 @@ Primary.args = {
       user_id: "",
       name: "First",
       slug: "first",
+      role: "user",
     },
     {
       author_id: 1,
@@ -35,6 +36,7 @@ Primary.args = {
       room_id: 1,
       room_name: "",
       user_id: "",
+      role: "user",
     },
   ],
 };

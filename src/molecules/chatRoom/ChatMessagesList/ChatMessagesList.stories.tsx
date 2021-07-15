@@ -1,14 +1,14 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import ChatView from "./ChatView";
+import ChatMessagesList from "./ChatMessagesList";
 
 export default {
-  title: "Molecules/ChatRoom/ChatView",
-  component: ChatView,
-} as ComponentMeta<typeof ChatView>;
+  title: "Molecules/ChatRoom/ChatMessagesList",
+  component: ChatMessagesList,
+} as ComponentMeta<typeof ChatMessagesList>;
 
-const Template: ComponentStory<typeof ChatView> = (args) => (
-  <ChatView {...args} />
+const Template: ComponentStory<typeof ChatMessagesList> = (args) => (
+  <ChatMessagesList {...args} />
 );
 
 export const Primary = Template.bind({});

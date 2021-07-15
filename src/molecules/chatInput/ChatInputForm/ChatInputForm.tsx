@@ -2,16 +2,16 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../atoms/Input/Input";
 
-export type ChatInputData = {
+export type ChatInputFormData = {
   url: string;
 };
 
-export type ChatInputProps = {
-  onSubmit: (data: ChatInputData) => void;
+export type ChatInputFormProps = {
+  onSubmit: (data: ChatInputFormData) => void;
 };
 
-const ChatInput = ({ onSubmit }: ChatInputProps): JSX.Element => {
-  const { register, handleSubmit } = useForm<ChatInputData>();
+const ChatInputForm = ({ onSubmit }: ChatInputFormProps): JSX.Element => {
+  const { register, handleSubmit } = useForm<ChatInputFormData>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,4 +21,4 @@ const ChatInput = ({ onSubmit }: ChatInputProps): JSX.Element => {
   );
 };
 
-export default ChatInput;
+export default ChatInputForm;

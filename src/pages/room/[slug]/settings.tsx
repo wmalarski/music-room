@@ -1,9 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import Navigation from "../../../molecules/navigation/Navigation/Navigation";
-import RoomNavigation from "../../../molecules/roomNavigation/RoomNavigation/RoomNavigation";
 import RoomSettings from "../../../molecules/roomSettings/RoomSettings/RoomSettings";
-import SignOut from "../../../molecules/signOut/SignOut/SignOut";
+import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
@@ -16,19 +14,7 @@ export type RoomSettingsProps = {
 
 const RoomSettingsPage = ({ room }: RoomSettingsProps): JSX.Element => (
   <RoomContextProvider room={room}>
-    <Layout
-      appTitle={room.room_name}
-      header={
-        <Navigation
-          right={
-            <>
-              <RoomNavigation />
-              <SignOut />
-            </>
-          }
-        />
-      }
-    >
+    <Layout appTitle={room.room_name} header={<RoomHeader />}>
       <RoomSettings />
     </Layout>
   </RoomContextProvider>
