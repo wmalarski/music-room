@@ -1,3 +1,5 @@
+import useText from "../../../utils/translations/useText";
+
 export type RoomNavigationBarProps = {
   onSettingsClicked: () => void;
   onRoomClicked: () => void;
@@ -6,11 +8,15 @@ export type RoomNavigationBarProps = {
 const RoomNavigationBar = ({
   onRoomClicked,
   onSettingsClicked,
-}: RoomNavigationBarProps): JSX.Element => (
-  <>
-    <button onClick={onRoomClicked}>Room</button>
-    <button onClick={onSettingsClicked}>Settings</button>
-  </>
-);
+}: RoomNavigationBarProps): JSX.Element => {
+  const text = useText();
+
+  return (
+    <>
+      <button onClick={onRoomClicked}>{text("navigationRoom")}</button>
+      <button onClick={onSettingsClicked}>{text("navigationSettings")}</button>
+    </>
+  );
+};
 
 export default RoomNavigationBar;

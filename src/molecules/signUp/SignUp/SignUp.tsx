@@ -6,8 +6,7 @@ const SignUp = (): JSX.Element => {
   const { data, mutate: signUp } = useSignUp();
 
   return (
-    <div>
-      <p>SignUp</p>
+    <>
       <SignUpForm
         onSubmit={(data) =>
           signUp({
@@ -17,7 +16,7 @@ const SignUp = (): JSX.Element => {
         }
       />
       <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    </>
   );
 };
 

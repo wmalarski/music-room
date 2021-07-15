@@ -1,0 +1,41 @@
+const translation = {
+  addMessage: "Add message",
+  addUrlPlaceholder: "Url",
+  loadMoreMessages: "Load More",
+  addRoom: "Add Room",
+  roomNamePlaceholder: "Name",
+  inviteToRoom: (roomName: string): string => `Welcome to ${roomName}`,
+  acceptInvitation: "Accept",
+  navigationHome: "Home",
+  controlsMute: "Mute",
+  controlsPause: "Pause",
+  controlsVolume: "Volume",
+  controlsAssignSpeaker: "Assign Speaker",
+  endMessage: "End Message",
+  likeMessage: "Like",
+  removeLikeMessage: "Remove Like",
+  dislikeMessage: "Dislike",
+  removeDislikeMessage: "Remove Dislike",
+  navigationRoom: "Room",
+  navigationSettings: "Settings",
+  roomLink: (roomName: string): string => `Go to ${roomName}`,
+  updateRoom: "Update Room",
+  signInHeader: "Sign In",
+  signInButton: "Sign In",
+  emailPlaceholder: "Email",
+  passwordPlaceholder: "Password",
+  confirmPasswordPlaceholder: "Confirm Password",
+  signOutButton: "Sign Out",
+  signUpHeader: "Sign Up",
+  signUpButton: "Sign Up",
+};
+
+export type Translation = typeof translation;
+
+export type Language = "default";
+
+const translations: Record<Language, Translation> = {
+  default: translation,
+};
+
+export default translations;

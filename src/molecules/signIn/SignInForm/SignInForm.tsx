@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../atoms/Input/Input";
+import useText from "../../../utils/translations/useText";
 
 export type SignInFormData = {
   email: string;
@@ -12,13 +13,24 @@ export type SignInFormProps = {
 };
 
 const SignInForm = ({ onSubmit }: SignInFormProps): JSX.Element => {
+  const text = useText();
+
   const { register, handleSubmit } = useForm<SignInFormData>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input placeholder="Email" type="email" {...register("email")} />
-      <Input placeholder="Password" type="password" {...register("password")} />
-      <button type="submit">Sign In</button>
+      <p>{text("signInHeader")}</p>
+      <Input
+        placeholder={text("emailPlaceholder")}
+        type="email"
+        {...register("email")}
+      />
+      <Input
+        placeholder={text("passwordPlaceholder")}
+        type="password"
+        {...register("password")}
+      />
+      <button type="submit">{text("signInButton")}</button>
     </form>
   );
 };

@@ -1,4 +1,5 @@
 import { Action } from "../../../services/data/types";
+import useText from "../../../utils/translations/useText";
 
 export type ReactionsButtonsData = {
   likeAt: string | null;
@@ -13,30 +14,36 @@ export type ReactionsButtonsProps = {
 const ReactionsButtons = ({
   action,
   onChange,
-}: ReactionsButtonsProps): JSX.Element => (
-  <>
-    <pre>{JSON.stringify(action, null, 2)}</pre>
-    <button
-      onClick={() =>
-        onChange({
-          likeAt: action?.like_at ? null : new Date().toISOString(),
-          dislikeAt: null,
-        })
-      }
-    >
-      {action?.like_at ? "Remove like" : "Like"}
-    </button>
-    <button
-      onClick={() =>
-        onChange({
-          likeAt: null,
-          dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
-        })
-      }
-    >
-      {action?.dislike_at ? "Remove Dislike" : "Dislike"}
-    </button>
-  </>
-);
+}: ReactionsButtonsProps): JSX.Element => {
+  const text = useText();
+
+  return (
+    <>
+      <pre>{JSON.stringify(action, null, 2)}</pre>
+      <button
+        onClick={() =>
+          onChange({
+            likeAt: action?.like_at ? null : new Date().toISOString(),
+            dislikeAt: null,
+          })
+        }
+      >
+        {action?.like_at ? text("removeLikeMessage") : text("likeMessage")}
+      </button>
+      <button
+        onClick={() =>
+          onChange({
+            likeAt: null,
+            dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
+          })
+        }
+      >
+        {action?.dislike_at
+          ? text("removeDislikeMessage")
+          : text("dislikeMessage")}
+      </button>
+    </>
+  );
+};
 
 export default ReactionsButtons;

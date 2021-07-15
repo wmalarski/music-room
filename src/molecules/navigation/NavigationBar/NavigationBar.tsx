@@ -1,3 +1,5 @@
+import useText from "../../../utils/translations/useText";
+
 export type NavigationBarProps = {
   right?: React.ReactNode;
   onHomeClicked: () => void;
@@ -6,11 +8,14 @@ export type NavigationBarProps = {
 const NavigationBar = ({
   right,
   onHomeClicked,
-}: NavigationBarProps): JSX.Element => (
-  <div>
-    <button onClick={onHomeClicked}>Home</button>
-    {right}
-  </div>
-);
+}: NavigationBarProps): JSX.Element => {
+  const text = useText();
+  return (
+    <div>
+      <button onClick={onHomeClicked}>{text("navigationHome")}</button>
+      {right}
+    </div>
+  );
+};
 
 export default NavigationBar;

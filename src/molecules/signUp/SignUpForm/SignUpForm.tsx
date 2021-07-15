@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../atoms/Input/Input";
+import useText from "../../../utils/translations/useText";
 
 export type SignUpFormData = {
   email: string;
@@ -13,18 +14,29 @@ export type SignUpFormProps = {
 };
 
 const SignUpForm = ({ onSubmit }: SignUpFormProps): JSX.Element => {
+  const text = useText();
+
   const { register, handleSubmit } = useForm<SignUpFormData>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input type="email" placeholder="Email" {...register("email")} />
-      <Input type="password" placeholder="Password" {...register("password")} />
+      <p>{text("signUpHeader")}</p>
+      <Input
+        type="email"
+        placeholder={text("emailPlaceholder")}
+        {...register("email")}
+      />
       <Input
         type="password"
-        placeholder="Confirm Password"
+        placeholder={text("passwordPlaceholder")}
+        {...register("password")}
+      />
+      <Input
+        type="password"
+        placeholder={text("confirmPasswordPlaceholder")}
         {...register("confirmPassword")}
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit">{text("signUpButton")}</button>
     </form>
   );
 };
