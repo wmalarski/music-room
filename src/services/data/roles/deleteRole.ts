@@ -9,12 +9,13 @@ import { supabase } from "../../supabase";
 import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
 import { Role } from "../types";
 
-export type InsertRolesArgs = Omit<Role, "id">;
+export type DeleteRoleArgs = Pick<Role, "id">;
 
-export const insertRole = async (args: InsertRolesArgs): Promise<Role> => {
+export const deleteRole = async ({ id }: DeleteRoleArgs): Promise<Role> => {
   const { data, error } = await supabase
     .from<Role>("roles")
-    .insert(args)
+    .delete()
+    .eq("id", id)
     .single();
 
   if (error || !data) throw error;
@@ -22,12 +23,12 @@ export const insertRole = async (args: InsertRolesArgs): Promise<Role> => {
   return data;
 };
 
-export const useInsertRole = (
-  options?: UseMutationOptions<Role, PostgrestError, InsertRolesArgs>
-): UseMutationResult<Role, PostgrestError, InsertRolesArgs> => {
+export const useDeleteRole = (
+  options?: UseMutationOptions<Role, PostgrestError, DeleteRoleArgs>
+): UseMutationResult<Role, PostgrestError, DeleteRoleArgs> => {
   const queryClient = useQueryClient();
 
-  return useMutation(insertRole, {
+  return useMutation(deleteRole, {
     ...options,
     onSuccess: (role, ...args) => {
       queryClient.invalidateQueries(selectAllRoomProfilesKey());

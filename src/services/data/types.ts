@@ -37,7 +37,7 @@ export type Profile = {
   user_id: string;
 };
 
-export type RoomRole = "owner" | "user" | "guest";
+export type RoomRole = "owner" | "mod" | "user" | "guest";
 
 export type Role = {
   id: number;
@@ -60,6 +60,7 @@ export type Room = {
 };
 
 export type RoomProfile = {
+  role_id: number;
   profile_id: number;
   name: string;
   user_id: string;

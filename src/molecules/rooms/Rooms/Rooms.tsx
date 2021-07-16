@@ -15,7 +15,7 @@ const Rooms = ({ user }: RoomsProps): JSX.Element => {
 
   return (
     <RoomsList
-      rooms={rooms}
+      rooms={rooms?.pages.flat()}
       onRoomClick={(room) => router.push(`/room/${room.slug}`)}
     />
   );

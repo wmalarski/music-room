@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import RoomSettings from "../../../molecules/roomSettings/RoomSettings/RoomSettings";
+import RoomUsers from "../../../molecules/roomUsers/RoomUsers/RoomUsers";
 import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
@@ -16,6 +17,7 @@ const RoomSettingsPage = ({ room }: RoomSettingsProps): JSX.Element => (
   <RoomContextProvider room={room}>
     <Layout appTitle={room.room_name} header={<RoomHeader />}>
       <RoomSettings />
+      <RoomUsers />
     </Layout>
   </RoomContextProvider>
 );

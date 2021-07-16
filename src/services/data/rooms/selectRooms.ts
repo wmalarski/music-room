@@ -13,6 +13,11 @@ export type SelectRoomsArgs = Partial<Room>;
 
 export type SelectRoomsKey = ["rooms", SelectRoomsArgs];
 
+export const selectRoomsKey = (args: SelectRoomsArgs): SelectRoomsKey => [
+  "rooms",
+  args,
+];
+
 export const selectRooms = async ({
   queryKey: [, args],
 }: QueryFunctionContext<SelectRoomsKey>): Promise<Room[]> => {
@@ -27,11 +32,6 @@ export const selectRooms = async ({
 };
 
 export const selectAllRoomsKey = (): QueryKey => ["rooms"];
-
-export const selectRoomsKey = (args: SelectRoomsArgs): SelectRoomsKey => [
-  "rooms",
-  args,
-];
 
 export const useSelectRooms = (
   args: SelectRoomsArgs,

@@ -1,19 +1,19 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import RoomsListItem from "./RoomsListItem";
+import RoomUserListItem from "./RoomUserListItem";
 
 export default {
-  title: "Molecules/Rooms/RoomsListItem",
-  component: RoomsListItem,
-} as ComponentMeta<typeof RoomsListItem>;
+  title: "Molecules/RoomUsers/RoomUserListItem",
+  component: RoomUserListItem,
+} as ComponentMeta<typeof RoomUserListItem>;
 
-const Template: ComponentStory<typeof RoomsListItem> = (args) => (
-  <RoomsListItem {...args} />
+const Template: ComponentStory<typeof RoomUserListItem> = (args) => (
+  <RoomUserListItem {...args} />
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
-  room: {
+  profile: {
     role_id: 1,
     author_id: 1,
     data: { kind: "room#0.0.1" },

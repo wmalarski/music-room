@@ -45,6 +45,7 @@ export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({
   const roomHash = Array.isArray(hash) ? undefined : hash;
   if (!roomHash) return { notFound: true };
 
+  // TODO replace with psql function
   const [room] = await selectRooms({ queryKey: ["rooms", { hash: roomHash }] });
   if (!room) return { notFound: true };
 

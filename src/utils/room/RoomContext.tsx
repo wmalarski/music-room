@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext } from "react";
 import { RoomProfile } from "../../services/data/types";
 
 const RoomContext = createContext<RoomProfile>({
+  role_id: 0,
   author_id: 0,
   data: { kind: "room#0.0.1" },
   hash: "",
