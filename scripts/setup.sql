@@ -103,6 +103,7 @@ create trigger handle_updated_at before update on actions
 ---- roomRoles view ----
 create or replace view room_roles as
   select 
+    roles.id as role_id,
     profiles.id as profile_id, 
     profiles.name, 
     profiles.user_id as user_id, 
