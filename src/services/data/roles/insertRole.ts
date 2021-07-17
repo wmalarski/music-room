@@ -12,6 +12,7 @@ import { Role } from "../types";
 export type InsertRolesArgs = Omit<Role, "id">;
 
 export const insertRole = async (args: InsertRolesArgs): Promise<Role> => {
+  // TODO move to procedure
   const { data, error } = await supabase
     .from<Role>("roles")
     .insert(args)

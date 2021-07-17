@@ -8,7 +8,7 @@ import {
 import { supabase } from "../../supabase";
 import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
 import { Room, RoomData } from "../types";
-import { selectAllRoomsKey } from "./selectRooms";
+import { selectRoomByHashKey } from "./selectRoomByHash";
 
 export type UpdateRoomArgs = {
   id: number;
@@ -36,10 +36,10 @@ export const useUpdateRoom = (
 
   return useMutation(updateRoom, {
     ...options,
-    onSuccess: (message, ...args) => {
-      options?.onSuccess?.(message, ...args);
+    onSuccess: (room, ...args) => {
+      options?.onSuccess?.(room, ...args);
       queryClient.invalidateQueries(selectAllRoomProfilesKey());
-      queryClient.invalidateQueries(selectAllRoomsKey());
+      queryClient.invalidateQueries(selectRoomByHashKey({ hash: room.hash }));
     },
   });
 };

@@ -118,3 +118,154 @@ create or replace view room_roles as
     profiles 
     inner join roles on profiles.id = roles.profile_id 
     inner join rooms on roles.room_id = rooms.id;
+
+---- select room function ----
+CREATE OR REPLACE FUNCTION room_by_hash (input_hash text)
+RETURNS TABLE(
+  id BIGINT, 
+  author_id BIGINT, 
+  name TEXT, 
+  slug TEXT,
+  data JSON,
+  hash TEXT) AS $$
+    SELECT * 
+    FROM rooms 
+    WHERE rooms.hash=input_hash;
+$$ LANGUAGE SQL;
+
+---- Room security roles ----
+CREATE POLICY "Enable access to users having role" ON public.rooms FOR
+SELECT
+  USING (
+    exists(
+      select
+        1
+      from
+        room_roles
+      where
+        room_roles.room_id = room_id
+        and room_roles.user_id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Enable insert for authenticated users only" ON public.rooms FOR 
+INSERT WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Enable update for users based on email" ON public.rooms FOR
+UPDATE
+  USING (
+    exists(
+      select
+        1
+      from
+        room_roles
+      where
+        room_roles.room_id = room_id
+        and room_roles.user_id = auth.uid()
+        and (
+          room_roles.role = 'mod'
+          or room_roles.role = 'owner'
+        )
+    )
+  ) WITH CHECK (
+    exists(
+      select
+        1
+      from
+        room_roles
+      where
+        room_roles.room_id = room_id
+        and room_roles.user_id = auth.uid()
+        and (
+          room_roles.role = 'mod'
+          or room_roles.role = 'owner'
+        )
+    )
+  );
+
+CREATE POLICY "Enable delete for users based on user_id" ON public.rooms FOR DELETE USING (
+  exists(
+    select
+      1
+    from
+      room_roles
+    where
+      room_roles.room_id = room_id
+      and room_roles.user_id = auth.uid()
+      and (
+        room_roles.role = 'mod'
+        or room_roles.role = 'owner'
+      )
+  )
+);
+
+---- Roles ----
+CREATE POLICY "Enable access to all users" ON public.roles FOR
+SELECT USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Enable insert for authenticated users only" ON public.roles FOR 
+INSERT WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Enable update for users based on email" ON public.roles FOR
+UPDATE
+  USING (
+    exists(
+      select
+        1
+      from
+        room_roles
+      where
+        room_roles.room_id = roles.room_id
+        and room_roles.user_id = auth.uid()
+        and (
+          room_roles.role = 'mod'
+          or room_roles.role = 'owner'
+        )
+    )
+  ) WITH CHECK (
+    exists(
+      select
+        1
+      from
+        room_roles
+      where
+        room_roles.room_id = roles.room_id
+        and room_roles.user_id = auth.uid()
+        and (
+          room_roles.role = 'mod'
+          or room_roles.role = 'owner'
+        )
+    )
+  );
+
+CREATE POLICY "Enable delete for users based on user_id" ON public.roles FOR DELETE USING (
+  exists(
+    select
+      1
+    from
+      room_roles
+    where
+      room_roles.room_id = roles.room_id
+      and (
+        room_roles.user_id = auth.uid()
+        and (
+          room_roles.role = 'mod'
+          or room_roles.role = 'owner'
+        )
+        or room_roles.user_id = auth.uid()
+      )
+  )
+);
+
+---- Profiles ----
+CREATE POLICY "Enable access to all users" ON public.profiles FOR
+SELECT USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Enable insert for authenticated users only" ON public.profiles FOR 
+INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Enable update for users based on email" ON public.profiles FOR
+UPDATE
+  USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+  CREATE POLICY "Enable delete for users based on user_id" ON public.profiles FOR DELETE USING (auth.uid() = user_id);

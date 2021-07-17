@@ -5,7 +5,7 @@ import SignIn from "../../molecules/signIn/SignIn/SignIn";
 import SignUp from "../../molecules/signUp/SignUp/SignUp";
 import UserHeader from "../../organisms/UserHeader/UserHeader";
 import { useSelectProfile } from "../../services/data/profiles/selectProfile";
-import { selectRooms } from "../../services/data/rooms/selectRooms";
+import { selectRoomByHash } from "../../services/data/rooms/selectRoomByHash";
 import { Room } from "../../services/data/types";
 import GuestHomeTemplate from "../../templates/GuestHomeTemplate/GuestHomeTemplate";
 import UserHomeTemplate from "../../templates/UserHomeTemplate/UserHomeTemplate";
@@ -39,8 +39,9 @@ export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({
   const roomHash = Array.isArray(hash) ? undefined : hash;
   if (!roomHash) return { notFound: true };
 
-  // TODO replace with psql function
-  const [room] = await selectRooms({ queryKey: ["rooms", { hash: roomHash }] });
+  const [room] = await selectRoomByHash({
+    queryKey: ["roomByHash", { hash: roomHash }],
+  });
   if (!room) return { notFound: true };
 
   return { props: { room } };
