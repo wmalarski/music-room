@@ -1,10 +1,9 @@
 import React from "react";
 import CreateRoom from "../molecules/createRoom/CreateRoom/CreateRoom";
-import Navigation from "../molecules/navigation/Navigation/Navigation";
 import Rooms from "../molecules/rooms/Rooms/Rooms";
 import SignIn from "../molecules/signIn/SignIn/SignIn";
-import SignOut from "../molecules/signOut/SignOut/SignOut";
 import SignUp from "../molecules/signUp/SignUp/SignUp";
+import UserHeader from "../organisms/UserHeader/UserHeader";
 import Layout from "../templates/Layout/Layout";
 import { useUserContext } from "../utils/auth/UserContext";
 
@@ -12,7 +11,7 @@ const Index = (): JSX.Element => {
   const { user } = useUserContext();
 
   return (
-    <Layout header={<Navigation right={user && <SignOut />} />}>
+    <Layout header={<UserHeader user={user} />}>
       {user ? (
         <div>
           <CreateRoom user={user} />

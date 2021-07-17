@@ -1,22 +1,26 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import Navigation from "../molecules/navigation/Navigation/Navigation";
 import ProfileDetails from "../molecules/profileDetails/ProfileDetails/ProfileDetails";
-import SignOut from "../molecules/signOut/SignOut/SignOut";
+import UserHeader from "../organisms/UserHeader/UserHeader";
 import { selectProfile } from "../services/data/profiles/selectProfile";
 import { Profile } from "../services/data/types";
 import { supabase } from "../services/supabase";
 import Layout from "../templates/Layout/Layout";
+import { useUserContext } from "../utils/auth/UserContext";
 
 export type ProfilePageProps = {
   profile: Profile;
 };
 
-const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => (
-  <Layout header={<Navigation right={<SignOut />} />}>
-    <ProfileDetails profile={profile} />
-  </Layout>
-);
+const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => {
+  const { user } = useUserContext();
+
+  return (
+    <Layout header={<UserHeader user={user} />}>
+      <ProfileDetails profile={profile} />
+    </Layout>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
   req,

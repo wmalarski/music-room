@@ -22,7 +22,7 @@ const ProfileForm = ({ profile, onSubmit }: ProfileFormProps): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <p>{text("signUpHeader")}</p>
+      <p>{text("profileHeader")}</p>
       <Input
         placeholder={text("profileNamePlaceholder")}
         {...register("name")}
