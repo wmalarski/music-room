@@ -6,7 +6,7 @@ import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
-import Layout from "../../../templates/Layout/Layout";
+import SettingsTemplate from "../../../templates/SettingsTemplate/SettingsTemplate";
 import { RoomContextProvider } from "../../../utils/room/RoomContext";
 
 export type RoomSettingsProps = {
@@ -15,10 +15,14 @@ export type RoomSettingsProps = {
 
 const RoomSettingsPage = ({ room }: RoomSettingsProps): JSX.Element => (
   <RoomContextProvider room={room}>
-    <Layout appTitle={room.room_name} header={<RoomHeader />}>
-      <RoomSettings />
-      <RoomUsers />
-    </Layout>
+    <SettingsTemplate
+      appTitle={room.room_name}
+      header={<RoomHeader />}
+      center={[
+        { key: "Settings", node: <RoomSettings /> },
+        { key: "Users", node: <RoomUsers /> },
+      ]}
+    />
   </RoomContextProvider>
 );
 

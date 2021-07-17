@@ -7,7 +7,7 @@ import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
-import RoomLayout from "../../../templates/RoomLayout/RoomLayout";
+import RoomTemplate from "../../../templates/RoomTemplate/RoomTemplate";
 import { RoomContextProvider } from "../../../utils/room/RoomContext";
 
 export type RoomPageProps = {
@@ -16,7 +16,7 @@ export type RoomPageProps = {
 
 const RoomPage = ({ room }: RoomPageProps): JSX.Element => (
   <RoomContextProvider room={room}>
-    <RoomLayout
+    <RoomTemplate
       appTitle={room.room_name}
       header={<RoomHeader />}
       left={<Player />}

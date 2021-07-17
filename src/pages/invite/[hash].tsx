@@ -2,13 +2,13 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import InviteAccept from "../../molecules/inviteAccept/InviteAccept/InviteAccept";
 import SignIn from "../../molecules/signIn/SignIn/SignIn";
-import SignOut from "../../molecules/signOut/SignOut/SignOut";
 import SignUp from "../../molecules/signUp/SignUp/SignUp";
 import UserHeader from "../../organisms/UserHeader/UserHeader";
 import { useSelectProfile } from "../../services/data/profiles/selectProfile";
 import { selectRooms } from "../../services/data/rooms/selectRooms";
 import { Room } from "../../services/data/types";
-import Layout from "../../templates/Layout/Layout";
+import GuestHomeTemplate from "../../templates/GuestHomeTemplate/GuestHomeTemplate";
+import UserHomeTemplate from "../../templates/UserHomeTemplate/UserHomeTemplate";
 import { useUserContext } from "../../utils/auth/UserContext";
 
 export type InvitePageProps = {
@@ -23,20 +23,13 @@ const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
     { enabled: !!user }
   );
 
-  return (
-    <Layout header={<UserHeader user={user} />}>
-      {user ? (
-        <div>
-          <SignOut />
-          {profile && <InviteAccept room={room} profile={profile} />}
-        </div>
-      ) : (
-        <div>
-          <SignIn />
-          <SignUp />
-        </div>
-      )}
-    </Layout>
+  return user ? (
+    <UserHomeTemplate
+      header={<UserHeader user={user} />}
+      center={profile && <InviteAccept room={room} profile={profile} />}
+    />
+  ) : (
+    <GuestHomeTemplate left={<SignIn />} right={<SignUp />} />
   );
 };
 

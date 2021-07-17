@@ -5,7 +5,7 @@ import UserHeader from "../organisms/UserHeader/UserHeader";
 import { selectProfile } from "../services/data/profiles/selectProfile";
 import { Profile } from "../services/data/types";
 import { supabase } from "../services/supabase";
-import Layout from "../templates/Layout/Layout";
+import ProfileTemplate from "../templates/ProfileTemplate/ProfileTemplate";
 import { useUserContext } from "../utils/auth/UserContext";
 
 export type ProfilePageProps = {
@@ -16,9 +16,10 @@ const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => {
   const { user } = useUserContext();
 
   return (
-    <Layout header={<UserHeader user={user} />}>
-      <ProfileDetails profile={profile} />
-    </Layout>
+    <ProfileTemplate
+      header={<UserHeader user={user} />}
+      center={<ProfileDetails profile={profile} />}
+    />
   );
 };
 

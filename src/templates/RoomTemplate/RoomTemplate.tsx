@@ -1,6 +1,6 @@
 import Layout from "../Layout/Layout";
 
-export type RoomLayoutProps = {
+export type RoomTemplateProps = {
   appTitle: string;
   header: React.ReactNode;
   left: React.ReactNode;
@@ -8,13 +8,13 @@ export type RoomLayoutProps = {
   bottom: React.ReactNode;
 };
 
-const RoomLayout = ({
+const RoomTemplate = ({
   appTitle,
   bottom,
   header,
   left,
   right,
-}: RoomLayoutProps): JSX.Element => (
+}: RoomTemplateProps): JSX.Element => (
   <Layout header={header} appTitle={appTitle}>
     {left}
     {right}
@@ -22,4 +22,4 @@ const RoomLayout = ({
   </Layout>
 );
 
-export default RoomLayout;
+export default RoomTemplate;
