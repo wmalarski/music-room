@@ -13,6 +13,7 @@ const RoomContext = createContext<RoomProfile>({
   room_name: "",
   slug: "",
   user_id: "",
+  avatar: null,
 });
 
 export const useRoomContext = (): RoomProfile => useContext(RoomContext);

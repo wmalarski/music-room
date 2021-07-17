@@ -25,5 +25,6 @@ Primary.args = {
     name: "First",
     slug: "first",
     role: "user",
+    avatar: null,
   },
 };

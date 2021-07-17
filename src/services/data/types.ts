@@ -72,5 +72,5 @@ export type RoomProfile = {
   author_id: number;
   data: RoomData;
   role: RoomRole;
-  avatar: string;
+  avatar: string | null;
 };
