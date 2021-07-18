@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import ChatInputView from "../ChatInputView/ChatInputView";
 
 const ChatInput = (): JSX.Element => {

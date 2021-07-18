@@ -4,6 +4,8 @@ const translation = {
   loadMoreMessages: "Load More",
   addRoom: "Add Room",
   roomNamePlaceholder: "Name",
+  removeRoom: "Remove Room",
+  confirmRemoveRoom: "Confirm",
   inviteToRoom: (roomName: string): string => `Welcome to ${roomName}`,
   acceptInvitation: "Accept",
   navigationHome: "Home",

@@ -1,11 +1,11 @@
 import React from "react";
 import { useUpdateRoom } from "../../../services/data/rooms/updateRoom";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import useRoleGuard from "../../../utils/room/useRoleGuard";
-import RoomSettingsCard from "../RoomSettingsCard/RoomSettingsCard";
-import RoomSettingsForm from "../RoomSettingsForm/RoomSettingsForm";
+import RoomDetailsCard from "../RoomDetailsCard/RoomDetailsCard";
+import RoomDetailsForm from "../RoomDetailsForm/RoomDetailsForm";
 
-const RoomSettings = (): JSX.Element | null => {
+const RoomDetails = (): JSX.Element | null => {
   const { room_id, room_name } = useMemberContext();
 
   const { mutate: updateRoom } = useUpdateRoom();
@@ -13,7 +13,7 @@ const RoomSettings = (): JSX.Element | null => {
   return (
     useRoleGuard({
       owner: (
-        <RoomSettingsForm
+        <RoomDetailsForm
           roomName={room_name}
           onSubmit={({ name }) =>
             updateRoom({
@@ -23,9 +23,9 @@ const RoomSettings = (): JSX.Element | null => {
           }
         />
       ),
-      default: <RoomSettingsCard roomName={room_name} />,
+      default: <RoomDetailsCard roomName={room_name} />,
     }) ?? null
   );
 };
 
-export default RoomSettings;
+export default RoomDetails;

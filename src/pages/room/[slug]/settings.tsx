@@ -1,12 +1,11 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import { RoomSettings, RoomUsers } from "../../../molecules";
-import { RoomHeader } from "../../../organisms";
+import { RoomHeader, RoomSettings } from "../../../organisms";
 import { Member } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideMembers from "../../../services/utils/getServerSideMembers";
 import SettingsTemplate from "../../../templates/SettingsTemplate/SettingsTemplate";
-import { MemberContextProvider } from "../../../utils/room/RoomContext";
+import { MemberContextProvider } from "../../../utils/room/MemberContext";
 
 export type RoomSettingsProps = {
   member: Member;
@@ -17,10 +16,7 @@ const RoomSettingsPage = ({ member }: RoomSettingsProps): JSX.Element => (
     <SettingsTemplate
       appTitle={member.room_name}
       header={<RoomHeader />}
-      center={[
-        { key: "Settings", node: <RoomSettings /> },
-        { key: "Users", node: <RoomUsers /> },
-      ]}
+      center={<RoomSettings />}
     />
   </MemberContextProvider>
 );

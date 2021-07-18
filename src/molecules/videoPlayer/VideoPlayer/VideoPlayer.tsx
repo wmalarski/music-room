@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useUpdateMessage } from "../../../services/data/messages/updateMessage";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import VideoPlayerView from "../VideoPlayerView/VideoPlayerView";
 
 const VideoPlayer = (): JSX.Element => {

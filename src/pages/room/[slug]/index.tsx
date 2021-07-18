@@ -6,7 +6,7 @@ import { Member } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideMembers from "../../../services/utils/getServerSideMembers";
 import RoomTemplate from "../../../templates/RoomTemplate/RoomTemplate";
-import { MemberContextProvider } from "../../../utils/room/RoomContext";
+import { MemberContextProvider } from "../../../utils/room/MemberContext";
 
 export type RoomPageProps = {
   member: Member;

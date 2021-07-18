@@ -4,7 +4,7 @@ import Layout from "../Layout/Layout";
 export type SettingsTemplateProps = {
   appTitle: string;
   header: React.ReactNode;
-  center: { key: string; node: React.ReactNode }[];
+  center: React.ReactNode;
 };
 
 const SettingsTemplate = ({
@@ -13,9 +13,7 @@ const SettingsTemplate = ({
   center,
 }: SettingsTemplateProps): JSX.Element => (
   <Layout appTitle={appTitle} header={header}>
-    {center.map(({ key, node }) => (
-      <React.Fragment key={key}>{node}</React.Fragment>
-    ))}
+    {center}
   </Layout>
 );
 

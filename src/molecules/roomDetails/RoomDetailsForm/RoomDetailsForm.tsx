@@ -3,22 +3,22 @@ import { useForm } from "react-hook-form";
 import { Button, Input } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
-export type RoomSettingsFormData = {
+export type RoomDetailsFormData = {
   name: string;
 };
 
-export type RoomSettingsFormProps = {
+export type RoomDetailsFormProps = {
   roomName: string;
-  onSubmit: (data: RoomSettingsFormData) => void;
+  onSubmit: (data: RoomDetailsFormData) => void;
 };
 
-const RoomSettingsForm = ({
+const RoomDetailsForm = ({
   roomName,
   onSubmit,
-}: RoomSettingsFormProps): JSX.Element | null => {
+}: RoomDetailsFormProps): JSX.Element | null => {
   const text = useText();
 
-  const { register, handleSubmit } = useForm<RoomSettingsFormData>({
+  const { register, handleSubmit } = useForm<RoomDetailsFormData>({
     defaultValues: { name: roomName },
   });
 
@@ -30,4 +30,4 @@ const RoomSettingsForm = ({
   );
 };
 
-export default RoomSettingsForm;
+export default RoomDetailsForm;

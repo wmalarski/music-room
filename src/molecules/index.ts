@@ -1,6 +1,7 @@
 export { default as ChatInput } from "./chatInput/ChatInput/ChatInput";
 export { default as ChatRoom } from "./chatRoom/ChatRoom/ChatRoom";
 export { default as CreateRoom } from "./createRoom/CreateRoom/CreateRoom";
+export { default as DeleteRoom } from "./deleteRoom/DeleteRoom/DeleteRoom";
 export { default as InviteAccept } from "./inviteAccept/InviteAccept/InviteAccept";
 export { default as InviteLink } from "./inviteLink/InviteLink/InviteLink";
 export { default as Navigation } from "./navigation/Navigation/Navigation";
@@ -8,9 +9,9 @@ export { default as PlayerControls } from "./playerControls/PlayerControls/Playe
 export { default as ProfileDetails } from "./profileDetails/ProfileDetails/ProfileDetails";
 export { default as ProfileNavigation } from "./profileNavigation/ProfileNavigation/ProfileNavigation";
 export { default as Reactions } from "./reactions/Reactions/Reactions";
+export { default as RoomDetails } from "./roomDetails/RoomDetails/RoomDetails";
 export { default as RoomNavigation } from "./roomNavigation/RoomNavigation/RoomNavigation";
 export { default as Rooms } from "./rooms/Rooms/Rooms";
-export { default as RoomSettings } from "./roomSettings/RoomSettings/RoomSettings";
 export { default as RoomUsers } from "./roomUsers/RoomUsers/RoomUsers";
 export { default as SignIn } from "./signIn/SignIn/SignIn";
 export { default as SignOut } from "./signOut/SignOut/SignOut";

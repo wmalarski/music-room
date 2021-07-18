@@ -1,5 +1,5 @@
 import { RoomRole } from "../../services/data/types";
-import { useMemberContext } from "./RoomContext";
+import { useMemberContext } from "./MemberContext";
 
 export type RoleGuardArgs<T> = Partial<Record<RoomRole, T>> & { default?: T };
 

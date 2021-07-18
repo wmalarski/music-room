@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import InviteLinkView from "../InviteLinkView/InviteLinkView";
 
 const InviteLink = (): JSX.Element | null => {

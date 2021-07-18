@@ -2,7 +2,7 @@ import React from "react";
 import { useSelectMembers } from "../../../services/data/members/selectMembers";
 import { useDeleteRole } from "../../../services/data/roles/deleteRole";
 import { useUpdateRole } from "../../../services/data/roles/updateRole";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import RoomUsersList from "../RoomUsersList/RoomUsersList";
 
 const RoomUsers = (): JSX.Element => {

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import ReactionsView from "../ReactionsView/ReactionsView";
 
 const Reactions = (): JSX.Element => {

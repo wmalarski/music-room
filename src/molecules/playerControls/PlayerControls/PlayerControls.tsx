@@ -2,7 +2,7 @@ import React from "react";
 import { useSelectControls } from "../../../services/data/controls/selectControls";
 import { useSubscribeToControls } from "../../../services/data/controls/subscribeToControls";
 import { useUpdateControls } from "../../../services/data/controls/updateControls";
-import { useMemberContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/MemberContext";
 import PlayerControlsView from "../PlayerControlsView/PlayerControlsView";
 
 const PlayerControls = (): JSX.Element => {

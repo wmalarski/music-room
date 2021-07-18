@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { RoomRole } from "../../services/data/types";
-import { useMemberContext } from "./RoomContext";
+import { useMemberContext } from "./MemberContext";
 
 export type RoleGuardProps = {
   visibleFor: RoomRole[];
