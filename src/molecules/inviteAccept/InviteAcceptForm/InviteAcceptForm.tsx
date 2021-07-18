@@ -1,3 +1,5 @@
+import React from "react";
+import { Button, Typography } from "../../../atoms";
 import { Room } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
@@ -14,8 +16,8 @@ const InviteAcceptForm = ({
 
   return (
     <div>
-      <p>{text("inviteToRoom")(room.name)}</p>
-      <button onClick={onAcceptClicked}>{text("acceptInvitation")}</button>
+      <Typography>{text("inviteToRoom")(room.name)}</Typography>
+      <Button onClick={onAcceptClicked}>{text("acceptInvitation")}</Button>
     </div>
   );
 };

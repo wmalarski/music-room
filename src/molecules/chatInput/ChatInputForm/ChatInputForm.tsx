@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../../../atoms/Input/Input";
+import { Button, Input } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type ChatInputFormData = {
@@ -31,7 +31,7 @@ const ChatInputForm = ({
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
       />
-      <button type="submit">{text("addMessage")}</button>
+      <Button type="submit">{text("addMessage")}</Button>
     </form>
   );
 };

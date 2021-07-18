@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Debug, Option, Select } from "../../../atoms";
 import { RoomProfile, RoomRole } from "../../../services/data/types";
 import RoleGuard from "../../../utils/room/RoleGuard";
 import useText from "../../../utils/translations/useText";
@@ -18,18 +19,18 @@ const RoomUsersListItem = ({
 
   return (
     <>
-      <pre>{JSON.stringify(profile, null, 2)}</pre>
+      <Debug value={profile} />
       {profile.author_id !== profile.profile_id && (
         <RoleGuard visibleFor={["owner", "mod"]}>
-          <button onClick={onRemoveClick}>{text("removeFromRoom")}</button>
-          <select
+          <Button onClick={onRemoveClick}>{text("removeFromRoom")}</Button>
+          <Select
             value={profile.role}
             onChange={(event) => onRoleChange(event.target.value as RoomRole)}
           >
-            <option value="mod">{text("modRole")}</option>
-            <option value="user">{text("userRole")}</option>
-            <option value="guest">{text("guestRole")}</option>
-          </select>
+            <Option value="mod">{text("modRole")}</Option>
+            <Option value="user">{text("userRole")}</Option>
+            <Option value="guest">{text("guestRole")}</Option>
+          </Select>
         </RoleGuard>
       )}
     </>

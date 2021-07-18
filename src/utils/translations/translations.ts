@@ -26,6 +26,7 @@ const translation = {
   roomLink: (roomName: string): string => `Go to ${roomName}`,
   updateRoom: "Update Room",
   removeFromRoom: "Remove from group",
+  loadMoreUsers: "Load more",
   modRole: "Mod",
   userRole: "User",
   guestRole: "Guest",

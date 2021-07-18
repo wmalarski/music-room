@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../../atoms/Input/Input";
+import { Button, Input } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type CreateRoomFormData = {
@@ -19,7 +19,7 @@ const CreateRoomForm = ({ onSubmit }: CreateRoomFormProps): JSX.Element => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input placeholder={text("roomNamePlaceholder")} {...register("name")} />
-      <button type="submit">{text("addRoom")}</button>
+      <Button type="submit">{text("addRoom")}</Button>
     </form>
   );
 };

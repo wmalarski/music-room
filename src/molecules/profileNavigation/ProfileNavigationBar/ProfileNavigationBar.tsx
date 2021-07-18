@@ -1,3 +1,5 @@
+import React from "react";
+import { Button } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type ProfileNavigationBarProps = {
@@ -10,7 +12,7 @@ const ProfileNavigationBar = ({
   const text = useText();
 
   return (
-    <button onClick={onProfileClicked}>{text("navigationProfile")}</button>
+    <Button onClick={onProfileClicked}>{text("navigationProfile")}</Button>
   );
 };
 

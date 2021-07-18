@@ -1,3 +1,5 @@
+import React from "react";
+import { Debug } from "../../../atoms";
 import { Message } from "../../../services/data/types";
 
 export type ChatMessageProps = {
@@ -5,7 +7,7 @@ export type ChatMessageProps = {
 };
 
 const ChatMessage = ({ message }: ChatMessageProps): JSX.Element => (
-  <pre>{JSON.stringify(message, null, 2)}</pre>
+  <Debug value={message} />
 );
 
 export default ChatMessage;

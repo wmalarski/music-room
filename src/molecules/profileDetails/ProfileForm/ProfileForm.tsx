@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../../atoms/Input/Input";
+import { Button, Input, Typography } from "../../../atoms";
 import { Profile } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
@@ -22,12 +22,12 @@ const ProfileForm = ({ profile, onSubmit }: ProfileFormProps): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <p>{text("profileHeader")}</p>
+      <Typography>{text("profileHeader")}</Typography>
       <Input
         placeholder={text("profileNamePlaceholder")}
         {...register("name")}
       />
-      <button type="submit">{text("profileSaveButton")}</button>
+      <Button type="submit">{text("profileSaveButton")}</Button>
     </form>
   );
 };

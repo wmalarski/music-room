@@ -1,4 +1,5 @@
 import React from "react";
+import { Debug } from "../../../atoms";
 import { useSignUp } from "../../../services/auth/signUp";
 import SignUpForm from "../SignUpForm/SignUpForm";
 
@@ -15,7 +16,7 @@ const SignUp = (): JSX.Element => {
           })
         }
       />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <Debug value={data} />
     </>
   );
 };

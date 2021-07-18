@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from "../../../atoms";
 
 export type RoomSettingsCardProps = {
   roomName: string;
@@ -7,7 +8,7 @@ export type RoomSettingsCardProps = {
 const RoomSettingsCard = ({
   roomName,
 }: RoomSettingsCardProps): JSX.Element | null => {
-  return <p>{roomName}</p>;
+  return <Typography>{roomName}</Typography>;
 };
 
 export default RoomSettingsCard;

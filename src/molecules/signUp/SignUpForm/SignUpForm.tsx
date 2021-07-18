@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../../atoms/Input/Input";
+import { Button, Input, Typography } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type SignUpFormData = {
@@ -20,7 +20,7 @@ const SignUpForm = ({ onSubmit }: SignUpFormProps): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <p>{text("signUpHeader")}</p>
+      <Typography>{text("signUpHeader")}</Typography>
       <Input
         type="email"
         placeholder={text("emailPlaceholder")}
@@ -36,7 +36,7 @@ const SignUpForm = ({ onSubmit }: SignUpFormProps): JSX.Element => {
         placeholder={text("confirmPasswordPlaceholder")}
         {...register("confirmPassword")}
       />
-      <button type="submit">{text("signUpButton")}</button>
+      <Button type="submit">{text("signUpButton")}</Button>
     </form>
   );
 };

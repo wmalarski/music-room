@@ -1,3 +1,5 @@
+import React from "react";
+import { Button } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type NavigationBarProps = {
@@ -12,7 +14,7 @@ const NavigationBar = ({
   const text = useText();
   return (
     <div>
-      <button onClick={onHomeClicked}>{text("navigationHome")}</button>
+      <Button onClick={onHomeClicked}>{text("navigationHome")}</Button>
       {right}
     </div>
   );

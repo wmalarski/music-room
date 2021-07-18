@@ -1,3 +1,5 @@
+import React from "react";
+import { Button } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type RoomNavigationBarProps = {
@@ -13,8 +15,8 @@ const RoomNavigationBar = ({
 
   return (
     <>
-      <button onClick={onRoomClicked}>{text("navigationRoom")}</button>
-      <button onClick={onSettingsClicked}>{text("navigationSettings")}</button>
+      <Button onClick={onRoomClicked}>{text("navigationRoom")}</Button>
+      <Button onClick={onSettingsClicked}>{text("navigationSettings")}</Button>
     </>
   );
 };

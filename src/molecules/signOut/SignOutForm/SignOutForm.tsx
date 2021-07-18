@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type SignOutFormProps = {
@@ -8,7 +9,7 @@ export type SignOutFormProps = {
 const SignOutForm = ({ onSignOutClicked }: SignOutFormProps): JSX.Element => {
   const text = useText();
 
-  return <button onClick={onSignOutClicked}>{text("signOutButton")}</button>;
+  return <Button onClick={onSignOutClicked}>{text("signOutButton")}</Button>;
 };
 
 export default SignOutForm;

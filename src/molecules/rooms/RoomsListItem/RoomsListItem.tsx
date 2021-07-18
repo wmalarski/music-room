@@ -1,3 +1,5 @@
+import React from "react";
+import { Button, Debug } from "../../../atoms";
 import { RoomProfile } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
@@ -11,10 +13,10 @@ const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => {
 
   return (
     <>
-      <pre>{JSON.stringify(room, null, 2)}</pre>
-      <button onClick={() => onClick(room)}>
+      <Debug value={room} />
+      <Button onClick={() => onClick(room)}>
         {text("roomLink")(room.room_name)}
-      </button>
+      </Button>
     </>
   );
 };

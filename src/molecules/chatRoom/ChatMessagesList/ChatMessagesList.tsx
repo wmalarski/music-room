@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../../../atoms";
 import { Message } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 import ChatMessage from "../ChatMessage/ChatMessage";
@@ -19,7 +20,7 @@ const ChatMessagesList = ({
       {[...(messages ?? [])].reverse().map((message) => (
         <ChatMessage key={message.id} message={message} />
       ))}
-      <button onClick={onLoadMore}>{text("loadMoreMessages")}</button>
+      <Button onClick={onLoadMore}>{text("loadMoreMessages")}</Button>
     </>
   );
 };

@@ -1,3 +1,5 @@
+import React from "react";
+import { Button, Debug } from "../../../atoms";
 import { Action } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
@@ -19,8 +21,8 @@ const ReactionsButtons = ({
 
   return (
     <>
-      <pre>{JSON.stringify(action, null, 2)}</pre>
-      <button
+      <Debug value={action} />
+      <Button
         onClick={() =>
           onChange({
             likeAt: action?.like_at ? null : new Date().toISOString(),
@@ -29,8 +31,8 @@ const ReactionsButtons = ({
         }
       >
         {action?.like_at ? text("removeLikeMessage") : text("likeMessage")}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() =>
           onChange({
             likeAt: null,
@@ -41,7 +43,7 @@ const ReactionsButtons = ({
         {action?.dislike_at
           ? text("removeDislikeMessage")
           : text("dislikeMessage")}
-      </button>
+      </Button>
     </>
   );
 };

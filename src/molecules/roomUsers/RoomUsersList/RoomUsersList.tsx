@@ -1,5 +1,7 @@
 import React from "react";
+import { Button } from "../../../atoms";
 import { RoomProfile, RoomRole } from "../../../services/data/types";
+import useText from "../../../utils/translations/useText";
 import RoomUsersListItem from "../RoomUsersListItem/RoomUserListItem";
 
 export type RoomUsersListProps = {
@@ -15,6 +17,8 @@ const RoomUsersList = ({
   onRoleChange,
   onRemoveClick,
 }: RoomUsersListProps): JSX.Element => {
+  const text = useText();
+
   return (
     <>
       {profiles?.map((profile) => (
@@ -25,7 +29,7 @@ const RoomUsersList = ({
           onRemoveClick={() => onRemoveClick(profile)}
         />
       ))}
-      <button onClick={onLoadMore}>Load more</button>
+      <Button onClick={onLoadMore}>{text("loadMoreUsers")}</Button>
     </>
   );
 };

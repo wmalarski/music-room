@@ -1,3 +1,5 @@
+import React from "react";
+import { Button, Input, Typography } from "../../../atoms";
 import { UpdateControlsArgs } from "../../../services/data/controls/updateControls";
 import { Controls } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
@@ -17,24 +19,24 @@ const PlayerControls = ({
 
   return (
     <div>
-      <label>
-        <input
+      <div>
+        <Input
           type="checkbox"
           checked={muted}
           onChange={() => onChange({ id, muted: !muted })}
         />
-        {text("controlsMute")}
-      </label>
-      <label>
-        <input
+        <Typography>{text("controlsMute")}</Typography>
+      </div>
+      <div>
+        <Input
           type="checkbox"
           checked={pause}
           onChange={() => onChange({ id, pause: !pause })}
         />
-        {text("controlsPause")}
-      </label>
-      <label>
-        <input
+        <Typography>{text("controlsPause")}</Typography>
+      </div>
+      <div>
+        <Input
           type="number"
           placeholder={text("controlsVolume")}
           step={0.1}
@@ -45,11 +47,11 @@ const PlayerControls = ({
             onChange({ id, volume: Number(event.target.value) })
           }
         />
-        {text("controlsVolume")}
-      </label>
-      <button onClick={() => onChange({ id, speaker_id: profileId })}>
+        <Typography>{text("controlsVolume")}</Typography>
+      </div>
+      <Button onClick={() => onChange({ id, speaker_id: profileId })}>
         {text("controlsAssignSpeaker")}
-      </button>
+      </Button>
     </div>
   );
 };

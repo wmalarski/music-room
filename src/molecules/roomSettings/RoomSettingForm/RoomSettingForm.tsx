@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../../atoms/Input/Input";
+import { Button, Input } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
 
 export type RoomSettingsFormData = {
@@ -25,7 +25,7 @@ const RoomSettingsForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input placeholder={text("roomNamePlaceholder")} {...register("name")} />
-      <button type="submit">{text("updateRoom")}</button>
+      <Button type="submit">{text("updateRoom")}</Button>
     </form>
   );
 };

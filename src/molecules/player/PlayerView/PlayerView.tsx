@@ -1,3 +1,5 @@
+import React from "react";
+import { Button, Typography } from "../../../atoms";
 import { UpdateMessageArgs } from "../../../services/data/messages/updateMessage";
 import { Message } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
@@ -15,14 +17,14 @@ const PlayerView = ({
 
   return (
     <>
-      <h2>{message.data.url}</h2>
-      <button
+      <Typography>{message.data.url}</Typography>
+      <Button
         onClick={() =>
           onMessageEnd({ id: message.id, ended_at: new Date().toISOString() })
         }
       >
         {text("endMessage")}
-      </button>
+      </Button>
     </>
   );
 };
