@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { RoomRole } from "../../services/data/types";
-import { useRoomContext } from "./RoomContext";
+import { useMemberContext } from "./RoomContext";
 
 export type RoleGuardProps = {
   visibleFor: RoomRole[];
@@ -12,7 +12,7 @@ const RoleGuard = ({
   children,
   fallback = null,
 }: PropsWithChildren<RoleGuardProps>): JSX.Element | null => {
-  const { role } = useRoomContext();
+  const { role } = useMemberContext();
 
   return <>{visibleFor.includes(role) ? children : fallback}</>;
 };

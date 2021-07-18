@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllMembersKey } from "../members/selectMembers";
 import { Room } from "../types";
 
 export type InsertRoomArgs = Omit<Room, "id" | "hash">;
@@ -29,7 +29,7 @@ export const useInsertRoom = (
   return useMutation(insertRoom, {
     ...options,
     onSuccess: (room, ...args) => {
-      queryClient.invalidateQueries(selectAllRoomProfilesKey());
+      queryClient.invalidateQueries(selectAllMembersKey());
       options?.onSuccess?.(room, ...args);
     },
   });

@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllMembersKey } from "../members/selectMembers";
 import { Profile } from "../types";
 import { selectProfileKey } from "./selectProfile";
 
@@ -36,7 +36,7 @@ export const useUpdateProfile = (
     ...options,
     onSuccess: (role, ...args) => {
       queryClient.invalidateQueries(selectProfileKey({ userId: role.user_id }));
-      queryClient.invalidateQueries(selectAllRoomProfilesKey());
+      queryClient.invalidateQueries(selectAllMembersKey());
       options?.onSuccess?.(role, ...args);
     },
   });

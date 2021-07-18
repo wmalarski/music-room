@@ -1,10 +1,10 @@
 import { useSelectMessages } from "../../../services/data/messages/selectMessages";
 import { useSubscribeToMessages } from "../../../services/data/messages/subscribeToMessages";
-import { useRoomContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/RoomContext";
 import ChatMessagesList from "../ChatMessagesList/ChatMessagesList";
 
 const ChatRoom = (): JSX.Element => {
-  const { room_id } = useRoomContext();
+  const { room_id } = useMemberContext();
 
   useSubscribeToMessages({ roomId: room_id });
 

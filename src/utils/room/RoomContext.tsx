@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
-import { RoomProfile } from "../../services/data/types";
+import { Member } from "../../services/data/types";
 
-const RoomContext = createContext<RoomProfile>({
+const MemberContext = createContext<Member>({
   role_id: 0,
   author_id: 0,
   data: { kind: "room#0.0.1" },
@@ -16,18 +16,18 @@ const RoomContext = createContext<RoomProfile>({
   avatar: null,
 });
 
-export const useRoomContext = (): RoomProfile => useContext(RoomContext);
+export const useMemberContext = (): Member => useContext(MemberContext);
 
-export type RoomContextProviderProps = {
+export type MemberContextProviderProps = {
   children: ReactNode;
-  room: RoomProfile;
+  member: Member;
 };
 
-export const RoomContextProvider = ({
+export const MemberContextProvider = ({
   children,
-  room,
-}: RoomContextProviderProps): JSX.Element => (
-  <RoomContext.Provider value={room}>{children}</RoomContext.Provider>
+  member,
+}: MemberContextProviderProps): JSX.Element => (
+  <MemberContext.Provider value={member}>{children}</MemberContext.Provider>
 );
 
-export default RoomContext;
+export default MemberContext;

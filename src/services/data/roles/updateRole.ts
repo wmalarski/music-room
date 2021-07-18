@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllMembersKey } from "../members/selectMembers";
 import { Role } from "../types";
 
 export type UpdateRolesArgs = Pick<Role, "id" | "role">;
@@ -34,7 +34,7 @@ export const useUpdateRole = (
   return useMutation(updateRole, {
     ...options,
     onSuccess: (role, ...args) => {
-      queryClient.invalidateQueries(selectAllRoomProfilesKey());
+      queryClient.invalidateQueries(selectAllMembersKey());
       options?.onSuccess?.(role, ...args);
     },
   });

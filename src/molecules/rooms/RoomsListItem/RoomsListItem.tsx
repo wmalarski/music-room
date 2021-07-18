@@ -1,21 +1,24 @@
 import React from "react";
 import { Button, Debug } from "../../../atoms";
-import { RoomProfile } from "../../../services/data/types";
+import { Member } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
 export type RoomsListItemProps = {
-  room: RoomProfile;
-  onClick: (room: RoomProfile) => void;
+  member: Member;
+  onClick: (room: Member) => void;
 };
 
-const RoomsListItem = ({ room, onClick }: RoomsListItemProps): JSX.Element => {
+const RoomsListItem = ({
+  member,
+  onClick,
+}: RoomsListItemProps): JSX.Element => {
   const text = useText();
 
   return (
     <>
-      <Debug value={room} />
-      <Button onClick={() => onClick(room)}>
-        {text("roomLink")(room.room_name)}
+      <Debug value={member} />
+      <Button onClick={() => onClick(member)}>
+        {text("roomLink")(member.room_name)}
       </Button>
     </>
   );

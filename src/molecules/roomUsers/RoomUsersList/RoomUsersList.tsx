@@ -1,18 +1,18 @@
 import React from "react";
 import { Button } from "../../../atoms";
-import { RoomProfile, RoomRole } from "../../../services/data/types";
+import { Member, RoomRole } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 import RoomUsersListItem from "../RoomUsersListItem/RoomUserListItem";
 
 export type RoomUsersListProps = {
-  profiles?: RoomProfile[];
+  members?: Member[];
   onLoadMore: () => void;
-  onRoleChange: (profile: RoomProfile, role: RoomRole) => void;
-  onRemoveClick: (profile: RoomProfile) => void;
+  onRoleChange: (profile: Member, role: RoomRole) => void;
+  onRemoveClick: (profile: Member) => void;
 };
 
 const RoomUsersList = ({
-  profiles,
+  members,
   onLoadMore,
   onRoleChange,
   onRemoveClick,
@@ -21,12 +21,12 @@ const RoomUsersList = ({
 
   return (
     <>
-      {profiles?.map((profile) => (
+      {members?.map((member) => (
         <RoomUsersListItem
-          key={profile.profile_id}
-          profile={profile}
-          onRoleChange={(role) => onRoleChange(profile, role)}
-          onRemoveClick={() => onRemoveClick(profile)}
+          key={member.profile_id}
+          member={member}
+          onRoleChange={(role) => onRoleChange(member, role)}
+          onRemoveClick={() => onRemoveClick(member)}
         />
       ))}
       <Button onClick={onLoadMore}>{text("loadMoreUsers")}</Button>

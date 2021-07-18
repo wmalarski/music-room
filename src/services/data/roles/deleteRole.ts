@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllMembersKey } from "../members/selectMembers";
 import { Role } from "../types";
 
 export type DeleteRoleArgs = Pick<Role, "id">;
@@ -31,7 +31,7 @@ export const useDeleteRole = (
   return useMutation(deleteRole, {
     ...options,
     onSuccess: (role, ...args) => {
-      queryClient.invalidateQueries(selectAllRoomProfilesKey());
+      queryClient.invalidateQueries(selectAllMembersKey());
       options?.onSuccess?.(role, ...args);
     },
   });

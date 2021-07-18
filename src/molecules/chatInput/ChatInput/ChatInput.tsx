@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
-import { useRoomContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/RoomContext";
 import ChatInputView from "../ChatInputView/ChatInputView";
 
 const ChatInput = (): JSX.Element => {
-  const { profile_id, room_id } = useRoomContext();
+  const { profile_id, room_id } = useMemberContext();
 
   const { mutate: insertMessage } = useInsertMessage();
 

@@ -1,17 +1,17 @@
 import React from "react";
 import { Button, Debug, Option, Select } from "../../../atoms";
-import { RoomProfile, RoomRole } from "../../../services/data/types";
+import { Member, RoomRole } from "../../../services/data/types";
 import RoleGuard from "../../../utils/room/RoleGuard";
 import useText from "../../../utils/translations/useText";
 
 export type RoomUsersListItemProps = {
-  profile: RoomProfile;
+  member: Member;
   onRoleChange: (role: RoomRole) => void;
   onRemoveClick: () => void;
 };
 
 const RoomUsersListItem = ({
-  profile,
+  member,
   onRemoveClick,
   onRoleChange,
 }: RoomUsersListItemProps): JSX.Element => {
@@ -19,12 +19,12 @@ const RoomUsersListItem = ({
 
   return (
     <>
-      <Debug value={profile} />
-      {profile.author_id !== profile.profile_id && (
+      <Debug value={member} />
+      {member.author_id !== member.profile_id && (
         <RoleGuard visibleFor={["owner", "mod"]}>
           <Button onClick={onRemoveClick}>{text("removeFromRoom")}</Button>
           <Select
-            value={profile.role}
+            value={member.role}
             onChange={(event) => onRoleChange(event.target.value as RoomRole)}
           >
             <Option value="mod">{text("modRole")}</Option>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRoomContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/RoomContext";
 import InviteLinkView from "../InviteLinkView/InviteLinkView";
 
 const InviteLink = (): JSX.Element | null => {
-  const { hash } = useRoomContext();
+  const { hash } = useMemberContext();
 
   const [href, setHref] = useState<string>();
 

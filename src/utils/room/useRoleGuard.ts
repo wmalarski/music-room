@@ -1,5 +1,5 @@
 import { RoomRole } from "../../services/data/types";
-import { useRoomContext } from "./RoomContext";
+import { useMemberContext } from "./RoomContext";
 
 export type RoleGuardArgs<T> = Partial<Record<RoomRole, T>> & { default?: T };
 
@@ -9,7 +9,7 @@ export const roleGuard = <T>(
 ): T | undefined => args[role] ?? args.default;
 
 const useRoleGuard = <T>(args: RoleGuardArgs<T>): T | undefined => {
-  const { role } = useRoomContext();
+  const { role } = useMemberContext();
 
   return roleGuard(role, args);
 };

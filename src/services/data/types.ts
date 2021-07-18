@@ -60,7 +60,7 @@ export type Room = {
   hash: string;
 };
 
-export type RoomProfile = {
+export type Member = {
   role_id: number;
   profile_id: number;
   name: string;

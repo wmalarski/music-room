@@ -2,27 +2,27 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import { RoomSettings, RoomUsers } from "../../../molecules";
 import { RoomHeader } from "../../../organisms";
-import { RoomProfile } from "../../../services/data/types";
+import { Member } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
-import getServerSideRoom from "../../../services/utils/getServerSideRoom";
+import getServerSideMembers from "../../../services/utils/getServerSideMembers";
 import SettingsTemplate from "../../../templates/SettingsTemplate/SettingsTemplate";
-import { RoomContextProvider } from "../../../utils/room/RoomContext";
+import { MemberContextProvider } from "../../../utils/room/RoomContext";
 
 export type RoomSettingsProps = {
-  room: RoomProfile;
+  member: Member;
 };
 
-const RoomSettingsPage = ({ room }: RoomSettingsProps): JSX.Element => (
-  <RoomContextProvider room={room}>
+const RoomSettingsPage = ({ member }: RoomSettingsProps): JSX.Element => (
+  <MemberContextProvider member={member}>
     <SettingsTemplate
-      appTitle={room.room_name}
+      appTitle={member.room_name}
       header={<RoomHeader />}
       center={[
         { key: "Settings", node: <RoomSettings /> },
         { key: "Users", node: <RoomUsers /> },
       ]}
     />
-  </RoomContextProvider>
+  </MemberContextProvider>
 );
 
 export const getServerSideProps: GetServerSideProps<RoomSettingsProps> =
@@ -30,8 +30,8 @@ export const getServerSideProps: GetServerSideProps<RoomSettingsProps> =
     const { user } = await supabase.auth.api.getUserByCookie(req);
     if (!user) return { notFound: true };
 
-    const room = await getServerSideRoom({ user, slug });
-    return room ? { props: { room } } : { notFound: true };
+    const member = await getServerSideMembers({ user, slug });
+    return member ? { props: { member } } : { notFound: true };
   };
 
 export default RoomSettingsPage;

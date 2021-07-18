@@ -1,7 +1,7 @@
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/router";
 import React from "react";
-import { useSelectRoomProfiles } from "../../../services/data/roomProfiles/selectRoomProfiles";
+import { useSelectMembers } from "../../../services/data/members/selectMembers";
 import RoomsList from "../RoomsList/RoomsList";
 
 export type RoomsProps = {
@@ -11,11 +11,11 @@ export type RoomsProps = {
 const Rooms = ({ user }: RoomsProps): JSX.Element => {
   const router = useRouter();
 
-  const { data: rooms } = useSelectRoomProfiles({ user_id: user.id });
+  const { data: members } = useSelectMembers({ user_id: user.id });
 
   return (
     <RoomsList
-      rooms={rooms?.pages.flat()}
+      members={members?.pages.flat()}
       onRoomClick={(room) => router.push(`/room/${room.slug}`)}
     />
   );

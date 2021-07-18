@@ -1,16 +1,20 @@
 import React from "react";
-import { RoomProfile } from "../../../services/data/types";
+import { Member } from "../../../services/data/types";
 import RoomsListItem from "../RoomsListItem/RoomsListItem";
 
 export type RoomsListProps = {
-  rooms?: RoomProfile[];
-  onRoomClick: (room: RoomProfile) => void;
+  members?: Member[];
+  onRoomClick: (room: Member) => void;
 };
 
-const RoomsList = ({ rooms, onRoomClick }: RoomsListProps): JSX.Element => (
+const RoomsList = ({ members, onRoomClick }: RoomsListProps): JSX.Element => (
   <>
-    {rooms?.map((room) => (
-      <RoomsListItem key={room.room_id} room={room} onClick={onRoomClick} />
+    {members?.map((member) => (
+      <RoomsListItem
+        key={member.room_id}
+        member={member}
+        onClick={onRoomClick}
+      />
     ))}
   </>
 );

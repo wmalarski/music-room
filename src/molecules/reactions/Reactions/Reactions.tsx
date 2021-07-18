@@ -2,11 +2,11 @@ import React from "react";
 import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
-import { useRoomContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/RoomContext";
 import ReactionsView from "../ReactionsView/ReactionsView";
 
 const Reactions = (): JSX.Element => {
-  const { room_id, profile_id } = useRoomContext();
+  const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
 

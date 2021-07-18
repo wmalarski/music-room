@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof RoomUsersList> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  profiles: [
+  members: [
     {
       role_id: 1,
       author_id: 1,

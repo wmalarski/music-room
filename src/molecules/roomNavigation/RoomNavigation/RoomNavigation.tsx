@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { useRoomContext } from "../../../utils/room/RoomContext";
+import { useMemberContext } from "../../../utils/room/RoomContext";
 import RoomNavigationView from "../RoomNavigationView/RoomNavigationView";
 
 const RoomNavigation = (): JSX.Element => {
   const router = useRouter();
-  const { slug } = useRoomContext();
+  const { slug } = useMemberContext();
 
   return (
     <RoomNavigationView

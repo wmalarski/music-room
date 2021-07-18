@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 import { supabase } from "../../supabase";
-import { selectAllRoomProfilesKey } from "../roomProfiles/selectRoomProfiles";
+import { selectAllMembersKey } from "../members/selectMembers";
 import { Room, RoomData } from "../types";
 import { selectRoomByHashKey } from "./selectRoomByHash";
 
@@ -38,7 +38,7 @@ export const useUpdateRoom = (
     ...options,
     onSuccess: (room, ...args) => {
       options?.onSuccess?.(room, ...args);
-      queryClient.invalidateQueries(selectAllRoomProfilesKey());
+      queryClient.invalidateQueries(selectAllMembersKey());
       queryClient.invalidateQueries(selectRoomByHashKey({ hash: room.hash }));
     },
   });
