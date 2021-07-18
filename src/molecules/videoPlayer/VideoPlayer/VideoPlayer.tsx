@@ -14,7 +14,7 @@ const VideoPlayer = (): JSX.Element => {
   const { mutate: updateMessage } = useUpdateMessage();
 
   const { data: controls } = useSelectControls({ roomId: room_id });
-  const { mutate: updateControls } = useUpdateControls();
+  const { mutate: updateControls } = useUpdateControls(room_id);
   useSubscribeToControls({ roomId: room_id });
 
   return (
