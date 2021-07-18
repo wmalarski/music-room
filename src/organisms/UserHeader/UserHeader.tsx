@@ -1,8 +1,6 @@
 import { User } from "@supabase/supabase-js";
 import React from "react";
-import Navigation from "../../molecules/navigation/Navigation/Navigation";
-import ProfileNavigation from "../../molecules/profileNavigation/ProfileNavigation/ProfileNavigation";
-import SignOut from "../../molecules/signOut/SignOut/SignOut";
+import { Navigation, ProfileNavigation, SignOut } from "../../molecules";
 
 export type UserHeaderProps = {
   user?: User | null;

@@ -1,9 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import Player from "../../../molecules/player/Player/Player";
-import Reactions from "../../../molecules/reactions/Reactions/Reactions";
-import ChatView from "../../../organisms/ChatView/ChatView";
-import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
+import { Reactions } from "../../../molecules";
+import { Chat, Player, RoomHeader } from "../../../organisms";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";
@@ -20,7 +18,7 @@ const RoomPage = ({ room }: RoomPageProps): JSX.Element => (
       appTitle={room.room_name}
       header={<RoomHeader />}
       left={<Player />}
-      right={<ChatView />}
+      right={<Chat />}
       bottom={<Reactions />}
     />
   </RoomContextProvider>

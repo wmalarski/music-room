@@ -1,9 +1,6 @@
 import React from "react";
-import CreateRoom from "../molecules/createRoom/CreateRoom/CreateRoom";
-import Rooms from "../molecules/rooms/Rooms/Rooms";
-import SignIn from "../molecules/signIn/SignIn/SignIn";
-import SignUp from "../molecules/signUp/SignUp/SignUp";
-import UserHeader from "../organisms/UserHeader/UserHeader";
+import { CreateRoom, Rooms, SignIn, SignUp } from "../molecules";
+import { UserHeader } from "../organisms";
 import GuestHomeTemplate from "../templates/GuestHomeTemplate/GuestHomeTemplate";
 import UserHomeTemplate from "../templates/UserHomeTemplate/UserHomeTemplate";
 import { useUserContext } from "../utils/auth/UserContext";

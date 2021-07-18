@@ -3,7 +3,7 @@ import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useRoomContext } from "../../../utils/room/RoomContext";
-import ReactionsButtons from "../ReactionButtons/ReactionsButtons";
+import ReactionsView from "../ReactionsView/ReactionsView";
 
 const Reactions = (): JSX.Element => {
   const { room_id, profile_id } = useRoomContext();
@@ -17,7 +17,7 @@ const Reactions = (): JSX.Element => {
   });
 
   return (
-    <ReactionsButtons
+    <ReactionsView
       action={action}
       onChange={(data) =>
         currentMessage &&

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
 import { useRoomContext } from "../../../utils/room/RoomContext";
-import ChatInputForm from "../ChatInputForm/ChatInputForm";
+import ChatInputView from "../ChatInputView/ChatInputView";
 
 const ChatInput = (): JSX.Element => {
   const { profile_id, room_id } = useRoomContext();
@@ -14,7 +14,7 @@ const ChatInput = (): JSX.Element => {
   // useEffect(() => console.log("selections", selections), [selections]);
 
   return (
-    <ChatInputForm
+    <ChatInputView
       query={query}
       onQueryChange={setQuery}
       onSubmit={({ url }) =>

@@ -1,14 +1,14 @@
 import React from "react";
 import { Debug } from "../../../atoms";
 import { useSignUp } from "../../../services/auth/signUp";
-import SignUpForm from "../SignUpForm/SignUpForm";
+import SignUpView from "../SignUpView/SignUpView";
 
 const SignUp = (): JSX.Element => {
   const { data, mutate: signUp } = useSignUp();
 
   return (
     <>
-      <SignUpForm
+      <SignUpView
         onSubmit={(data) =>
           signUp({
             email: data.email,

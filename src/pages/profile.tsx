@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import ProfileDetails from "../molecules/profileDetails/ProfileDetails/ProfileDetails";
-import UserHeader from "../organisms/UserHeader/UserHeader";
+import { ProfileDetails } from "../molecules";
+import { UserHeader } from "../organisms";
 import { selectProfile } from "../services/data/profiles/selectProfile";
 import { Profile } from "../services/data/types";
 import { supabase } from "../services/supabase";

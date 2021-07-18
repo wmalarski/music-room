@@ -3,7 +3,7 @@ import React from "react";
 import { useInsertRole } from "../../../services/data/roles/insertRole";
 import { Profile, Room } from "../../../services/data/types";
 import { SupabaseErrorCode } from "../../../services/supabase";
-import InviteAcceptForm from "../InviteAcceptForm/InviteAcceptForm";
+import InviteAcceptView from "../InviteAcceptView/InviteAcceptView";
 
 export type InviteAcceptProps = {
   room: Room;
@@ -22,7 +22,7 @@ const InviteAccept = ({ room, profile }: InviteAcceptProps): JSX.Element => {
   });
 
   return (
-    <InviteAcceptForm
+    <InviteAcceptView
       room={room}
       onAcceptClicked={() =>
         insertRole({

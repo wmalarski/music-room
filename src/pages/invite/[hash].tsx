@@ -1,9 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import InviteAccept from "../../molecules/inviteAccept/InviteAccept/InviteAccept";
-import SignIn from "../../molecules/signIn/SignIn/SignIn";
-import SignUp from "../../molecules/signUp/SignUp/SignUp";
-import UserHeader from "../../organisms/UserHeader/UserHeader";
+import { InviteAccept, SignIn, SignUp } from "../../molecules";
+import { UserHeader } from "../../organisms";
 import { useSelectProfile } from "../../services/data/profiles/selectProfile";
 import { selectRoomByHash } from "../../services/data/rooms/selectRoomByHash";
 import { Room } from "../../services/data/types";

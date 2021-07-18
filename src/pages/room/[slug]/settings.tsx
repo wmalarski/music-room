@@ -1,8 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
-import RoomSettings from "../../../molecules/roomSettings/RoomSettings/RoomSettings";
-import RoomUsers from "../../../molecules/roomUsers/RoomUsers/RoomUsers";
-import RoomHeader from "../../../organisms/RoomHeader/RoomHeader";
+import { RoomSettings, RoomUsers } from "../../../molecules";
+import { RoomHeader } from "../../../organisms";
 import { RoomProfile } from "../../../services/data/types";
 import { supabase } from "../../../services/supabase";
 import getServerSideRoom from "../../../services/utils/getServerSideRoom";

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useSelectProfile } from "../../../services/data/profiles/selectProfile";
 import { useInsertRoom } from "../../../services/data/rooms/insertRoom";
-import CreateRoomForm from "../CreateRoomForm/CreateRoomForm";
+import CreateRoomView from "../CreateRoomView/CreateRoomView";
 
 export type CreateRoomProps = {
   user: User;
@@ -18,7 +18,7 @@ const CreateRoom = ({ user }: CreateRoomProps): JSX.Element | null => {
   });
 
   return profile ? (
-    <CreateRoomForm
+    <CreateRoomView
       onSubmit={({ name }) =>
         insertRoom({
           author_id: profile?.id,

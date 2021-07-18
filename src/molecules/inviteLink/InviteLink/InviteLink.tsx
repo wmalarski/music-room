@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRoomContext } from "../../../utils/room/RoomContext";
-import InviteLinkForm from "../InviteLinkForm/InviteLinkForm";
+import InviteLinkView from "../InviteLinkView/InviteLinkView";
 
 const InviteLink = (): JSX.Element | null => {
   const { hash } = useRoomContext();
@@ -15,7 +15,7 @@ const InviteLink = (): JSX.Element | null => {
           <a ref={(element) => setHref(element?.href)} />
         </Link>
       </div>
-      {href && <InviteLinkForm link={href} />}
+      {href && <InviteLinkView link={href} />}
     </>
   );
 };
