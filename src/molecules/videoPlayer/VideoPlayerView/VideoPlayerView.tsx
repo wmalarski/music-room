@@ -1,30 +1,74 @@
-import React from "react";
-import { Button, Typography } from "../../../atoms";
-import { UpdateMessageArgs } from "../../../services/data/messages/updateMessage";
-import { Message } from "../../../services/data/types";
-import useText from "../../../utils/translations/useText";
+import React, { useEffect, useRef } from "react";
+import YouTube from "react-youtube";
+import { Controls, Message } from "../../../services/data/types";
+import PlayerControls from "../PlayerControls/PlayerControls";
 
 export type PlayerViewProps = {
+  profileId: number;
   message: Message;
-  onMessageEnd: (update: UpdateMessageArgs) => void;
+  controls: Controls;
+  onEnd: () => void;
+  onChange: (controls: Partial<Controls>) => void;
 };
 
 const PlayerView = ({
+  profileId,
   message,
-  onMessageEnd,
+  controls,
+  onEnd,
+  onChange,
 }: PlayerViewProps): JSX.Element => {
-  const text = useText();
+  const { muted, pause, volume, speaker_id } = controls;
+
+  const ref = useRef<YouTube>(null);
+
+  const isSpeaker = profileId === speaker_id;
+
+  useEffect(() => {
+    const player = ref.current?.getInternalPlayer();
+    if (!player || !isSpeaker) return;
+    player.setVolume(volume);
+  }, [isSpeaker, volume]);
+
+  useEffect(() => {
+    const player = ref.current?.getInternalPlayer();
+    if (!player || !isSpeaker) return;
+    if (muted) player.mute();
+    else player.unMute();
+  }, [isSpeaker, muted]);
+
+  useEffect(() => {
+    const player = ref.current?.getInternalPlayer();
+    if (!player) return;
+    if (pause) player.pauseVideo();
+    else player.playVideo();
+  }, [pause]);
 
   return (
     <>
-      <Typography>{message.data.url}</Typography>
-      <Button
-        onClick={() =>
-          onMessageEnd({ id: message.id, ended_at: new Date().toISOString() })
-        }
-      >
-        {text("endMessage")}
-      </Button>
+      <YouTube
+        ref={ref}
+        videoId={message.data.url}
+        opts={{
+          height: "390",
+          width: "640",
+          playerVars: {
+            autoplay: 1,
+            mute: 1,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+          },
+        }}
+        onPause={() => onChange({ pause: true })}
+        onPlay={() => onChange({ pause: false })}
+        onEnd={() => onEnd()}
+      />
+      <PlayerControls
+        controls={controls}
+        onChange={onChange}
+        profileId={profileId}
+      />
     </>
   );
 };

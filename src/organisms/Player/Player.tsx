@@ -1,11 +1,6 @@
 import React from "react";
-import { PlayerControls, VideoPlayer } from "../../molecules";
+import { VideoPlayer } from "../../molecules";
 
-const Player = (): JSX.Element => (
-  <>
-    <VideoPlayer />
-    <PlayerControls />
-  </>
-);
+const Player = (): JSX.Element => <VideoPlayer />;
 
 export default Player;

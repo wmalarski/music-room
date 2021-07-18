@@ -5,7 +5,6 @@ export { default as DeleteRoom } from "./deleteRoom/DeleteRoom/DeleteRoom";
 export { default as InviteAccept } from "./inviteAccept/InviteAccept/InviteAccept";
 export { default as InviteLink } from "./inviteLink/InviteLink/InviteLink";
 export { default as Navigation } from "./navigation/Navigation/Navigation";
-export { default as PlayerControls } from "./playerControls/PlayerControls/PlayerControls";
 export { default as ProfileDetails } from "./profileDetails/ProfileDetails/ProfileDetails";
 export { default as ProfileNavigation } from "./profileNavigation/ProfileNavigation/ProfileNavigation";
 export { default as Reactions } from "./reactions/Reactions/Reactions";

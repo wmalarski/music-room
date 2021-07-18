@@ -4,17 +4,17 @@ import { UpdateControlsArgs } from "../../../services/data/controls/updateContro
 import { Controls } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
-export type PlayerControlsViewProps = {
+export type PlayerControlsProps = {
   profileId: number;
   controls: Controls;
   onChange: (controls: UpdateControlsArgs) => void;
 };
 
-const PlayerControlsView = ({
+const PlayerControls = ({
   profileId,
   controls: { id, muted, pause, volume },
   onChange,
-}: PlayerControlsViewProps): JSX.Element => {
+}: PlayerControlsProps): JSX.Element => {
   const text = useText();
 
   return (
@@ -39,9 +39,9 @@ const PlayerControlsView = ({
         <Input
           type="number"
           placeholder={text("controlsVolume")}
-          step={0.1}
+          step={1}
           min={0}
-          max={1}
+          max={100}
           value={volume}
           onChange={(event) =>
             onChange({ id, volume: Number(event.target.value) })
@@ -56,4 +56,4 @@ const PlayerControlsView = ({
   );
 };
 
-export default PlayerControlsView;
+export default PlayerControls;
