@@ -17,6 +17,11 @@ export type UpsertActionArgs = {
   dislike_at?: string | null;
 };
 
+export type UpsertActionContext = {
+  previous?: Action;
+  next?: Partial<Action>;
+};
+
 export const upsertAction = async (args: UpsertActionArgs): Promise<Action> => {
   const { data, error } = await supabase
     .from<Action>("actions")
@@ -29,19 +34,58 @@ export const upsertAction = async (args: UpsertActionArgs): Promise<Action> => {
 };
 
 export const useUpsertAction = (
-  options?: UseMutationOptions<Action, PostgrestError, UpsertActionArgs>
-): UseMutationResult<Action, PostgrestError, UpsertActionArgs> => {
+  options?: Omit<
+    UseMutationOptions<
+      Action,
+      PostgrestError,
+      UpsertActionArgs,
+      UpsertActionContext
+    >,
+    "onMutate"
+  >
+): UseMutationResult<
+  Action,
+  PostgrestError,
+  UpsertActionArgs,
+  UpsertActionContext
+> => {
   const queryClient = useQueryClient();
+
   return useMutation(upsertAction, {
     ...options,
-    onSuccess: (action, ...args) => {
-      queryClient.invalidateQueries(
-        selectActionKey({
-          messageId: action.message_id,
-          profileId: action.profile_id,
-        })
-      );
-      options?.onSuccess?.(action, ...args);
+    onMutate: async (action) => {
+      const selectKey = selectActionKey({
+        messageId: action.message_id,
+        profileId: action.profile_id,
+      });
+
+      await queryClient.cancelQueries(selectKey);
+
+      const previous = queryClient.getQueryData<Action>(selectKey);
+      const next = { ...previous, ...action };
+
+      queryClient.setQueryData(selectKey, next);
+
+      return { previous, next };
+    },
+    onError: (err, action, context) => {
+      const selectKey = selectActionKey({
+        messageId: action.message_id,
+        profileId: action.profile_id,
+      });
+
+      queryClient.setQueryData(selectKey, context?.previous);
+      options?.onError?.(err, action, context);
+    },
+    onSettled: (action, ...args) => {
+      options?.onSettled?.(action, ...args);
+      if (!action) return;
+
+      const selectKey = selectActionKey({
+        messageId: action?.message_id,
+        profileId: action?.profile_id,
+      });
+      queryClient.invalidateQueries(selectKey);
     },
   });
 };

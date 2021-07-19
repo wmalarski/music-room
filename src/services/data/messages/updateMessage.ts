@@ -14,6 +14,11 @@ export type UpdateMessageArgs = {
   ended_at?: string;
 };
 
+export type UpdateMessageContext = {
+  previous?: Message;
+  next?: Partial<Message>;
+};
+
 export const updateMessage = async (
   args: UpdateMessageArgs
 ): Promise<Message> => {
@@ -29,17 +34,41 @@ export const updateMessage = async (
 };
 
 export const useUpdateMessage = (
-  options?: UseMutationOptions<Message, PostgrestError, UpdateMessageArgs>
-): UseMutationResult<Message, PostgrestError, UpdateMessageArgs> => {
+  roomId: number,
+  options?: UseMutationOptions<
+    Message,
+    PostgrestError,
+    UpdateMessageArgs,
+    UpdateMessageContext
+  >
+): UseMutationResult<
+  Message,
+  PostgrestError,
+  UpdateMessageArgs,
+  UpdateMessageContext
+> => {
   const queryClient = useQueryClient();
+  const selectKey = selectCurrentMessageKey({ roomId });
 
   return useMutation(updateMessage, {
     ...options,
-    onSuccess: (message, ...args) => {
-      options?.onSuccess?.(message, ...args);
-      queryClient.invalidateQueries(
-        selectCurrentMessageKey({ roomId: message.room_id })
-      );
+    onMutate: async (action) => {
+      await queryClient.cancelQueries(selectKey);
+
+      const previous = queryClient.getQueryData<Message>(selectKey);
+      const next = { ...previous, ...action };
+
+      queryClient.setQueryData(selectKey, next);
+
+      return { previous, next };
+    },
+    onError: (err, action, context) => {
+      queryClient.setQueryData(selectKey, context?.previous);
+      options?.onError?.(err, action, context);
+    },
+    onSettled: (message, ...args) => {
+      queryClient.invalidateQueries(selectKey);
+      options?.onSettled?.(message, ...args);
     },
   });
 };

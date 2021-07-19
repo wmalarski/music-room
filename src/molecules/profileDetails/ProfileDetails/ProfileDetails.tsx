@@ -8,7 +8,7 @@ export type ProfileDetailsProps = {
 };
 
 const ProfileDetails = ({ profile }: ProfileDetailsProps): JSX.Element => {
-  const { mutate: updateProfile } = useUpdateProfile();
+  const { mutate: updateProfile } = useUpdateProfile(profile.user_id);
 
   return (
     <ProfileDetailsView

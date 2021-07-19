@@ -7,10 +7,17 @@ import {
 } from "react-query";
 import { supabase } from "../../supabase";
 import { selectAllMembersKey } from "../members/selectMembers";
-import { Profile } from "../types";
+import { Member, Profile } from "../types";
 import { selectProfileKey } from "./selectProfile";
 
 export type UpdateProfileArgs = Pick<Profile, "id" | "name">;
+
+export type UpdateProfileContext = {
+  previousProfile?: Profile;
+  previousMembers?: Member[];
+  nextProfile?: Partial<Profile>;
+  nextMembers?: Member[];
+};
 
 export const updateProfile = async ({
   id,
@@ -28,16 +35,55 @@ export const updateProfile = async ({
 };
 
 export const useUpdateProfile = (
-  options?: UseMutationOptions<Profile, PostgrestError, UpdateProfileArgs>
-): UseMutationResult<Profile, PostgrestError, UpdateProfileArgs> => {
+  userId: string,
+  options?: UseMutationOptions<
+    Profile,
+    PostgrestError,
+    UpdateProfileArgs,
+    UpdateProfileContext
+  >
+): UseMutationResult<
+  Profile,
+  PostgrestError,
+  UpdateProfileArgs,
+  UpdateProfileContext
+> => {
   const queryClient = useQueryClient();
+  const profileKey = selectProfileKey({ userId });
+  const membersKey = selectAllMembersKey();
 
   return useMutation(updateProfile, {
     ...options,
-    onSuccess: (role, ...args) => {
-      queryClient.invalidateQueries(selectProfileKey({ userId: role.user_id }));
-      queryClient.invalidateQueries(selectAllMembersKey());
-      options?.onSuccess?.(role, ...args);
+    onMutate: async (profile) => {
+      await Promise.all([
+        queryClient.cancelQueries(profileKey),
+        queryClient.cancelQueries(membersKey),
+      ]);
+
+      const previousProfile = queryClient.getQueryData<Profile>(profileKey);
+      const previousMembers = queryClient.getQueryData<Member[]>(membersKey);
+
+      const nextProfile = { ...previousProfile, ...profile };
+      const nextMembers = previousMembers?.map((member) =>
+        member.profile_id === profile.id
+          ? { ...member, name: profile.name }
+          : member
+      );
+
+      queryClient.setQueryData(profileKey, nextProfile);
+      queryClient.setQueryData(membersKey, nextMembers);
+
+      return { previousProfile, previousMembers, nextProfile, nextMembers };
+    },
+    onError: (err, controls, context) => {
+      queryClient.setQueryData(profileKey, context?.previousProfile);
+      queryClient.setQueryData(membersKey, context?.previousMembers);
+      options?.onError?.(err, controls, context);
+    },
+    onSettled: (role, ...args) => {
+      queryClient.invalidateQueries(profileKey);
+      queryClient.invalidateQueries(membersKey);
+      options?.onSettled?.(role, ...args);
     },
   });
 };

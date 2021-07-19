@@ -11,7 +11,7 @@ const VideoPlayer = (): JSX.Element => {
   const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
-  const { mutate: updateMessage } = useUpdateMessage();
+  const { mutate: updateMessage } = useUpdateMessage(room_id);
 
   const { data: controls } = useSelectControls({ roomId: room_id });
   const { mutate: updateControls } = useUpdateControls(room_id);

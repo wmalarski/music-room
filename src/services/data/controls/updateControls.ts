@@ -64,9 +64,9 @@ export const useUpdateControls = (
 
       return { previous, next };
     },
-    onError: (err, newTodo, context) => {
+    onError: (err, controls, context) => {
       queryClient.setQueryData(selectKey, context?.previous);
-      options?.onError?.(err, newTodo, context);
+      options?.onError?.(err, controls, context);
     },
     onSettled: (...args) => {
       queryClient.invalidateQueries(selectKey);
