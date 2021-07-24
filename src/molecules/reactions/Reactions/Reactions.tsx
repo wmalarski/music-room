@@ -3,9 +3,15 @@ import { useSelectAction } from "../../../services/data/actions/selectAction";
 import { useUpsertAction } from "../../../services/data/actions/upsertAction";
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useMemberContext } from "../../../utils/room/MemberContext";
-import ReactionsView from "../ReactionsView/ReactionsView";
+import ReactionsView, {
+  ReactionsViewProps,
+} from "../ReactionsView/ReactionsView";
 
-const Reactions = (): JSX.Element => {
+export type ReactionsProps = {
+  View?: React.ComponentType<ReactionsViewProps>;
+};
+
+const Reactions = ({ View = ReactionsView }: ReactionsProps): JSX.Element => {
   const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
@@ -17,7 +23,7 @@ const Reactions = (): JSX.Element => {
   });
 
   return (
-    <ReactionsView
+    <View
       action={action}
       onChange={(data) =>
         currentMessage &&

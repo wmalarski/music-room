@@ -1,11 +1,15 @@
 import React from "react";
 import { useSignOut } from "../../../services/auth/signOut";
-import SignOutView from "../SignOutView/SignOutView";
+import SignOutView, { SignOutViewProps } from "../SignOutView/SignOutView";
 
-const SignOut = (): JSX.Element => {
+export type SignOutProps = {
+  View?: React.ComponentType<SignOutViewProps>;
+};
+
+const SignOut = ({ View = SignOutView }: SignOutProps): JSX.Element => {
   const { mutate: signOut } = useSignOut();
 
-  return <SignOutView onSignOutClicked={signOut} />;
+  return <View onSignOutClicked={signOut} />;
 };
 
 export default SignOut;

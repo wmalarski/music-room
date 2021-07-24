@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useInsertMessage } from "../../../services/data/messages/insertMessage";
 import { useMemberContext } from "../../../utils/room/MemberContext";
-import ChatInputView from "../ChatInputView/ChatInputView";
+import ChatInputView, {
+  ChatInputViewProps,
+} from "../ChatInputView/ChatInputView";
 
-const ChatInput = (): JSX.Element => {
+export type ChatInputProps = {
+  View?: React.ComponentType<ChatInputViewProps>;
+};
+
+const ChatInput = ({ View = ChatInputView }: ChatInputProps): JSX.Element => {
   const { profile_id, room_id } = useMemberContext();
 
   const { mutate: insertMessage } = useInsertMessage();
@@ -14,7 +20,7 @@ const ChatInput = (): JSX.Element => {
   // useEffect(() => console.log("selections", selections), [selections]);
 
   return (
-    <ChatInputView
+    <View
       query={query}
       onQueryChange={setQuery}
       onSubmit={({ url }) =>

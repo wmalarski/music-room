@@ -1,12 +1,16 @@
 import React from "react";
 import { useSignIn } from "../../../services/auth/signIn";
-import SignInView from "../SignInView/SignInView";
+import SignInView, { SignInViewProps } from "../SignInView/SignInView";
 
-const SignIn = (): JSX.Element => {
+export type SignInProps = {
+  View?: React.ComponentType<SignInViewProps>;
+};
+
+const SignIn = ({ View = SignInView }: SignInProps): JSX.Element => {
   const { mutate: signUp } = useSignIn();
 
   return (
-    <SignInView
+    <View
       onSubmit={(data) =>
         signUp({
           email: data.email,

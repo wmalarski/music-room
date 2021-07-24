@@ -1,9 +1,17 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useMemberContext } from "../../../utils/room/MemberContext";
-import InviteLinkView from "../InviteLinkView/InviteLinkView";
+import InviteLinkView, {
+  InviteLinkViewProps,
+} from "../InviteLinkView/InviteLinkView";
 
-const InviteLink = (): JSX.Element | null => {
+export type InviteLinkProps = {
+  View?: React.ComponentType<InviteLinkViewProps>;
+};
+
+const InviteLink = ({
+  View = InviteLinkView,
+}: InviteLinkProps): JSX.Element | null => {
   const { hash } = useMemberContext();
 
   const [href, setHref] = useState<string>();
@@ -15,7 +23,7 @@ const InviteLink = (): JSX.Element | null => {
           <a ref={(element) => setHref(element?.href)} />
         </Link>
       </div>
-      {href && <InviteLinkView link={href} />}
+      {href && <View link={href} />}
     </>
   );
 };

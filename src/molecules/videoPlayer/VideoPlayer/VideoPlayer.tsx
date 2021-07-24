@@ -5,9 +5,17 @@ import { useUpdateControls } from "../../../services/data/controls/updateControl
 import { useSelectCurrentMessage } from "../../../services/data/messages/selectCurrentMessage";
 import { useUpdateMessage } from "../../../services/data/messages/updateMessage";
 import { useMemberContext } from "../../../utils/room/MemberContext";
-import VideoPlayerView from "../VideoPlayerView/VideoPlayerView";
+import VideoPlayerView, {
+  PlayerViewProps,
+} from "../VideoPlayerView/VideoPlayerView";
 
-const VideoPlayer = (): JSX.Element => {
+export type VideoPlayerProps = {
+  View?: React.ComponentType<PlayerViewProps>;
+};
+
+const VideoPlayer = ({
+  View = VideoPlayerView,
+}: VideoPlayerProps): JSX.Element => {
   const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
@@ -20,7 +28,7 @@ const VideoPlayer = (): JSX.Element => {
   return (
     <>
       {currentMessage && controls && (
-        <VideoPlayerView
+        <View
           profileId={profile_id}
           controls={controls}
           message={{

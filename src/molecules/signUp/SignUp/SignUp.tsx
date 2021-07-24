@@ -1,14 +1,18 @@
 import React from "react";
 import { Debug } from "../../../atoms";
 import { useSignUp } from "../../../services/auth/signUp";
-import SignUpView from "../SignUpView/SignUpView";
+import SignUpView, { SignUpViewProps } from "../SignUpView/SignUpView";
 
-const SignUp = (): JSX.Element => {
+export type SignUpProps = {
+  View?: React.ComponentType<SignUpViewProps>;
+};
+
+const SignUp = ({ View = SignUpView }: SignUpProps): JSX.Element => {
   const { data, mutate: signUp } = useSignUp();
 
   return (
     <>
-      <SignUpView
+      <View
         onSubmit={(data) =>
           signUp({
             email: data.email,

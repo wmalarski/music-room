@@ -3,9 +3,15 @@ import { useSelectMembers } from "../../../services/data/members/selectMembers";
 import { useDeleteRole } from "../../../services/data/roles/deleteRole";
 import { useUpdateRole } from "../../../services/data/roles/updateRole";
 import { useMemberContext } from "../../../utils/room/MemberContext";
-import RoomUsersList from "../RoomUsersList/RoomUsersList";
+import RoomUsersList, {
+  RoomUsersListProps,
+} from "../RoomUsersList/RoomUsersList";
 
-const RoomUsers = (): JSX.Element => {
+export type RoomUsersProps = {
+  View?: React.ComponentType<RoomUsersListProps>;
+};
+
+const RoomUsers = ({ View = RoomUsersList }: RoomUsersProps): JSX.Element => {
   const { room_id } = useMemberContext();
 
   const { data: members, fetchNextPage } = useSelectMembers({
@@ -17,7 +23,7 @@ const RoomUsers = (): JSX.Element => {
   const { mutate: updateRole } = useUpdateRole();
 
   return (
-    <RoomUsersList
+    <View
       members={members?.pages.flat()}
       onLoadMore={() => fetchNextPage()}
       onRemoveClick={(profile) => deleteRole({ id: profile.role_id })}

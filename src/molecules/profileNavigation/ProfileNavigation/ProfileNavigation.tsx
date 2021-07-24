@@ -1,13 +1,19 @@
 import { useRouter } from "next/router";
 import React from "react";
-import ProfileNavigationView from "../ProfileNavigationView/ProfileNavigationView";
+import ProfileNavigationView, {
+  ProfileNavigationViewProps,
+} from "../ProfileNavigationView/ProfileNavigationView";
 
-const ProfileNavigation = (): JSX.Element => {
+export type ProfileNavigationProps = {
+  View?: React.ComponentType<ProfileNavigationViewProps>;
+};
+
+const ProfileNavigation = ({
+  View = ProfileNavigationView,
+}: ProfileNavigationProps): JSX.Element => {
   const router = useRouter();
 
-  return (
-    <ProfileNavigationView onProfileClicked={() => router.push(`/profile`)} />
-  );
+  return <View onProfileClicked={() => router.push(`/profile`)} />;
 };
 
 export default ProfileNavigation;
