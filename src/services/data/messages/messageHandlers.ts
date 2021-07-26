@@ -3,10 +3,9 @@ import { SUPABASE_ENDPOINT } from "../../supabase";
 import { Message } from "../types";
 
 export const mockMessagesStorage = {
-  get: (): Message[] =>
-    JSON.parse(window.sessionStorage.getItem("messages") ?? "[]"),
+  get: (): Message[] => JSON.parse(sessionStorage.getItem("messages") ?? "[]"),
   set: (actions: Message[]): void =>
-    window.sessionStorage.setItem("messages", JSON.stringify(actions)),
+    sessionStorage.setItem("messages", JSON.stringify(actions)),
 };
 
 export const messagesHandlers = [

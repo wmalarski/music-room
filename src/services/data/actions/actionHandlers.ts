@@ -4,10 +4,9 @@ import { Action } from "../types";
 import { UpsertActionArgs } from "./upsertAction";
 
 export const mockActionsStorage = {
-  get: (): Action[] =>
-    JSON.parse(window.sessionStorage.getItem("actions") ?? "[]"),
+  get: (): Action[] => JSON.parse(sessionStorage.getItem("actions") ?? "[]"),
   set: (actions: Action[]): void =>
-    window.sessionStorage.setItem("actions", JSON.stringify(actions)),
+    sessionStorage.setItem("actions", JSON.stringify(actions)),
 };
 
 export const actionHandlers = [
