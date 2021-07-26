@@ -22,4 +22,11 @@ Playground.args = {
     profile_id: 1,
     updated_at: new Date().toISOString(),
   },
+  message: {
+    created_at: new Date().toISOString(),
+    data: { kind: "message#0.0.1", url: "" },
+    id: 1,
+    profile_id: 1,
+    room_id: 1,
+  },
 };

@@ -14,7 +14,9 @@ export type ReactionsProps = {
 const Reactions = ({ View = ReactionsView }: ReactionsProps): JSX.Element => {
   const { room_id, profile_id } = useMemberContext();
 
-  const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
+  const { data: currentMessage = null } = useSelectCurrentMessage({
+    roomId: room_id,
+  });
 
   const { mutate: upsertMessage } = useUpsertAction();
   const { data: action = null } = useSelectAction({
@@ -25,6 +27,7 @@ const Reactions = ({ View = ReactionsView }: ReactionsProps): JSX.Element => {
   return (
     <View
       action={action}
+      message={currentMessage}
       onChange={(data) =>
         currentMessage &&
         upsertMessage({

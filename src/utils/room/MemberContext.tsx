@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import React, { createContext, ReactNode, useContext } from "react";
 import { Member } from "../../services/data/types";
 
 const MemberContext = createContext<Member>({

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Debug } from "../../../atoms";
-import { Action } from "../../../services/data/types";
+import { Action, Message } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
 export type ReactionsViewData = {
@@ -10,6 +10,7 @@ export type ReactionsViewData = {
 
 export type ReactionsViewProps = {
   action: Action | null;
+  message: Message | null;
   onChange: (data: ReactionsViewData) => void;
 };
 
