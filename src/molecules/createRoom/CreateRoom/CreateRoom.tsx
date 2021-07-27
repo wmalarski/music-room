@@ -18,23 +18,32 @@ const CreateRoom = ({
 }: CreateRoomProps): JSX.Element | null => {
   const router = useRouter();
 
-  const { data: profile } = useSelectProfile({ userId: user.id });
+  const {
+    data: profile = null,
+    error,
+    isLoading,
+  } = useSelectProfile({ userId: user.id });
+
   const { mutate: insertRoom } = useInsertRoom({
     onSuccess: (room) => router.push(`/room/${room.slug}`),
   });
 
-  return profile ? (
+  return (
     <View
-      onSubmit={({ name }) =>
+      isLoading={isLoading}
+      error={error}
+      profile={profile}
+      onSubmit={({ name, slug }) =>
+        profile &&
         insertRoom({
           author_id: profile?.id,
-          name: name,
-          slug: name.replace(/\s/g, "_"), // remove not [0-9][a-z][A-Z]
+          name,
+          slug,
           data: { kind: "room#0.0.1" },
         })
       }
     />
-  ) : null;
+  );
 };
 
 export default CreateRoom;

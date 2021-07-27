@@ -35,7 +35,7 @@ export type Profile = {
   id: number;
   name: string;
   user_id: string;
-  avatar: string;
+  avatar: string | null;
 };
 
 export type RoomRole = "owner" | "mod" | "user" | "guest";

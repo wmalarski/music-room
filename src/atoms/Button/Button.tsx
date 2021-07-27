@@ -4,7 +4,7 @@ const Button = (
   props: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
-  >,
+  > & { isLoading: boolean },
   ref: React.LegacyRef<HTMLButtonElement>
 ): JSX.Element => <button {...props} ref={ref} />;
 
