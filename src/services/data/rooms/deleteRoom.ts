@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Room } from "../types";
 import { selectRoomByHashKey } from "./selectRoomByHash";
@@ -15,8 +15,7 @@ export type DeleteRoomArgs = {
 };
 
 export const deleteRoom = async (args: DeleteRoomArgs): Promise<Room> => {
-  const { data, error } = await supabase
-    .from<Room>("rooms")
+  const { data, error } = await fromSupabase("rooms")
     .delete()
     .eq("id", args.id)
     .single();

@@ -5,17 +5,14 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Room } from "../types";
 
 export type InsertRoomArgs = Omit<Room, "id" | "hash">;
 
 export const insertRoom = async (args: InsertRoomArgs): Promise<Room> => {
-  const { data, error } = await supabase
-    .from<Room>("rooms")
-    .insert(args)
-    .single();
+  const { data, error } = await fromSupabase("rooms").insert(args).single();
 
   if (error || !data) throw error;
 

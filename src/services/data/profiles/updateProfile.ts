@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Member, Profile } from "../types";
 import { selectProfileKey } from "./selectProfile";
@@ -23,8 +23,7 @@ export const updateProfile = async ({
   id,
   name,
 }: UpdateProfileArgs): Promise<Profile> => {
-  const { data, error } = await supabase
-    .from<Profile>("profiles")
+  const { data, error } = await fromSupabase("profiles")
     .update({ id, name })
     .eq("id", id)
     .single();

@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Controls } from "../types";
 import { selectControlsKey } from "./selectControls";
 
@@ -21,8 +21,7 @@ export type UpdateControlsContext = {
 export const updateControls = async (
   args: UpdateControlsArgs
 ): Promise<Controls> => {
-  const { data, error } = await supabase
-    .from<Controls>("controls")
+  const { data, error } = await fromSupabase("controls")
     .update(args)
     .eq("id", args.id)
     .single();

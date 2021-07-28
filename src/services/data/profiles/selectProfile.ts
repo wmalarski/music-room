@@ -5,7 +5,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Profile } from "../types";
 
 export type SelectProfileArgs = {
@@ -22,8 +22,7 @@ export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
 export const selectProfile = async ({
   queryKey: [, { userId }],
 }: QueryFunctionContext<SelectProfileKey>): Promise<Profile | null> => {
-  const { data, error } = await supabase
-    .from<Profile>("profiles")
+  const { data, error } = await fromSupabase("profiles")
     .select("*")
     .eq("user_id", userId)
     .single();

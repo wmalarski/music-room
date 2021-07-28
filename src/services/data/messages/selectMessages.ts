@@ -5,7 +5,7 @@ import {
   UseInfiniteQueryOptions,
   UseInfiniteQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Message } from "../types";
 
 export const MESSAGES_PAGE_LIMIT = 20;
@@ -24,8 +24,7 @@ export const selectMessages = async ({
   queryKey: [, { roomId }],
   pageParam = 0,
 }: QueryFunctionContext<SelectMessagesKey>): Promise<Message[]> => {
-  const { data, error } = await supabase
-    .from<Message>("messages")
+  const { data, error } = await fromSupabase("messages")
     .select("*")
     .match({ room_id: roomId })
     .order("created_at", { ascending: false })

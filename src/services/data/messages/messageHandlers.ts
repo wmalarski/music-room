@@ -1,5 +1,5 @@
 import { DefaultRequestBody, rest } from "msw";
-import { SUPABASE_ENDPOINT } from "../../supabase";
+import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
 import { Message } from "../types";
 
 export const mockMessagesStorage = {
@@ -10,7 +10,7 @@ export const mockMessagesStorage = {
 
 export const messagesHandlers = [
   rest.get<DefaultRequestBody, Message[]>(
-    `${SUPABASE_ENDPOINT}/messages`,
+    `${SUPABASE_ENDPOINT}/${TABLES.messages}`,
     (req, res, ctx) =>
       res(ctx.json(mockMessagesStorage.get().slice(0, req.params.limit)))
   ),

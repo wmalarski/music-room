@@ -5,7 +5,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Message } from "../types";
 
 export type SelectCurrentMessageArgs = {
@@ -24,8 +24,7 @@ export const selectCurrentMessageKey = (
 export const selectCurrentMessage = async ({
   queryKey: [, { roomId }],
 }: QueryFunctionContext<SelectCurrentMessageKey>): Promise<Message | null> => {
-  const { data, error } = await supabase
-    .from<Message>("messages")
+  const { data, error } = await fromSupabase("messages")
     .select("*")
     .is("ended_at", null)
     .eq("room_id", roomId)

@@ -74,3 +74,13 @@ export type Member = {
   role: RoomRole;
   avatar: string | null;
 };
+
+export type TableMapping = {
+  actions: Action;
+  controls: Controls;
+  members: Member;
+  messages: Message;
+  profiles: Profile;
+  roles: Role;
+  rooms: Room;
+};

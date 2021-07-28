@@ -14,11 +14,18 @@ const ProfileDetails = ({
   profile,
   View = ProfileDetailsView,
 }: ProfileDetailsProps): JSX.Element => {
-  const { mutate: updateProfile } = useUpdateProfile(profile.user_id);
+  const {
+    mutate: updateProfile,
+    isLoading,
+    data,
+    error,
+  } = useUpdateProfile(profile.user_id);
 
   return (
     <View
-      profile={profile}
+      profile={{ ...profile, ...data }}
+      error={error}
+      isLoading={isLoading}
       onSubmit={({ name }) => updateProfile({ id: profile.id, name })}
     />
   );

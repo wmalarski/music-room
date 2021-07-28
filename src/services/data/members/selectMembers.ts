@@ -6,7 +6,7 @@ import {
   UseInfiniteQueryOptions,
   UseInfiniteQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Member } from "../types";
 
 const MEMBERS_PAGE_LIMIT = 20;
@@ -28,8 +28,7 @@ export const selectMembers = async ({
 }: QueryFunctionContext<SelectMembersKey>): Promise<Member[]> => {
   const { data, error } = await Object.entries(args).reduce(
     (prev, [key, value]) => prev.eq(key as keyof Member, value),
-    supabase
-      .from<Member>("room_roles")
+    fromSupabase("members")
       .select("*")
       .range(pageParam, pageParam + MEMBERS_PAGE_LIMIT)
   );

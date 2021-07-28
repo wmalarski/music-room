@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Action } from "../types";
 import { selectActionKey } from "./selectAction";
 
@@ -23,10 +23,7 @@ export type UpsertActionContext = {
 };
 
 export const upsertAction = async (args: UpsertActionArgs): Promise<Action> => {
-  const { data, error } = await supabase
-    .from<Action>("actions")
-    .upsert(args)
-    .single();
+  const { data, error } = await fromSupabase("actions").upsert(args).single();
 
   if (error || !data) throw error;
 

@@ -5,7 +5,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Controls } from "../types";
 
 export type SelectControlsArgs = {
@@ -21,8 +21,7 @@ export const selectControlsKey = (
 export const selectControls = async ({
   queryKey: [, { roomId }],
 }: QueryFunctionContext<SelectControlsKey>): Promise<Controls | null> => {
-  const { data, error } = await supabase
-    .from<Controls>("controls")
+  const { data, error } = await fromSupabase("controls")
     .select("*")
     .eq("room_id", roomId)
     .single();

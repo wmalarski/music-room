@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Role } from "../types";
 
@@ -15,8 +15,7 @@ export const updateRole = async ({
   id,
   role,
 }: UpdateRolesArgs): Promise<Role> => {
-  const { data, error } = await supabase
-    .from<Role>("roles")
+  const { data, error } = await fromSupabase("roles")
     .update({ id, role })
     .eq("id", id)
     .single();

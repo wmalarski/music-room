@@ -5,15 +5,14 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Role } from "../types";
 
 export type DeleteRoleArgs = Pick<Role, "id">;
 
 export const deleteRole = async ({ id }: DeleteRoleArgs): Promise<Role> => {
-  const { data, error } = await supabase
-    .from<Role>("roles")
+  const { data, error } = await fromSupabase("roles")
     .delete()
     .eq("id", id)
     .single();

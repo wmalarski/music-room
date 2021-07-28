@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { InfiniteData, useQueryClient } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Message } from "../types";
 import {
   deleteCacheMessage,
@@ -20,8 +20,7 @@ export const useSubscribeToMessages = ({
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const subscription = supabase
-      .from<Message>("messages")
+    const subscription = fromSupabase("messages")
       .on("INSERT", ({ new: message }) =>
         queryClient.setQueryData<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId }),

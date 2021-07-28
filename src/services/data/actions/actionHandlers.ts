@@ -1,5 +1,5 @@
 import { DefaultRequestBody, rest } from "msw";
-import { SUPABASE_ENDPOINT } from "../../supabase";
+import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
 import { Action } from "../types";
 import { UpsertActionArgs } from "./upsertAction";
 
@@ -11,12 +11,12 @@ export const mockActionsStorage = {
 
 export const actionHandlers = [
   rest.get<DefaultRequestBody, Action[]>(
-    `${SUPABASE_ENDPOINT}/actions`,
+    `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
     (req, res, ctx) =>
       res(ctx.json(mockActionsStorage.get().slice(0, req.params.limit)))
   ),
   rest.post<UpsertActionArgs, Action>(
-    `${SUPABASE_ENDPOINT}/actions`,
+    `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
     (req, res, ctx) => {
       const actions = mockActionsStorage.get();
 

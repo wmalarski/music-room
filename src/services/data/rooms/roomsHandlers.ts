@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { SUPABASE_ENDPOINT } from "../../supabase";
+import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
 import { Room } from "../types";
 import { InsertRoomArgs } from "./insertRoom";
 
@@ -11,7 +11,7 @@ export const mockRoomsStorage = {
 
 export const roomsHandlers = [
   rest.post<InsertRoomArgs, Room>(
-    `${SUPABASE_ENDPOINT}/rooms`,
+    `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
     (req, res, ctx) => {
       const rooms = mockRoomsStorage.get();
 

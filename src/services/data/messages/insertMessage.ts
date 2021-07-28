@@ -4,7 +4,7 @@ import {
   UseMutationOptions,
   UseMutationResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Message } from "../types";
 
 export type InsertMessageArgs = Omit<Message, "id" | "created_at" | "ended_at">;
@@ -12,10 +12,7 @@ export type InsertMessageArgs = Omit<Message, "id" | "created_at" | "ended_at">;
 export const insertMessage = async (
   args: InsertMessageArgs
 ): Promise<Message> => {
-  const { data, error } = await supabase
-    .from<Message>("messages")
-    .insert(args)
-    .single();
+  const { data, error } = await fromSupabase("messages").insert(args).single();
 
   if (error || !data) throw error;
 

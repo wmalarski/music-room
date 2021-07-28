@@ -5,7 +5,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Action } from "../types";
 
 export type SelectActionArgs = {
@@ -25,8 +25,7 @@ export const selectAction = async ({
 }: QueryFunctionContext<SelectActionKey>): Promise<Action | null> => {
   if (!messageId) return null;
 
-  const { data, error } = await supabase
-    .from<Action>("actions")
+  const { data, error } = await fromSupabase("actions")
     .select("*")
     .eq("message_id", messageId)
     .eq("profile_id", profileId)

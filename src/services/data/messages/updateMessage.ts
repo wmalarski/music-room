@@ -5,7 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Message } from "../types";
 import { selectCurrentMessageKey } from "./selectCurrentMessage";
 
@@ -22,8 +22,7 @@ export type UpdateMessageContext = {
 export const updateMessage = async (
   args: UpdateMessageArgs
 ): Promise<Message> => {
-  const { data, error } = await supabase
-    .from<Message>("messages")
+  const { data, error } = await fromSupabase("messages")
     .update(args)
     .eq("id", args.id)
     .single();
