@@ -9,6 +9,7 @@ export { default as ProfileDetails } from "./profileDetails/ProfileDetails/Profi
 export { default as ProfileNavigation } from "./profileNavigation/ProfileNavigation/ProfileNavigation";
 export { default as Reactions } from "./reactions/Reactions/Reactions";
 export { default as RoomDetails } from "./roomDetails/RoomDetails/RoomDetails";
+export { default as RoomForm } from "./roomForm/RoomForm/RoomForm";
 export { default as RoomNavigation } from "./roomNavigation/RoomNavigation/RoomNavigation";
 export { default as Rooms } from "./rooms/Rooms/Rooms";
 export { default as RoomUsers } from "./roomUsers/RoomUsers/RoomUsers";

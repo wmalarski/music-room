@@ -2,23 +2,20 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
+import { RoomFormViewData } from "./RoomFormView.utils";
 
-export type RoomDetailsFormData = {
-  name: string;
-};
-
-export type RoomDetailsFormProps = {
+export type RoomFormViewProps = {
   roomName: string;
-  onSubmit: (data: RoomDetailsFormData) => void;
+  onSubmit: (data: RoomFormViewData) => void;
 };
 
-const RoomDetailsForm = ({
+const RoomFormView = ({
   roomName,
   onSubmit,
-}: RoomDetailsFormProps): JSX.Element | null => {
+}: RoomFormViewProps): JSX.Element | null => {
   const text = useText();
 
-  const { register, handleSubmit } = useForm<RoomDetailsFormData>({
+  const { register, handleSubmit } = useForm<RoomFormViewData>({
     defaultValues: { name: roomName },
   });
 
@@ -30,4 +27,4 @@ const RoomDetailsForm = ({
   );
 };
 
-export default RoomDetailsForm;
+export default RoomFormView;

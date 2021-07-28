@@ -1,5 +1,5 @@
 import { User } from "@supabase/supabase-js";
-import { Member, Profile } from "../data/types";
+import { Member, Profile, Room } from "../data/types";
 
 export const defaultUser: User = {
   app_metadata: {},
@@ -29,4 +29,13 @@ export const defaultMember: Member = {
   slug: "first",
   role: "user",
   avatar: null,
+};
+
+export const defaultRoom: Room = {
+  author_id: 1,
+  data: { kind: "room#0.0.1" },
+  hash: "qwertyuiop",
+  id: 1,
+  name: "Room",
+  slug: "room",
 };

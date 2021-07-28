@@ -1,9 +1,14 @@
 import React from "react";
-import { DeleteRoom, RoomDetails, RoomUsers } from "../../molecules";
+import { DeleteRoom, RoomDetails, RoomForm, RoomUsers } from "../../molecules";
+import useRoleGuard from "../../utils/room/useRoleGuard";
 
 const RoomSettings = (): JSX.Element => (
   <>
-    <RoomDetails />
+    {useRoleGuard({
+      owner: <RoomForm />,
+      mod: <RoomForm />,
+      default: <RoomDetails />,
+    })}
     <RoomUsers />
     <DeleteRoom />
   </>
