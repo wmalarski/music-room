@@ -12,9 +12,10 @@ export type ChatInputProps = {
 const ChatInput = ({ View = ChatInputView }: ChatInputProps): JSX.Element => {
   const { profile_id, room_id } = useMemberContext();
 
-  const { mutate: insertMessage } = useInsertMessage();
+  const { mutate: insertMessage, isLoading, data, error } = useInsertMessage();
 
   const [query, setQuery] = useState("");
+
   // const { data: selections } = useSelectSuggestions({ query });
 
   // useEffect(() => console.log("selections", selections), [selections]);
@@ -22,6 +23,9 @@ const ChatInput = ({ View = ChatInputView }: ChatInputProps): JSX.Element => {
   return (
     <View
       query={query}
+      isLoading={isLoading}
+      message={data}
+      error={error}
       onQueryChange={setQuery}
       onSubmit={({ url }) =>
         insertMessage({

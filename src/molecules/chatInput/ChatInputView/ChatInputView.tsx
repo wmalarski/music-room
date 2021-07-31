@@ -1,5 +1,7 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import React from "react";
 import { Button, Input } from "../../../atoms";
+import { Message } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 
 export type ChatInputViewData = {
@@ -7,6 +9,9 @@ export type ChatInputViewData = {
 };
 
 export type ChatInputViewProps = {
+  isLoading: boolean;
+  message?: Message | null;
+  error: PostgrestError | null;
   query: string;
   onSubmit: (data: ChatInputViewData) => void;
   onQueryChange: (query: string) => void;
