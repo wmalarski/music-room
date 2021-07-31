@@ -41,6 +41,8 @@ const translation = {
   emailPlaceholder: "Email",
   passwordPlaceholder: "Password",
   confirmPasswordPlaceholder: "Confirm Password",
+  fieldIsDifferent: "Repeat password",
+  errorMaxLength: (max: number): string => `Max ${max}`,
   signOutButton: "Sign Out",
   signUpHeader: "Sign Up",
   signUpButton: "Sign Up",

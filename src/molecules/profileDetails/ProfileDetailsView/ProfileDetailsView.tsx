@@ -1,8 +1,7 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Typography } from "../../../atoms";
-import Alert from "../../../atoms/Alert/Alert";
+import { Alert, Button, Input, Typography } from "../../../atoms";
 import { Profile } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
 import {

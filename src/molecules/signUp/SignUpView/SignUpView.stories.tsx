@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { defaultUser } from "../../../services/utils/defaults";
 import SignUpView from "./SignUpView";
 
 export default {
@@ -15,3 +16,9 @@ const Template: ComponentStory<typeof SignUpView> = (args) => (
 );
 
 export const Playground = Template.bind({});
+Playground.args = {
+  error: null,
+  isLoading: false,
+  onSubmit: () => null,
+  user: defaultUser,
+};

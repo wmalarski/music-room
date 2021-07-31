@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { defaultRoom } from "../../../services/utils/defaults";
 import InviteAcceptView from "./InviteAcceptView";
 
 export default {
@@ -14,12 +15,5 @@ const Template: ComponentStory<typeof InviteAcceptView> = (args) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  room: {
-    author_id: 1,
-    data: { kind: "room#0.0.1" },
-    hash: "hash",
-    id: 1,
-    name: "Name",
-    slug: "name",
-  },
+  room: defaultRoom,
 };

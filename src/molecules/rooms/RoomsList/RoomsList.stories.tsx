@@ -28,4 +28,5 @@ Primary.args = {
       slug: "second",
     },
   ],
+  onRoomClick: () => null,
 };

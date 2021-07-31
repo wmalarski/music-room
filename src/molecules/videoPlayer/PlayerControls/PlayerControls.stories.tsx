@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { defaultControls } from "../../../services/utils/defaults";
 import PlayerControls from "./PlayerControls";
 
 export default {
@@ -13,12 +14,7 @@ const Template: ComponentStory<typeof PlayerControls> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  controls: {
-    id: 1,
-    muted: false,
-    pause: false,
-    room_id: 1,
-    speaker_id: 1,
-    volume: 1,
-  },
+  controls: defaultControls,
+  onChange: () => null,
+  profileId: 1,
 };

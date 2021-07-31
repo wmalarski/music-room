@@ -1,5 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import {
+  defaultAction,
+  defaultMessage,
+} from "../../../services/utils/defaults";
 import ReactionsView from "./ReactionsView";
 
 export default {
@@ -13,20 +17,7 @@ const Template: ComponentStory<typeof ReactionsView> = (args) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  action: {
-    created_at: new Date().toISOString(),
-    dislike_at: null,
-    id: 1,
-    like_at: null,
-    message_id: 1,
-    profile_id: 1,
-    updated_at: new Date().toISOString(),
-  },
-  message: {
-    created_at: new Date().toISOString(),
-    data: { kind: "message#0.0.1", url: "" },
-    id: 1,
-    profile_id: 1,
-    room_id: 1,
-  },
+  action: defaultAction,
+  message: defaultMessage,
+  onChange: () => null,
 };

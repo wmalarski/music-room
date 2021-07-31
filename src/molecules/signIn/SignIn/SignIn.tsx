@@ -7,10 +7,13 @@ export type SignInProps = {
 };
 
 const SignIn = ({ View = SignInView }: SignInProps): JSX.Element => {
-  const { mutate: signUp } = useSignIn();
+  const { mutate: signUp, error, isLoading, data: user } = useSignIn();
 
   return (
     <View
+      user={user}
+      error={error}
+      isLoading={isLoading}
       onSubmit={(data) =>
         signUp({
           email: data.email,

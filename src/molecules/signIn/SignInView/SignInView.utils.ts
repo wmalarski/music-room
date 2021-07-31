@@ -2,18 +2,19 @@ import { useMemo } from "react";
 import { RegisterOptions } from "react-hook-form";
 import useText from "../../../utils/translations/useText";
 
-export type RoomFormViewData = {
-  name: string;
+export type SignInViewData = {
+  email: string;
+  password: string;
 };
 
-export const useRoomFormViewOptions = (): Record<
-  keyof RoomFormViewData,
-  RegisterOptions<RoomFormViewData>
+export const useSignInViewOptions = (): Record<
+  keyof SignInViewData,
+  RegisterOptions<SignInViewData>
 > => {
   const text = useText();
   return useMemo(
     () => ({
-      name: {
+      email: {
         required: {
           value: true,
           message: text("fieldIsRequired"),
@@ -21,6 +22,12 @@ export const useRoomFormViewOptions = (): Record<
         minLength: {
           value: 3,
           message: text("errorMinLength")(3),
+        },
+      },
+      password: {
+        required: {
+          value: true,
+          message: text("fieldIsRequired"),
         },
       },
     }),

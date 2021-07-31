@@ -15,3 +15,6 @@ const Template: ComponentStory<typeof SignOutView> = (args) => (
 );
 
 export const Playground = Template.bind({});
+Playground.args = {
+  onSignOutClicked: () => null,
+};

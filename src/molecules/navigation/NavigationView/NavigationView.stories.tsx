@@ -12,4 +12,7 @@ const Template: ComponentStory<typeof NavigationView> = (args) => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {};
+Playground.args = {
+  onHomeClicked: () => null,
+  right: <p>Right</p>,
+};

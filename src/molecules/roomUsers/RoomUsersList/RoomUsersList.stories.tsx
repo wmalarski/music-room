@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { defaultMember } from "../../../services/utils/defaults";
 import RoomUsersList from "./RoomUsersList";
 
 export default {
@@ -15,32 +16,19 @@ export const Primary = Template.bind({});
 Primary.args = {
   members: [
     {
-      role_id: 1,
-      author_id: 1,
-      data: { kind: "room#0.0.1" },
-      hash: "d",
-      profile_id: 1,
-      room_id: 1,
-      room_name: "",
-      user_id: "",
+      ...defaultMember,
       name: "First",
       slug: "first",
-      role: "user",
-      avatar: null,
+      room_name: "RoomName1",
     },
     {
-      role_id: 1,
-      author_id: 1,
-      data: { kind: "room#0.0.1" },
+      ...defaultMember,
       name: "Second",
       slug: "second",
-      hash: "d",
-      profile_id: 1,
-      room_id: 1,
-      room_name: "",
-      user_id: "",
-      role: "user",
-      avatar: null,
+      room_name: "RoomName2",
     },
   ],
+  onLoadMore: () => null,
+  onRemoveClick: () => null,
+  onRoleChange: () => null,
 };

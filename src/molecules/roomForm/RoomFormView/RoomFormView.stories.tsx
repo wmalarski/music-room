@@ -12,4 +12,9 @@ const Template: ComponentStory<typeof RoomFormView> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  error: null,
+  isLoading: false,
+  onSubmit: () => null,
+  roomName: "roomName",
+};

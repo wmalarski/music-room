@@ -12,4 +12,6 @@ const Template: ComponentStory<typeof RoomDetailsView> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  roomName: "roomName",
+};

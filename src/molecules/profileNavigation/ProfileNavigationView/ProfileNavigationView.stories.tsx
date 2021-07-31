@@ -12,4 +12,6 @@ const Template: ComponentStory<typeof ProfileNavigationView> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  onProfileClicked: () => null,
+};

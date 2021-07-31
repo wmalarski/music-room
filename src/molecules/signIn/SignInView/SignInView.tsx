@@ -1,21 +1,31 @@
+import { PostgrestError, User } from "@supabase/supabase-js";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Typography } from "../../../atoms";
+import { Alert, Button, Input, Typography } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
-
-export type SignInViewData = {
-  email: string;
-  password: string;
-};
+import { SignInViewData, useSignInViewOptions } from "./SignInView.utils";
 
 export type SignInViewProps = {
+  isLoading: boolean;
+  error: PostgrestError | null;
+  user?: User | null;
   onSubmit: (data: SignInViewData) => void;
 };
 
-const SignInView = ({ onSubmit }: SignInViewProps): JSX.Element => {
+const SignInView = ({
+  isLoading,
+  error,
+  onSubmit,
+}: SignInViewProps): JSX.Element => {
   const text = useText();
 
-  const { register, handleSubmit } = useForm<SignInViewData>();
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<SignInViewData>();
+
+  const options = useSignInViewOptions();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -23,14 +33,21 @@ const SignInView = ({ onSubmit }: SignInViewProps): JSX.Element => {
       <Input
         placeholder={text("emailPlaceholder")}
         type="email"
-        {...register("email")}
+        {...register("email", options.email)}
       />
+      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
       <Input
         placeholder={text("passwordPlaceholder")}
         type="password"
-        {...register("password")}
+        {...register("password", options.password)}
       />
-      <Button type="submit">{text("signInButton")}</Button>
+      {errors.password && (
+        <Alert severity="error">{errors.password.message}</Alert>
+      )}
+      {error && <Alert severity="error">{error.message}</Alert>}
+      <Button isLoading={isLoading} type="submit">
+        {text("signInButton")}
+      </Button>
     </form>
   );
 };

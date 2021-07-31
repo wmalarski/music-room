@@ -1,5 +1,12 @@
 import { User } from "@supabase/supabase-js";
-import { Member, Profile, Room } from "../data/types";
+import {
+  Action,
+  Controls,
+  Member,
+  Message,
+  Profile,
+  Room,
+} from "../data/types";
 
 export const defaultUser: User = {
   app_metadata: {},
@@ -7,6 +14,16 @@ export const defaultUser: User = {
   created_at: new Date().toISOString(),
   id: "qwertyuiop",
   user_metadata: {},
+};
+
+export const defaultAction: Action = {
+  created_at: new Date().toISOString(),
+  dislike_at: null,
+  id: 1,
+  like_at: null,
+  message_id: 1,
+  profile_id: 1,
+  updated_at: new Date().toISOString(),
 };
 
 export const defaultProfile: Profile = {
@@ -38,4 +55,21 @@ export const defaultRoom: Room = {
   id: 1,
   name: "Room",
   slug: "room",
+};
+
+export const defaultMessage: Message = {
+  created_at: new Date().toLocaleTimeString(),
+  data: { kind: "message#0.0.1", url: "dQw4w9WgXcQ" },
+  id: 1,
+  profile_id: 1,
+  room_id: 1,
+};
+
+export const defaultControls: Controls = {
+  id: 1,
+  muted: false,
+  pause: false,
+  room_id: 1,
+  speaker_id: 1,
+  volume: 0,
 };

@@ -1,22 +1,40 @@
+import { PostgrestError, User } from "@supabase/supabase-js";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Typography } from "../../../atoms";
+import { Alert, Button, Debug, Input, Typography } from "../../../atoms";
 import useText from "../../../utils/translations/useText";
-
-export type SignUpViewData = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import {
+  SignUpViewContext,
+  SignUpViewData,
+  signUpViewResolver,
+  useSignUpViewOptions,
+} from "./SignUpView.utils";
 
 export type SignUpViewProps = {
+  isLoading: boolean;
+  error: PostgrestError | null;
+  user?: User | null;
   onSubmit: (data: SignUpViewData) => void;
 };
 
-const SignUpView = ({ onSubmit }: SignUpViewProps): JSX.Element => {
+const SignUpView = ({
+  isLoading,
+  error,
+  user,
+  onSubmit,
+}: SignUpViewProps): JSX.Element => {
   const text = useText();
 
-  const { register, handleSubmit } = useForm<SignUpViewData>();
+  const options = useSignUpViewOptions();
+
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<SignUpViewData, SignUpViewContext>({
+    resolver: signUpViewResolver,
+    context: { text },
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -24,19 +42,30 @@ const SignUpView = ({ onSubmit }: SignUpViewProps): JSX.Element => {
       <Input
         type="email"
         placeholder={text("emailPlaceholder")}
-        {...register("email")}
+        {...register("email", options.email)}
       />
+      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
       <Input
         type="password"
         placeholder={text("passwordPlaceholder")}
-        {...register("password")}
+        {...register("password", options.password)}
       />
+      {errors.password && (
+        <Alert severity="error">{errors.password.message}</Alert>
+      )}
       <Input
         type="password"
         placeholder={text("confirmPasswordPlaceholder")}
-        {...register("confirmPassword")}
+        {...register("confirmPassword", options.confirmPassword)}
       />
-      <Button type="submit">{text("signUpButton")}</Button>
+      {errors.confirmPassword && (
+        <Alert severity="error">{errors.confirmPassword.message}</Alert>
+      )}
+      {error && <Alert severity="error">{error.message}</Alert>}
+      <Button isLoading={isLoading} type="submit">
+        {text("signUpButton")}
+      </Button>
+      <Debug value={user} />
     </form>
   );
 };

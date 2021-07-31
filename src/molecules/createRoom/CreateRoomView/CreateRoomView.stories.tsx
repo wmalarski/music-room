@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { defaultProfile } from "../../../services/utils/defaults";
 import CreateRoomView from "./CreateRoomView";
 
 export default {
@@ -15,3 +16,9 @@ const Template: ComponentStory<typeof CreateRoomView> = (args) => (
 );
 
 export const Playground = Template.bind({});
+Playground.args = {
+  profile: defaultProfile,
+  error: null,
+  isLoading: false,
+  onSubmit: () => null,
+};

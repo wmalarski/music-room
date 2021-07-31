@@ -1,5 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React, { useState } from "react";
+import {
+  defaultControls,
+  defaultMessage,
+} from "../../../services/utils/defaults";
 import PlayerView from "./VideoPlayerView";
 
 export default {
@@ -25,19 +29,6 @@ const Template: ComponentStory<typeof PlayerView> = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
   profileId: 1,
-  message: {
-    created_at: new Date().toLocaleDateString(),
-    data: { kind: "message#0.0.1", url: "dQw4w9WgXcQ" },
-    id: 1,
-    profile_id: 1,
-    room_id: 1,
-  },
-  controls: {
-    id: 1,
-    muted: false,
-    pause: false,
-    room_id: 1,
-    speaker_id: 1,
-    volume: 10,
-  },
+  message: defaultMessage,
+  controls: defaultControls,
 };

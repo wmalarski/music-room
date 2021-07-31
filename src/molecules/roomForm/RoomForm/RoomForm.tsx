@@ -12,10 +12,12 @@ const RoomDetails = ({
 }: RoomDetailsProps): JSX.Element | null => {
   const { room_id, room_name } = useMemberContext();
 
-  const { mutate: updateRoom, data } = useUpdateRoom();
+  const { mutate: updateRoom, data, error, isLoading } = useUpdateRoom();
 
   return (
     <View
+      error={error}
+      isLoading={isLoading}
       roomName={data?.name ?? room_name}
       onSubmit={({ name }) =>
         updateRoom({
