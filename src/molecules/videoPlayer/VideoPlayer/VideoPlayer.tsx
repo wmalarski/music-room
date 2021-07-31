@@ -6,11 +6,11 @@ import { useSelectCurrentMessage } from "../../../services/data/messages/selectC
 import { useUpdateMessage } from "../../../services/data/messages/updateMessage";
 import { useMemberContext } from "../../../utils/room/MemberContext";
 import VideoPlayerView, {
-  PlayerViewProps,
+  VideoPlayerViewProps,
 } from "../VideoPlayerView/VideoPlayerView";
 
 export type VideoPlayerProps = {
-  View?: React.ComponentType<PlayerViewProps>;
+  View?: React.ComponentType<VideoPlayerViewProps>;
 };
 
 const VideoPlayer = ({

@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../../../atoms";
 import { Member, RoomRole } from "../../../services/data/types";
 import useText from "../../../utils/translations/useText";
-import RoomUsersListItem from "../RoomUsersListItem/RoomUserListItem";
+import RoomUsersListItem from "../RoomUsersListItem/RoomUsersListItem";
 
 export type RoomUsersListProps = {
   members?: Member[];

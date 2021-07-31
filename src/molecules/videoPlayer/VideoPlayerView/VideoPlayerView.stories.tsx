@@ -4,21 +4,21 @@ import {
   defaultControls,
   defaultMessage,
 } from "../../../services/utils/defaults";
-import PlayerView from "./VideoPlayerView";
+import VideoPlayerView from "./VideoPlayerView";
 
 export default {
   title: "Molecules/VideoPlayer/VideoPlayerView",
-  component: PlayerView,
+  component: VideoPlayerView,
   argTypes: {
     onEnd: { action: "onEnd" },
     onChange: { action: "onChange" },
   },
-} as ComponentMeta<typeof PlayerView>;
+} as ComponentMeta<typeof VideoPlayerView>;
 
-const Template: ComponentStory<typeof PlayerView> = (args) => {
+const Template: ComponentStory<typeof VideoPlayerView> = (args) => {
   const [controls, setControls] = useState(args.controls);
   return (
-    <PlayerView
+    <VideoPlayerView
       {...args}
       controls={controls}
       onChange={(data) => setControls((current) => ({ ...current, ...data }))}

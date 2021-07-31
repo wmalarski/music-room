@@ -81,8 +81,8 @@
       }
     },
     "collectCoverageFrom": [
-      "src/**/*.ts",
-      "src/**/*.tsx"
+      "src/**/*.{ts,tsx}",
+      "!<rootDir>/src/**/*.stories.tsx"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/src/tests/setupTests.ts"

@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import { Controls, Message } from "../../../services/data/types";
 import PlayerControls from "../PlayerControls/PlayerControls";
 
-export type PlayerViewProps = {
+export type VideoPlayerViewProps = {
   profileId: number;
   message: Message;
   controls: Controls;
@@ -11,13 +11,13 @@ export type PlayerViewProps = {
   onChange: (controls: Partial<Controls>) => void;
 };
 
-const PlayerView = ({
+const VideoPlayerView = ({
   profileId,
   message,
   controls,
   onEnd,
   onChange,
-}: PlayerViewProps): JSX.Element => {
+}: VideoPlayerViewProps): JSX.Element => {
   const { muted, pause, volume, speaker_id } = controls;
 
   const ref = useRef<YouTube>(null);
@@ -73,4 +73,4 @@ const PlayerView = ({
   );
 };
 
-export default PlayerView;
+export default VideoPlayerView;

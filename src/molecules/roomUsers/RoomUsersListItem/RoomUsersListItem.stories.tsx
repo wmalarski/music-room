@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { defaultMember } from "../../../services/utils/defaults";
-import RoomUserListItem from "./RoomUserListItem";
+import RoomUserListItem from "./RoomUsersListItem";
 
 export default {
   title: "Molecules/RoomUsers/RoomUserListItem",

@@ -1,11 +1,16 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 const Button = (
-  props: DetailedHTMLProps<
+  {
+    isLoading,
+    ...props
+  }: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > & { isLoading?: boolean },
   ref: React.LegacyRef<HTMLButtonElement>
-): JSX.Element => <button {...props} ref={ref} />;
+): JSX.Element => (
+  <button {...props} disabled={props.disabled || isLoading} ref={ref} />
+);
 
 export default React.forwardRef(Button);
