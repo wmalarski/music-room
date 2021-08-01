@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import NavigationView from "./NavigationView";
 
-type ComponentProps = Parameters<typeof NavigationView>[0];
+type ComponentProps = React.ComponentProps<typeof NavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

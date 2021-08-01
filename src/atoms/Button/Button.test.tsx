@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Button from "./Button";
 
-type ComponentProps = Parameters<typeof Button>[0];
+type ComponentProps = React.ComponentProps<typeof Button>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

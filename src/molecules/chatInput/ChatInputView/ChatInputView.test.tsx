@@ -5,7 +5,7 @@ import React from "react";
 import { defaultMessage } from "../../../services/utils/defaults";
 import ChatInputView from "./ChatInputView";
 
-type ComponentProps = Parameters<typeof ChatInputView>[0];
+type ComponentProps = React.ComponentProps<typeof ChatInputView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

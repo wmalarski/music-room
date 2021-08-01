@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Select from "./Select";
 
-type ComponentProps = Parameters<typeof Select>[0];
+type ComponentProps = React.ComponentProps<typeof Select>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {};

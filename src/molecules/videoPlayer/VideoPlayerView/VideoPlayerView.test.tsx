@@ -8,7 +8,7 @@ import {
 } from "../../../services/utils/defaults";
 import VideoPlayerView from "./VideoPlayerView";
 
-type ComponentProps = Parameters<typeof VideoPlayerView>[0];
+type ComponentProps = React.ComponentProps<typeof VideoPlayerView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

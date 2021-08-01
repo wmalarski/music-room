@@ -5,7 +5,7 @@ import React from "react";
 import { defaultMessage } from "../../../services/utils/defaults";
 import ChatMessagesList from "./ChatMessagesList";
 
-type ComponentProps = Parameters<typeof ChatMessagesList>[0];
+type ComponentProps = React.ComponentProps<typeof ChatMessagesList>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import RoomDetailsView from "./RoomDetailsView";
 
-type ComponentProps = Parameters<typeof RoomDetailsView>[0];
+type ComponentProps = React.ComponentProps<typeof RoomDetailsView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

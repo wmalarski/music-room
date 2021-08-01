@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Alert from "./Alert";
 
-type ComponentProps = Parameters<typeof Alert>[0];
+type ComponentProps = React.ComponentProps<typeof Alert>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

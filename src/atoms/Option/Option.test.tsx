@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Option from "./Option";
 
-type ComponentProps = Parameters<typeof Option>[0];
+type ComponentProps = React.ComponentProps<typeof Option>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {};

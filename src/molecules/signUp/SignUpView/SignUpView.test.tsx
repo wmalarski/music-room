@@ -5,7 +5,7 @@ import React from "react";
 import { defaultUser } from "../../../services/utils/defaults";
 import SignUpView from "./SignUpView";
 
-type ComponentProps = Parameters<typeof SignUpView>[0];
+type ComponentProps = React.ComponentProps<typeof SignUpView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

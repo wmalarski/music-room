@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import RoomFormView from "./RoomFormView";
 
-type ComponentProps = Parameters<typeof RoomFormView>[0];
+type ComponentProps = React.ComponentProps<typeof RoomFormView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

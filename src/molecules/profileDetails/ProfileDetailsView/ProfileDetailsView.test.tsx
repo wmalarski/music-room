@@ -5,7 +5,7 @@ import React from "react";
 import { defaultProfile } from "../../../services/utils/defaults";
 import ProfileDetailsView from "./ProfileDetailsView";
 
-type ComponentProps = Parameters<typeof ProfileDetailsView>[0];
+type ComponentProps = React.ComponentProps<typeof ProfileDetailsView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

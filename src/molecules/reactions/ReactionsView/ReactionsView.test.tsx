@@ -8,7 +8,7 @@ import {
 } from "../../../services/utils/defaults";
 import ReactionsView from "./ReactionsView";
 
-type ComponentProps = Parameters<typeof ReactionsView>[0];
+type ComponentProps = React.ComponentProps<typeof ReactionsView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

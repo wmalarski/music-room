@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import ProfileNavigationView from "./ProfileNavigationView";
 
-type ComponentProps = Parameters<typeof ProfileNavigationView>[0];
+type ComponentProps = React.ComponentProps<typeof ProfileNavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

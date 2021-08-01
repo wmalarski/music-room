@@ -9,7 +9,7 @@ import { defaultRoom } from "../../../services/utils/defaults";
 import { RoomFormViewProps } from "../RoomFormView/RoomFormView";
 import RoomForm from "./RoomForm";
 
-type ComponentProps = Parameters<typeof RoomForm>[0];
+type ComponentProps = React.ComponentProps<typeof RoomForm>;
 
 const View = ({ roomName, onSubmit }: RoomFormViewProps) => (
   <>

@@ -5,7 +5,7 @@ import React from "react";
 import { defaultRoom } from "../../../services/utils/defaults";
 import InviteAcceptView from "./InviteAcceptView";
 
-type ComponentProps = Parameters<typeof InviteAcceptView>[0];
+type ComponentProps = React.ComponentProps<typeof InviteAcceptView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

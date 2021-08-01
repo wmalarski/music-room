@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import RoomNavigationView from "./RoomNavigationView";
 
-type ComponentProps = Parameters<typeof RoomNavigationView>[0];
+type ComponentProps = React.ComponentProps<typeof RoomNavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

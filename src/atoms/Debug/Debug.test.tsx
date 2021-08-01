@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Debug from "./Debug";
 
-type ComponentProps = Parameters<typeof Debug>[0];
+type ComponentProps = React.ComponentProps<typeof Debug>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

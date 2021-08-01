@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import Layout from "./Layout";
 
-type ComponentProps = Parameters<typeof Layout>[0];
+type ComponentProps = React.ComponentProps<typeof Layout>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {};

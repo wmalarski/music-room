@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Typography from "./Typography";
 
-type ComponentProps = Parameters<typeof Typography>[0];
+type ComponentProps = React.ComponentProps<typeof Typography>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {};

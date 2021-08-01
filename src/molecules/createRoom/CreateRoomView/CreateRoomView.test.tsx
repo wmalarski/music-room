@@ -5,7 +5,7 @@ import React from "react";
 import { defaultProfile } from "../../../services/utils/defaults";
 import CreateRoomView from "./CreateRoomView";
 
-type ComponentProps = Parameters<typeof CreateRoomView>[0];
+type ComponentProps = React.ComponentProps<typeof CreateRoomView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import InviteLinkView from "./InviteLinkView";
 
-type ComponentProps = Parameters<typeof InviteLinkView>[0];
+type ComponentProps = React.ComponentProps<typeof InviteLinkView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

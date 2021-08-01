@@ -9,7 +9,7 @@ import { defaultProfile } from "../../../services/utils/defaults";
 import { ProfileDetailsViewProps } from "../ProfileDetailsView/ProfileDetailsView";
 import ProfileDetails from "./ProfileDetails";
 
-type ComponentProps = Parameters<typeof ProfileDetails>[0];
+type ComponentProps = React.ComponentProps<typeof ProfileDetails>;
 
 const View = ({ profile, onSubmit }: ProfileDetailsViewProps) => (
   <>

@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import Input from "./Input";
 
-type ComponentProps = Parameters<typeof Input>[0];
+type ComponentProps = React.ComponentProps<typeof Input>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {};

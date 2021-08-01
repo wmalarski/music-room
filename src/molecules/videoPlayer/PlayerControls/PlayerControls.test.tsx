@@ -5,7 +5,7 @@ import React from "react";
 import { defaultControls } from "../../../services/utils/defaults";
 import PlayerControls from "./PlayerControls";
 
-type ComponentProps = Parameters<typeof PlayerControls>[0];
+type ComponentProps = React.ComponentProps<typeof PlayerControls>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import DeleteRoomView from "./DeleteRoomView";
 
-type ComponentProps = Parameters<typeof DeleteRoomView>[0];
+type ComponentProps = React.ComponentProps<typeof DeleteRoomView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

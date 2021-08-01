@@ -9,7 +9,7 @@ import { mockMessagesStorage } from "../../../services/data/messages/messageHand
 import { ReactionsViewProps } from "../ReactionsView/ReactionsView";
 import Reactions from "./Reactions";
 
-type ComponentProps = Parameters<typeof Reactions>[0];
+type ComponentProps = React.ComponentProps<typeof Reactions>;
 
 const View = ({ action, message, onChange }: ReactionsViewProps) => (
   <>

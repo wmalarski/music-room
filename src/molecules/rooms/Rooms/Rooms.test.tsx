@@ -9,7 +9,7 @@ import { defaultMember, defaultUser } from "../../../services/utils/defaults";
 import { RoomsListProps } from "../RoomsList/RoomsList";
 import Rooms from "./Rooms";
 
-type ComponentProps = Parameters<typeof Rooms>[0];
+type ComponentProps = React.ComponentProps<typeof Rooms>;
 
 const View = ({ onRoomClick, members }: RoomsListProps) => (
   <>

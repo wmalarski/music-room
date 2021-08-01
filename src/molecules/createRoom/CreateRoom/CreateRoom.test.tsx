@@ -9,7 +9,7 @@ import { defaultProfile, defaultUser } from "../../../services/utils/defaults";
 import { CreateRoomViewProps } from "../CreateRoomView/CreateRoomView";
 import CreateRoom from "./CreateRoom";
 
-type ComponentProps = Parameters<typeof CreateRoom>[0];
+type ComponentProps = React.ComponentProps<typeof CreateRoom>;
 
 const View = ({ profile, onSubmit }: CreateRoomViewProps) => (
   <button onClick={() => onSubmit({ name: "RoomName", slug: "RoomName" })}>

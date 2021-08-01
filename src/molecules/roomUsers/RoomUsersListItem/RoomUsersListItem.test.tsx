@@ -5,7 +5,7 @@ import React from "react";
 import { defaultMember } from "../../../services/utils/defaults";
 import RoomUsersListItem from "./RoomUsersListItem";
 
-type ComponentProps = Parameters<typeof RoomUsersListItem>[0];
+type ComponentProps = React.ComponentProps<typeof RoomUsersListItem>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {

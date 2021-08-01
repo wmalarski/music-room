@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ChatInputViewProps } from "../ChatInputView/ChatInputView";
 import ChatInput from "./ChatInput";
 
-type ComponentProps = Parameters<typeof ChatInput>[0];
+type ComponentProps = React.ComponentProps<typeof ChatInput>;
 
 const View = ({
   query,
