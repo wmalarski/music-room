@@ -15,15 +15,15 @@ const DeleteRoom = ({
 }: DeleteRoomProps): JSX.Element => {
   const router = useRouter();
 
-  const { room_id, role } = useMemberContext();
+  const { room_id, hash } = useMemberContext();
 
-  const { mutate: deleteRoom } = useDeleteRoom({
+  const { mutate: deleteRoom, isLoading } = useDeleteRoom(hash, {
     onSuccess: () => router.push("/"),
   });
 
   return (
     <View
-      role={role}
+      isLoading={isLoading}
       onClicked={() =>
         deleteRoom({
           id: room_id,

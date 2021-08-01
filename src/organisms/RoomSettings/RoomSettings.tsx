@@ -5,12 +5,16 @@ import useRoleGuard from "../../utils/room/useRoleGuard";
 const RoomSettings = (): JSX.Element => (
   <>
     {useRoleGuard({
-      owner: <RoomForm />,
+      owner: (
+        <>
+          <RoomForm />
+          <DeleteRoom />
+        </>
+      ),
       mod: <RoomForm />,
       default: <RoomDetails />,
     })}
     <RoomUsers />
-    <DeleteRoom />
   </>
 );
 

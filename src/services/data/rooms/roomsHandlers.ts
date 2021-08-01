@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
 import { Room } from "../types";
+import { DeleteRoomArgs } from "./deleteRoom";
 import { InsertRoomArgs } from "./insertRoom";
 import { UpdateRoomArgs } from "./updateRoom";
 
@@ -33,6 +34,19 @@ export const roomsHandlers = [
 
       const room = { ...rooms[index], ...body };
       rooms.splice(index, 1, room);
+
+      mockRoomsStorage.set(rooms);
+
+      return res(ctx.json(room));
+    }
+  ),
+  rest.delete<DeleteRoomArgs, Room>(
+    `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
+    ({ body }, res, ctx) => {
+      const rooms = [...mockRoomsStorage.get()];
+      const index = rooms.findIndex((room) => room.id === body.id);
+
+      const [room] = rooms.splice(index, 1);
 
       mockRoomsStorage.set(rooms);
 

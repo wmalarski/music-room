@@ -17,5 +17,4 @@ const Template: ComponentStory<typeof DeleteRoomView> = (args) => (
 export const Playground = Template.bind({});
 Playground.args = {
   onClicked: () => null,
-  role: "guest",
 };

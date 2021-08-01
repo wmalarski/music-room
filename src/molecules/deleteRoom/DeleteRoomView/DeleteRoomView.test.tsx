@@ -8,8 +8,8 @@ type ComponentProps = React.ComponentProps<typeof DeleteRoomView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
+    isLoading: false,
     onClicked: () => null,
-    role: "guest",
   };
   return render(<DeleteRoomView {...defaultProps} {...props} />);
 }
