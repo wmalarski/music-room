@@ -10,6 +10,7 @@ type ComponentProps = React.ComponentProps<typeof InviteAcceptView>;
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
     room: defaultRoom,
+    isLoading: false,
     onAcceptClicked: () => null,
   };
   return render(<InviteAcceptView {...defaultProps} {...props} />);

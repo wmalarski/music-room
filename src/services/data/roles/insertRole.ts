@@ -9,9 +9,9 @@ import fromSupabase from "../../utils/fromSupabase";
 import { selectAllMembersKey } from "../members/selectMembers";
 import { Role } from "../types";
 
-export type InsertRolesArgs = Omit<Role, "id">;
+export type InsertRoleArgs = Omit<Role, "id">;
 
-export const insertRole = async (args: InsertRolesArgs): Promise<Role> => {
+export const insertRole = async (args: InsertRoleArgs): Promise<Role> => {
   // TODO move to procedure
   const { data, error } = await fromSupabase("roles").insert(args).single();
 
@@ -21,8 +21,8 @@ export const insertRole = async (args: InsertRolesArgs): Promise<Role> => {
 };
 
 export const useInsertRole = (
-  options?: UseMutationOptions<Role, PostgrestError, InsertRolesArgs>
-): UseMutationResult<Role, PostgrestError, InsertRolesArgs> => {
+  options?: UseMutationOptions<Role, PostgrestError, InsertRoleArgs>
+): UseMutationResult<Role, PostgrestError, InsertRoleArgs> => {
   const queryClient = useQueryClient();
 
   return useMutation(insertRole, {

@@ -20,7 +20,7 @@ const InviteAccept = ({
 }: InviteAcceptProps): JSX.Element => {
   const router = useRouter();
 
-  const { mutate: insertRole } = useInsertRole({
+  const { mutate: insertRole, isLoading } = useInsertRole({
     onSuccess: () => router.push(`/room/${room.slug}`),
     onError: (error) => {
       if (error.code !== SupabaseErrorCode.UniquenessViolation) return;
@@ -31,6 +31,7 @@ const InviteAccept = ({
   return (
     <View
       room={room}
+      isLoading={isLoading}
       onAcceptClicked={() =>
         insertRole({
           profile_id: profile.id,

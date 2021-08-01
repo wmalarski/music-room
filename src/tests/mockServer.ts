@@ -3,6 +3,7 @@ import { actionHandlers } from "../services/data/actions/actionHandlers";
 import { membersHandlers } from "../services/data/members/membersHandlers";
 import { messagesHandlers } from "../services/data/messages/messageHandlers";
 import { profilesHandlers } from "../services/data/profiles/profileHandlers";
+import { rolesHandlers } from "../services/data/roles/rolesHandlers";
 import { roomsHandlers } from "../services/data/rooms/roomsHandlers";
 
 const server = setupServer(
@@ -10,7 +11,8 @@ const server = setupServer(
   ...messagesHandlers,
   ...membersHandlers,
   ...profilesHandlers,
-  ...roomsHandlers
+  ...roomsHandlers,
+  ...rolesHandlers
 );
 
 export default server;

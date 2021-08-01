@@ -5,11 +5,13 @@ import useText from "../../../utils/translations/useText";
 
 export type InviteAcceptViewProps = {
   room: Room;
+  isLoading: boolean;
   onAcceptClicked: () => void;
 };
 
 const InviteAcceptView = ({
   room,
+  isLoading,
   onAcceptClicked,
 }: InviteAcceptViewProps): JSX.Element => {
   const text = useText();
@@ -17,7 +19,9 @@ const InviteAcceptView = ({
   return (
     <div>
       <Typography>{text("inviteToRoom")(room.name)}</Typography>
-      <Button onClick={onAcceptClicked}>{text("acceptInvitation")}</Button>
+      <Button isLoading={isLoading} onClick={onAcceptClicked}>
+        {text("acceptInvitation")}
+      </Button>
     </div>
   );
 };
