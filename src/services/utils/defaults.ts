@@ -37,7 +37,7 @@ export const defaultMember: Member = {
   role_id: 1,
   author_id: 1,
   data: { kind: "room#0.0.1" },
-  hash: "d",
+  hash: "qwertyuiop",
   profile_id: 1,
   room_id: 1,
   room_name: "FirstRoom",
