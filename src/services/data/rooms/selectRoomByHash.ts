@@ -5,7 +5,7 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { supabase } from "../../supabase";
+import fromSupabase from "../../utils/fromSupabase";
 import { Room } from "../types";
 
 export type SelectRoomByHashArgs = Pick<Room, "hash">;
@@ -19,9 +19,9 @@ export const selectRoomByHashKey = (
 export const selectRoomByHash = async ({
   queryKey: [, { hash }],
 }: QueryFunctionContext<SelectRoomByHashKey>): Promise<Room[]> => {
-  const { data, error } = await supabase
-    .rpc<Room>("room_by_hash", { input_hash: hash })
-    .select("*");
+  const { data, error } = await fromSupabase("rooms")
+    .select("*")
+    .eq("hash", hash);
 
   if (error || !data) throw error;
 

@@ -5,6 +5,7 @@ import {
   Member,
   Message,
   Profile,
+  Role,
   Room,
 } from "../data/types";
 
@@ -55,6 +56,13 @@ export const defaultRoom: Room = {
   id: 1,
   name: "Room",
   slug: "room",
+};
+
+export const defaultRole: Role = {
+  id: 1,
+  profile_id: 1,
+  role: "user",
+  room_id: 1,
 };
 
 export const defaultMessage: Message = {

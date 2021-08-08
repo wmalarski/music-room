@@ -4,8 +4,9 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { mockMembersStorage } from "../../../services/data/members/membersHandlers";
 import { mockRoomsStorage } from "../../../services/data/rooms/roomsHandlers";
-import { defaultRoom } from "../../../services/utils/defaults";
+import { defaultMember, defaultRoom } from "../../../services/utils/defaults";
 import { RoomFormViewProps } from "../RoomFormView/RoomFormView";
 import RoomForm from "./RoomForm";
 
@@ -31,6 +32,7 @@ describe("<RoomForm />", () => {
   it("should add room", async () => {
     expect.hasAssertions();
 
+    mockMembersStorage.setContext(defaultMember);
     mockRoomsStorage.set([defaultRoom]);
 
     renderComponent();

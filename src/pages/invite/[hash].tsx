@@ -40,6 +40,9 @@ export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({
   const [room] = await selectRoomByHash({
     queryKey: ["roomByHash", { hash: roomHash }],
   });
+
+  console.log("room", room);
+
   if (!room) return { notFound: true };
 
   return { props: { room } };

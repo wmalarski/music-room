@@ -21,7 +21,7 @@ const RoomUsersListItem = ({
     <>
       <Debug value={member} />
       {member.author_id !== member.profile_id && (
-        <RoleGuard role={member.role} visibleFor={["owner", "mod"]}>
+        <RoleGuard visibleFor={["owner", "mod"]}>
           <Button onClick={onRemoveClick}>{text("removeFromRoom")}</Button>
           <Select
             value={member.role}

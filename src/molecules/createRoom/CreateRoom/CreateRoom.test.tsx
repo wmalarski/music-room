@@ -4,8 +4,13 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { mockMembersStorage } from "../../../services/data/members/membersHandlers";
 import { mockProfilesStorage } from "../../../services/data/profiles/profileHandlers";
-import { defaultProfile, defaultUser } from "../../../services/utils/defaults";
+import {
+  defaultMember,
+  defaultProfile,
+  defaultUser,
+} from "../../../services/utils/defaults";
 import { CreateRoomViewProps } from "../CreateRoomView/CreateRoomView";
 import CreateRoom from "./CreateRoom";
 
@@ -33,6 +38,7 @@ describe("<CreateRoom />", () => {
   it("should add room", async () => {
     expect.hasAssertions();
 
+    mockMembersStorage.setContext(defaultMember);
     mockProfilesStorage.set([defaultProfile]);
 
     renderComponent();

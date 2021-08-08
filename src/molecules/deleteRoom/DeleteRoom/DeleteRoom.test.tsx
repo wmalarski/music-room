@@ -4,8 +4,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { mockMembersStorage } from "../../../services/data/members/membersHandlers";
 import { mockProfilesStorage } from "../../../services/data/profiles/profileHandlers";
-import { defaultProfile } from "../../../services/utils/defaults";
+import {
+  defaultMember,
+  defaultProfile,
+} from "../../../services/utils/defaults";
 import { DeleteRoomViewProps } from "../DeleteRoomView/DeleteRoomView";
 import DeleteRoom from "./DeleteRoom";
 
@@ -30,6 +34,7 @@ describe("<DeleteRoom />", () => {
   it("should delete room", async () => {
     expect.hasAssertions();
 
+    mockMembersStorage.setContext(defaultMember);
     mockProfilesStorage.set([defaultProfile]);
 
     renderComponent();

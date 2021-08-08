@@ -11,20 +11,15 @@ import { Role } from "../types";
 
 export type DeleteRoleArgs = Pick<Role, "id">;
 
-export const deleteRole = async ({ id }: DeleteRoleArgs): Promise<Role> => {
-  const { data, error } = await fromSupabase("roles")
-    .delete()
-    .eq("id", id)
-    .single();
+export const deleteRole = async ({ id }: DeleteRoleArgs): Promise<void> => {
+  const { error } = await fromSupabase("roles").delete().eq("id", id).single();
 
-  if (error || !data) throw error;
-
-  return data;
+  if (error) throw error;
 };
 
 export const useDeleteRole = (
-  options?: UseMutationOptions<Role, PostgrestError, DeleteRoleArgs>
-): UseMutationResult<Role, PostgrestError, DeleteRoleArgs> => {
+  options?: UseMutationOptions<void, PostgrestError, DeleteRoleArgs>
+): UseMutationResult<void, PostgrestError, DeleteRoleArgs> => {
   const queryClient = useQueryClient();
 
   return useMutation(deleteRole, {

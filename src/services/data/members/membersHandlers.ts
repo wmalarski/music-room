@@ -3,6 +3,13 @@ import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
 import { Member } from "../types";
 
 export const mockMembersStorage = {
+  getContext: (): Member | null => {
+    const member = sessionStorage.getItem("member");
+    if (!member) return null;
+    return JSON.parse(member);
+  },
+  setContext: (member: Member): void =>
+    sessionStorage.setItem("member", JSON.stringify(member)),
   get: (): Member[] => JSON.parse(sessionStorage.getItem("members") ?? "[]"),
   set: (actions: Member[]): void =>
     sessionStorage.setItem("members", JSON.stringify(actions)),

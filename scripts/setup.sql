@@ -135,18 +135,7 @@ $$ LANGUAGE SQL;
 
 ---- Room security roles ----
 CREATE POLICY "Enable access to users having role" ON public.rooms FOR
-SELECT
-  USING (
-    exists(
-      select
-        1
-      from
-        room_roles
-      where
-        room_roles.room_id = room_id
-        and room_roles.user_id = auth.uid()
-    )
-  );
+SELECT true;
 
 CREATE POLICY "Enable insert for authenticated users only" ON public.rooms FOR 
 INSERT WITH CHECK (auth.role() = 'authenticated');

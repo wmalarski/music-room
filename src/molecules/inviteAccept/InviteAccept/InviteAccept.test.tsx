@@ -4,7 +4,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { defaultProfile, defaultRoom } from "../../../services/utils/defaults";
+import { mockMembersStorage } from "../../../services/data/members/membersHandlers";
+import {
+  defaultMember,
+  defaultProfile,
+  defaultRoom,
+} from "../../../services/utils/defaults";
 import { InviteAcceptViewProps } from "../InviteAcceptView/InviteAcceptView";
 import InviteAccept from "./InviteAccept";
 
@@ -32,6 +37,8 @@ const renderComponent = (props: Partial<ComponentProps> = {}) => {
 describe("<InviteAccept />", () => {
   it("should render", async () => {
     expect.hasAssertions();
+
+    mockMembersStorage.setContext(defaultMember);
 
     renderComponent();
 
