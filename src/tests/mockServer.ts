@@ -1,4 +1,5 @@
 import { setupServer } from "msw/node";
+import { usersHandlers } from "../services/auth/authHandlers";
 import { actionHandlers } from "../services/data/actions/actionHandlers";
 import { membersHandlers } from "../services/data/members/membersHandlers";
 import { messagesHandlers } from "../services/data/messages/messageHandlers";
@@ -12,7 +13,8 @@ const server = setupServer(
   ...membersHandlers,
   ...profilesHandlers,
   ...roomsHandlers,
-  ...rolesHandlers
+  ...rolesHandlers,
+  ...usersHandlers
 );
 
 export default server;

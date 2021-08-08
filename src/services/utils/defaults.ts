@@ -10,11 +10,13 @@ import {
 } from "../data/types";
 
 export const defaultUser: User = {
-  app_metadata: {},
-  aud: "",
+  app_metadata: { provider: "email" },
+  aud: "authenticated",
   created_at: new Date().toISOString(),
   id: "qwertyuiop",
   user_metadata: {},
+  role: "authenticated",
+  email: "example@example.com",
 };
 
 export const defaultAction: Action = {

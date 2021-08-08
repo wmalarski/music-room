@@ -84,3 +84,8 @@ export type TableMapping = {
   roles: Role;
   rooms: Room;
 };
+
+export type ResponseError = {
+  error: string;
+  error_description: string;
+};
