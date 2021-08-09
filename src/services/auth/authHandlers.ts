@@ -2,6 +2,7 @@ import { Session, User, UserCredentials } from "@supabase/supabase-js";
 import { rest } from "msw";
 import { ResponseError } from "../data/types";
 import { AUTH_ENDPOINT } from "../supabase";
+import { defaultUser } from "../utils/defaults";
 
 export const mockUserStorage = {
   get: (): User[] => JSON.parse(sessionStorage.getItem("users") ?? "[]"),
@@ -26,6 +27,29 @@ export const usersHandlers = [
           }),
           ctx.status(400)
         );
+
+      const result = {
+        access_token: "eyJ.eyJ.CY80",
+        token_type: "bearer",
+        expires_in: 3600,
+        refresh_token: "kHMih_-mwYUn08FTYMhx2g",
+        user,
+      };
+
+      return res(ctx.json<Session>(result));
+    }
+  ),
+  rest.post<string, Session | ResponseError>(
+    `${AUTH_ENDPOINT}/signup`,
+    ({ body }, res, ctx) => {
+      const credentials: UserCredentials = JSON.parse(body);
+
+      const user = {
+        ...defaultUser,
+        ...credentials,
+      };
+
+      mockUserStorage.set([...mockUserStorage.get(), user]);
 
       const result = {
         access_token: "eyJ.eyJ.CY80",
