@@ -1,22 +1,19 @@
 import React from "react";
-import { Button } from "../../../atoms";
+import { Link } from "../../../atoms";
+import paths from "../../../utils/routing/paths";
 import useText from "../../../utils/translations/useText";
 
 export type RoomNavigationViewProps = {
-  onSettingsClicked: () => void;
-  onRoomClicked: () => void;
+  slug: string;
 };
 
-const RoomNavigationView = ({
-  onRoomClicked,
-  onSettingsClicked,
-}: RoomNavigationViewProps): JSX.Element => {
+const RoomNavigationView = ({ slug }: RoomNavigationViewProps): JSX.Element => {
   const text = useText();
 
   return (
     <>
-      <Button onClick={onRoomClicked}>{text("navigationRoom")}</Button>
-      <Button onClick={onSettingsClicked}>{text("navigationSettings")}</Button>
+      <Link href={paths.room(slug)}>{text("navigationRoom")}</Link>
+      <Link href={paths.roomSettings(slug)}>{text("navigationSettings")}</Link>
     </>
   );
 };

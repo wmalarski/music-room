@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { defaultMember } from "../../../services/utils/defaults";
@@ -11,15 +10,7 @@ import RoomNavigation from "./RoomNavigation";
 
 type ComponentProps = React.ComponentProps<typeof RoomNavigation>;
 
-const View = ({
-  onRoomClicked,
-  onSettingsClicked,
-}: RoomNavigationViewProps) => (
-  <>
-    <button onClick={onRoomClicked}>Room</button>
-    <button onClick={onSettingsClicked}>Settings</button>
-  </>
-);
+const View = ({ slug }: RoomNavigationViewProps) => <p>{slug}</p>;
 
 const renderComponent = (props: Partial<ComponentProps> = {}) => {
   const defaultProps: ComponentProps = {
@@ -35,27 +26,11 @@ const renderComponent = (props: Partial<ComponentProps> = {}) => {
 };
 
 describe("<RoomNavigation />", () => {
-  it("should navigate to room", async () => {
+  it("should render slug", async () => {
     expect.hasAssertions();
 
     renderComponent();
 
-    userEvent.click(await screen.findByText("Room"));
-
-    const { push } = jest.requireMock("next/router").default;
-
-    expect(push).toHaveBeenCalledWith(`/room/${defaultMember.slug}`);
-  });
-
-  it("should navigate to settings", async () => {
-    expect.hasAssertions();
-
-    renderComponent();
-
-    userEvent.click(await screen.findByText("Settings"));
-
-    const { push } = jest.requireMock("next/router").default;
-
-    expect(push).toHaveBeenCalledWith(`/room/${defaultMember.slug}/settings`);
+    expect(await screen.findByText(defaultMember.slug)).toBeInTheDocument();
   });
 });

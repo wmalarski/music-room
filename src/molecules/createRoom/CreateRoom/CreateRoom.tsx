@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useSelectProfile } from "../../../services/data/profiles/selectProfile";
 import { useInsertRoom } from "../../../services/data/rooms/insertRoom";
+import paths from "../../../utils/routing/paths";
 import CreateRoomView, {
   CreateRoomViewProps,
 } from "../CreateRoomView/CreateRoomView";
@@ -25,7 +26,7 @@ const CreateRoom = ({
   } = useSelectProfile({ userId: user.id });
 
   const { mutate: insertRoom } = useInsertRoom({
-    onSuccess: (room) => router.push(`/room/${room.slug}`),
+    onSuccess: (room) => router.push(paths.room(room.slug)),
   });
 
   return (

@@ -27,7 +27,6 @@ function renderComponent(props: Partial<ComponentProps> = {}) {
         slug: "second",
       },
     ],
-    onRoomClick: () => null,
   };
   return render(<RoomsList {...defaultProps} {...props} />);
 }

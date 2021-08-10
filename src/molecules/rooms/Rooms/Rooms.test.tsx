@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { mockMembersStorage } from "../../../services/data/members/membersHandlers";
@@ -11,12 +10,10 @@ import Rooms from "./Rooms";
 
 type ComponentProps = React.ComponentProps<typeof Rooms>;
 
-const View = ({ onRoomClick, members }: RoomsListProps) => (
+const View = ({ members }: RoomsListProps) => (
   <>
     {members?.map((member) => (
-      <button key={member.role_id} onClick={() => onRoomClick(member)}>
-        {member.room_name}
-      </button>
+      <p key={member.role_id}>{member.room_name}</p>
     ))}
     <p>{!members && "Empty"}</p>
   </>
@@ -55,23 +52,5 @@ describe("<Rooms />", () => {
     );
 
     expect(screen.queryByText("Empty")).toBeNull();
-  });
-
-  it("should navigate to room route", async () => {
-    expect.hasAssertions();
-
-    mockMembersStorage.set([defaultMember]);
-
-    renderComponent();
-
-    await waitFor(async () =>
-      expect(screen.getByText(defaultMember.room_name)).toBeInTheDocument()
-    );
-
-    userEvent.click(await screen.findByText(defaultMember.room_name));
-
-    const { push } = jest.requireMock("next/router").default;
-    expect(push).toHaveBeenCalledTimes(1);
-    expect(push).toHaveBeenCalledWith(`/room/${defaultMember.slug}`);
   });
 });

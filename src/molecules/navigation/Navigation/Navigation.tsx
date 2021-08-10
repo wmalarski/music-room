@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React from "react";
 import NavigationView, {
   NavigationViewProps,
@@ -13,9 +12,7 @@ const Navigation = ({
   right,
   View = NavigationView,
 }: NavigationProps): JSX.Element => {
-  const router = useRouter();
-
-  return <View right={right} onHomeClicked={() => router.push("/")} />;
+  return <View right={right} />;
 };
 
 export default Navigation;

@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { NavigationViewProps } from "../NavigationView/NavigationView";
@@ -9,9 +8,8 @@ import Navigation from "./Navigation";
 
 type ComponentProps = React.ComponentProps<typeof Navigation>;
 
-const View = ({ right, onHomeClicked }: NavigationViewProps) => (
+const View = ({ right }: NavigationViewProps) => (
   <>
-    <button onClick={onHomeClicked}>Click</button>
     <div>{right}</div>
   </>
 );
@@ -34,17 +32,5 @@ describe("<Navigation />", () => {
     renderComponent({ right: "Hello world" });
 
     expect(await screen.findByText("Hello world")).toBeInTheDocument();
-  });
-
-  it("should navigate to home", async () => {
-    expect.hasAssertions();
-
-    renderComponent();
-
-    userEvent.click(await screen.findByText("Click"));
-
-    const { push } = jest.requireMock("next/router").default;
-
-    expect(push).toHaveBeenCalledWith("/");
   });
 });

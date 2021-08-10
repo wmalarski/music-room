@@ -1,19 +1,12 @@
 import React from "react";
-import { Button } from "../../../atoms";
+import { Link } from "../../../atoms";
+import paths from "../../../utils/routing/paths";
 import useText from "../../../utils/translations/useText";
 
-export type ProfileNavigationViewProps = {
-  onProfileClicked: () => void;
-};
-
-const ProfileNavigationView = ({
-  onProfileClicked,
-}: ProfileNavigationViewProps): JSX.Element => {
+const ProfileNavigationView = (): JSX.Element => {
   const text = useText();
 
-  return (
-    <Button onClick={onProfileClicked}>{text("navigationProfile")}</Button>
-  );
+  return <Link href={paths.profile}>{text("navigationProfile")}</Link>;
 };
 
 export default ProfileNavigationView;

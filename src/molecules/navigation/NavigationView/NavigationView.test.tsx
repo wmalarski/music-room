@@ -8,7 +8,6 @@ type ComponentProps = React.ComponentProps<typeof NavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
-    onHomeClicked: () => null,
     right: <p>Right</p>,
   };
   return render(<NavigationView {...defaultProps} {...props} />);

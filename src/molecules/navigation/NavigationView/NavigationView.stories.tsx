@@ -13,6 +13,5 @@ const Template: ComponentStory<typeof NavigationView> = (args) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  onHomeClicked: () => null,
   right: <p>Right</p>,
 };

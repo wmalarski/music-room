@@ -4,17 +4,12 @@ import RoomsListItem from "../RoomsListItem/RoomsListItem";
 
 export type RoomsListProps = {
   members?: Member[];
-  onRoomClick: (room: Member) => void;
 };
 
-const RoomsList = ({ members, onRoomClick }: RoomsListProps): JSX.Element => (
+const RoomsList = ({ members }: RoomsListProps): JSX.Element => (
   <>
     {members?.map((member) => (
-      <RoomsListItem
-        key={member.room_id}
-        member={member}
-        onClick={onRoomClick}
-      />
+      <RoomsListItem key={member.room_id} member={member} />
     ))}
   </>
 );

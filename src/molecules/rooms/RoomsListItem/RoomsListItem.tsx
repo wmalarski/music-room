@@ -1,25 +1,22 @@
 import React from "react";
-import { Button, Debug } from "../../../atoms";
+import { Debug, Link } from "../../../atoms";
 import { Member } from "../../../services/data/types";
+import paths from "../../../utils/routing/paths";
 import useText from "../../../utils/translations/useText";
 
 export type RoomsListItemProps = {
   member: Member;
-  onClick: (room: Member) => void;
 };
 
-const RoomsListItem = ({
-  member,
-  onClick,
-}: RoomsListItemProps): JSX.Element => {
+const RoomsListItem = ({ member }: RoomsListItemProps): JSX.Element => {
   const text = useText();
 
   return (
     <>
       <Debug value={member} />
-      <Button onClick={() => onClick(member)}>
+      <Link href={paths.room(member.slug)}>
         {text("roomLink")(member.room_name)}
-      </Button>
+      </Link>
     </>
   );
 };

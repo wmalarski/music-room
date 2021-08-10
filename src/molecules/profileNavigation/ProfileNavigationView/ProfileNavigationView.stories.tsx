@@ -7,11 +7,9 @@ export default {
   component: ProfileNavigationView,
 } as ComponentMeta<typeof ProfileNavigationView>;
 
-const Template: ComponentStory<typeof ProfileNavigationView> = (args) => (
-  <ProfileNavigationView {...args} />
+const Template: ComponentStory<typeof ProfileNavigationView> = () => (
+  <ProfileNavigationView />
 );
 
 export const Primary = Template.bind({});
-Primary.args = {
-  onProfileClicked: () => null,
-};
+Primary.args = {};

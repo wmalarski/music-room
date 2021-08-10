@@ -13,6 +13,5 @@ const Template: ComponentStory<typeof RoomNavigationView> = (args) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  onRoomClicked: () => null,
-  onSettingsClicked: () => null,
+  slug: "abc",
 };

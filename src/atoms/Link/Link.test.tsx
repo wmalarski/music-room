@@ -2,19 +2,18 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 import React from "react";
-import { defaultMember } from "../../../services/utils/defaults";
-import RoomsListItem from "./RoomsListItem";
+import Link from "./Link";
 
-type ComponentProps = React.ComponentProps<typeof RoomsListItem>;
+type ComponentProps = Parameters<typeof Link>[0];
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
-    member: defaultMember,
+    href: "/",
   };
-  return render(<RoomsListItem {...defaultProps} {...props} />);
+  return render(<Link {...defaultProps} {...props} />);
 }
 
-describe("<RoomsListItem />", () => {
+describe("<Link />", () => {
   it("should render", async () => {
     expect.hasAssertions();
 

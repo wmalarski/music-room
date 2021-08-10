@@ -15,5 +15,4 @@ const Template: ComponentStory<typeof RoomsListItem> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   member: defaultMember,
-  onClick: () => null,
 };

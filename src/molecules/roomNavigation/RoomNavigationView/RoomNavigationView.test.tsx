@@ -8,8 +8,7 @@ type ComponentProps = React.ComponentProps<typeof RoomNavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
-    onRoomClicked: () => null,
-    onSettingsClicked: () => null,
+    slug: "slug123",
   };
   return render(<RoomNavigationView {...defaultProps} {...props} />);
 }

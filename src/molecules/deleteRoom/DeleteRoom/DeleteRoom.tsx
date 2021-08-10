@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDeleteRoom } from "../../../services/data/rooms/deleteRoom";
 import { useMemberContext } from "../../../utils/room/MemberContext";
+import paths from "../../../utils/routing/paths";
 import DeleteRoomView, {
   DeleteRoomViewProps,
 } from "../DeleteRoomView/DeleteRoomView";
@@ -18,7 +19,7 @@ const DeleteRoom = ({
   const { room_id, hash } = useMemberContext();
 
   const { mutate: deleteRoom, isLoading } = useDeleteRoom(hash, {
-    onSuccess: () => router.push("/"),
+    onSuccess: () => router.push(paths.home),
   });
 
   return (

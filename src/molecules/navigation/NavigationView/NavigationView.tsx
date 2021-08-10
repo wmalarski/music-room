@@ -1,20 +1,18 @@
 import React from "react";
-import { Button } from "../../../atoms";
+import { Link } from "../../../atoms";
+import paths from "../../../utils/routing/paths";
 import useText from "../../../utils/translations/useText";
 
 export type NavigationViewProps = {
   right?: React.ReactNode;
-  onHomeClicked: () => void;
 };
 
-const NavigationView = ({
-  right,
-  onHomeClicked,
-}: NavigationViewProps): JSX.Element => {
+const NavigationView = ({ right }: NavigationViewProps): JSX.Element => {
   const text = useText();
+
   return (
     <div>
-      <Button onClick={onHomeClicked}>{text("navigationHome")}</Button>
+      <Link href={paths.home}>{text("navigationHome")}</Link>
       {right}
     </div>
   );

@@ -7,9 +7,7 @@ import ProfileNavigationView from "./ProfileNavigationView";
 type ComponentProps = React.ComponentProps<typeof ProfileNavigationView>;
 
 function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    onProfileClicked: () => null,
-  };
+  const defaultProps: ComponentProps = {};
   return render(<ProfileNavigationView {...defaultProps} {...props} />);
 }
 
