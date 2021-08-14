@@ -61,18 +61,18 @@ export type Room = {
 };
 
 export type Member = {
-  role_id: number;
-  profile_id: number;
-  name: string;
+  id: number;
+  role: RoomRole;
   user_id: string;
+  profile_id: number;
+  profile_name: string;
+  profile_avatar: string | null;
   room_id: number;
   room_name: string;
-  slug: string;
-  hash: string;
-  author_id: number;
-  data: RoomData;
-  role: RoomRole;
-  avatar: string | null;
+  room_slug: string;
+  room_hash: string;
+  room_author_id: number;
+  room_avatar: string | null;
 };
 
 export type TableMapping = {

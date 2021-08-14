@@ -13,7 +13,7 @@ type ComponentProps = React.ComponentProps<typeof Rooms>;
 const View = ({ members }: RoomsListProps) => (
   <>
     {members?.map((member) => (
-      <p key={member.role_id}>{member.room_name}</p>
+      <p key={member.id}>{member.room_name}</p>
     ))}
     <p>{!members && "Empty"}</p>
   </>

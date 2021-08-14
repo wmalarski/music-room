@@ -11,9 +11,9 @@ export type RoomNavigationProps = {
 const RoomNavigation = ({
   View = RoomNavigationView,
 }: RoomNavigationProps): JSX.Element => {
-  const { slug } = useMemberContext();
+  const { room_slug } = useMemberContext();
 
-  return <View slug={slug} />;
+  return <View slug={room_slug} />;
 };
 
 export default RoomNavigation;

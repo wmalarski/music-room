@@ -9,7 +9,7 @@ import { UpdateRolesArgs } from "./updateRole";
 export const mockRolesStorage = {
   get: (): Role[] =>
     mockMembersStorage.get().map((member) => ({
-      id: member.role_id,
+      id: member.id,
       profile_id: member.profile_id,
       role: member.role,
       room_id: member.room_id,

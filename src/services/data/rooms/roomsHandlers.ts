@@ -9,12 +9,12 @@ import { UpdateRoomArgs } from "./updateRoom";
 export const mockRoomsStorage = {
   get: (): Room[] =>
     mockMembersStorage.get().map((member) => ({
-      author_id: member.author_id,
-      data: member.data,
-      hash: member.hash,
+      author_id: member.room_author_id,
+      hash: member.room_hash,
       id: member.room_id,
       name: member.room_name,
-      slug: member.slug,
+      slug: member.room_slug,
+      data: { kind: "room#0.0.1" },
     })),
   set: (rooms: Room[]): void => {
     const member = mockMembersStorage.getContext();

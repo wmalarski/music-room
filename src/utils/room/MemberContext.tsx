@@ -2,18 +2,18 @@ import React, { createContext, ReactNode, useContext } from "react";
 import { Member } from "../../services/data/types";
 
 const MemberContext = createContext<Member>({
-  role_id: 0,
-  author_id: 0,
-  data: { kind: "room#0.0.1" },
-  hash: "",
-  name: "",
+  id: 0,
+  room_author_id: 0,
+  room_hash: "",
+  profile_name: "",
   profile_id: 0,
   role: "guest",
   room_id: 0,
   room_name: "",
-  slug: "",
+  room_slug: "",
   user_id: "",
-  avatar: null,
+  room_avatar: null,
+  profile_avatar: null,
 });
 
 export const useMemberContext = (): Member => useContext(MemberContext);

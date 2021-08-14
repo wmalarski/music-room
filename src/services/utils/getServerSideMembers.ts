@@ -18,7 +18,7 @@ const getServerSideMembers = async ({
     queryKey: [
       "members",
       {
-        slug: roomSlug,
+        room_slug: roomSlug,
         user_id: user.id,
       },
     ],

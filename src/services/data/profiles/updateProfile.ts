@@ -65,7 +65,7 @@ export const useUpdateProfile = (
       const nextProfile = { ...previousProfile, ...profile };
       const nextMembers = previousMembers?.map((member) =>
         member.profile_id === profile.id
-          ? { ...member, name: profile.name }
+          ? { ...member, profile_name: profile.name }
           : member
       );
 

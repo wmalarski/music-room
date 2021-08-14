@@ -14,7 +14,7 @@ const RoomsListItem = ({ member }: RoomsListItemProps): JSX.Element => {
   return (
     <>
       <Debug value={member} />
-      <Link href={paths.room(member.slug)}>
+      <Link href={paths.room(member.room_slug)}>
         {text("roomLink")(member.room_name)}
       </Link>
     </>

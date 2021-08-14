@@ -31,6 +31,8 @@ describe("<RoomNavigation />", () => {
 
     renderComponent();
 
-    expect(await screen.findByText(defaultMember.slug)).toBeInTheDocument();
+    expect(
+      await screen.findByText(defaultMember.room_slug)
+    ).toBeInTheDocument();
   });
 });

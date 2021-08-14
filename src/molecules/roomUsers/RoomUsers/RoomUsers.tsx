@@ -26,10 +26,8 @@ const RoomUsers = ({ View = RoomUsersList }: RoomUsersProps): JSX.Element => {
     <View
       members={members?.pages.flat()}
       onLoadMore={() => fetchNextPage()}
-      onRemoveClick={(profile) => deleteRole({ id: profile.role_id })}
-      onRoleChange={(profile, role) =>
-        updateRole({ id: profile.role_id, role })
-      }
+      onRemoveClick={(profile) => deleteRole({ id: profile.id })}
+      onRoleChange={(profile, role) => updateRole({ id: profile.id, role })}
     />
   );
 };

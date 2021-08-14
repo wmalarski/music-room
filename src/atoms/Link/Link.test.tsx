@@ -9,6 +9,7 @@ type ComponentProps = Parameters<typeof Link>[0];
 function renderComponent(props: Partial<ComponentProps> = {}) {
   const defaultProps: ComponentProps = {
     href: "/",
+    children: "Hello",
   };
   return render(<Link {...defaultProps} {...props} />);
 }

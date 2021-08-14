@@ -37,18 +37,18 @@ export const defaultProfile: Profile = {
 };
 
 export const defaultMember: Member = {
-  role_id: 1,
-  author_id: 1,
-  data: { kind: "room#0.0.1" },
-  hash: "qwertyuiop",
+  id: 1,
+  room_author_id: 1,
+  room_hash: "qwertyuiop",
   profile_id: 1,
   room_id: 1,
   room_name: "FirstRoom",
   user_id: "",
-  name: "First",
-  slug: "first",
+  profile_name: "First",
+  room_slug: "first",
   role: "user",
-  avatar: null,
+  room_avatar: null,
+  profile_avatar: null,
 };
 
 export const defaultRoom: Room = {

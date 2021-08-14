@@ -12,14 +12,14 @@ export type InviteLinkProps = {
 const InviteLink = ({
   View = InviteLinkView,
 }: InviteLinkProps): JSX.Element | null => {
-  const { hash } = useMemberContext();
+  const { room_hash } = useMemberContext();
 
   const [href, setHref] = useState<string>();
 
   return (
     <>
       <div style={{ display: "none" }}>
-        <Link href={`/invite/${hash}`}>
+        <Link href={`/invite/${room_hash}`}>
           <a ref={(element) => setHref(element?.href)} />
         </Link>
       </div>

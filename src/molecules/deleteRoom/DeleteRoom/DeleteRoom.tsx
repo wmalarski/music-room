@@ -16,9 +16,9 @@ const DeleteRoom = ({
 }: DeleteRoomProps): JSX.Element => {
   const router = useRouter();
 
-  const { room_id, hash } = useMemberContext();
+  const { room_id, room_hash } = useMemberContext();
 
-  const { mutate: deleteRoom, isLoading } = useDeleteRoom(hash, {
+  const { mutate: deleteRoom, isLoading } = useDeleteRoom(room_hash, {
     onSuccess: () => router.push(paths.home),
   });
 

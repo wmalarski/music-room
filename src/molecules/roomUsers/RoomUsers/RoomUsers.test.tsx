@@ -19,15 +19,15 @@ const View = ({
 }: RoomUsersListProps) => (
   <>
     {members?.map((member) => (
-      <div key={member.role_id}>
-        <p>{member.name}</p>
+      <div key={member.id}>
+        <p>{member.profile_name}</p>
         <p>{member.role}</p>
         <button
           onClick={() => onRoleChange(member, "mod")}
-        >{`Change ${member.name}`}</button>
+        >{`Change ${member.profile_name}`}</button>
         <button
           onClick={() => onRemoveClick(member)}
-        >{`Remove ${member.name}`}</button>
+        >{`Remove ${member.profile_name}`}</button>
       </div>
     ))}
     <button onClick={onLoadMore}>Load More</button>
@@ -54,7 +54,9 @@ describe("<RoomUsers />", () => {
 
     renderComponent();
 
-    expect(await screen.findByText(defaultMember.name)).toBeInTheDocument();
+    expect(
+      await screen.findByText(defaultMember.profile_name)
+    ).toBeInTheDocument();
   });
 
   it("should remove role from room", async () => {
@@ -65,15 +67,19 @@ describe("<RoomUsers />", () => {
 
     renderComponent();
 
-    expect(await screen.findByText(defaultMember.name)).toBeInTheDocument();
+    expect(
+      await screen.findByText(defaultMember.profile_name)
+    ).toBeInTheDocument();
 
-    userEvent.click(await screen.findByText(`Remove ${defaultMember.name}`));
-
-    await waitFor(async () =>
-      expect(screen.queryByText(defaultMember.name)).toBeNull()
+    userEvent.click(
+      await screen.findByText(`Remove ${defaultMember.profile_name}`)
     );
 
-    expect(screen.queryByText(defaultMember.name)).toBeNull();
+    await waitFor(async () =>
+      expect(screen.queryByText(defaultMember.profile_name)).toBeNull()
+    );
+
+    expect(screen.queryByText(defaultMember.profile_name)).toBeNull();
   });
 
   it("should update role", async () => {
@@ -86,7 +92,9 @@ describe("<RoomUsers />", () => {
 
     expect(await screen.findByText("user")).toBeInTheDocument();
 
-    userEvent.click(await screen.findByText(`Change ${defaultMember.name}`));
+    userEvent.click(
+      await screen.findByText(`Change ${defaultMember.profile_name}`)
+    );
 
     await waitFor(async () =>
       expect(await screen.findByText("mod")).toBeInTheDocument()

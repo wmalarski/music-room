@@ -17,7 +17,7 @@ export enum SupabaseErrorCode {
 export const TABLES: Record<keyof TableMapping, string> = {
   actions: "actions",
   controls: "controls",
-  members: "room_roles",
+  members: "members",
   messages: "messages",
   profiles: "profiles",
   roles: "roles",

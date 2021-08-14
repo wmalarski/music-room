@@ -17,15 +17,15 @@ Primary.args = {
   members: [
     {
       ...defaultMember,
-      role_id: 1,
-      name: "First",
-      slug: "first",
+      id: 1,
+      profile_name: "First",
+      room_slug: "first",
     },
     {
       ...defaultMember,
-      role_id: 2,
-      name: "Second",
-      slug: "second",
+      id: 2,
+      profile_name: "Second",
+      room_slug: "second",
     },
   ],
 };
