@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import useText from '../../../../utils/translations/useText';
 import { SignInViewData, useSignInViewOptions } from './SignInView.utils';
 
-export type SignInViewProps = {
+type Props = {
   isLoading: boolean;
   error: PostgrestError | null;
   user?: User | null;
@@ -16,7 +16,7 @@ export const SignInView = ({
   isLoading,
   error,
   onSubmit,
-}: SignInViewProps): ReactElement => {
+}: Props): ReactElement => {
   const text = useText();
 
   const {

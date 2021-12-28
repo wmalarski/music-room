@@ -7,13 +7,12 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockUserStorage } from '../../../services/auth/authHandlers';
 import { defaultUser } from '../../../services/utils/defaults';
 import { SignUp } from './SignUp';
-import { SignUpViewProps } from './SignUpView/SignUpView';
 
 type Props = ComponentProps<typeof SignUp>;
 
 const defaultUserEmail = defaultUser.email ?? '';
 
-const View = ({ onSubmit, user, error }: SignUpViewProps) => (
+const View: Props['View'] = ({ onSubmit, user, error }) => (
   <>
     <p>{user?.email}</p>
     <p>{error?.message}</p>

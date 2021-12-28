@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { defaultMember } from '../../../../services/utils/defaults';
-import RoomsList from './RoomsList';
+import { RoomsList } from './RoomsList';
 
 export default {
-  title: 'Molecules/Rooms/RoomsList',
+  title: 'Home/RoomsList',
   component: RoomsList,
 } as ComponentMeta<typeof RoomsList>;
 

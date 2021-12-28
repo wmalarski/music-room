@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Member } from '../../../../services/data/types';
-import RoomsListItem from './RoomsListItem/RoomsListItem';
+import { RoomsListItem } from './RoomsListItem/RoomsListItem';
 
-export type RoomsListProps = {
+type Props = {
   members?: Member[];
 };
 
-const RoomsList = ({ members }: RoomsListProps): JSX.Element => (
+export const RoomsList = ({ members }: Props): ReactElement => (
   <>
     {members?.map((member) => (
       <RoomsListItem key={member.room_id} member={member} />
     ))}
   </>
 );
-
-export default RoomsList;

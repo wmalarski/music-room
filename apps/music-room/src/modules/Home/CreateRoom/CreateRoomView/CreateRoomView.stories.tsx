@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultProfile } from '../../../../services/utils/defaults';
-import CreateRoomView from './CreateRoomView';
+import { CreateRoomView } from './CreateRoomView';
 
 export default {
-  title: 'Molecules/CreateRoom/CreateRoomView',
+  title: 'Home/CreateRoomView',
   component: CreateRoomView,
   argTypes: {
     onSubmit: { action: 'onSubmit' },

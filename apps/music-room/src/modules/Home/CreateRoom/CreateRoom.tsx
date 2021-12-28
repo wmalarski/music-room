@@ -1,22 +1,20 @@
 import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSelectProfile } from '../../../services/data/profiles/selectProfile';
 import { useInsertRoom } from '../../../services/data/rooms/insertRoom';
 import paths from '../../../utils/routing/paths';
-import CreateRoomView, {
-  CreateRoomViewProps,
-} from './CreateRoomView/CreateRoomView';
+import { CreateRoomView } from './CreateRoomView/CreateRoomView';
 
-export type CreateRoomProps = {
+type Props = {
   user: User;
-  View?: React.ComponentType<CreateRoomViewProps>;
+  View?: typeof CreateRoomView;
 };
 
-const CreateRoom = ({
+export const CreateRoom = ({
   user,
   View = CreateRoomView,
-}: CreateRoomProps): JSX.Element | null => {
+}: Props): ReactElement | null => {
   const router = useRouter();
 
   const {
@@ -46,5 +44,3 @@ const CreateRoom = ({
     />
   );
 };
-
-export default CreateRoom;

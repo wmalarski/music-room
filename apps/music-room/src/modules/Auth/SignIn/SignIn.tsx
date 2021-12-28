@@ -1,9 +1,9 @@
-import { ComponentType, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useSignIn } from '../../../services/auth/signIn';
-import { SignInView, SignInViewProps } from './SignInView/SignInView';
+import { SignInView } from './SignInView/SignInView';
 
 type Props = {
-  View?: ComponentType<SignInViewProps>;
+  View?: typeof SignInView;
 };
 
 export const SignIn = ({ View = SignInView }: Props): ReactElement => {

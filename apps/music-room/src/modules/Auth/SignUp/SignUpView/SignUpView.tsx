@@ -10,7 +10,7 @@ import {
   useSignUpViewOptions,
 } from './SignUpView.utils';
 
-export type SignUpViewProps = {
+type Props = {
   isLoading: boolean;
   error: PostgrestError | null;
   user?: User | null;
@@ -22,7 +22,7 @@ const SignUpView = ({
   error,
   user,
   onSubmit,
-}: SignUpViewProps): ReactElement => {
+}: Props): ReactElement => {
   const text = useText();
 
   const options = useSignUpViewOptions();

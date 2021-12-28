@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockMembersStorage } from '../../../services/data/members/membersHandlers';
 import { mockProfilesStorage } from '../../../services/data/profiles/profileHandlers';
@@ -11,22 +11,22 @@ import {
   defaultProfile,
   defaultUser,
 } from '../../../services/utils/defaults';
-import CreateRoom from './CreateRoom';
-import { CreateRoomViewProps } from './CreateRoomView/CreateRoomView';
+import { CreateRoom } from './CreateRoom';
 
-type ComponentProps = React.ComponentProps<typeof CreateRoom>;
+type Props = ComponentProps<typeof CreateRoom>;
 
-const View = ({ profile, onSubmit }: CreateRoomViewProps) => (
+const View: Props['View'] = ({ profile, onSubmit }) => (
   <button onClick={() => onSubmit({ name: 'RoomName', slug: 'RoomName' })}>
     {profile ? 'Add' : ''}
   </button>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-    user: defaultUser,
-  };
+const defaultProps: Props = {
+  View,
+  user: defaultUser,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <CreateRoom {...defaultProps} {...props} />

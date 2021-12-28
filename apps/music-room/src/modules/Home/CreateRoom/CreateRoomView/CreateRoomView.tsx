@@ -1,26 +1,26 @@
+import { Alert, Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { Profile } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
-import { Alert, Button, Input } from '../../../atoms';
 import {
   CreateRoomViewData,
   useCreateRoomViewOptions,
 } from './CreateRoomView.utils';
 
-export type CreateRoomViewProps = {
+export type Props = {
   isLoading: boolean;
   profile: Profile | null;
   error: PostgrestError | null;
   onSubmit: (data: CreateRoomViewData) => void;
 };
 
-const CreateRoomView = ({
+export const CreateRoomView = ({
   error,
   isLoading,
   onSubmit,
-}: CreateRoomViewProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   const {
@@ -50,5 +50,3 @@ const CreateRoomView = ({
     </form>
   );
 };
-
-export default CreateRoomView;

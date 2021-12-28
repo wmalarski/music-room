@@ -1,14 +1,14 @@
-import React from 'react';
+import { Debug, Link } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Member } from '../../../../../services/data/types';
 import paths from '../../../../../utils/routing/paths';
 import useText from '../../../../../utils/translations/useText';
-import { Debug, Link } from '../../../atoms';
 
-export type RoomsListItemProps = {
+type Props = {
   member: Member;
 };
 
-const RoomsListItem = ({ member }: RoomsListItemProps): JSX.Element => {
+export const RoomsListItem = ({ member }: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -20,5 +20,3 @@ const RoomsListItem = ({ member }: RoomsListItemProps): JSX.Element => {
     </>
   );
 };
-
-export default RoomsListItem;

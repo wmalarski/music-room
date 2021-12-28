@@ -1,17 +1,23 @@
 import { User } from '@supabase/supabase-js';
 import React from 'react';
 import { useSelectMembers } from '../../../services/data/members/selectMembers';
-import RoomsList, { RoomsListProps } from './RoomsList/RoomsList';
+import { Member } from '../../../services/data/types';
+import { RoomsList } from './RoomsList/RoomsList';
 
-export type RoomsProps = {
+type Props = {
   user: User;
-  View?: React.ComponentType<RoomsListProps>;
+  View?: typeof RoomsList;
 };
 
-const Rooms = ({ user, View = RoomsList }: RoomsProps): JSX.Element => {
+export const Rooms = ({ user, View = RoomsList }: Props): JSX.Element => {
   const { data: members } = useSelectMembers({ user_id: user.id });
 
-  return <View members={members?.pages.flat()} />;
+  return (
+    <View
+      members={members?.pages.reduce<Member[]>(
+        (prev, curr) => [...prev, ...curr],
+        []
+      )}
+    />
+  );
 };
-
-export default Rooms;
