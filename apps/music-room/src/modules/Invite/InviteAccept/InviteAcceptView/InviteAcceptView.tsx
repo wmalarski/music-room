@@ -1,19 +1,19 @@
-import React from 'react';
+import { Button, Typography } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Room } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
-import { Button, Typography } from '../../../atoms';
 
-export type InviteAcceptViewProps = {
+type Props = {
   room: Room;
   isLoading: boolean;
   onAcceptClicked: () => void;
 };
 
-const InviteAcceptView = ({
+export const InviteAcceptView = ({
   room,
   isLoading,
   onAcceptClicked,
-}: InviteAcceptViewProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -25,5 +25,3 @@ const InviteAcceptView = ({
     </div>
   );
 };
-
-export default InviteAcceptView;

@@ -1,20 +1,21 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { defaultRoom } from '../../../../services/utils/defaults';
-import InviteAcceptView from './InviteAcceptView';
+import { InviteAcceptView } from './InviteAcceptView';
 
-type ComponentProps = React.ComponentProps<typeof InviteAcceptView>;
+type Props = ComponentProps<typeof InviteAcceptView>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    room: defaultRoom,
-    isLoading: false,
-    onAcceptClicked: () => null,
-  };
+const defaultProps: Props = {
+  room: defaultRoom,
+  isLoading: false,
+  onAcceptClicked: () => null,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<InviteAcceptView {...defaultProps} {...props} />);
-}
+};
 
 describe('<InviteAcceptView />', () => {
   it('should render', async () => {

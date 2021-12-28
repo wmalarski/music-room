@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultRoom } from '../../../../services/utils/defaults';
-import InviteAcceptView from './InviteAcceptView';
+import { InviteAcceptView } from './InviteAcceptView';
 
 export default {
-  title: 'Molecules/InviteAccept/InviteAcceptView',
+  title: 'Invite/InviteAcceptView',
   component: InviteAcceptView,
   argTypes: { onAcceptClicked: { type: 'action' } },
 } as ComponentMeta<typeof InviteAcceptView>;

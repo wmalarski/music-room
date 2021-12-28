@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { Auth } from '../../modules/Auth/Auth';
+import { Invite } from '../../modules/Invite/Invite';
 import { useSelectProfile } from '../../services/data/profiles/selectProfile';
 import { selectRoomByHash } from '../../services/data/rooms/selectRoomByHash';
 import { Room } from '../../services/data/types';
-import UserHomeTemplate from '../../templates/UserHomeTemplate/UserHomeTemplate';
 import { useUserContext } from '../../utils/auth/UserContext';
 
 export type InvitePageProps = {
@@ -19,7 +19,7 @@ const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
     { enabled: !!user }
   );
 
-  return user ? <UserHomeTemplate header={} center={} /> : <Auth />;
+  return user ? <Invite room={room} profile={profile} user={user} /> : <Auth />;
 };
 
 export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({

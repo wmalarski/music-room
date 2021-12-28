@@ -1,24 +1,22 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useInsertRole } from '../../../services/data/roles/insertRole';
 import { Profile, Room } from '../../../services/data/types';
 import { SupabaseErrorCode } from '../../../services/supabase';
 import paths from '../../../utils/routing/paths';
-import InviteAcceptView, {
-  InviteAcceptViewProps,
-} from './InviteAcceptView/InviteAcceptView';
+import { InviteAcceptView } from './InviteAcceptView/InviteAcceptView';
 
-export type InviteAcceptProps = {
+type Props = {
   room: Room;
   profile: Profile;
-  View?: React.ComponentType<InviteAcceptViewProps>;
+  View?: typeof InviteAcceptView;
 };
 
-const InviteAccept = ({
+export const InviteAccept = ({
   room,
   profile,
   View = InviteAcceptView,
-}: InviteAcceptProps): JSX.Element => {
+}: Props): ReactElement => {
   const router = useRouter();
 
   const { mutate: insertRole, isLoading } = useInsertRole({
@@ -43,5 +41,3 @@ const InviteAccept = ({
     />
   );
 };
-
-export default InviteAccept;
