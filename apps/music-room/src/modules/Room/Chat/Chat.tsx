@@ -1,12 +1,12 @@
-import React from 'react';
-import { ChatInput, ChatRoom, InviteLink } from '../../../molecules';
+import { ReactElement } from 'react';
+import { ChatInput } from './ChatInput/ChatInput';
+import { ChatRoom } from './ChatRoom/ChatRoom';
+import { InviteLink } from './InviteLink/InviteLink';
 
-const Chat = (): JSX.Element => (
+export const Chat = (): ReactElement => (
   <>
     <ChatRoom />
     <InviteLink />
     <ChatInput />
   </>
 );
-
-export default Chat;

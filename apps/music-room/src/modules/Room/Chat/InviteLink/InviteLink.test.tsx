@@ -1,19 +1,18 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { defaultMember } from '../../../../services/utils/defaults';
 import { MemberContextProvider } from '../../../../utils/room/MemberContext';
-import InviteLink from './InviteLink';
-import { InviteLinkViewProps } from './InviteLinkView/InviteLinkView';
+import { InviteLink } from './InviteLink';
 
-type ComponentProps = React.ComponentProps<typeof InviteLink>;
+type Props = ComponentProps<typeof InviteLink>;
 
-const View = ({ link }: InviteLinkViewProps) => <p>{link}</p>;
+const View: Props['View'] = ({ link }) => <p>{link}</p>;
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
+const renderComponent = (props: Partial<Props> = {}) => {
+  const defaultProps: Props = {
     View,
   };
   return render(

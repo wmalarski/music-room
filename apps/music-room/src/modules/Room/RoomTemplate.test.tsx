@@ -1,24 +1,22 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import RoomTemplate from "./RoomTemplate";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { defaultMember } from '../../services/utils/defaults';
+import { Room } from './RoomTemplate';
 
-type ComponentProps = Parameters<typeof RoomTemplate>[0];
+type Props = ComponentProps<typeof Room>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    appTitle: "Room",
-    bottom: "Bottom",
-    header: "Header",
-    left: "Left",
-    right: "Right",
-  };
-  return render(<RoomTemplate {...defaultProps} {...props} />);
+const defaultProps: Props = {
+  member: defaultMember,
+};
+
+function renderComponent(props: Partial<Props> = {}) {
+  return render(<Room {...defaultProps} {...props} />);
 }
 
-describe("<RoomTemplate />", () => {
-  it("should render", async () => {
+describe('<Room />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

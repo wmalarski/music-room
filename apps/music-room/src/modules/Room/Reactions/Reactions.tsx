@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useSelectAction } from '../../../services/data/actions/selectAction';
 import { useUpsertAction } from '../../../services/data/actions/upsertAction';
 import { useSelectCurrentMessage } from '../../../services/data/messages/selectCurrentMessage';
 import { useMemberContext } from '../../../utils/room/MemberContext';
-import ReactionsView, {
-  ReactionsViewProps,
-} from './ReactionsView/ReactionsView';
+import { ReactionsView } from './ReactionsView/ReactionsView';
 
-export type ReactionsProps = {
-  View?: React.ComponentType<ReactionsViewProps>;
+type Props = {
+  View?: typeof ReactionsView;
 };
 
-const Reactions = ({ View = ReactionsView }: ReactionsProps): JSX.Element => {
+export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
   const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage = null } = useSelectCurrentMessage({
@@ -41,5 +39,3 @@ const Reactions = ({ View = ReactionsView }: ReactionsProps): JSX.Element => {
     />
   );
 };
-
-export default Reactions;

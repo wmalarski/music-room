@@ -1,9 +1,8 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import ProfileNavigationView from "./ProfileNavigationView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ProfileNavigationView } from './ProfileNavigationView';
 
 export default {
-  title: "Molecules/ProfileNavigation/ProfileNavigationView",
+  title: 'ProfileNavigation/ProfileNavigationView',
   component: ProfileNavigationView,
 } as ComponentMeta<typeof ProfileNavigationView>;
 

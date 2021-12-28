@@ -1,23 +1,24 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import {
   defaultAction,
   defaultMessage,
 } from '../../../../services/utils/defaults';
-import ReactionsView from './ReactionsView';
+import { ReactionsView } from './ReactionsView';
 
-type ComponentProps = React.ComponentProps<typeof ReactionsView>;
+type Props = ComponentProps<typeof ReactionsView>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    action: defaultAction,
-    message: defaultMessage,
-    onChange: () => null,
-  };
+const defaultProps: Props = {
+  action: defaultAction,
+  message: defaultMessage,
+  onChange: () => null,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<ReactionsView {...defaultProps} {...props} />);
-}
+};
 
 describe('<ReactionsView />', () => {
   it('should render', async () => {

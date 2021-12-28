@@ -1,21 +1,15 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import RoomTemplate from "./RoomTemplate";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { defaultMember } from '../../services/utils/defaults';
+import { Room } from './RoomTemplate';
 
 export default {
-  title: "templates/RoomTemplate",
-  component: RoomTemplate,
-} as ComponentMeta<typeof RoomTemplate>;
+  title: 'Room/Room',
+  component: Room,
+} as ComponentMeta<typeof Room>;
 
-const Template: ComponentStory<typeof RoomTemplate> = (args) => (
-  <RoomTemplate {...args} />
-);
+const Template: ComponentStory<typeof Room> = (args) => <Room {...args} />;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  appTitle: "Title",
-  bottom: "bottom",
-  header: "Header",
-  left: "left",
-  right: "right",
+  member: defaultMember,
 };

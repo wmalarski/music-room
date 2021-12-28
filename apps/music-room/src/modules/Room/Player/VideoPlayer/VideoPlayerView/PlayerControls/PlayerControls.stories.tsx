@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultControls } from '../../../../../../services/utils/defaults';
-import PlayerControls from './PlayerControls';
+import { PlayerControls } from './PlayerControls';
 
 export default {
-  title: 'Molecules/VideoPlayer/PlayerControls',
+  title: 'Chat/PlayerControls',
   component: PlayerControls,
 } as ComponentMeta<typeof PlayerControls>;
 

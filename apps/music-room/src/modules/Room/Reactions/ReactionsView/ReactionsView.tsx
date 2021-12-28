@@ -1,23 +1,20 @@
-import React from 'react';
+import { Button, Debug } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Action, Message } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
-import { Button, Debug } from '../../../atoms';
 
-export type ReactionsViewData = {
+type Data = {
   likeAt: string | null;
   dislikeAt: string | null;
 };
 
-export type ReactionsViewProps = {
+type Props = {
   action: Action | null;
   message: Message | null;
-  onChange: (data: ReactionsViewData) => void;
+  onChange: (data: Data) => void;
 };
 
-const ReactionsView = ({
-  action,
-  onChange,
-}: ReactionsViewProps): JSX.Element => {
+export const ReactionsView = ({ action, onChange }: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -48,5 +45,3 @@ const ReactionsView = ({
     </>
   );
 };
-
-export default ReactionsView;

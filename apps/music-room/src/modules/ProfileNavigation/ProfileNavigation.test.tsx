@@ -1,18 +1,19 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import ProfileNavigation from "./ProfileNavigation";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ProfileNavigation } from './ProfileNavigation';
 
-type ComponentProps = React.ComponentProps<typeof ProfileNavigation>;
+type Props = ComponentProps<typeof ProfileNavigation>;
 
-const View = () => <button>Click</button>;
+const View: Props['View'] = () => <button>Click</button>;
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <ProfileNavigation {...defaultProps} {...props} />
@@ -20,8 +21,8 @@ const renderComponent = (props: Partial<ComponentProps> = {}) => {
   );
 };
 
-describe("<ProfileNavigation />", () => {
-  it("should navigate to profile", async () => {
+describe('<ProfileNavigation />', () => {
+  it('should navigate to profile', async () => {
     expect.hasAssertions();
 
     renderComponent();

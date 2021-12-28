@@ -1,22 +1,24 @@
+import { ReactElement } from 'react';
 import { useSelectMessages } from '../../../../services/data/messages/selectMessages';
 import { useSubscribeToMessages } from '../../../../services/data/messages/subscribeToMessages';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
-import ChatMessagesList, {
-  ChatMessagesListProps,
-} from './ChatMessagesList/ChatMessagesList';
+import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 
-export type ChatRoomProps = {
-  View?: React.ComponentType<ChatMessagesListProps>;
+type Props = {
+  View?: typeof ChatMessagesList;
 };
 
-const ChatRoom = ({ View = ChatMessagesList }: ChatRoomProps): JSX.Element => {
+export const ChatRoom = ({ View = ChatMessagesList }: Props): ReactElement => {
   const { room_id } = useMemberContext();
 
   useSubscribeToMessages({ roomId: room_id });
 
   const { data: pages, fetchNextPage } = useSelectMessages({ roomId: room_id });
 
-  return <View messages={pages?.pages.flat()} onLoadMore={fetchNextPage} />;
+  return (
+    <View
+      messages={pages?.pages.reduce((prev, curr) => [...prev, ...curr])}
+      onLoadMore={fetchNextPage}
+    />
+  );
 };
-
-export default ChatRoom;

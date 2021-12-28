@@ -4,10 +4,10 @@ import {
   defaultControls,
   defaultMessage,
 } from '../../../../../services/utils/defaults';
-import VideoPlayerView from './VideoPlayerView';
+import { VideoPlayerView } from './VideoPlayerView';
 
 export default {
-  title: 'Molecules/VideoPlayer/VideoPlayerView',
+  title: 'Chat/VideoPlayerView',
   component: VideoPlayerView,
   argTypes: {
     onEnd: { action: 'onEnd' },

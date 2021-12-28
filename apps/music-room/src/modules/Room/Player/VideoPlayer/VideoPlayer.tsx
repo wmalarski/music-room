@@ -1,21 +1,19 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSelectControls } from '../../../../services/data/controls/selectControls';
 import { useSubscribeToControls } from '../../../../services/data/controls/subscribeToControls';
 import { useUpdateControls } from '../../../../services/data/controls/updateControls';
 import { useSelectCurrentMessage } from '../../../../services/data/messages/selectCurrentMessage';
 import { useUpdateMessage } from '../../../../services/data/messages/updateMessage';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
-import VideoPlayerView, {
-  VideoPlayerViewProps,
-} from './VideoPlayerView/VideoPlayerView';
+import { VideoPlayerView } from './VideoPlayerView/VideoPlayerView';
 
-export type VideoPlayerProps = {
-  View?: React.ComponentType<VideoPlayerViewProps>;
+type Props = {
+  View?: typeof VideoPlayerView;
 };
 
-const VideoPlayer = ({
+export const VideoPlayer = ({
   View = VideoPlayerView,
-}: VideoPlayerProps): JSX.Element => {
+}: Props): ReactElement => {
   const { room_id, profile_id } = useMemberContext();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
@@ -47,5 +45,3 @@ const VideoPlayer = ({
     </>
   );
 };
-
-export default VideoPlayer;

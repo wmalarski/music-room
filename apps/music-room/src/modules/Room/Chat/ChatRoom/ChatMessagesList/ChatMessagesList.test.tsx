@@ -1,22 +1,23 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { defaultMessage } from '../../../../../services/utils/defaults';
-import ChatMessagesList from './ChatMessagesList';
+import { ChatMessagesList } from './ChatMessagesList';
 
-type ComponentProps = React.ComponentProps<typeof ChatMessagesList>;
+type Props = ComponentProps<typeof ChatMessagesList>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    messages: [
-      { ...defaultMessage, id: 1 },
-      { ...defaultMessage, id: 2 },
-    ],
-    onLoadMore: () => null,
-  };
+const defaultProps: Props = {
+  messages: [
+    { ...defaultMessage, id: 1 },
+    { ...defaultMessage, id: 2 },
+  ],
+  onLoadMore: () => null,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<ChatMessagesList {...defaultProps} {...props} />);
-}
+};
 
 describe('<ChatMessagesList />', () => {
   it('should render', async () => {

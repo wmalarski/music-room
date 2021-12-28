@@ -1,14 +1,12 @@
-import React from 'react';
-import ProfileNavigationView from './ProfileNavigationView/ProfileNavigationView';
+import { ReactElement } from 'react';
+import { ProfileNavigationView } from './ProfileNavigationView/ProfileNavigationView';
 
-export type ProfileNavigationProps = {
-  View?: React.ComponentType;
+type Props = {
+  View?: typeof ProfileNavigationView;
 };
 
-const ProfileNavigation = ({
+export const ProfileNavigation = ({
   View = ProfileNavigationView,
-}: ProfileNavigationProps): JSX.Element => {
+}: Props): ReactElement => {
   return <View />;
 };
-
-export default ProfileNavigation;

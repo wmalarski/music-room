@@ -1,11 +1,10 @@
-import { Input } from "../../../atoms";
+import { Input } from '@music-room/ui';
+import { ReactElement } from 'react';
 
-export type InviteLinkViewProps = {
+type Props = {
   link: string;
 };
 
-const InviteLinkView = ({ link }: InviteLinkViewProps): JSX.Element => (
+export const InviteLinkView = ({ link }: Props): ReactElement => (
   <Input readOnly value={link} />
 );
-
-export default InviteLinkView;

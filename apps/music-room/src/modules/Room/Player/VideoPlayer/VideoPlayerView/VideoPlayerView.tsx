@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import { Controls, Message } from '../../../../../services/data/types';
-import PlayerControls from './PlayerControls/PlayerControls';
+import { PlayerControls } from './PlayerControls/PlayerControls';
 
-export type VideoPlayerViewProps = {
+type Props = {
   profileId: number;
   message: Message;
   controls: Controls;
@@ -11,13 +11,13 @@ export type VideoPlayerViewProps = {
   onChange: (controls: Partial<Controls>) => void;
 };
 
-const VideoPlayerView = ({
+export const VideoPlayerView = ({
   profileId,
   message,
   controls,
   onEnd,
   onChange,
-}: VideoPlayerViewProps): JSX.Element => {
+}: Props): ReactElement => {
   const { muted, pause, volume, speaker_id } = controls;
 
   const ref = useRef<YouTube>(null);
@@ -72,5 +72,3 @@ const VideoPlayerView = ({
     </>
   );
 };
-
-export default VideoPlayerView;

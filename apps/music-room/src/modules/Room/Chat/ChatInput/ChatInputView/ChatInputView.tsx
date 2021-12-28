@@ -1,27 +1,27 @@
+import { Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
-import React from 'react';
+import { ReactElement } from 'react';
 import { Message } from '../../../../../services/data/types';
 import useText from '../../../../../utils/translations/useText';
-import { Button, Input } from '../../../atoms';
 
-export type ChatInputViewData = {
+type Data = {
   url: string;
 };
 
-export type ChatInputViewProps = {
+type Props = {
   isLoading: boolean;
   message?: Message | null;
   error: PostgrestError | null;
   query: string;
-  onSubmit: (data: ChatInputViewData) => void;
+  onSubmit: (data: Data) => void;
   onQueryChange: (query: string) => void;
 };
 
-const ChatInputView = ({
+export const ChatInputView = ({
   query,
   onSubmit,
   onQueryChange,
-}: ChatInputViewProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -40,5 +40,3 @@ const ChatInputView = ({
     </form>
   );
 };
-
-export default ChatInputView;

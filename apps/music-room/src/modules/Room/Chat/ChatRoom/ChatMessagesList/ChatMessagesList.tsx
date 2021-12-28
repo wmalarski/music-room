@@ -1,18 +1,18 @@
-import React from 'react';
+import { Button } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Message } from '../../../../../services/data/types';
 import useText from '../../../../../utils/translations/useText';
-import { Button } from '../../../atoms';
-import ChatMessage from './ChatMessage/ChatMessage';
+import { ChatMessage } from './ChatMessage/ChatMessage';
 
-export type ChatMessagesListProps = {
+type Props = {
   messages?: Message[];
   onLoadMore?: () => void;
 };
 
-const ChatMessagesList = ({
+export const ChatMessagesList = ({
   messages,
   onLoadMore,
-}: ChatMessagesListProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -24,5 +24,3 @@ const ChatMessagesList = ({
     </>
   );
 };
-
-export default ChatMessagesList;

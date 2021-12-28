@@ -2,16 +2,15 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockActionsStorage } from '../../../services/data/actions/actionHandlers';
 import { mockMessagesStorage } from '../../../services/data/messages/messageHandlers';
-import Reactions from './Reactions';
-import { ReactionsViewProps } from './ReactionsView/ReactionsView';
+import { Reactions } from './Reactions';
 
-type ComponentProps = React.ComponentProps<typeof Reactions>;
+type Props = ComponentProps<typeof Reactions>;
 
-const View = ({ action, message, onChange }: ReactionsViewProps) => (
+const View: Props['View'] = ({ action, message, onChange }) => (
   <>
     <p>{action ? 'action' : 'emptyAction'}</p>
     <p>{message ? 'message' : 'emptyMessage'}</p>
@@ -28,8 +27,9 @@ const View = ({ action, message, onChange }: ReactionsViewProps) => (
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = { View };
+const defaultProps: Props = { View };
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <Reactions {...defaultProps} {...props} />

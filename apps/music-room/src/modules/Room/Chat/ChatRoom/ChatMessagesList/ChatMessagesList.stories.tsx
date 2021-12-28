@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultMessage } from '../../../../../services/utils/defaults';
-import ChatMessagesList from './ChatMessagesList';
+import { ChatMessagesList } from './ChatMessagesList';
 
 export default {
-  title: 'Molecules/ChatRoom/ChatMessagesList',
+  title: 'Chat/ChatMessagesList',
   component: ChatMessagesList,
 } as ComponentMeta<typeof ChatMessagesList>;
 

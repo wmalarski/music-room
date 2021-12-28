@@ -2,19 +2,13 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ChatInput from './ChatInput';
-import { ChatInputViewProps } from './ChatInputView/ChatInputView';
+import { ChatInput } from './ChatInput';
 
-type ComponentProps = React.ComponentProps<typeof ChatInput>;
+type Props = ComponentProps<typeof ChatInput>;
 
-const View = ({
-  query,
-  message,
-  onQueryChange,
-  onSubmit,
-}: ChatInputViewProps) => (
+const View: Props['View'] = ({ query, message, onQueryChange, onSubmit }) => (
   <>
     <button onClick={() => onSubmit({ url: 'URL' })}>Submit</button>
     <p>{query}</p>
@@ -27,10 +21,11 @@ const View = ({
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <ChatInput {...defaultProps} {...props} />

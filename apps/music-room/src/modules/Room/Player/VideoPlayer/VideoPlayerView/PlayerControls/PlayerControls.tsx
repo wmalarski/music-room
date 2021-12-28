@@ -1,20 +1,20 @@
-import React from 'react';
+import { Button, Input, Typography } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { UpdateControlsArgs } from '../../../../../../services/data/controls/updateControls';
 import { Controls } from '../../../../../../services/data/types';
 import useText from '../../../../../../utils/translations/useText';
-import { Button, Input, Typography } from '../../../atoms';
 
-export type PlayerControlsProps = {
+type Props = {
   profileId: number;
   controls: Controls;
   onChange: (controls: UpdateControlsArgs) => void;
 };
 
-const PlayerControls = ({
+export const PlayerControls = ({
   profileId,
   controls: { id, muted, pause, volume },
   onChange,
-}: PlayerControlsProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -55,5 +55,3 @@ const PlayerControls = ({
     </div>
   );
 };
-
-export default PlayerControls;

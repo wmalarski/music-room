@@ -1,15 +1,13 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useInsertMessage } from '../../../../services/data/messages/insertMessage';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
-import ChatInputView, {
-  ChatInputViewProps,
-} from './ChatInputView/ChatInputView';
+import { ChatInputView } from './ChatInputView/ChatInputView';
 
-export type ChatInputProps = {
-  View?: React.ComponentType<ChatInputViewProps>;
+type Props = {
+  View?: typeof ChatInputView;
 };
 
-const ChatInput = ({ View = ChatInputView }: ChatInputProps): JSX.Element => {
+export const ChatInput = ({ View = ChatInputView }: Props): ReactElement => {
   const { profile_id, room_id } = useMemberContext();
 
   const { mutate: insertMessage, isLoading, data, error } = useInsertMessage();
@@ -37,5 +35,3 @@ const ChatInput = ({ View = ChatInputView }: ChatInputProps): JSX.Element => {
     />
   );
 };
-
-export default ChatInput;

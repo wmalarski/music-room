@@ -1,12 +1,10 @@
-import React from "react";
-import { Link } from "../../../atoms";
-import paths from "../../../utils/routing/paths";
-import useText from "../../../utils/translations/useText";
+import { Link } from '@music-room/ui';
+import { ReactElement } from 'react';
+import paths from '../../../utils/routing/paths';
+import useText from '../../../utils/translations/useText';
 
-const ProfileNavigationView = (): JSX.Element => {
+export const ProfileNavigationView = (): ReactElement => {
   const text = useText();
 
-  return <Link href={paths.profile}>{text("navigationProfile")}</Link>;
+  return <Link href={paths.profile}>{text('navigationProfile')}</Link>;
 };
-
-export default ProfileNavigationView;

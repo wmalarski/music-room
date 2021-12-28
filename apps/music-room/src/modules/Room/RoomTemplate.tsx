@@ -1,23 +1,19 @@
-import Layout from '../../modules/Layout/Layout';
-import { Reactions } from '../../molecules';
-import Chat from './Chat/Chat';
-import Player from './Player/Player';
+import { ReactElement } from 'react';
+import { Member } from '../../services/data/types';
+import { Layout } from '../Layout/Layout';
+import { Navigation } from '../Navigation/Navigation';
+import { ProfileNavigation } from '../ProfileNavigation/ProfileNavigation';
+import RoomNavigation from '../RoomNavigation/RoomNavigation';
+import SignOut from '../SignOut/SignOut';
+import { Chat } from './Chat/Chat';
+import { Player } from './Player/Player';
+import { Reactions } from './Reactions/Reactions';
 
-export type RoomTemplateProps = {
-  appTitle: string;
-  header: React.ReactNode;
-  left: React.ReactNode;
-  right: React.ReactNode;
-  bottom: React.ReactNode;
+type Props = {
+  member: Member;
 };
 
-const RoomTemplate = ({
-  appTitle,
-  bottom,
-  header,
-  left,
-  right,
-}: RoomTemplateProps): JSX.Element => (
+export const Room = ({ member }: Props): ReactElement => (
   <Layout
     header={
       <Navigation
@@ -37,5 +33,3 @@ const RoomTemplate = ({
     <Reactions />
   </Layout>
 );
-
-export default RoomTemplate;

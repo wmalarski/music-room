@@ -1,13 +1,11 @@
-import React from 'react';
+import { Debug } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Message } from '../../../../../../services/data/types';
-import { Debug } from '../../../atoms';
 
-export type ChatMessageProps = {
+type Props = {
   message: Message;
 };
 
-const ChatMessage = ({ message }: ChatMessageProps): JSX.Element => (
+export const ChatMessage = ({ message }: Props): ReactElement => (
   <Debug value={message} />
 );
-
-export default ChatMessage;
