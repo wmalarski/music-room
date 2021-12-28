@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultUser } from '../../../../services/utils/defaults';
 import SignUpView from './SignUpView';
 
 export default {
-  title: 'Molecules/SignUp/SignUpView',
+  title: 'Auth/SignUpView',
   component: SignUpView,
   argTypes: {
     onSubmit: { action: 'onSubmit' },

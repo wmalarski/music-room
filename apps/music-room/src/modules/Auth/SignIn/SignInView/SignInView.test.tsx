@@ -1,21 +1,22 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { defaultUser } from '../../../../services/utils/defaults';
-import SignInView from './SignInView';
+import { SignInView } from './SignInView';
 
-type ComponentProps = React.ComponentProps<typeof SignInView>;
+type Props = ComponentProps<typeof SignInView>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    error: null,
-    isLoading: false,
-    onSubmit: () => null,
-    user: defaultUser,
-  };
+const defaultProps: Props = {
+  error: null,
+  isLoading: false,
+  onSubmit: () => null,
+  user: defaultUser,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<SignInView {...defaultProps} {...props} />);
-}
+};
 
 describe('<SignInView />', () => {
   it('should render', async () => {

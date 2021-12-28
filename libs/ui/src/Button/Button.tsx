@@ -1,6 +1,6 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-const Button = (
+export const ButtonInner = (
   {
     isLoading,
     ...props
@@ -13,4 +13,4 @@ const Button = (
   <button {...props} disabled={props.disabled || isLoading} ref={ref} />
 );
 
-export default React.forwardRef(Button);
+export const Button = React.forwardRef(ButtonInner);

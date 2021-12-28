@@ -1,10 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultUser } from '../../../../services/utils/defaults';
-import SignInView from './SignInView';
+import { SignInView } from './SignInView';
 
 export default {
-  title: 'Molecules/SignIn/SignInView',
+  title: 'Auth/SignInView',
   component: SignInView,
   argTypes: {
     onSubmit: { action: 'onSubmit' },

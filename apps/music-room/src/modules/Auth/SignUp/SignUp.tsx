@@ -1,12 +1,12 @@
-import React from 'react';
+import { ComponentType, ReactElement } from 'react';
 import { useSignUp } from '../../../services/auth/signUp';
 import SignUpView, { SignUpViewProps } from './SignUpView/SignUpView';
 
-export type SignUpProps = {
-  View?: React.ComponentType<SignUpViewProps>;
+type Props = {
+  View?: ComponentType<SignUpViewProps>;
 };
 
-const SignUp = ({ View = SignUpView }: SignUpProps): JSX.Element => {
+export const SignUp = ({ View = SignUpView }: Props): ReactElement => {
   const { data, mutate: signUp, error, isLoading } = useSignUp();
 
   return (
@@ -23,5 +23,3 @@ const SignUp = ({ View = SignUpView }: SignUpProps): JSX.Element => {
     />
   );
 };
-
-export default SignUp;

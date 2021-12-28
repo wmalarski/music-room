@@ -1,6 +1,6 @@
-import React, { DetailedHTMLProps, SelectHTMLAttributes } from "react";
+import React, { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
 
-const Select = (
+const SelectInner = (
   props: DetailedHTMLProps<
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
@@ -8,4 +8,4 @@ const Select = (
   ref: React.LegacyRef<HTMLSelectElement>
 ): JSX.Element => <select {...props} ref={ref} />;
 
-export default React.forwardRef(Select);
+export const Select = React.forwardRef(SelectInner);

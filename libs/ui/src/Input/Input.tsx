@@ -1,6 +1,6 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-const Input = (
+const InputInner = (
   props: DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -8,4 +8,4 @@ const Input = (
   ref: React.LegacyRef<HTMLInputElement>
 ): JSX.Element => <input {...props} ref={ref} />;
 
-export default React.forwardRef(Input);
+export const Input = React.forwardRef(InputInner);

@@ -1,8 +1,8 @@
+import { Alert, Button, Input, Typography } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import useText from '../../../../utils/translations/useText';
-import { Alert, Button, Input, Typography } from '../../../atoms';
 import { SignInViewData, useSignInViewOptions } from './SignInView.utils';
 
 export type SignInViewProps = {
@@ -12,11 +12,11 @@ export type SignInViewProps = {
   onSubmit: (data: SignInViewData) => void;
 };
 
-const SignInView = ({
+export const SignInView = ({
   isLoading,
   error,
   onSubmit,
-}: SignInViewProps): JSX.Element => {
+}: SignInViewProps): ReactElement => {
   const text = useText();
 
   const {
@@ -51,5 +51,3 @@ const SignInView = ({
     </form>
   );
 };
-
-export default SignInView;

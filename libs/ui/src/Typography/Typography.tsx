@@ -1,6 +1,6 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from "react";
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-const Typography = (
+const TypographyInner = (
   props: DetailedHTMLProps<
     HTMLAttributes<HTMLParagraphElement>,
     HTMLParagraphElement
@@ -8,4 +8,4 @@ const Typography = (
   ref: React.LegacyRef<HTMLParagraphElement>
 ): JSX.Element => <p {...props} ref={ref} />;
 
-export default React.forwardRef(Typography);
+export const Typography = React.forwardRef(TypographyInner);

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Auth } from '../modules/Auth/Auth';
 import { CreateRoom, Rooms } from '../molecules';
 import { UserHeader } from '../organisms';
-import GuestHomeTemplate from '../templates/GuestHomeTemplate/GuestHomeTemplate';
 import UserHomeTemplate from '../templates/UserHomeTemplate/UserHomeTemplate';
 import { useUserContext } from '../utils/auth/UserContext';
 
@@ -15,7 +15,7 @@ const Index = (): JSX.Element => {
       center={<Rooms user={user} />}
     />
   ) : (
-    <GuestHomeTemplate />
+    <Auth />
   );
 };
 

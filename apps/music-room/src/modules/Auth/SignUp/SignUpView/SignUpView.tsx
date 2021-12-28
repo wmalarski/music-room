@@ -1,8 +1,8 @@
+import { Alert, Button, Debug, Input, Typography } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import useText from '../../../../utils/translations/useText';
-import { Alert, Button, Debug, Input, Typography } from '../../../atoms';
 import {
   SignUpViewContext,
   SignUpViewData,
@@ -22,7 +22,7 @@ const SignUpView = ({
   error,
   user,
   onSubmit,
-}: SignUpViewProps): JSX.Element => {
+}: SignUpViewProps): ReactElement => {
   const text = useText();
 
   const options = useSignUpViewOptions();

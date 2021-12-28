@@ -2,14 +2,14 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockUserStorage } from '../../../services/auth/authHandlers';
 import { defaultUser } from '../../../services/utils/defaults';
-import SignIn from './SignIn';
+import { SignIn } from './SignIn';
 import { SignInViewProps } from './SignInView/SignInView';
 
-type ComponentProps = React.ComponentProps<typeof SignIn>;
+type Props = ComponentProps<typeof SignIn>;
 
 const defaultUserEmail = defaultUser.email ?? '';
 
@@ -30,10 +30,11 @@ const View = ({ user, error, onSubmit }: SignInViewProps) => (
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <SignIn {...defaultProps} {...props} />

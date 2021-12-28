@@ -1,12 +1,12 @@
-import React from 'react';
+import { ComponentType, ReactElement } from 'react';
 import { useSignIn } from '../../../services/auth/signIn';
-import SignInView, { SignInViewProps } from './SignInView/SignInView';
+import { SignInView, SignInViewProps } from './SignInView/SignInView';
 
-export type SignInProps = {
-  View?: React.ComponentType<SignInViewProps>;
+type Props = {
+  View?: ComponentType<SignInViewProps>;
 };
 
-const SignIn = ({ View = SignInView }: SignInProps): JSX.Element => {
+export const SignIn = ({ View = SignInView }: Props): ReactElement => {
   const { mutate: signUp, error, isLoading, data: user } = useSignIn();
 
   return (
@@ -23,5 +23,3 @@ const SignIn = ({ View = SignInView }: SignInProps): JSX.Element => {
     />
   );
 };
-
-export default SignIn;
