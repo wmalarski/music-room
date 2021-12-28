@@ -1,7 +1,9 @@
 import { User } from '@supabase/supabase-js';
-import React, { ReactElement } from 'react';
-import Layout from '../Layout/Layout';
-import UserHeader from '../UserHeader/UserHeader';
+import { ReactElement } from 'react';
+import { Layout } from '../Layout/Layout';
+import { Navigation } from '../Navigation/Navigation';
+import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
+import SignOut from '../SignOut/SignOut';
 import { CreateRoom } from './CreateRoom/CreateRoom';
 import { Rooms } from './Rooms/Rooms';
 
@@ -10,7 +12,20 @@ type Props = {
 };
 
 export const Home = ({ user }: Props): ReactElement => (
-  <Layout header={<UserHeader user={user} />}>
+  <Layout
+    header={
+      <Navigation
+        right={
+          user && (
+            <>
+              <ProfileNavigation />
+              <SignOut />
+            </>
+          )
+        }
+      />
+    }
+  >
     <CreateRoom user={user} />
     <Rooms user={user} />
   </Layout>

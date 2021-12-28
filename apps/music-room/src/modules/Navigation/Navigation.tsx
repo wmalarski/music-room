@@ -1,18 +1,14 @@
-import React from 'react';
-import NavigationView, {
-  NavigationViewProps,
-} from './NavigationView/NavigationView';
+import { ReactElement, ReactNode } from 'react';
+import { NavigationView } from './NavigationView/NavigationView';
 
-export type NavigationProps = {
-  right?: React.ReactNode;
-  View?: React.ComponentType<NavigationViewProps>;
+type Props = {
+  right?: ReactNode;
+  View?: typeof NavigationView;
 };
 
-const Navigation = ({
+export const Navigation = ({
   right,
   View = NavigationView,
-}: NavigationProps): JSX.Element => {
+}: Props): ReactElement => {
   return <View right={right} />;
 };
-
-export default Navigation;

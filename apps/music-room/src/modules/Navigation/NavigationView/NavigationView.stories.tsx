@@ -1,9 +1,8 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import NavigationView from "./NavigationView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { NavigationView } from './NavigationView';
 
 export default {
-  title: "Molecules/Navigation/NavigationView",
+  title: 'Navigation/NavigationView',
   component: NavigationView,
 } as ComponentMeta<typeof NavigationView>;
 

@@ -1,8 +1,10 @@
 import { User } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { Profile, Room } from '../../services/data/types';
-import Layout from '../Layout/Layout';
-import UserHeader from '../UserHeader/UserHeader';
+import { Layout } from '../Layout/Layout';
+import { Navigation } from '../Navigation/Navigation';
+import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
+import SignOut from '../SignOut/SignOut';
 import { InviteAccept } from './InviteAccept/InviteAccept';
 
 type Props = {
@@ -12,7 +14,20 @@ type Props = {
 };
 
 export const Invite = ({ profile, user, room }: Props): ReactElement => (
-  <Layout header={<UserHeader user={user} />}>
+  <Layout
+    header={
+      <Navigation
+        right={
+          user && (
+            <>
+              <ProfileNavigation />
+              <SignOut />
+            </>
+          )
+        }
+      />
+    }
+  >
     {profile && <InviteAccept room={room} profile={profile} />}
   </Layout>
 );

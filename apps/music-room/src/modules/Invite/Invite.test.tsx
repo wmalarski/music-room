@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import {
   defaultProfile,
   defaultRoom,
@@ -17,9 +17,9 @@ const defaultProps: Props = {
   profile: defaultProfile,
 };
 
-function renderComponent(props: Partial<Props> = {}) {
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Invite {...defaultProps} {...props} />);
-}
+};
 
 describe('<Invite />', () => {
   it('should render', async () => {

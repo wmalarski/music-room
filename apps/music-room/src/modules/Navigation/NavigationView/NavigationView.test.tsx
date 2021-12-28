@@ -1,20 +1,21 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import NavigationView from "./NavigationView";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { NavigationView } from './NavigationView';
 
-type ComponentProps = React.ComponentProps<typeof NavigationView>;
+type Props = ComponentProps<typeof NavigationView>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    right: <p>Right</p>,
-  };
+const defaultProps: Props = {
+  right: <p>Right</p>,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<NavigationView {...defaultProps} {...props} />);
-}
+};
 
-describe("<NavigationView />", () => {
-  it("should render", async () => {
+describe('<NavigationView />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

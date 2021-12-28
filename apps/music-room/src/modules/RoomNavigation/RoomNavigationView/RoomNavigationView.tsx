@@ -1,7 +1,7 @@
 import React from 'react';
-import paths from '../../../../utils/routing/paths';
-import useText from '../../../../utils/translations/useText';
 import { Link } from '../../../atoms';
+import paths from '../../../utils/routing/paths';
+import useText from '../../../utils/translations/useText';
 
 export type RoomNavigationViewProps = {
   slug: string;

@@ -1,21 +1,19 @@
-import React from "react";
-import { Link } from "../../../atoms";
-import paths from "../../../utils/routing/paths";
-import useText from "../../../utils/translations/useText";
+import { Link } from '@music-room/ui';
+import { ReactNode } from 'react';
+import paths from '../../../utils/routing/paths';
+import useText from '../../../utils/translations/useText';
 
-export type NavigationViewProps = {
-  right?: React.ReactNode;
+type Props = {
+  right?: ReactNode;
 };
 
-const NavigationView = ({ right }: NavigationViewProps): JSX.Element => {
+export const NavigationView = ({ right }: Props): JSX.Element => {
   const text = useText();
 
   return (
     <div>
-      <Link href={paths.home}>{text("navigationHome")}</Link>
+      <Link href={paths.home}>{text('navigationHome')}</Link>
       {right}
     </div>
   );
 };
-
-export default NavigationView;

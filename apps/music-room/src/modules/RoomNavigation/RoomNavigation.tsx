@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMemberContext } from '../../../utils/room/MemberContext';
+import { useMemberContext } from '../../utils/room/MemberContext';
 import RoomNavigationView, {
   RoomNavigationViewProps,
 } from './RoomNavigationView/RoomNavigationView';

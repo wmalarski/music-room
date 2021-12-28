@@ -1,23 +1,23 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Navigation from './Navigation';
-import { NavigationViewProps } from './NavigationView/NavigationView';
+import { Navigation } from './Navigation';
 
-type ComponentProps = React.ComponentProps<typeof Navigation>;
+type Props = ComponentProps<typeof Navigation>;
 
-const View = ({ right }: NavigationViewProps) => (
+const View: Props['View'] = ({ right }) => (
   <>
     <div>{right}</div>
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <Navigation {...defaultProps} {...props} />

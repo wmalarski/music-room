@@ -1,17 +1,17 @@
-import Head from "next/head";
-import Image from "next/image";
-import { PropsWithChildren } from "react";
+import Head from 'next/head';
+import Image from 'next/image';
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
 
-export type LayoutProps = {
+type Props = {
   appTitle?: string;
-  header?: React.ReactNode;
+  header?: ReactNode;
 };
 
-const Layout = ({
+export const Layout = ({
   children,
   header,
-  appTitle = "Create Next App",
-}: PropsWithChildren<LayoutProps>): JSX.Element => (
+  appTitle = 'Create Next App',
+}: PropsWithChildren<Props>): ReactElement => (
   <div>
     <Head>
       <title>{appTitle}</title>
@@ -29,7 +29,7 @@ const Layout = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Powered by{" "}
+        Powered by{' '}
         <span>
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </span>
@@ -37,5 +37,3 @@ const Layout = ({
     </footer>
   </div>
 );
-
-export default Layout;

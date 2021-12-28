@@ -1,24 +1,25 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import Layout from "./Layout";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Layout } from './Layout';
 
-type ComponentProps = React.ComponentProps<typeof Layout>;
+type Props = ComponentProps<typeof Layout>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {};
+const defaultProps: Props = {};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Layout {...defaultProps} {...props} />);
-}
+};
 
-describe("<Layout />", () => {
-  it("should have correct children", async () => {
+describe('<Layout />', () => {
+  it('should have correct children', async () => {
     expect.hasAssertions();
 
     renderComponent({
-      children: "Hello World",
+      children: 'Hello World',
     });
 
-    expect(await screen.findByText("Hello World")).toBeInTheDocument();
+    expect(await screen.findByText('Hello World')).toBeInTheDocument();
   });
 });

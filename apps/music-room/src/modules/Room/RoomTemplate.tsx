@@ -1,5 +1,4 @@
 import Layout from '../../modules/Layout/Layout';
-import RoomHeader from '../../modules/RoomHeader/RoomHeader';
 import { Reactions } from '../../molecules';
 import Chat from './Chat/Chat';
 import Player from './Player/Player';
@@ -19,7 +18,20 @@ const RoomTemplate = ({
   left,
   right,
 }: RoomTemplateProps): JSX.Element => (
-  <Layout header={<RoomHeader />} appTitle={member.room_name}>
+  <Layout
+    header={
+      <Navigation
+        right={
+          <>
+            <RoomNavigation />
+            <ProfileNavigation />
+            <SignOut />
+          </>
+        }
+      />
+    }
+    appTitle={member.room_name}
+  >
     <Player />
     <Chat />
     <Reactions />

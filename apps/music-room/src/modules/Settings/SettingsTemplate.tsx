@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../../modules/Layout/Layout';
-import RoomHeader from '../../modules/RoomHeader/RoomHeader';
 import RoomSettings from './RoomSettings/RoomSettings';
 
 export type SettingsTemplateProps = {
@@ -14,7 +13,20 @@ const SettingsTemplate = ({
   header,
   center,
 }: SettingsTemplateProps): JSX.Element => (
-  <Layout appTitle={member.room_name} header={<RoomHeader />}>
+  <Layout
+    appTitle={member.room_name}
+    header={
+      <Navigation
+        right={
+          <>
+            <RoomNavigation />
+            <ProfileNavigation />
+            <SignOut />
+          </>
+        }
+      />
+    }
+  >
     <RoomSettings />
   </Layout>
 );
