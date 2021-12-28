@@ -1,21 +1,22 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { defaultProfile } from '../../../../services/utils/defaults';
-import ProfileDetailsView from './ProfileDetailsView';
+import { ProfileDetailsView } from './ProfileDetailsView';
 
-type ComponentProps = React.ComponentProps<typeof ProfileDetailsView>;
+type Props = ComponentProps<typeof ProfileDetailsView>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    error: null,
-    isLoading: false,
-    onSubmit: () => null,
-    profile: defaultProfile,
-  };
+const defaultProps: Props = {
+  error: null,
+  isLoading: false,
+  onSubmit: () => null,
+  profile: defaultProfile,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<ProfileDetailsView {...defaultProps} {...props} />);
-}
+};
 
 describe('<ProfileDetailsView />', () => {
   it('should render', async () => {

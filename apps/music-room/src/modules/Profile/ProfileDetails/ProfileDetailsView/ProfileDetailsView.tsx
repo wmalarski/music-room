@@ -1,27 +1,27 @@
+import { Alert, Button, Input, Typography } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { Profile } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
-import { Alert, Button, Input, Typography } from '../../../atoms';
 import {
   ProfileDetailsViewData,
   useProfileDetailsViewOptions,
 } from './ProfileDetailsView.utils';
 
-export type ProfileDetailsViewProps = {
+type Props = {
   isLoading: boolean;
   profile: Profile;
   error: PostgrestError | null;
   onSubmit: (data: ProfileDetailsViewData) => void;
 };
 
-const ProfileDetailsView = ({
+export const ProfileDetailsView = ({
   profile,
   error,
   isLoading,
   onSubmit,
-}: ProfileDetailsViewProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   const {
@@ -49,5 +49,3 @@ const ProfileDetailsView = ({
     </form>
   );
 };
-
-export default ProfileDetailsView;

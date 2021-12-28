@@ -1,19 +1,19 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { Profile } from '../modules/Profile/Profile';
 import { selectProfile } from '../services/data/profiles/selectProfile';
-import { Profile } from '../services/data/types';
+import { Profile as ProfileType } from '../services/data/types';
 import { supabase } from '../services/supabase';
-import ProfileTemplate from '../templates/ProfileTemplate/ProfileTemplate';
 import { useUserContext } from '../utils/auth/UserContext';
 
 export type ProfilePageProps = {
-  profile: Profile;
+  profile: ProfileType;
 };
 
 const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => {
   const { user } = useUserContext();
 
-  return <ProfileTemplate header={} center={} />;
+  return <Profile profile={profile} user={user} />;
 };
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({

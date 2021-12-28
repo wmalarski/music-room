@@ -1,19 +1,17 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useUpdateProfile } from '../../../services/data/profiles/updateProfile';
 import { Profile } from '../../../services/data/types';
-import ProfileDetailsView, {
-  ProfileDetailsViewProps,
-} from './ProfileDetailsView/ProfileDetailsView';
+import { ProfileDetailsView } from './ProfileDetailsView/ProfileDetailsView';
 
-export type ProfileDetailsProps = {
+type Props = {
   profile: Profile;
-  View?: React.ComponentType<ProfileDetailsViewProps>;
+  View?: typeof ProfileDetailsView;
 };
 
-const ProfileDetails = ({
+export const ProfileDetails = ({
   profile,
   View = ProfileDetailsView,
-}: ProfileDetailsProps): JSX.Element => {
+}: Props): ReactElement => {
   const {
     mutate: updateProfile,
     isLoading,
@@ -30,5 +28,3 @@ const ProfileDetails = ({
     />
   );
 };
-
-export default ProfileDetails;

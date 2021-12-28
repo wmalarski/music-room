@@ -2,16 +2,15 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockProfilesStorage } from '../../../services/data/profiles/profileHandlers';
 import { defaultProfile } from '../../../services/utils/defaults';
-import ProfileDetails from './ProfileDetails';
-import { ProfileDetailsViewProps } from './ProfileDetailsView/ProfileDetailsView';
+import { ProfileDetails } from './ProfileDetails';
 
-type ComponentProps = React.ComponentProps<typeof ProfileDetails>;
+type Props = ComponentProps<typeof ProfileDetails>;
 
-const View = ({ profile, onSubmit }: ProfileDetailsViewProps) => (
+const View: Props['View'] = ({ profile, onSubmit }) => (
   <>
     <button onClick={() => onSubmit({ name: 'Username' })}>
       {profile ? 'Update' : ''}
@@ -20,11 +19,12 @@ const View = ({ profile, onSubmit }: ProfileDetailsViewProps) => (
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-    profile: defaultProfile,
-  };
+const defaultProps: Props = {
+  View,
+  profile: defaultProfile,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <ProfileDetails {...defaultProps} {...props} />

@@ -1,15 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultProfile } from '../../../../services/utils/defaults';
-import PlayerControlsView from './ProfileDetailsView';
+import { ProfileDetailsView } from './ProfileDetailsView';
 
 export default {
-  title: 'Molecules/ProfileDetails/PlayerControlsView',
-  component: PlayerControlsView,
-} as ComponentMeta<typeof PlayerControlsView>;
+  title: 'Profile/ProfileDetailsView',
+  component: ProfileDetailsView,
+} as ComponentMeta<typeof ProfileDetailsView>;
 
-const Template: ComponentStory<typeof PlayerControlsView> = (args) => (
-  <PlayerControlsView {...args} />
+const Template: ComponentStory<typeof ProfileDetailsView> = (args) => (
+  <ProfileDetailsView {...args} />
 );
 
 export const Primary = Template.bind({});
