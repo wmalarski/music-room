@@ -3,3 +3,7 @@ package.json
 package-lock.json
 public
 node_modules
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
