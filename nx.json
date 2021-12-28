@@ -33,6 +33,9 @@
     "music-room-e2e": {
       "tags": [],
       "implicitDependencies": ["music-room"]
+    },
+    "ui": {
+      "tags": []
     }
   }
 }

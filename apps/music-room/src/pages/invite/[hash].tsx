@@ -1,13 +1,11 @@
-import { GetServerSideProps } from "next";
-import React from "react";
-import { InviteAccept, SignIn, SignUp } from "../../molecules";
-import { UserHeader } from "../../organisms";
-import { useSelectProfile } from "../../services/data/profiles/selectProfile";
-import { selectRoomByHash } from "../../services/data/rooms/selectRoomByHash";
-import { Room } from "../../services/data/types";
-import GuestHomeTemplate from "../../templates/GuestHomeTemplate/GuestHomeTemplate";
-import UserHomeTemplate from "../../templates/UserHomeTemplate/UserHomeTemplate";
-import { useUserContext } from "../../utils/auth/UserContext";
+import { GetServerSideProps } from 'next';
+import React from 'react';
+import { useSelectProfile } from '../../services/data/profiles/selectProfile';
+import { selectRoomByHash } from '../../services/data/rooms/selectRoomByHash';
+import { Room } from '../../services/data/types';
+import GuestHomeTemplate from '../../templates/GuestHomeTemplate/GuestHomeTemplate';
+import UserHomeTemplate from '../../templates/UserHomeTemplate/UserHomeTemplate';
+import { useUserContext } from '../../utils/auth/UserContext';
 
 export type InvitePageProps = {
   room: Room;
@@ -17,17 +15,14 @@ const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
   const { user } = useUserContext();
 
   const { data: profile } = useSelectProfile(
-    { userId: user?.id ?? "" },
+    { userId: user?.id ?? '' },
     { enabled: !!user }
   );
 
   return user ? (
-    <UserHomeTemplate
-      header={<UserHeader user={user} />}
-      center={profile && <InviteAccept room={room} profile={profile} />}
-    />
+    <UserHomeTemplate header={} center={} />
   ) : (
-    <GuestHomeTemplate left={<SignIn />} right={<SignUp />} />
+    <GuestHomeTemplate />
   );
 };
 
@@ -38,10 +33,10 @@ export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({
   if (!roomHash) return { notFound: true };
 
   const [room] = await selectRoomByHash({
-    queryKey: ["roomByHash", { hash: roomHash }],
+    queryKey: ['roomByHash', { hash: roomHash }],
   });
 
-  console.log("room", room);
+  console.log('room', room);
 
   if (!room) return { notFound: true };
 

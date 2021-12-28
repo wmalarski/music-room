@@ -1,9 +1,9 @@
-import React from "react";
-import { CreateRoom, Rooms, SignIn, SignUp } from "../molecules";
-import { UserHeader } from "../organisms";
-import GuestHomeTemplate from "../templates/GuestHomeTemplate/GuestHomeTemplate";
-import UserHomeTemplate from "../templates/UserHomeTemplate/UserHomeTemplate";
-import { useUserContext } from "../utils/auth/UserContext";
+import React from 'react';
+import { CreateRoom, Rooms } from '../molecules';
+import { UserHeader } from '../organisms';
+import GuestHomeTemplate from '../templates/GuestHomeTemplate/GuestHomeTemplate';
+import UserHomeTemplate from '../templates/UserHomeTemplate/UserHomeTemplate';
+import { useUserContext } from '../utils/auth/UserContext';
 
 const Index = (): JSX.Element => {
   const { user } = useUserContext();
@@ -15,7 +15,7 @@ const Index = (): JSX.Element => {
       center={<Rooms user={user} />}
     />
   ) : (
-    <GuestHomeTemplate left={<SignIn />} right={<SignUp />} />
+    <GuestHomeTemplate />
   );
 };
 

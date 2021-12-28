@@ -1,12 +1,10 @@
-import { GetServerSideProps } from "next";
-import React from "react";
-import { Reactions } from "../../../molecules";
-import { Chat, Player, RoomHeader } from "../../../organisms";
-import { Member } from "../../../services/data/types";
-import { supabase } from "../../../services/supabase";
-import getServerSideMembers from "../../../services/utils/getServerSideMembers";
-import RoomTemplate from "../../../templates/RoomTemplate/RoomTemplate";
-import { MemberContextProvider } from "../../../utils/room/MemberContext";
+import { GetServerSideProps } from 'next';
+import React from 'react';
+import { Member } from '../../../services/data/types';
+import { supabase } from '../../../services/supabase';
+import getServerSideMembers from '../../../services/utils/getServerSideMembers';
+import RoomTemplate from '../../../templates/RoomTemplate/RoomTemplate';
+import { MemberContextProvider } from '../../../utils/room/MemberContext';
 
 export type RoomPageProps = {
   member: Member;
@@ -16,10 +14,10 @@ const RoomPage = ({ member }: RoomPageProps): JSX.Element => (
   <MemberContextProvider member={member}>
     <RoomTemplate
       appTitle={member.room_name}
-      header={<RoomHeader />}
-      left={<Player />}
-      right={<Chat />}
-      bottom={<Reactions />}
+      header={}
+      left={}
+      right={}
+      bottom={}
     />
   </MemberContextProvider>
 );
