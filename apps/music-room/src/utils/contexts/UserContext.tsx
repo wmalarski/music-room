@@ -11,7 +11,7 @@ import {
 
 export type UserContextValue = User | null;
 
-const UserContext = createContext<UserContextValue>(null);
+export const UserContext = createContext<UserContextValue>(null);
 
 export const useUserContext = (): UserContextValue => useContext(UserContext);
 
@@ -44,5 +44,3 @@ export const UserContextProvider = ({ children }: Props): ReactElement => {
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
-
-export default UserContext;

@@ -1,10 +1,15 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
+import { TestWrapper } from '../../tests/TestWrapper';
 import { Auth } from './Auth';
 
 const renderComponent = () => {
-  return render(<Auth />);
+  return render(
+    <TestWrapper>
+      <Auth />
+    </TestWrapper>
+  );
 };
 
 describe('<Auth />', () => {

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { TestWrapper } from '../../../tests/TestWrapper';
 import { Rooms } from './Rooms';
 
 type Props = ComponentProps<typeof Rooms>;
@@ -23,9 +23,9 @@ const defaultProps: Props = {
 
 const renderComponent = (props: Partial<Props> = {}) => {
   return render(
-    <QueryClientProvider client={new QueryClient()}>
+    <TestWrapper>
       <Rooms {...defaultProps} {...props} />
-    </QueryClientProvider>
+    </TestWrapper>
   );
 };
 

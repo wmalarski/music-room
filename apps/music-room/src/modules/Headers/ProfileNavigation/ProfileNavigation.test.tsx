@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { TestWrapper } from '../../../tests/TestWrapper';
 import { ProfileNavigation } from './ProfileNavigation';
 
 const renderComponent = () => {
   return render(
-    <QueryClientProvider client={new QueryClient()}>
+    <TestWrapper>
       <ProfileNavigation />
-    </QueryClientProvider>
+    </TestWrapper>
   );
 };
 

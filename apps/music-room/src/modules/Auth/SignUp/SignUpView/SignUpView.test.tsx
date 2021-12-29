@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
+import { TestWrapper } from '../../../../tests/TestWrapper';
 import SignUpView from './SignUpView';
 
 type Props = ComponentProps<typeof SignUpView>;
@@ -15,7 +16,11 @@ const defaultProps: Props = {
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<SignUpView {...defaultProps} {...props} />);
+  return render(
+    <TestWrapper>
+      <SignUpView {...defaultProps} {...props} />
+    </TestWrapper>
+  );
 };
 
 describe('<SignUpView />', () => {

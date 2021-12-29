@@ -9,7 +9,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { TestWrapper } from '../../../tests/TestWrapper';
 import { DeleteRoom } from './DeleteRoom';
 
 type Props = ComponentProps<typeof DeleteRoom>;
@@ -23,9 +23,9 @@ const renderComponent = (props: Partial<Props> = {}) => {
     View,
   };
   return render(
-    <QueryClientProvider client={new QueryClient()}>
+    <TestWrapper>
       <DeleteRoom {...defaultProps} {...props} />
-    </QueryClientProvider>
+    </TestWrapper>
   );
 };
 

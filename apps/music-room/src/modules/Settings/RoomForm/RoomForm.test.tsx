@@ -9,7 +9,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { TestWrapper } from '../../../tests/TestWrapper';
 import { RoomForm } from './RoomForm';
 
 type Props = ComponentProps<typeof RoomForm>;
@@ -25,9 +25,9 @@ const defaultProps: Props = { View };
 
 const renderComponent = (props: Partial<Props> = {}) => {
   return render(
-    <QueryClientProvider client={new QueryClient()}>
+    <TestWrapper>
       <RoomForm {...defaultProps} {...props} />
-    </QueryClientProvider>
+    </TestWrapper>
   );
 };
 
