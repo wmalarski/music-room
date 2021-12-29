@@ -2,19 +2,20 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { RoomNavigationView } from './RoomNavigationView';
+import { defaultMember } from '../../services/utils/defaults';
+import { Settings } from './Settings';
 
-type Props = ComponentProps<typeof RoomNavigationView>;
+type Props = ComponentProps<typeof Settings>;
 
 const defaultProps: Props = {
-  slug: 'slug123',
+  member: defaultMember,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<RoomNavigationView {...defaultProps} {...props} />);
+  return render(<Settings {...defaultProps} {...props} />);
 };
 
-describe('<RoomNavigationView />', () => {
+describe('<Settings />', () => {
   it('should render', async () => {
     expect.hasAssertions();
 

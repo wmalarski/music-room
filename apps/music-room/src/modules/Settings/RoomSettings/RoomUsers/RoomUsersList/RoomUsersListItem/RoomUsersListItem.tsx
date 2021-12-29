@@ -1,20 +1,20 @@
-import React from 'react';
+import { Button, Debug, Option, Select } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Member, RoomRole } from '../../../../../../services/data/types';
 import RoleGuard from '../../../../../../utils/room/RoleGuard';
 import useText from '../../../../../../utils/translations/useText';
-import { Button, Debug, Option, Select } from '../../../atoms';
 
-export type RoomUsersListItemProps = {
+type Props = {
   member: Member;
   onRoleChange: (role: RoomRole) => void;
   onRemoveClick: () => void;
 };
 
-const RoomUsersListItem = ({
+export const RoomUsersListItem = ({
   member,
   onRemoveClick,
   onRoleChange,
-}: RoomUsersListItemProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -36,5 +36,3 @@ const RoomUsersListItem = ({
     </>
   );
 };
-
-export default RoomUsersListItem;

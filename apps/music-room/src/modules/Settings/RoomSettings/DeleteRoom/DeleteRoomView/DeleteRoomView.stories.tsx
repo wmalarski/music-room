@@ -1,12 +1,11 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import DeleteRoomView from "./DeleteRoomView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { DeleteRoomView } from './DeleteRoomView';
 
 export default {
-  title: "Molecules/DeleteRoom/DeleteRoomView",
+  title: 'Settings/DeleteRoomView',
   component: DeleteRoomView,
   argTypes: {
-    onSubmit: { action: "onSubmit" },
+    onSubmit: { action: 'onSubmit' },
   },
 } as ComponentMeta<typeof DeleteRoomView>;
 

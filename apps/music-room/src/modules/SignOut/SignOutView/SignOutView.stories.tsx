@@ -1,12 +1,11 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import SignOutView from "./SignOutView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { SignOutView } from './SignOutView';
 
 export default {
-  title: "Molecules/SignOut/SignOutView",
+  title: 'SignOut/SignOutView',
   component: SignOutView,
   argTypes: {
-    onSubmit: { action: "onSubmit" },
+    onSubmit: { action: 'onSubmit' },
   },
 } as ComponentMeta<typeof SignOutView>;
 

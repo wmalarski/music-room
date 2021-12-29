@@ -2,21 +2,21 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import SignOut from './SignOut';
-import { SignOutViewProps } from './SignOutView/SignOutView';
+import { SignOut } from './SignOut';
 
-type ComponentProps = React.ComponentProps<typeof SignOut>;
+type Props = ComponentProps<typeof SignOut>;
 
-const View = ({ onSignOutClicked }: SignOutViewProps) => (
+const View = ({ onSignOutClicked }) => (
   <button onClick={onSignOutClicked}>Click</button>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <SignOut {...defaultProps} {...props} />

@@ -1,19 +1,15 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useDeleteRoom } from '../../../../services/data/rooms/deleteRoom';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
 import paths from '../../../../utils/routing/paths';
-import DeleteRoomView, {
-  DeleteRoomViewProps,
-} from './DeleteRoomView/DeleteRoomView';
+import { DeleteRoomView } from './DeleteRoomView/DeleteRoomView';
 
-export type DeleteRoomProps = {
-  View?: React.ComponentType<DeleteRoomViewProps>;
+type Props = {
+  View?: typeof DeleteRoomView;
 };
 
-const DeleteRoom = ({
-  View = DeleteRoomView,
-}: DeleteRoomProps): JSX.Element => {
+export const DeleteRoom = ({ View = DeleteRoomView }: Props): ReactElement => {
   const router = useRouter();
 
   const { room_id, room_hash } = useMemberContext();
@@ -33,5 +29,3 @@ const DeleteRoom = ({
     />
   );
 };
-
-export default DeleteRoom;

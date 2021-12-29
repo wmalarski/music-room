@@ -4,7 +4,7 @@ import { Profile, Room } from '../../services/data/types';
 import { Layout } from '../Layout/Layout';
 import { Navigation } from '../Navigation/Navigation';
 import { ProfileNavigation } from '../ProfileNavigation/ProfileNavigation';
-import SignOut from '../SignOut/SignOut';
+import { SignOut } from '../SignOut/SignOut';
 import { InviteAccept } from './InviteAccept/InviteAccept';
 
 type Props = {

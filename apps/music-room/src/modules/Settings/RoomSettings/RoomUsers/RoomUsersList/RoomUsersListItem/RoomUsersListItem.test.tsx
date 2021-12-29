@@ -1,20 +1,21 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { defaultMember } from '../../../../../../services/utils/defaults';
-import RoomUsersListItem from './RoomUsersListItem';
+import { RoomUsersListItem } from './RoomUsersListItem';
 
-type ComponentProps = React.ComponentProps<typeof RoomUsersListItem>;
+type Props = ComponentProps<typeof RoomUsersListItem>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    member: defaultMember,
-    onRemoveClick: () => null,
-    onRoleChange: () => null,
-  };
+const defaultProps: Props = {
+  member: defaultMember,
+  onRemoveClick: () => null,
+  onRoleChange: () => null,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<RoomUsersListItem {...defaultProps} {...props} />);
-}
+};
 
 describe('<RoomUsersListItem />', () => {
   it('should render', async () => {

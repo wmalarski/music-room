@@ -1,19 +1,15 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
-import RoomDetailsView, {
-  RoomDetailsViewProps,
-} from './RoomDetailsView/RoomDetailsView';
+import { RoomDetailsView } from './RoomDetailsView/RoomDetailsView';
 
-export type RoomDetailsProps = {
-  View?: React.ComponentType<RoomDetailsViewProps>;
+type Props = {
+  View?: typeof RoomDetailsView;
 };
 
-const RoomDetails = ({
+export const RoomDetails = ({
   View = RoomDetailsView,
-}: RoomDetailsProps): JSX.Element | null => {
+}: Props): ReactElement | null => {
   const { room_name } = useMemberContext();
 
   return <View roomName={room_name} />;
 };
-
-export default RoomDetails;

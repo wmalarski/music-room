@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
 
 const SelectInner = (
   props: DetailedHTMLProps<

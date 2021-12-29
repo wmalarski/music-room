@@ -1,19 +1,15 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useMemberContext } from '../../utils/room/MemberContext';
-import RoomNavigationView, {
-  RoomNavigationViewProps,
-} from './RoomNavigationView/RoomNavigationView';
+import { RoomNavigationView } from './RoomNavigationView/RoomNavigationView';
 
-export type RoomNavigationProps = {
-  View?: React.ComponentType<RoomNavigationViewProps>;
+type Props = {
+  View?: typeof RoomNavigationView;
 };
 
-const RoomNavigation = ({
+export const RoomNavigation = ({
   View = RoomNavigationView,
-}: RoomNavigationProps): JSX.Element => {
+}: Props): ReactElement => {
   const { room_slug } = useMemberContext();
 
   return <View slug={room_slug} />;
 };
-
-export default RoomNavigation;

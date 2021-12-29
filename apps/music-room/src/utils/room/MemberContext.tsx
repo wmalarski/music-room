@@ -1,17 +1,17 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import { Member } from "../../services/data/types";
+import { createContext, ReactNode, useContext } from 'react';
+import { Member } from '../../services/data/types';
 
 const MemberContext = createContext<Member>({
   id: 0,
   room_author_id: 0,
-  room_hash: "",
-  profile_name: "",
+  room_hash: '',
+  profile_name: '',
   profile_id: 0,
-  role: "guest",
+  role: 'guest',
   room_id: 0,
-  room_name: "",
-  room_slug: "",
-  user_id: "",
+  room_name: '',
+  room_slug: '',
+  user_id: '',
   room_avatar: null,
   profile_avatar: null,
 });

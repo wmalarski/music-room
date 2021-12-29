@@ -1,15 +1,15 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useUpdateRoom } from '../../../../services/data/rooms/updateRoom';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
-import RoomFormView, { RoomFormViewProps } from './RoomFormView/RoomFormView';
+import { RoomFormView } from './RoomFormView/RoomFormView';
 
-export type RoomDetailsProps = {
-  View?: React.ComponentType<RoomFormViewProps>;
+type Props = {
+  View?: typeof RoomFormView;
 };
 
-const RoomDetails = ({
+export const RoomForm = ({
   View = RoomFormView,
-}: RoomDetailsProps): JSX.Element | null => {
+}: Props): ReactElement | null => {
   const { room_id, room_name } = useMemberContext();
 
   const { mutate: updateRoom, data, error, isLoading } = useUpdateRoom();
@@ -28,5 +28,3 @@ const RoomDetails = ({
     />
   );
 };
-
-export default RoomDetails;

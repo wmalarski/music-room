@@ -1,5 +1,4 @@
 import { User } from '@supabase/supabase-js';
-import React from 'react';
 import { useSelectMembers } from '../../../services/data/members/selectMembers';
 import { Member } from '../../../services/data/types';
 import { RoomsList } from './RoomsList/RoomsList';

@@ -1,13 +1,11 @@
-import React from 'react';
-import {
-  DeleteRoom,
-  RoomDetails,
-  RoomForm,
-  RoomUsers,
-} from '../../../molecules';
+import { ReactElement } from 'react';
 import useRoleGuard from '../../../utils/room/useRoleGuard';
+import { DeleteRoom } from './DeleteRoom/DeleteRoom';
+import { RoomDetails } from './RoomDetails/RoomDetails';
+import { RoomForm } from './RoomForm/RoomForm';
+import { RoomUsers } from './RoomUsers/RoomUsers';
 
-const RoomSettings = (): JSX.Element => (
+export const RoomSettings = (): ReactElement => (
   <>
     {useRoleGuard({
       owner: (
@@ -22,5 +20,3 @@ const RoomSettings = (): JSX.Element => (
     <RoomUsers />
   </>
 );
-
-export default RoomSettings;

@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
 import { defaultMember } from '../../../../services/utils/defaults';
 import { RoomsList } from './RoomsList';
 

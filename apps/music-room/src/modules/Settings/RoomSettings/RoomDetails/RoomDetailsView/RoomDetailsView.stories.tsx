@@ -1,9 +1,8 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import RoomDetailsView from "./RoomDetailsView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { RoomDetailsView } from './RoomDetailsView';
 
 export default {
-  title: "Molecules/RoomDetails/RoomDetailsView",
+  title: 'Settings/RoomDetailsView',
   component: RoomDetailsView,
 } as ComponentMeta<typeof RoomDetailsView>;
 
@@ -13,5 +12,5 @@ const Template: ComponentStory<typeof RoomDetailsView> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  roomName: "roomName",
+  roomName: 'roomName',
 };

@@ -1,14 +1,10 @@
-import React from "react";
-import { Typography } from "../../../atoms";
+import { Typography } from '@music-room/ui';
+import { ReactElement } from 'react';
 
-export type RoomDetailsViewProps = {
+type Props = {
   roomName: string;
 };
 
-const RoomDetailsView = ({
-  roomName,
-}: RoomDetailsViewProps): JSX.Element | null => {
+export const RoomDetailsView = ({ roomName }: Props): ReactElement | null => {
   return <Typography>{roomName}</Typography>;
 };
-
-export default RoomDetailsView;

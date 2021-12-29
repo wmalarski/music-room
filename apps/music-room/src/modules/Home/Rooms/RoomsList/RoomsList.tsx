@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { Member } from '../../../../services/data/types';
 import { RoomsListItem } from './RoomsListItem/RoomsListItem';
 

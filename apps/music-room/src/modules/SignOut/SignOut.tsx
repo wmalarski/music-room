@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSignOut } from '../../services/auth/signOut';
-import SignOutView, { SignOutViewProps } from './SignOutView/SignOutView';
+import { SignOutView } from './SignOutView/SignOutView';
 
-export type SignOutProps = {
-  View?: React.ComponentType<SignOutViewProps>;
+type Props = {
+  View?: typeof SignOutView;
 };
 
-const SignOut = ({ View = SignOutView }: SignOutProps): JSX.Element => {
+export const SignOut = ({ View = SignOutView }: Props): ReactElement => {
   const router = useRouter();
 
   const { mutate: signOut } = useSignOut({
@@ -16,5 +16,3 @@ const SignOut = ({ View = SignOutView }: SignOutProps): JSX.Element => {
 
   return <View onSignOutClicked={signOut} />;
 };
-
-export default SignOut;

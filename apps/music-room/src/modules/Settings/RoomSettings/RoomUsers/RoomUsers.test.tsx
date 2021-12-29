@@ -2,21 +2,15 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockMembersStorage } from '../../../../services/data/members/membersHandlers';
 import { defaultMember } from '../../../../services/utils/defaults';
-import RoomUsers from './RoomUsers';
-import { RoomUsersListProps } from './RoomUsersList/RoomUsersList';
+import { RoomUsers } from './RoomUsers';
 
-type ComponentProps = React.ComponentProps<typeof RoomUsers>;
+type Props = ComponentProps<typeof RoomUsers>;
 
-const View = ({
-  members,
-  onLoadMore,
-  onRoleChange,
-  onRemoveClick,
-}: RoomUsersListProps) => (
+const View = ({ members, onLoadMore, onRoleChange, onRemoveClick }) => (
   <>
     {members?.map((member) => (
       <div key={member.id}>
@@ -34,10 +28,11 @@ const View = ({
   </>
 );
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <QueryClientProvider client={new QueryClient()}>
       <RoomUsers {...defaultProps} {...props} />

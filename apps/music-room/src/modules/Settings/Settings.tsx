@@ -5,16 +5,15 @@ import { Navigation } from '../Navigation/Navigation';
 import { ProfileNavigation } from '../ProfileNavigation/ProfileNavigation';
 import { RoomNavigation } from '../RoomNavigation/RoomNavigation';
 import { SignOut } from '../SignOut/SignOut';
-import { Chat } from './Chat/Chat';
-import { Player } from './Player/Player';
-import { Reactions } from './Reactions/Reactions';
+import { RoomSettings } from './RoomSettings/RoomSettings';
 
 type Props = {
   member: Member;
 };
 
-export const Room = ({ member }: Props): ReactElement => (
+export const Settings = ({ member }: Props): ReactElement => (
   <Layout
+    appTitle={member.room_name}
     header={
       <Navigation
         right={
@@ -26,10 +25,7 @@ export const Room = ({ member }: Props): ReactElement => (
         }
       />
     }
-    appTitle={member.room_name}
   >
-    <Player />
-    <Chat />
-    <Reactions />
+    <RoomSettings />
   </Layout>
 );

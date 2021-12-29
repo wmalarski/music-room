@@ -1,9 +1,8 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import RoomFormView from "./RoomFormView";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { RoomFormView } from './RoomFormView';
 
 export default {
-  title: "Molecules/RoomForm/RoomFormView",
+  title: 'Settings/RoomFormView',
   component: RoomFormView,
 } as ComponentMeta<typeof RoomFormView>;
 
@@ -16,5 +15,5 @@ Primary.args = {
   error: null,
   isLoading: false,
   onSubmit: () => null,
-  roomName: "roomName",
+  roomName: 'roomName',
 };

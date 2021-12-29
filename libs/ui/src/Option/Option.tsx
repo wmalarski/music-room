@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, OptionHTMLAttributes } from 'react';
+import { DetailedHTMLProps, OptionHTMLAttributes } from 'react';
 
 const OptionInner = (
   props: DetailedHTMLProps<

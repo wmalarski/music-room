@@ -1,21 +1,21 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { defaultMember } from '../../services/utils/defaults';
 import { MemberContextProvider } from '../../utils/room/MemberContext';
-import RoomNavigation from './RoomNavigation';
-import { RoomNavigationViewProps } from './RoomNavigationView/RoomNavigationView';
+import { RoomNavigation } from './RoomNavigation';
 
-type ComponentProps = React.ComponentProps<typeof RoomNavigation>;
+type Props = ComponentProps<typeof RoomNavigation>;
 
-const View = ({ slug }: RoomNavigationViewProps) => <p>{slug}</p>;
+const View: Props['View'] = ({ slug }) => <p>{slug}</p>;
 
-const renderComponent = (props: Partial<ComponentProps> = {}) => {
-  const defaultProps: ComponentProps = {
-    View,
-  };
+const defaultProps: Props = {
+  View,
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(
     <MemberContextProvider member={defaultMember}>
       <QueryClientProvider client={new QueryClient()}>

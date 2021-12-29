@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
 import { useSelectProfile } from '../../services/data/profiles/selectProfile';

@@ -1,15 +1,13 @@
-import React from "react";
-import { Button } from "../../../atoms";
-import useText from "../../../utils/translations/useText";
+import { Button } from '@music-room/ui';
+import { ReactElement } from 'react';
+import useText from '../../../utils/translations/useText';
 
-export type SignOutViewProps = {
+type Props = {
   onSignOutClicked: () => void;
 };
 
-const SignOutView = ({ onSignOutClicked }: SignOutViewProps): JSX.Element => {
+export const SignOutView = ({ onSignOutClicked }: Props): ReactElement => {
   const text = useText();
 
-  return <Button onClick={onSignOutClicked}>{text("signOutButton")}</Button>;
+  return <Button onClick={onSignOutClicked}>{text('signOutButton')}</Button>;
 };
-
-export default SignOutView;

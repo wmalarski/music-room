@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import { Settings } from '../../../modules/Settings/Settings';
 import { Member } from '../../../services/data/types';
 import { supabase } from '../../../services/supabase';
 import getServerSideMembers from '../../../services/utils/getServerSideMembers';
-import SettingsTemplate from '../../../templates/SettingsTemplate/SettingsTemplate';
 import { MemberContextProvider } from '../../../utils/room/MemberContext';
 
 export type RoomSettingsProps = {
@@ -12,7 +11,7 @@ export type RoomSettingsProps = {
 
 const RoomSettingsPage = ({ member }: RoomSettingsProps): JSX.Element => (
   <MemberContextProvider member={member}>
-    <SettingsTemplate appTitle={} header={} center={} />
+    <Settings member={member} />
   </MemberContextProvider>
 );
 

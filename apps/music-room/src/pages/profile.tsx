@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { Profile } from '../modules/Profile/Profile';
 import { selectProfile } from '../services/data/profiles/selectProfile';
 import { Profile as ProfileType } from '../services/data/types';

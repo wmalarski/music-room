@@ -1,22 +1,22 @@
-import React from 'react';
+import { Button } from '@music-room/ui';
+import { ReactElement } from 'react';
 import { Member, RoomRole } from '../../../../../services/data/types';
 import useText from '../../../../../utils/translations/useText';
-import { Button } from '../../../atoms';
-import RoomUsersListItem from './RoomUsersListItem/RoomUsersListItem';
+import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
 
-export type RoomUsersListProps = {
+type Props = {
   members?: Member[];
   onLoadMore: () => void;
   onRoleChange: (profile: Member, role: RoomRole) => void;
   onRemoveClick: (profile: Member) => void;
 };
 
-const RoomUsersList = ({
+export const RoomUsersList = ({
   members,
   onLoadMore,
   onRoleChange,
   onRemoveClick,
-}: RoomUsersListProps): JSX.Element => {
+}: Props): ReactElement => {
   const text = useText();
 
   return (
@@ -33,5 +33,3 @@ const RoomUsersList = ({
     </>
   );
 };
-
-export default RoomUsersList;

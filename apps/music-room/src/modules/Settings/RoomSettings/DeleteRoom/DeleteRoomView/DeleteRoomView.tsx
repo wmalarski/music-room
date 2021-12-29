@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { Button } from '@music-room/ui';
+import { ReactElement, useState } from 'react';
 import useText from '../../../../../utils/translations/useText';
-import { Button } from '../../../atoms';
 
-export type DeleteRoomViewProps = {
+type Props = {
   isLoading: boolean;
   onClicked: () => void;
 };
 
-const DeleteRoomView = ({ onClicked }: DeleteRoomViewProps): JSX.Element => {
+export const DeleteRoomView = ({ onClicked }: Props): ReactElement => {
   const text = useText();
 
   const [isClicked, setIsClicked] = useState(false);
@@ -21,5 +21,3 @@ const DeleteRoomView = ({ onClicked }: DeleteRoomViewProps): JSX.Element => {
     </>
   );
 };
-
-export default DeleteRoomView;
