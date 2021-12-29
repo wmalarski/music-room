@@ -1,6 +1,6 @@
+import { Room } from '@music-room/data-access';
 import { Button, Typography } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { Room } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 
 type Props = {

@@ -1,8 +1,5 @@
+import { defaultAction, defaultMessage } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import {
-  defaultAction,
-  defaultMessage,
-} from '../../../../services/utils/defaults';
 import { ReactionsView } from './ReactionsView';
 
 export default {

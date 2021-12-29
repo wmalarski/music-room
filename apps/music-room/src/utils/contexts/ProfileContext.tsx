@@ -1,5 +1,5 @@
+import { Profile } from '@music-room/data-access';
 import { createContext, ReactElement, ReactNode, useContext } from 'react';
-import { Profile } from '../../services/data/types';
 
 const ProfileContext = createContext<Profile | null>(null);
 

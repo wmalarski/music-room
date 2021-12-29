@@ -1,5 +1,5 @@
+import { defaultRoom } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultRoom } from '../../../../services/utils/defaults';
 import { InviteAcceptView } from './InviteAcceptView';
 
 export default {

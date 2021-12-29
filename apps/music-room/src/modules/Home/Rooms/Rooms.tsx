@@ -1,6 +1,5 @@
+import { Member, useSelectMembers } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectMembers } from '../../../services/data/members/selectMembers';
-import { Member } from '../../../services/data/types';
 import { useUser } from '../../../utils/auth/UserContext';
 import { RoomsList } from './RoomsList/RoomsList';
 

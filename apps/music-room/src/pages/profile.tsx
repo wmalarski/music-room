@@ -1,9 +1,11 @@
+import {
+  Profile as ProfileType,
+  selectProfile,
+  supabase,
+} from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Profile } from '../modules/Profile/Profile';
-import { selectProfile } from '../services/data/profiles/selectProfile';
-import { Profile as ProfileType } from '../services/data/types';
-import { supabase } from '../services/supabase';
 import { ProfileContextProvider } from '../utils/contexts/ProfileContext';
 
 type Props = {

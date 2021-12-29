@@ -1,8 +1,8 @@
+import { defaultProfile, defaultUser } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { defaultProfile, defaultUser } from '../../services/utils/defaults';
 import { Profile } from './Profile';
 
 type Props = ComponentProps<typeof Profile>;

@@ -1,5 +1,5 @@
+import { defaultUser } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultUser } from '../../services/utils/defaults';
 import { Home } from './Home';
 
 export default {

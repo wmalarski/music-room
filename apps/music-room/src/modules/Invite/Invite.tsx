@@ -1,6 +1,5 @@
+import { Room, useSelectProfile } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectProfile } from '../../services/data/profiles/selectProfile';
-import { Room } from '../../services/data/types';
 import { useUser } from '../../utils/auth/UserContext';
 import { ProfileHeader } from '../Headers/ProfileHeader/ProfileHeader';
 import { Layout } from '../Layout/Layout';

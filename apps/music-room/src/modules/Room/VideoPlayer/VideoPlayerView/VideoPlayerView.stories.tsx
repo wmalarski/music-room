@@ -1,9 +1,6 @@
+import { defaultControls, defaultMessage } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
-import {
-  defaultControls,
-  defaultMessage,
-} from '../../../../services/utils/defaults';
 import { VideoPlayerView } from './VideoPlayerView';
 
 export default {

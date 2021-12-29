@@ -1,7 +1,9 @@
+import {
+  useSelectAction,
+  useSelectCurrentMessage,
+  useUpsertAction,
+} from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectAction } from '../../../services/data/actions/selectAction';
-import { useUpsertAction } from '../../../services/data/actions/upsertAction';
-import { useSelectCurrentMessage } from '../../../services/data/messages/selectCurrentMessage';
 import { useRole } from '../../../utils/contexts/RoleContext';
 import { ReactionsView } from './ReactionsView/ReactionsView';
 

@@ -1,5 +1,5 @@
+import { Member } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { Member } from '../../services/data/types';
 import { useRoleGuard } from '../../utils/contexts/RoleContext';
 import { RoomHeader } from '../Headers/RoomHeader/RoomHeader';
 import { Layout } from '../Layout/Layout';

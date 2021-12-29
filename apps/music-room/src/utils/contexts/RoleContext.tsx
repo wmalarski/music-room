@@ -1,3 +1,4 @@
+import { Role, RoomRole } from '@music-room/data-access';
 import {
   createContext,
   PropsWithChildren,
@@ -5,7 +6,6 @@ import {
   ReactNode,
   useContext,
 } from 'react';
-import { Role, RoomRole } from '../../services/data/types';
 
 const RoleContext = createContext<Role | null>(null);
 

@@ -1,8 +1,8 @@
+import { defaultUser } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { defaultUser } from '../../../../services/utils/defaults';
 import SignUpView from './SignUpView';
 
 type Props = ComponentProps<typeof SignUpView>;

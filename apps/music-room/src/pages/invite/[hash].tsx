@@ -1,9 +1,8 @@
+import { Room, selectRoomByHash } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
-import { selectRoomByHash } from '../../services/data/rooms/selectRoomByHash';
-import { Room } from '../../services/data/types';
 import { useUserContext } from '../../utils/auth/UserContext';
 import { RoomContextProvider } from '../../utils/contexts/RoomContext';
 

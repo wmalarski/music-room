@@ -1,11 +1,8 @@
+import { defaultControls, defaultMessage } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import {
-  defaultControls,
-  defaultMessage,
-} from '../../../../services/utils/defaults';
 import { VideoPlayerView } from './VideoPlayerView';
 
 type Props = ComponentProps<typeof VideoPlayerView>;

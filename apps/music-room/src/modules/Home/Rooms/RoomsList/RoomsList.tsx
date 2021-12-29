@@ -1,5 +1,5 @@
+import { Member } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { Member } from '../../../../services/data/types';
 import { RoomsListItem } from './RoomsListItem/RoomsListItem';
 
 type Props = {

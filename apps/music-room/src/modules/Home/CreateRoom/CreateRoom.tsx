@@ -1,7 +1,6 @@
+import { useInsertRoom, useSelectProfile } from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import { useSelectProfile } from '../../../services/data/profiles/selectProfile';
-import { useInsertRoom } from '../../../services/data/rooms/insertRoom';
 import { useUser } from '../../../utils/auth/UserContext';
 import paths from '../../../utils/routing/paths';
 import { CreateRoomView } from './CreateRoomView/CreateRoomView';

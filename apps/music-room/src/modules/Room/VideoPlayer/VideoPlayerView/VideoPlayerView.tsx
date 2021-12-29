@@ -1,6 +1,6 @@
+import { Controls, Message } from '@music-room/data-access';
 import { ReactElement, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
-import { Controls, Message } from '../../../../services/data/types';
 import { PlayerControls } from './PlayerControls/PlayerControls';
 
 type Props = {

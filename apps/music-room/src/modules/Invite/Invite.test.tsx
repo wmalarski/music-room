@@ -1,12 +1,12 @@
-import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
-import { ComponentProps } from 'react';
 import {
   defaultProfile,
   defaultRoom,
   defaultUser,
-} from '../../services/utils/defaults';
+} from '@music-room/data-access';
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
 import { Invite } from './Invite';
 
 type Props = ComponentProps<typeof Invite>;

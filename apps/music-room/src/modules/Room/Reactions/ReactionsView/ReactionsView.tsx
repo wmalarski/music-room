@@ -1,6 +1,6 @@
+import { Action, Message } from '@music-room/data-access';
 import { Button, Debug } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { Action, Message } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 
 type Data = {

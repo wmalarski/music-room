@@ -1,7 +1,6 @@
+import { Controls, UpdateControlsArgs } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { UpdateControlsArgs } from '../../../../../services/data/controls/updateControls';
-import { Controls } from '../../../../../services/data/types';
 import useText from '../../../../../utils/translations/useText';
 
 type Props = {

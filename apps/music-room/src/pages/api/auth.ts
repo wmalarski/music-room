@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { supabase } from "../../services/supabase";
+import { supabase } from '@music-room/data-access';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   supabase.auth.api.setAuthCookie(req, res);

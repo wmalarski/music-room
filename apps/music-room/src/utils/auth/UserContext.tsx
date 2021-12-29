@@ -1,3 +1,4 @@
+import { supabase } from '@music-room/data-access';
 import { User } from '@supabase/supabase-js';
 import {
   createContext,
@@ -7,7 +8,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { supabase } from '../../services/supabase';
 
 export type UserContextValue = User | null;
 

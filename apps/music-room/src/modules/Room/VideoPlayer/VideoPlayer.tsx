@@ -1,9 +1,11 @@
+import {
+  useSelectControls,
+  useSelectCurrentMessage,
+  useSubscribeToControls,
+  useUpdateControls,
+  useUpdateMessage,
+} from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectControls } from '../../../services/data/controls/selectControls';
-import { useSubscribeToControls } from '../../../services/data/controls/subscribeToControls';
-import { useUpdateControls } from '../../../services/data/controls/updateControls';
-import { useSelectCurrentMessage } from '../../../services/data/messages/selectCurrentMessage';
-import { useUpdateMessage } from '../../../services/data/messages/updateMessage';
 import { useRole } from '../../../utils/contexts/RoleContext';
 import { VideoPlayerView } from './VideoPlayerView/VideoPlayerView';
 

@@ -1,8 +1,8 @@
+import { defaultProfile } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { defaultProfile } from '../../../../services/utils/defaults';
 import { CreateRoomView } from './CreateRoomView';
 
 type Props = ComponentProps<typeof CreateRoomView>;

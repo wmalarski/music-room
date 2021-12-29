@@ -1,5 +1,5 @@
+import { defaultProfile } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultProfile } from '../../../../services/utils/defaults';
 import { CreateRoomView } from './CreateRoomView';
 
 export default {

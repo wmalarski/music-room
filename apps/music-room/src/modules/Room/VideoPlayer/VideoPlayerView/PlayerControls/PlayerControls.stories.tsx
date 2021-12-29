@@ -1,5 +1,5 @@
+import { defaultControls } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultControls } from '../../../../../services/utils/defaults';
 import { PlayerControls } from './PlayerControls';
 
 export default {

@@ -1,5 +1,5 @@
+import { useInsertMessage } from '@music-room/data-access';
 import { ReactElement, useState } from 'react';
-import { useInsertMessage } from '../../../services/data/messages/insertMessage';
 import { useRole } from '../../../utils/contexts/RoleContext';
 import { ChatInputView } from './ChatInputView/ChatInputView';
 

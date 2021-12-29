@@ -1,8 +1,8 @@
+import { Profile } from '@music-room/data-access';
 import { Alert, Button, Input, Typography } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { Profile } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 import {
   ProfileDetailsViewData,

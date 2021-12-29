@@ -1,13 +1,13 @@
-import { User } from "@supabase/supabase-js";
-import { selectMembers } from "../data/members/selectMembers";
-import { Member } from "../data/types";
+import { User } from '@supabase/supabase-js';
+import { selectMembers } from '../data/members/selectMembers';
+import { Member } from '../data/types';
 
 export type GetServerSideMembersArgs = {
   slug?: string | string[];
   user: User;
 };
 
-const getServerSideMembers = async ({
+export const getServerSideMembers = async ({
   slug,
   user,
 }: GetServerSideMembersArgs): Promise<Member | null> => {
@@ -16,7 +16,7 @@ const getServerSideMembers = async ({
 
   const roles = await selectMembers({
     queryKey: [
-      "members",
+      'members',
       {
         room_slug: roomSlug,
         user_id: user.id,
@@ -26,5 +26,3 @@ const getServerSideMembers = async ({
 
   return roles?.[0] ?? null;
 };
-
-export default getServerSideMembers;

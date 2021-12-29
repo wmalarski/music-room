@@ -1,5 +1,5 @@
+import { defaultMember } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultMember } from '../../../../services/utils/defaults';
 import { RoomsList } from './RoomsList';
 
 export default {

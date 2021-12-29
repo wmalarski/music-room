@@ -1,11 +1,10 @@
+import { defaultMember, mockMembersStorage } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { mockMembersStorage } from '../../../services/data/members/membersHandlers';
-import { defaultMember } from '../../../services/utils/defaults';
 import { RoomUsers } from './RoomUsers';
 
 type Props = ComponentProps<typeof RoomUsers>;

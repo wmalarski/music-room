@@ -1,11 +1,11 @@
+import { defaultUser } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { mockUserStorage } from '../../../services/auth/authHandlers';
-import { defaultUser } from '../../../services/utils/defaults';
+import { mockUserStorage } from '../../../../../../libs/data-access/src/auth/authHandlers';
 import { SignUp } from './SignUp';
 
 type Props = ComponentProps<typeof SignUp>;

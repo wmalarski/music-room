@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@music-room/data-access": ["libs/data-access/src/index.ts"],
       "@music-room/ui": ["libs/ui/src/index.ts"]
     }
   },

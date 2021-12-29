@@ -1,6 +1,8 @@
+import {
+  useSelectMessages,
+  useSubscribeToMessages,
+} from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectMessages } from '../../../services/data/messages/selectMessages';
-import { useSubscribeToMessages } from '../../../services/data/messages/subscribeToMessages';
 import { useRoom } from '../../../utils/contexts/RoomContext';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 

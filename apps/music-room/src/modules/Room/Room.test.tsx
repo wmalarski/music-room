@@ -1,8 +1,8 @@
+import { defaultMember } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { defaultMember } from '../../services/utils/defaults';
 import { Room } from './Room';
 
 type Props = ComponentProps<typeof Room>;

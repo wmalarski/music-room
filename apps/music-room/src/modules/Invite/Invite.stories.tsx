@@ -1,9 +1,9 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   defaultProfile,
   defaultRoom,
   defaultUser,
-} from '../../services/utils/defaults';
+} from '@music-room/data-access';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Invite } from './Invite';
 
 export default {

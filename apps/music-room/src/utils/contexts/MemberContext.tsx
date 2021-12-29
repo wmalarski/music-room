@@ -1,5 +1,5 @@
+import { Member } from '@music-room/data-access';
 import { ReactElement, ReactNode } from 'react';
-import { Member } from '../../services/data/types';
 import { ProfileContextProvider } from './ProfileContext';
 import { RoleContextProvider } from './RoleContext';
 import { RoomContextProvider } from './RoomContext';

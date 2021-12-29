@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useSignUp } from '../../../services/auth/signUp';
+import { useSignUp } from '../../../../../../libs/data-access/src/auth/signUp';
 import SignUpView from './SignUpView/SignUpView';
 
 type Props = {

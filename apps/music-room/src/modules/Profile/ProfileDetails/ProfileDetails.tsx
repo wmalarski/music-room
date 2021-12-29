@@ -1,5 +1,5 @@
+import { useUpdateProfile } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useUpdateProfile } from '../../../services/data/profiles/updateProfile';
 import { useProfile } from '../../../utils/contexts/ProfileContext';
 import { ProfileDetailsView } from './ProfileDetailsView/ProfileDetailsView';
 

@@ -1,7 +1,9 @@
+import {
+  useDeleteRole,
+  useSelectMembers,
+  useUpdateRole,
+} from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSelectMembers } from '../../../services/data/members/selectMembers';
-import { useDeleteRole } from '../../../services/data/roles/deleteRole';
-import { useUpdateRole } from '../../../services/data/roles/updateRole';
 import { useRoom } from '../../../utils/contexts/RoomContext';
 import { RoomUsersList } from './RoomUsersList/RoomUsersList';
 

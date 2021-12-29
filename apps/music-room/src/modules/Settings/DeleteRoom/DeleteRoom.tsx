@@ -1,6 +1,6 @@
+import { useDeleteRoom } from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import { useDeleteRoom } from '../../../services/data/rooms/deleteRoom';
 import { useRoom } from '../../../utils/contexts/RoomContext';
 import paths from '../../../utils/routing/paths';
 import { DeleteRoomView } from './DeleteRoomView/DeleteRoomView';

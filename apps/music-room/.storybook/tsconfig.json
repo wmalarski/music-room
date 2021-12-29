@@ -17,6 +17,7 @@
   ],
   "include": [
     "../src/**/*",
-    "*.js"
+    "*.js",
+    "../../../libs/data-access/src/auth"
   ],
 }

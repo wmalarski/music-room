@@ -1,6 +1,6 @@
+import { Message } from '@music-room/data-access';
 import { Button } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { Message } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 

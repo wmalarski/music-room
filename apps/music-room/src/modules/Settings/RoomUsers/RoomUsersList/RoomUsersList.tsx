@@ -1,6 +1,6 @@
+import { Member, RoomRole } from '@music-room/data-access';
 import { Button } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { Member, RoomRole } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
 

@@ -1,5 +1,5 @@
+import { defaultMessage } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { defaultMessage } from '../../../../../services/utils/defaults';
 import { ChatMessage } from './ChatMessage';
 
 export default {

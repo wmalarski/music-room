@@ -1,8 +1,11 @@
+import {
+  Profile,
+  Room,
+  SupabaseErrorCode,
+  useInsertRole,
+} from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import { useInsertRole } from '../../../services/data/roles/insertRole';
-import { Profile, Room } from '../../../services/data/types';
-import { SupabaseErrorCode } from '../../../services/supabase';
 import paths from '../../../utils/routing/paths';
 import { InviteAcceptView } from './InviteAcceptView/InviteAcceptView';
 

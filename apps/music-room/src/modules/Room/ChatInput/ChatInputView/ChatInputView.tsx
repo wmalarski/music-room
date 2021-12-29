@@ -1,7 +1,7 @@
+import { Message } from '@music-room/data-access';
 import { Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
-import { Message } from '../../../../services/data/types';
 import useText from '../../../../utils/translations/useText';
 
 type Data = {
