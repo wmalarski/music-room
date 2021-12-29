@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 import { useDeleteRoom } from '../../../../services/data/rooms/deleteRoom';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRoom } from '../../../../utils/contexts/RoomContext';
 import paths from '../../../../utils/routing/paths';
 import { DeleteRoomView } from './DeleteRoomView/DeleteRoomView';
 
@@ -12,20 +12,11 @@ type Props = {
 export const DeleteRoom = ({ View = DeleteRoomView }: Props): ReactElement => {
   const router = useRouter();
 
-  const { room_id, room_hash } = useMemberContext();
+  const { id, hash } = useRoom();
 
-  const { mutate: deleteRoom, isLoading } = useDeleteRoom(room_hash, {
+  const { mutate: deleteRoom, isLoading } = useDeleteRoom(hash, {
     onSuccess: () => router.push(paths.home),
   });
 
-  return (
-    <View
-      isLoading={isLoading}
-      onClicked={() =>
-        deleteRoom({
-          id: room_id,
-        })
-      }
-    />
-  );
+  return <View isLoading={isLoading} onClicked={() => deleteRoom({ id })} />;
 };

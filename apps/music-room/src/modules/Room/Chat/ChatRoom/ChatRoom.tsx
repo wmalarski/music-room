@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { useSelectMessages } from '../../../../services/data/messages/selectMessages';
 import { useSubscribeToMessages } from '../../../../services/data/messages/subscribeToMessages';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRoom } from '../../../../utils/contexts/RoomContext';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 
 type Props = {
@@ -9,11 +9,11 @@ type Props = {
 };
 
 export const ChatRoom = ({ View = ChatMessagesList }: Props): ReactElement => {
-  const { room_id } = useMemberContext();
+  const { id: roomId } = useRoom();
 
-  useSubscribeToMessages({ roomId: room_id });
+  useSubscribeToMessages({ roomId });
 
-  const { data: pages, fetchNextPage } = useSelectMessages({ roomId: room_id });
+  const { data: pages, fetchNextPage } = useSelectMessages({ roomId });
 
   return (
     <View

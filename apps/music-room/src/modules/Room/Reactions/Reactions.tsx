@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { useSelectAction } from '../../../services/data/actions/selectAction';
 import { useUpsertAction } from '../../../services/data/actions/upsertAction';
 import { useSelectCurrentMessage } from '../../../services/data/messages/selectCurrentMessage';
-import { useMemberContext } from '../../../utils/room/MemberContext';
+import { useRole } from '../../../utils/contexts/RoleContext';
 import { ReactionsView } from './ReactionsView/ReactionsView';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
-  const { room_id, profile_id } = useMemberContext();
+  const { room_id, profile_id } = useRole();
 
   const { data: currentMessage = null } = useSelectCurrentMessage({
     roomId: room_id,

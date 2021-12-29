@@ -4,7 +4,7 @@ import { Room } from '../../../modules/Room/Room';
 import { Member } from '../../../services/data/types';
 import { supabase } from '../../../services/supabase';
 import getServerSideMembers from '../../../services/utils/getServerSideMembers';
-import { MemberContextProvider } from '../../../utils/room/MemberContext';
+import { MemberContextProvider } from '../../../utils/contexts/MemberContext';
 
 type Props = {
   member: Member;
@@ -12,7 +12,7 @@ type Props = {
 
 const RoomPage = ({ member }: Props): ReactElement => (
   <MemberContextProvider member={member}>
-    <Room member={member} />
+    <Room />
   </MemberContextProvider>
 );
 

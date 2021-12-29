@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useMemberContext } from '../../../utils/room/MemberContext';
+import { useRoom } from '../../../utils/contexts/RoomContext';
 import { RoomNavigationView } from './RoomNavigationView/RoomNavigationView';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const RoomNavigation = ({
   View = RoomNavigationView,
 }: Props): ReactElement => {
-  const { room_slug } = useMemberContext();
+  const { slug } = useRoom();
 
-  return <View slug={room_slug} />;
+  return <View slug={slug} />;
 };

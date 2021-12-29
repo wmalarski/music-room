@@ -9,15 +9,17 @@ import {
 } from 'react';
 import { supabase } from '../../services/supabase';
 
-export type UserContextValue = {
-  user: User | null;
-};
+export type UserContextValue = User | null;
 
-const UserContext = createContext<UserContextValue>({
-  user: null,
-});
+const UserContext = createContext<UserContextValue>(null);
 
 export const useUserContext = (): UserContextValue => useContext(UserContext);
+
+export const useUser = (): User => {
+  const user = useContext(UserContext);
+  if (!user) throw new Error('User is not defined');
+  return user;
+};
 
 type Props = {
   children: ReactNode;
@@ -40,9 +42,7 @@ export const UserContextProvider = ({ children }: Props): ReactElement => {
     return () => data?.unsubscribe?.();
   }, []);
 
-  return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 export default UserContext;

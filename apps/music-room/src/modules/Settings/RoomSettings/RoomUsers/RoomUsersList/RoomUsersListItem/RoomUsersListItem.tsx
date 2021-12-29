@@ -1,7 +1,7 @@
 import { Button, Debug, Option, Select } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { Member, RoomRole } from '../../../../../../services/data/types';
-import { RoleGuard } from '../../../../../../utils/room/RoleGuard';
+import { RoleGuard } from '../../../../../../utils/contexts/RoleContext';
 import useText from '../../../../../../utils/translations/useText';
 
 type Props = {

@@ -4,9 +4,9 @@ import { Home } from '../modules/Home/Home';
 import { useUserContext } from '../utils/auth/UserContext';
 
 const Index = (): ReactElement => {
-  const { user } = useUserContext();
+  const user = useUserContext();
 
-  return user ? <Home user={user} /> : <Auth />;
+  return user ? <Home /> : <Auth />;
 };
 
 export default Index;

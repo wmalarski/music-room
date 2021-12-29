@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { useInsertMessage } from '../../../../services/data/messages/insertMessage';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRole } from '../../../../utils/contexts/RoleContext';
 import { ChatInputView } from './ChatInputView/ChatInputView';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const ChatInput = ({ View = ChatInputView }: Props): ReactElement => {
-  const { profile_id, room_id } = useMemberContext();
+  const { profile_id, room_id } = useRole();
 
   const { mutate: insertMessage, isLoading, data, error } = useInsertMessage();
 

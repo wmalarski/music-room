@@ -1,16 +1,26 @@
 import { ReactElement } from 'react';
-import { Profile, Room } from '../../services/data/types';
+import { useSelectProfile } from '../../services/data/profiles/selectProfile';
+import { Room } from '../../services/data/types';
+import { useUser } from '../../utils/auth/UserContext';
 import { ProfileHeader } from '../Headers/ProfileHeader/ProfileHeader';
 import { Layout } from '../Layout/Layout';
 import { InviteAccept } from './InviteAccept/InviteAccept';
 
 type Props = {
-  profile?: Profile;
   room: Room;
 };
 
-export const Invite = ({ profile, room }: Props): ReactElement => (
-  <Layout header={<ProfileHeader />}>
-    {profile && <InviteAccept room={room} profile={profile} />}
-  </Layout>
-);
+export const Invite = ({ room }: Props): ReactElement => {
+  const user = useUser();
+
+  const { data: profile } = useSelectProfile(
+    { userId: user?.id ?? '' },
+    { enabled: !!user }
+  );
+
+  return (
+    <Layout header={<ProfileHeader />}>
+      {profile && <InviteAccept room={room} profile={profile} />}
+    </Layout>
+  );
+};

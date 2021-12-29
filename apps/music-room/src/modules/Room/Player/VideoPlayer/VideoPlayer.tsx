@@ -4,7 +4,7 @@ import { useSubscribeToControls } from '../../../../services/data/controls/subsc
 import { useUpdateControls } from '../../../../services/data/controls/updateControls';
 import { useSelectCurrentMessage } from '../../../../services/data/messages/selectCurrentMessage';
 import { useUpdateMessage } from '../../../../services/data/messages/updateMessage';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRole } from '../../../../utils/contexts/RoleContext';
 import { VideoPlayerView } from './VideoPlayerView/VideoPlayerView';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 export const VideoPlayer = ({
   View = VideoPlayerView,
 }: Props): ReactElement => {
-  const { room_id, profile_id } = useMemberContext();
+  const { room_id, profile_id } = useRole();
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
   const { mutate: updateMessage } = useUpdateMessage(room_id);

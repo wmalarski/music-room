@@ -4,7 +4,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { mockMembersStorage } from '../../../services/data/members/membersHandlers';
-import { defaultMember, defaultUser } from '../../../services/utils/defaults';
+import { defaultMember } from '../../../services/utils/defaults';
 import { Rooms } from './Rooms';
 
 type Props = ComponentProps<typeof Rooms>;
@@ -20,7 +20,6 @@ const View: Props['View'] = ({ members }) => (
 
 const defaultProps: Props = {
   View,
-  user: defaultUser,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

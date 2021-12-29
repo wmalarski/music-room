@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { defaultMember } from '../../../../services/utils/defaults';
-import { MemberContextProvider } from '../../../../utils/room/MemberContext';
+import { MemberContextProvider } from '../../../../utils/contexts/MemberContext';
 import { InviteLink } from './InviteLink';
 
 type Props = ComponentProps<typeof InviteLink>;

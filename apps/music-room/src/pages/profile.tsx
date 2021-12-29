@@ -4,13 +4,18 @@ import { Profile } from '../modules/Profile/Profile';
 import { selectProfile } from '../services/data/profiles/selectProfile';
 import { Profile as ProfileType } from '../services/data/types';
 import { supabase } from '../services/supabase';
+import { ProfileContextProvider } from '../utils/contexts/ProfileContext';
 
 type Props = {
   profile: ProfileType;
 };
 
 const ProfilePage = ({ profile }: Props): ReactElement => {
-  return <Profile profile={profile} />;
+  return (
+    <ProfileContextProvider profile={profile}>
+      <Profile />
+    </ProfileContextProvider>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({

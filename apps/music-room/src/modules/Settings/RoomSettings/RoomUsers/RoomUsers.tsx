@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { useSelectMembers } from '../../../../services/data/members/selectMembers';
 import { useDeleteRole } from '../../../../services/data/roles/deleteRole';
 import { useUpdateRole } from '../../../../services/data/roles/updateRole';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRoom } from '../../../../utils/contexts/RoomContext';
 import { RoomUsersList } from './RoomUsersList/RoomUsersList';
 
 type Props = {
@@ -10,10 +10,10 @@ type Props = {
 };
 
 export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
-  const { room_id } = useMemberContext();
+  const { id } = useRoom();
 
   const { data: members, fetchNextPage } = useSelectMembers({
-    room_id,
+    room_id: id,
   });
 
   const { mutate: deleteRole } = useDeleteRole();

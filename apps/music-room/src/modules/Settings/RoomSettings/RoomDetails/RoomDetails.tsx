@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRoom } from '../../../../utils/contexts/RoomContext';
 import { RoomDetailsView } from './RoomDetailsView/RoomDetailsView';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const RoomDetails = ({
   View = RoomDetailsView,
 }: Props): ReactElement => {
-  const { room_name } = useMemberContext();
+  const { name } = useRoom();
 
-  return <View roomName={room_name} />;
+  return <View roomName={name} />;
 };

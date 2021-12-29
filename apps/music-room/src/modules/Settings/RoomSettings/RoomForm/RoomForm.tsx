@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { useUpdateRoom } from '../../../../services/data/rooms/updateRoom';
-import { useMemberContext } from '../../../../utils/room/MemberContext';
+import { useRoom } from '../../../../utils/contexts/RoomContext';
 import { RoomFormView } from './RoomFormView/RoomFormView';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const RoomForm = ({ View = RoomFormView }: Props): ReactElement => {
-  const { room_id, room_name } = useMemberContext();
+  const { id, name } = useRoom();
 
   const { mutate: updateRoom, data, error, isLoading } = useUpdateRoom();
 
@@ -16,13 +16,8 @@ export const RoomForm = ({ View = RoomFormView }: Props): ReactElement => {
     <View
       error={error}
       isLoading={isLoading}
-      roomName={data?.name ?? room_name}
-      onSubmit={({ name }) =>
-        updateRoom({
-          id: room_id,
-          name,
-        })
-      }
+      roomName={data?.name ?? name}
+      onSubmit={({ name }) => updateRoom({ id, name })}
     />
   );
 };

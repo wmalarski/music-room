@@ -9,7 +9,6 @@ import { mockProfilesStorage } from '../../../services/data/profiles/profileHand
 import {
   defaultMember,
   defaultProfile,
-  defaultUser,
 } from '../../../services/utils/defaults';
 import { CreateRoom } from './CreateRoom';
 
@@ -23,7 +22,6 @@ const View: Props['View'] = ({ profile, onSubmit }) => (
 
 const defaultProps: Props = {
   View,
-  user: defaultUser,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

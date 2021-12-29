@@ -2,24 +2,25 @@ import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
-import { useSelectProfile } from '../../services/data/profiles/selectProfile';
 import { selectRoomByHash } from '../../services/data/rooms/selectRoomByHash';
 import { Room } from '../../services/data/types';
 import { useUserContext } from '../../utils/auth/UserContext';
+import { RoomContextProvider } from '../../utils/contexts/RoomContext';
 
 type Props = {
   room: Room;
 };
 
 const InvitePage = ({ room }: Props): ReactElement => {
-  const { user } = useUserContext();
+  const user = useUserContext();
 
-  const { data: profile } = useSelectProfile(
-    { userId: user?.id ?? '' },
-    { enabled: !!user }
+  return user ? (
+    <RoomContextProvider room={room}>
+      <Invite room={room} />
+    </RoomContextProvider>
+  ) : (
+    <Auth />
   );
-
-  return user ? <Invite room={room} profile={profile} /> : <Auth />;
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -31,8 +32,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   const [room] = await selectRoomByHash({
     queryKey: ['roomByHash', { hash: roomHash }],
   });
-
-  console.log('room', room);
 
   if (!room) return { notFound: true };
 

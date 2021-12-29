@@ -1,17 +1,17 @@
 import { ReactElement } from 'react';
 import { useUpdateProfile } from '../../../services/data/profiles/updateProfile';
-import { Profile } from '../../../services/data/types';
+import { useProfile } from '../../../utils/contexts/ProfileContext';
 import { ProfileDetailsView } from './ProfileDetailsView/ProfileDetailsView';
 
 type Props = {
-  profile: Profile;
   View?: typeof ProfileDetailsView;
 };
 
 export const ProfileDetails = ({
-  profile,
   View = ProfileDetailsView,
 }: Props): ReactElement => {
+  const profile = useProfile();
+
   const {
     mutate: updateProfile,
     isLoading,
