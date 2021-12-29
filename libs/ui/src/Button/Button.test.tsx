@@ -1,20 +1,21 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import Button from "./Button";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Button } from './Button';
 
-type ComponentProps = React.ComponentProps<typeof Button>;
+type Props = ComponentProps<typeof Button>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    children: "AAA",
-  };
+const defaultProps: Props = {
+  children: 'AAA',
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Button {...defaultProps} {...props} />);
-}
+};
 
-describe("<Button />", () => {
-  it("should render", async () => {
+describe('<Button />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

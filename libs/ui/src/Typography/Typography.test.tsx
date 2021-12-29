@@ -1,18 +1,19 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import Typography from "./Typography";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Typography } from './Typography';
 
-type ComponentProps = React.ComponentProps<typeof Typography>;
+type Props = ComponentProps<typeof Typography>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {};
+const defaultProps: Props = {};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Typography {...defaultProps} {...props} />);
-}
+};
 
-describe("<Typography />", () => {
-  it("should render", async () => {
+describe('<Typography />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

@@ -1,12 +1,13 @@
-import { User } from "@supabase/supabase-js";
+import { User } from '@supabase/supabase-js';
 import {
   createContext,
+  ReactElement,
   ReactNode,
   useContext,
   useEffect,
   useState,
-} from "react";
-import { supabase } from "../../services/supabase";
+} from 'react';
+import { supabase } from '../../services/supabase';
 
 export type UserContextValue = {
   user: User | null;
@@ -18,21 +19,19 @@ const UserContext = createContext<UserContextValue>({
 
 export const useUserContext = (): UserContextValue => useContext(UserContext);
 
-export type UserContextProviderProps = {
+type Props = {
   children: ReactNode;
 };
 
-export const UserContextProvider = ({
-  children,
-}: UserContextProviderProps): JSX.Element => {
+export const UserContextProvider = ({ children }: Props): ReactElement => {
   const [user, setUser] = useState<User | null>(supabase.auth.user());
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
-      await fetch("/api/auth", {
-        method: "POST",
-        headers: new Headers({ "Content-Type": "application/json" }),
-        credentials: "same-origin",
+      await fetch('/api/auth', {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        credentials: 'same-origin',
         body: JSON.stringify({ event, session }),
       });
 

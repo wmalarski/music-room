@@ -1,5 +1,5 @@
 import { Link } from '@music-room/ui';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import paths from '../../../utils/routing/paths';
 import useText from '../../../utils/translations/useText';
 
@@ -7,7 +7,7 @@ type Props = {
   right?: ReactNode;
 };
 
-export const HeaderView = ({ right }: Props): JSX.Element => {
+export const HeaderView = ({ right }: Props): ReactElement => {
   const text = useText();
 
   return (

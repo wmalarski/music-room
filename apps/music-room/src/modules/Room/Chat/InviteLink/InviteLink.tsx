@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
 import { InviteLinkView } from './InviteLinkView/InviteLinkView';
 
@@ -7,9 +7,7 @@ type Props = {
   View?: typeof InviteLinkView;
 };
 
-export const InviteLink = ({
-  View = InviteLinkView,
-}: Props): JSX.Element | null => {
+export const InviteLink = ({ View = InviteLinkView }: Props): ReactElement => {
   const { room_hash } = useMemberContext();
 
   const [href, setHref] = useState<string>();

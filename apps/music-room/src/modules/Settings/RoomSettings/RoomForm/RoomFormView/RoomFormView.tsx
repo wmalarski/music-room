@@ -17,7 +17,7 @@ export const RoomFormView = ({
   roomName,
   error,
   onSubmit,
-}: Props): ReactElement | null => {
+}: Props): ReactElement => {
   const text = useText();
 
   const {

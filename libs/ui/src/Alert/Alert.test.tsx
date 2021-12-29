@@ -1,21 +1,22 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import Alert from "./Alert";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Alert } from './Alert';
 
-type ComponentProps = React.ComponentProps<typeof Alert>;
+type Props = ComponentProps<typeof Alert>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    severity: "error",
-    children: "AAA",
-  };
+const defaultProps: Props = {
+  severity: 'error',
+  children: 'AAA',
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Alert {...defaultProps} {...props} />);
-}
+};
 
-describe("<Alert />", () => {
-  it("should render", async () => {
+describe('<Alert />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

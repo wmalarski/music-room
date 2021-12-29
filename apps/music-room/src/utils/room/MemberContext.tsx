@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactElement, ReactNode, useContext } from 'react';
 import { Member } from '../../services/data/types';
 
 const MemberContext = createContext<Member>({
@@ -18,7 +18,7 @@ const MemberContext = createContext<Member>({
 
 export const useMemberContext = (): Member => useContext(MemberContext);
 
-export type MemberContextProviderProps = {
+type Props = {
   children: ReactNode;
   member: Member;
 };
@@ -26,7 +26,7 @@ export type MemberContextProviderProps = {
 export const MemberContextProvider = ({
   children,
   member,
-}: MemberContextProviderProps): JSX.Element => (
+}: Props): ReactElement => (
   <MemberContext.Provider value={member}>{children}</MemberContext.Provider>
 );
 

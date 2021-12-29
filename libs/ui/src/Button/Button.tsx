@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   forwardRef,
   LegacyRef,
+  ReactElement,
 } from 'react';
 
 export const ButtonInner = (
@@ -14,7 +15,7 @@ export const ButtonInner = (
     HTMLButtonElement
   > & { isLoading?: boolean },
   ref: LegacyRef<HTMLButtonElement>
-): JSX.Element => (
+): ReactElement => (
   <button {...props} disabled={props.disabled || isLoading} ref={ref} />
 );
 

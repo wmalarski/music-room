@@ -1,11 +1,17 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import {
+  DetailedHTMLProps,
+  forwardRef,
+  InputHTMLAttributes,
+  LegacyRef,
+  ReactElement,
+} from 'react';
 
 const InputInner = (
   props: DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  ref: React.LegacyRef<HTMLInputElement>
-): JSX.Element => <input {...props} ref={ref} />;
+  ref: LegacyRef<HTMLInputElement>
+): ReactElement => <input {...props} ref={ref} />;
 
-export const Input = React.forwardRef(InputInner);
+export const Input = forwardRef(InputInner);

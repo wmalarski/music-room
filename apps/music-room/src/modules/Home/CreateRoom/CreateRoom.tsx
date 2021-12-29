@@ -14,7 +14,7 @@ type Props = {
 export const CreateRoom = ({
   user,
   View = CreateRoomView,
-}: Props): ReactElement | null => {
+}: Props): ReactElement => {
   const router = useRouter();
 
   const {

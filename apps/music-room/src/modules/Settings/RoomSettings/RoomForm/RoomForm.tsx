@@ -7,9 +7,7 @@ type Props = {
   View?: typeof RoomFormView;
 };
 
-export const RoomForm = ({
-  View = RoomFormView,
-}: Props): ReactElement | null => {
+export const RoomForm = ({ View = RoomFormView }: Props): ReactElement => {
   const { room_id, room_name } = useMemberContext();
 
   const { mutate: updateRoom, data, error, isLoading } = useUpdateRoom();

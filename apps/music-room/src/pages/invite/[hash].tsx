@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
 import { useSelectProfile } from '../../services/data/profiles/selectProfile';
@@ -6,11 +7,11 @@ import { selectRoomByHash } from '../../services/data/rooms/selectRoomByHash';
 import { Room } from '../../services/data/types';
 import { useUserContext } from '../../utils/auth/UserContext';
 
-export type InvitePageProps = {
+type Props = {
   room: Room;
 };
 
-const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
+const InvitePage = ({ room }: Props): ReactElement => {
   const { user } = useUserContext();
 
   const { data: profile } = useSelectProfile(
@@ -21,7 +22,7 @@ const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
   return user ? <Invite room={room} profile={profile} /> : <Auth />;
 };
 
-export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({
+export const getServerSideProps: GetServerSideProps<Props> = async ({
   params: { hash } = {},
 }) => {
   const roomHash = Array.isArray(hash) ? undefined : hash;

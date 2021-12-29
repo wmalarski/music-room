@@ -1,21 +1,22 @@
 import { GetServerSideProps } from 'next';
+import { ReactElement } from 'react';
 import { Room } from '../../../modules/Room/Room';
 import { Member } from '../../../services/data/types';
 import { supabase } from '../../../services/supabase';
 import getServerSideMembers from '../../../services/utils/getServerSideMembers';
 import { MemberContextProvider } from '../../../utils/room/MemberContext';
 
-export type RoomPageProps = {
+type Props = {
   member: Member;
 };
 
-const RoomPage = ({ member }: RoomPageProps): JSX.Element => (
+const RoomPage = ({ member }: Props): ReactElement => (
   <MemberContextProvider member={member}>
     <Room member={member} />
   </MemberContextProvider>
 );
 
-export const getServerSideProps: GetServerSideProps<RoomPageProps> = async ({
+export const getServerSideProps: GetServerSideProps<Props> = async ({
   params: { slug } = {},
   req,
 }) => {

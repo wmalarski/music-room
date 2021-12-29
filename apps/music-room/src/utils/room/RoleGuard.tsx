@@ -1,22 +1,20 @@
-import { PropsWithChildren } from "react";
-import { RoomRole } from "../../services/data/types";
-import { useMemberContext } from "./MemberContext";
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { RoomRole } from '../../services/data/types';
+import { useMemberContext } from './MemberContext';
 
-export type RoleGuardProps = {
+type Props = {
   visibleFor: RoomRole[];
-  fallback?: React.ReactNode;
+  fallback?: ReactNode;
   role?: RoomRole;
 };
 
-const RoleGuard = ({
+export const RoleGuard = ({
   visibleFor,
   children,
   fallback = null,
   role,
-}: PropsWithChildren<RoleGuardProps>): JSX.Element | null => {
+}: PropsWithChildren<Props>): ReactElement => {
   const { role: defaultRole } = useMemberContext();
 
   return <>{visibleFor.includes(role ?? defaultRole) ? children : fallback}</>;
 };
-
-export default RoleGuard;

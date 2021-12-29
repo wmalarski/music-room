@@ -1,11 +1,17 @@
-import { DetailedHTMLProps, OptionHTMLAttributes } from 'react';
+import {
+  DetailedHTMLProps,
+  forwardRef,
+  LegacyRef,
+  OptionHTMLAttributes,
+  ReactElement,
+} from 'react';
 
 const OptionInner = (
   props: DetailedHTMLProps<
     OptionHTMLAttributes<HTMLOptionElement>,
     HTMLOptionElement
   >,
-  ref: React.LegacyRef<HTMLOptionElement>
-): JSX.Element => <option {...props} ref={ref} />;
+  ref: LegacyRef<HTMLOptionElement>
+): ReactElement => <option {...props} ref={ref} />;
 
-export const Option = React.forwardRef(OptionInner);
+export const Option = forwardRef(OptionInner);

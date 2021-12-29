@@ -1,18 +1,19 @@
 import { GetServerSideProps } from 'next';
+import { ReactElement } from 'react';
 import { Profile } from '../modules/Profile/Profile';
 import { selectProfile } from '../services/data/profiles/selectProfile';
 import { Profile as ProfileType } from '../services/data/types';
 import { supabase } from '../services/supabase';
 
-export type ProfilePageProps = {
+type Props = {
   profile: ProfileType;
 };
 
-const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => {
+const ProfilePage = ({ profile }: Props): ReactElement => {
   return <Profile profile={profile} />;
 };
 
-export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
+export const getServerSideProps: GetServerSideProps<Props> = async ({
   req,
 }) => {
   const { user } = await supabase.auth.api.getUserByCookie(req);

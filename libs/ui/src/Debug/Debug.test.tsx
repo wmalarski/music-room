@@ -1,20 +1,21 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import Debug from "./Debug";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Debug } from './Debug';
 
-type ComponentProps = React.ComponentProps<typeof Debug>;
+type Props = ComponentProps<typeof Debug>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    value: { hello: "world" },
-  };
+const defaultProps: Props = {
+  value: { hello: 'world' },
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Debug {...defaultProps} {...props} />);
-}
+};
 
-describe("<Debug />", () => {
-  it("should render", async () => {
+describe('<Debug />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();

@@ -5,6 +5,6 @@ type Props = {
   roomName: string;
 };
 
-export const RoomDetailsView = ({ roomName }: Props): ReactElement | null => {
+export const RoomDetailsView = ({ roomName }: Props): ReactElement => {
   return <Typography>{roomName}</Typography>;
 };

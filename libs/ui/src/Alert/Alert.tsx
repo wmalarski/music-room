@@ -1,4 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import {
+  DetailedHTMLProps,
+  forwardRef,
+  HTMLAttributes,
+  LegacyRef,
+  ReactElement,
+} from 'react';
 
 export type SeverityLevel = 'error' | 'warning' | 'info' | 'success';
 
@@ -6,8 +12,8 @@ const AlertInner = (
   props: DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & {
     severity: SeverityLevel;
   },
-  ref: React.LegacyRef<HTMLSpanElement>
-): JSX.Element => {
+  ref: LegacyRef<HTMLSpanElement>
+): ReactElement => {
   const { severity, children, ...rest } = props;
   return (
     <span {...rest} ref={ref}>
@@ -17,4 +23,4 @@ const AlertInner = (
   );
 };
 
-export const Alert = React.forwardRef(AlertInner);
+export const Alert = forwardRef(AlertInner);

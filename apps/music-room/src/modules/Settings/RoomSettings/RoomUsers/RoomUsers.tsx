@@ -5,13 +5,11 @@ import { useUpdateRole } from '../../../../services/data/roles/updateRole';
 import { useMemberContext } from '../../../../utils/room/MemberContext';
 import { RoomUsersList } from './RoomUsersList/RoomUsersList';
 
-export type RoomUsersProps = {
+type Props = {
   View?: typeof RoomUsersList;
 };
 
-export const RoomUsers = ({
-  View = RoomUsersList,
-}: RoomUsersProps): ReactElement => {
+export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
   const { room_id } = useMemberContext();
 
   const { data: members, fetchNextPage } = useSelectMembers({

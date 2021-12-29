@@ -8,7 +8,7 @@ type Props = {
 
 export const RoomDetails = ({
   View = RoomDetailsView,
-}: Props): ReactElement | null => {
+}: Props): ReactElement => {
   const { room_name } = useMemberContext();
 
   return <View roomName={room_name} />;

@@ -1,21 +1,22 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
-import { render } from "@testing-library/react";
-import React from "react";
-import Link from "./Link";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import { ComponentProps } from 'react';
+import { Link } from './Link';
 
-type ComponentProps = Parameters<typeof Link>[0];
+type Props = ComponentProps<typeof Link>;
 
-function renderComponent(props: Partial<ComponentProps> = {}) {
-  const defaultProps: ComponentProps = {
-    href: "/",
-    children: "Hello",
-  };
+const defaultProps: Props = {
+  href: '/',
+  children: 'Hello',
+};
+
+const renderComponent = (props: Partial<Props> = {}) => {
   return render(<Link {...defaultProps} {...props} />);
-}
+};
 
-describe("<Link />", () => {
-  it("should render", async () => {
+describe('<Link />', () => {
+  it('should render', async () => {
     expect.hasAssertions();
 
     renderComponent();
