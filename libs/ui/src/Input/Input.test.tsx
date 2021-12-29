@@ -9,7 +9,7 @@ type Props = ComponentProps<typeof Input>;
 const defaultProps: Props = {};
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Input {...defaultProps} {...props} />);
+  return render(<Input {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Input />', () => {

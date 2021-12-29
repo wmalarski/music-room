@@ -12,7 +12,7 @@ const defaultProps: Props = {
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Alert {...defaultProps} {...props} />);
+  return render(<Alert {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Alert />', () => {

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
-import Option from '../Option/Option';
-import Select from './Select';
+import { Option } from '../Option/Option';
+import { Select } from './Select';
 
 export default {
   title: 'Atoms/Select',
@@ -15,6 +15,7 @@ const Template: ComponentStory<typeof Select> = (args) => {
       {...args}
       value={value}
       onChange={(event) => setValue(event.target.value)}
+      css={{}}
     >
       <Option value="mod">modRole</Option>
       <Option value="user">userRole</Option>

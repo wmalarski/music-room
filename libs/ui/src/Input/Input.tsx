@@ -1,17 +1,3 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  InputHTMLAttributes,
-  LegacyRef,
-  ReactElement,
-} from 'react';
+import { styled } from '@music-room/util-styles';
 
-const InputInner = (
-  props: DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
-  ref: LegacyRef<HTMLInputElement>
-): ReactElement => <input {...props} ref={ref} />;
-
-export const Input = forwardRef(InputInner);
+export const Input = styled('input', {});

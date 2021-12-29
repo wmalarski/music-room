@@ -1,6 +1,4 @@
-import NextLink, { LinkProps } from 'next/link';
-import { PropsWithChildren, ReactElement } from 'react';
+import { styled } from '@music-room/util-styles';
+import NextLink from 'next/link';
 
-export const Link = (props: PropsWithChildren<LinkProps>): ReactElement => (
-  <NextLink {...props} />
-);
+export const Link = styled(NextLink, {});

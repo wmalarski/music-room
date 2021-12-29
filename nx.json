@@ -45,6 +45,9 @@
     },
     "ui": {
       "tags": []
+    },
+    "util-styles": {
+      "tags": []
     }
   }
 }

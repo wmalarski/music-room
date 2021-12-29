@@ -1,17 +1,3 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  LegacyRef,
-  OptionHTMLAttributes,
-  ReactElement,
-} from 'react';
+import { styled } from '@music-room/util-styles';
 
-const OptionInner = (
-  props: DetailedHTMLProps<
-    OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >,
-  ref: LegacyRef<HTMLOptionElement>
-): ReactElement => <option {...props} ref={ref} />;
-
-export const Option = forwardRef(OptionInner);
+export const Option = styled('option', {});

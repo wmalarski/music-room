@@ -154,6 +154,28 @@
           }
         }
       }
+    },
+    "util-styles": {
+      "root": "libs/util-styles",
+      "sourceRoot": "libs/util-styles/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/util-styles/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util-styles"],
+          "options": {
+            "jestConfig": "libs/util-styles/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,17 +1,3 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  LegacyRef,
-  ReactElement,
-  SelectHTMLAttributes,
-} from 'react';
+import { styled } from '@music-room/util-styles';
 
-const SelectInner = (
-  props: DetailedHTMLProps<
-    SelectHTMLAttributes<HTMLSelectElement>,
-    HTMLSelectElement
-  >,
-  ref: LegacyRef<HTMLSelectElement>
-): ReactElement => <select {...props} ref={ref} />;
-
-export const Select = forwardRef(SelectInner);
+export const Select = styled('select', {});

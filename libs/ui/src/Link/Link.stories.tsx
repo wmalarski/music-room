@@ -6,7 +6,9 @@ export default {
   component: Link,
 } as ComponentMeta<typeof Link>;
 
-const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
+const Template: ComponentStory<typeof Link> = (args) => (
+  <Link {...args} css={{}} />
+);
 
 export const Playground = Template.bind({});
 Playground.args = {

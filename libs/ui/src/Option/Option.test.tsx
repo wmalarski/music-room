@@ -9,7 +9,7 @@ type Props = ComponentProps<typeof Option>;
 const defaultProps: Props = {};
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Option {...defaultProps} {...props} />);
+  return render(<Option {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Option />', () => {

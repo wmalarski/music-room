@@ -12,7 +12,7 @@ const defaultProps: Props = {
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Link {...defaultProps} {...props} />);
+  return render(<Link {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Link />', () => {

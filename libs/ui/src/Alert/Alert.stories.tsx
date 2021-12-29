@@ -6,7 +6,9 @@ export default {
   component: Alert,
 } as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
+const Template: ComponentStory<typeof Alert> = (args) => (
+  <Alert {...args} css={{}} />
+);
 
 export const Error = Template.bind({});
 Error.args = {

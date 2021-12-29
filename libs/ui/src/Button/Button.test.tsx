@@ -11,7 +11,7 @@ const defaultProps: Props = {
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Button {...defaultProps} {...props} />);
+  return render(<Button {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Button />', () => {

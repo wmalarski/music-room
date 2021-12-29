@@ -9,7 +9,7 @@ type Props = ComponentProps<typeof Typography>;
 const defaultProps: Props = {};
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Typography {...defaultProps} {...props} />);
+  return render(<Typography {...defaultProps} {...props} css={{}} />);
 };
 
 describe('<Typography />', () => {

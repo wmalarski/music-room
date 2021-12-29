@@ -1,26 +1,12 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  LegacyRef,
-  ReactElement,
-} from 'react';
+import { styled } from '@music-room/util-styles';
 
-export type SeverityLevel = 'error' | 'warning' | 'info' | 'success';
-
-const AlertInner = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & {
-    severity: SeverityLevel;
+export const Alert = styled('span', {
+  variants: {
+    severity: {
+      error: { backgroundColor: '$brand1' },
+      warning: { backgroundColor: '$brand3' },
+      info: { backgroundColor: '$brand5' },
+      success: { backgroundColor: '$brand7' },
+    },
   },
-  ref: LegacyRef<HTMLSpanElement>
-): ReactElement => {
-  const { severity, children, ...rest } = props;
-  return (
-    <span {...rest} ref={ref}>
-      {severity}
-      {children}
-    </span>
-  );
-};
-
-export const Alert = forwardRef(AlertInner);
+});
