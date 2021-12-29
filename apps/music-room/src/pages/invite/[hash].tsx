@@ -3,8 +3,8 @@ import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
-import { useUserContext } from '../../utils/auth/UserContext';
 import { RoomContextProvider } from '../../utils/contexts/RoomContext';
+import { useUserContext } from '../../utils/contexts/UserContext';
 
 type Props = {
   room: Room;
