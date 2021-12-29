@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ProfileNavigationView } from './ProfileNavigationView';
 
 export default {
-  title: 'ProfileNavigation/ProfileNavigationView',
+  title: 'Headers/ProfileNavigationView',
   component: ProfileNavigationView,
 } as ComponentMeta<typeof ProfileNavigationView>;
 

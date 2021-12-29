@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Room } from '../../../modules/Room/RoomTemplate';
+import { Room } from '../../../modules/Room/Room';
 import { Member } from '../../../services/data/types';
 import { supabase } from '../../../services/supabase';
 import getServerSideMembers from '../../../services/utils/getServerSideMembers';

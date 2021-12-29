@@ -3,16 +3,13 @@ import { Profile } from '../modules/Profile/Profile';
 import { selectProfile } from '../services/data/profiles/selectProfile';
 import { Profile as ProfileType } from '../services/data/types';
 import { supabase } from '../services/supabase';
-import { useUserContext } from '../utils/auth/UserContext';
 
 export type ProfilePageProps = {
   profile: ProfileType;
 };
 
 const ProfilePage = ({ profile }: ProfilePageProps): JSX.Element => {
-  const { user } = useUserContext();
-
-  return <Profile profile={profile} user={user} />;
+  return <Profile profile={profile} />;
 };
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({

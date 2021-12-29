@@ -3,8 +3,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { ComponentProps } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { defaultMember } from '../../services/utils/defaults';
-import { MemberContextProvider } from '../../utils/room/MemberContext';
+import { defaultMember } from '../../../services/utils/defaults';
+import { MemberContextProvider } from '../../../utils/room/MemberContext';
 import { RoomNavigation } from './RoomNavigation';
 
 type Props = ComponentProps<typeof RoomNavigation>;

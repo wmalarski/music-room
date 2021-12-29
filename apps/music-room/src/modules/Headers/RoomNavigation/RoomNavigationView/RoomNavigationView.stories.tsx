@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { RoomNavigationView } from './RoomNavigationView';
 
 export default {
-  title: 'RoomNavigation/RoomNavigationView',
+  title: 'Headers/RoomNavigationView',
   component: RoomNavigationView,
 } as ComponentMeta<typeof RoomNavigationView>;
 

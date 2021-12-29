@@ -2,16 +2,16 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { NavigationView } from './NavigationView';
+import { HeaderView } from './HeaderView';
 
-type Props = ComponentProps<typeof NavigationView>;
+type Props = ComponentProps<typeof HeaderView>;
 
 const defaultProps: Props = {
   right: <p>Right</p>,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<NavigationView {...defaultProps} {...props} />);
+  return render(<HeaderView {...defaultProps} {...props} />);
 };
 
 describe('<NavigationView />', () => {

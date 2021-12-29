@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { defaultMember } from '../../services/utils/defaults';
-import { Room } from './RoomTemplate';
+import { Room } from './Room';
 
 export default {
   title: 'Room/Room',

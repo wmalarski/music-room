@@ -18,7 +18,7 @@ const InvitePage = ({ room }: InvitePageProps): JSX.Element => {
     { enabled: !!user }
   );
 
-  return user ? <Invite room={room} profile={profile} user={user} /> : <Auth />;
+  return user ? <Invite room={room} profile={profile} /> : <Auth />;
 };
 
 export const getServerSideProps: GetServerSideProps<InvitePageProps> = async ({

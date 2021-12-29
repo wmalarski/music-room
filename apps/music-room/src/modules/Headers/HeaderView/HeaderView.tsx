@@ -7,7 +7,7 @@ type Props = {
   right?: ReactNode;
 };
 
-export const NavigationView = ({ right }: Props): JSX.Element => {
+export const HeaderView = ({ right }: Props): JSX.Element => {
   const text = useText();
 
   return (

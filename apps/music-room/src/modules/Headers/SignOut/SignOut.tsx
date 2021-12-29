@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import { useSignOut } from '../../services/auth/signOut';
+import { useSignOut } from '../../../services/auth/signOut';
 import { SignOutView } from './SignOutView/SignOutView';
 
 type Props = {
