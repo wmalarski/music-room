@@ -1,12 +1,10 @@
+import { Link } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { ProfileNavigationView } from './ProfileNavigationView/ProfileNavigationView';
+import paths from '../../../utils/routing/paths';
+import useText from '../../../utils/translations/useText';
 
-type Props = {
-  View?: typeof ProfileNavigationView;
-};
+export const ProfileNavigation = (): ReactElement => {
+  const text = useText();
 
-export const ProfileNavigation = ({
-  View = ProfileNavigationView,
-}: Props): ReactElement => {
-  return <View />;
+  return <Link href={paths.profile}>{text('navigationProfile')}</Link>;
 };

@@ -4,26 +4,24 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { defaultMember } from '../../../services/utils/defaults';
 import { MemberContextProvider } from '../../../utils/contexts/MemberContext';
-import { RoomNavigation } from './RoomNavigation';
+import { InviteLink } from './InviteLink';
 
 const renderComponent = () => {
   return render(
     <MemberContextProvider member={defaultMember}>
       <QueryClientProvider client={new QueryClient()}>
-        <RoomNavigation />
+        <InviteLink />
       </QueryClientProvider>
     </MemberContextProvider>
   );
 };
 
-describe('<RoomNavigation />', () => {
-  it('should render slug', async () => {
+describe('<InviteLink />', () => {
+  it('should render link', async () => {
     expect.hasAssertions();
 
     renderComponent();
 
-    expect(
-      await screen.findByText(defaultMember.room_slug)
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/.*qwertyuiop/)).toBeInTheDocument();
   });
 });
