@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof Typography>;
 
 const Template: ComponentStory<typeof Typography> = (args) => (
-  <Typography {...args} css={{}} />
+  <Typography {...args} />
 );
 
 export const Primary = Template.bind({});

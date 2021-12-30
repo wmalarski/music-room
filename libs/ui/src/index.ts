@@ -1,6 +1,7 @@
 export * from './Alert/Alert';
 export * from './Button/Button';
 export * from './Debug/Debug';
+export * from './Flex/Flex';
 export * from './Input/Input';
 export * from './Link/Link';
 export * from './Option/Option';

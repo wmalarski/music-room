@@ -15,7 +15,6 @@ const Template: ComponentStory<typeof Select> = (args) => {
       {...args}
       value={value}
       onChange={(event) => setValue(event.target.value)}
-      css={{}}
     >
       <Option value="mod">modRole</Option>
       <Option value="user">userRole</Option>

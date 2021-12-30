@@ -94,6 +94,8 @@ export const globalStyles = globalCss({
     margin: 0,
     backgroundColor: '$background',
     color: '$foreground',
+    fontFamily:
+      '-apple-system, "Segoe UI", Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji"',
   },
   '*, *::before, *::after': {
     boxSizing: 'inherit',

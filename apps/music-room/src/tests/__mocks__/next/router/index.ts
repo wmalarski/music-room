@@ -1,18 +1,19 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 
-jest.mock("next/router", () => {
+jest.mock('next/router', () => {
   const push = jest.fn();
   const replace = jest.fn();
 
   return {
     // spread out all "Router" exports
-    ...jest.requireActual("next/router"),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ...(jest.requireActual('next/router') as any),
 
     // shallow merge the "default" exports with...
     default: {
       // all actual "default" exports...
-      ...jest.requireActual("next/router").default,
+      ...jest.requireActual('next/router').default,
 
       // and overwrite push and replace to be jest functions
       push,
@@ -26,4 +27,4 @@ jest.mock("next/router", () => {
 });
 
 // export the mocked instance above
-module.exports = jest.requireMock("next/router");
+module.exports = jest.requireMock('next/router');
