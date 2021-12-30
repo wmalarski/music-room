@@ -1,7 +1,7 @@
 import { Controls, UpdateControlsArgs } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
 import { ReactElement } from 'react';
-import useText from '../../../../../utils/translations/useText';
+import { useText } from '../../../../../utils';
 
 type Props = {
   profileId: number;

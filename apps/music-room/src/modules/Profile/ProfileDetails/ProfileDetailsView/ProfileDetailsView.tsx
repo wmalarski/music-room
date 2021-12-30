@@ -3,7 +3,7 @@ import { Alert, Button, Input, Typography } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 import {
   ProfileDetailsViewData,
   useProfileDetailsViewOptions,

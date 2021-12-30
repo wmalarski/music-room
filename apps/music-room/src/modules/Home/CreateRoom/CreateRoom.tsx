@@ -5,7 +5,7 @@ import {
 } from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import paths from '../../../utils/routing/paths';
+import { paths } from '../../../utils';
 import { CreateRoomView } from './CreateRoomView/CreateRoomView';
 
 type Props = {

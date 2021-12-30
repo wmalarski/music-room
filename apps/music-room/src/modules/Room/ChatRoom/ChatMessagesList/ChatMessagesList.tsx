@@ -1,7 +1,7 @@
 import { Message } from '@music-room/data-access';
 import { Button } from '@music-room/ui';
 import { ReactElement } from 'react';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 
 type Props = {

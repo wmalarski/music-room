@@ -1,6 +1,6 @@
 import { Button } from '@music-room/ui';
 import { ReactElement } from 'react';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 
 type Props = {
   onSignOutClicked: () => void;
