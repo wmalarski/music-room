@@ -1,6 +1,5 @@
-import { useUpdateRoom } from '@music-room/data-access';
+import { useRoom, useUpdateRoom } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRoom } from '../../../utils/contexts/RoomContext';
 import { RoomFormView } from './RoomFormView/RoomFormView';
 
 type Props = {

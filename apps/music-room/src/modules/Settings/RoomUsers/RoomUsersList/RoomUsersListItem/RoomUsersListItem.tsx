@@ -1,8 +1,7 @@
-import { Member, RoomRole } from '@music-room/data-access';
+import { Member, RoleGuard, RoomRole } from '@music-room/data-access';
 import { Button, Debug, Option, Select } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { RoleGuard } from '../../../../../utils/contexts/RoleContext';
-import useText from '../../../../../utils/translations/useText';
+import { useText } from '../../../../../utils';
 
 type Props = {
   member: Member;

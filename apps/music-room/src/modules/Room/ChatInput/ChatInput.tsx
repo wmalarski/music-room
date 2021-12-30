@@ -1,6 +1,5 @@
-import { useInsertMessage } from '@music-room/data-access';
+import { useInsertMessage, useRole } from '@music-room/data-access';
 import { ReactElement, useState } from 'react';
-import { useRole } from '../../../utils/contexts/RoleContext';
 import { ChatInputView } from './ChatInputView/ChatInputView';
 
 type Props = {

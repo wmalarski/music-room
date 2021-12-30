@@ -2,7 +2,7 @@ import { Message } from '@music-room/data-access';
 import { Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 
 type Data = {
   url: string;

@@ -1,20 +1,23 @@
-import { DefaultRequestBody, rest } from "msw";
-import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
-import { Profile } from "../types";
-import { UpdateProfileArgs } from "./updateProfile";
+import {
+  Profile,
+  SUPABASE_ENDPOINT,
+  TABLES,
+  UpdateProfileArgs,
+} from '@music-room/data-access';
+import { DefaultRequestBody, rest } from 'msw';
 
 export const mockProfilesStorage = {
-  get: (): Profile[] => JSON.parse(sessionStorage.getItem("profiles") ?? "[]"),
+  get: (): Profile[] => JSON.parse(sessionStorage.getItem('profiles') ?? '[]'),
   set: (profiles: Profile[]): void =>
-    sessionStorage.setItem("profiles", JSON.stringify(profiles)),
+    sessionStorage.setItem('profiles', JSON.stringify(profiles)),
 };
 
 export const profilesHandlers = [
-  rest.get<DefaultRequestBody, Profile>(
+  rest.get<DefaultRequestBody, never, Profile>(
     `${SUPABASE_ENDPOINT}/${TABLES.profiles}`,
     (_req, res, ctx) => res(ctx.json(mockProfilesStorage.get()[0]))
   ),
-  rest.patch<UpdateProfileArgs, Profile>(
+  rest.patch<UpdateProfileArgs, never, Profile>(
     `${SUPABASE_ENDPOINT}/${TABLES.profiles}`,
     ({ body }, res, ctx) => {
       const profiles = [...mockProfilesStorage.get()];

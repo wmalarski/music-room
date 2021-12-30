@@ -21,7 +21,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "music-room": {
       "root": "apps/music-room",
@@ -104,7 +105,8 @@
             }
           }
         }
-      }
+      },
+      "tags": []
     },
     "music-room-e2e": {
       "root": "apps/music-room-e2e",
@@ -131,7 +133,9 @@
             "lintFilePatterns": ["apps/music-room-e2e/**/*.{js,ts}"]
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["music-room"]
     },
     "ui": {
       "root": "libs/ui",
@@ -153,7 +157,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "util-styles": {
       "root": "libs/util-styles",
@@ -175,23 +180,31 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "babel": true
-      }
+      },
+      "tags": []
     },
-    "@nrwl/next": {
-      "application": {
-        "linter": "eslint"
+    "util-tests": {
+      "root": "libs/util-tests",
+      "sourceRoot": "libs/util-tests/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/util-tests/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util-tests"],
+          "options": {
+            "jestConfig": "libs/util-tests/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
       }
     }
-  },
-  "defaultProject": "music-room"
+  }
 }

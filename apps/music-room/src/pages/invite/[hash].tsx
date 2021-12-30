@@ -1,10 +1,13 @@
-import { Room, selectRoomByHash } from '@music-room/data-access';
+import {
+  Room,
+  RoomContextProvider,
+  selectRoomByHash,
+  useUserContext,
+} from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
-import { RoomContextProvider } from '../../utils/contexts/RoomContext';
-import { useUserContext } from '../../utils/contexts/UserContext';
 
 type Props = {
   room: Room;
@@ -15,7 +18,7 @@ const InvitePage = ({ room }: Props): ReactElement => {
 
   return user ? (
     <RoomContextProvider room={room}>
-      <Invite room={room} />
+      <Invite />
     </RoomContextProvider>
   ) : (
     <Auth />
@@ -30,6 +33,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   const [room] = await selectRoomByHash({
     queryKey: ['roomByHash', { hash: roomHash }],
+    meta: {},
   });
 
   if (!room) return { notFound: true };

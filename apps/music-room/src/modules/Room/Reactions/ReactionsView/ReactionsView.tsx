@@ -1,7 +1,7 @@
 import { Action, Message } from '@music-room/data-access';
 import { Button, Debug } from '@music-room/ui';
 import { ReactElement } from 'react';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 
 type Data = {
   likeAt: string | null;

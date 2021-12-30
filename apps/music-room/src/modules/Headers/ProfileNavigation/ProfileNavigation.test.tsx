@@ -1,7 +1,7 @@
+import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { TestWrapper } from '../../../tests/TestWrapper';
 import { ProfileNavigation } from './ProfileNavigation';
 
 const renderComponent = () => {

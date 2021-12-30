@@ -1,12 +1,12 @@
 import {
   getServerSideMembers,
   Member,
+  MemberContextProvider,
   supabase,
 } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Settings } from '../../../modules/Settings/Settings';
-import { MemberContextProvider } from '../../../utils/contexts/MemberContext';
 
 type Props = {
   member: Member;
@@ -14,7 +14,7 @@ type Props = {
 
 const RoomSettingsPage = ({ member }: Props): ReactElement => (
   <MemberContextProvider member={member}>
-    <Settings member={member} />
+    <Settings />
   </MemberContextProvider>
 );
 

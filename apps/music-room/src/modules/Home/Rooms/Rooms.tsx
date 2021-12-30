@@ -1,6 +1,5 @@
-import { Member, useSelectMembers } from '@music-room/data-access';
+import { Member, useSelectMembers, useUser } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useUser } from '../../../utils/contexts/UserContext';
 import { RoomsList } from './RoomsList/RoomsList';
 
 type Props = {

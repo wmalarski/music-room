@@ -20,7 +20,8 @@
           "test",
           "e2e",
           "build-storybook"
-        ]
+        ],
+        "parallel": 1
       }
     }
   },
@@ -32,22 +33,20 @@
       }
     ]
   },
-  "projects": {
-    "data-access": {
-      "tags": []
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
     },
-    "music-room": {
-      "tags": []
-    },
-    "music-room-e2e": {
-      "tags": [],
-      "implicitDependencies": ["music-room"]
-    },
-    "ui": {
-      "tags": []
-    },
-    "util-styles": {
-      "tags": []
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
     }
-  }
+  },
+  "defaultProject": "music-room"
 }

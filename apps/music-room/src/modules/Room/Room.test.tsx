@@ -1,4 +1,5 @@
 import { defaultMember } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
@@ -12,7 +13,11 @@ const defaultProps: Props = {
 };
 
 function renderComponent(props: Partial<Props> = {}) {
-  return render(<Room {...defaultProps} {...props} />);
+  return render(
+    <TestWrapper>
+      <Room {...defaultProps} {...props} />
+    </TestWrapper>
+  );
 }
 
 describe('<Room />', () => {

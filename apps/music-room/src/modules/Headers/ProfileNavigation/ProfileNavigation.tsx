@@ -1,7 +1,6 @@
 import { Link } from '@music-room/ui';
 import { ReactElement } from 'react';
-import paths from '../../../utils/routing/paths';
-import useText from '../../../utils/translations/useText';
+import { paths, useText } from '../../../utils';
 
 export const ProfileNavigation = (): ReactElement => {
   const text = useText();

@@ -1,7 +1,6 @@
 import { Link } from '@music-room/ui';
 import { ReactElement, ReactNode } from 'react';
-import paths from '../../../utils/routing/paths';
-import useText from '../../../utils/translations/useText';
+import { paths, useText } from '../../../utils';
 
 type Props = {
   right?: ReactNode;

@@ -1,7 +1,7 @@
+import { useRoom } from '@music-room/data-access';
 import { Input } from '@music-room/ui';
 import Link from 'next/link';
 import { ReactElement, useState } from 'react';
-import { useRoom } from '../../../utils/contexts/RoomContext';
 
 export const InviteLink = (): ReactElement => {
   const { hash } = useRoom();

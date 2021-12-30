@@ -1,21 +1,24 @@
-import { DefaultRequestBody, rest } from "msw";
-import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
-import { Action } from "../types";
-import { UpsertActionArgs } from "./upsertAction";
+import {
+  Action,
+  SUPABASE_ENDPOINT,
+  TABLES,
+  UpsertActionArgs,
+} from '@music-room/data-access';
+import { DefaultRequestBody, rest } from 'msw';
 
 export const mockActionsStorage = {
-  get: (): Action[] => JSON.parse(sessionStorage.getItem("actions") ?? "[]"),
+  get: (): Action[] => JSON.parse(sessionStorage.getItem('actions') ?? '[]'),
   set: (actions: Action[]): void =>
-    sessionStorage.setItem("actions", JSON.stringify(actions)),
+    sessionStorage.setItem('actions', JSON.stringify(actions)),
 };
 
 export const actionHandlers = [
-  rest.get<DefaultRequestBody, Action[]>(
+  rest.get<DefaultRequestBody, { limit: string }, Action[]>(
     `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
     (req, res, ctx) =>
-      res(ctx.json(mockActionsStorage.get().slice(0, req.params.limit)))
+      res(ctx.json(mockActionsStorage.get().slice(0, Number(req.params.limit))))
   ),
-  rest.post<UpsertActionArgs, Action>(
+  rest.post<UpsertActionArgs, never, Action>(
     `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
     (req, res, ctx) => {
       const actions = mockActionsStorage.get();

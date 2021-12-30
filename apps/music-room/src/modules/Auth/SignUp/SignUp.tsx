@@ -1,5 +1,5 @@
+import { useSignUp } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSignUp } from '../../../../../../libs/data-access/src/auth/signUp';
 import SignUpView from './SignUpView/SignUpView';
 
 type Props = {

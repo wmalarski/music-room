@@ -1,5 +1,5 @@
+import { useRoom } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRoom } from '../../utils/contexts/RoomContext';
 import { RoomHeader } from '../Headers/RoomHeader/RoomHeader';
 import { Layout } from '../Layout/Layout';
 import { ChatInput } from './ChatInput/ChatInput';

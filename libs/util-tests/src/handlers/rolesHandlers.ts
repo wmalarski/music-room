@@ -1,10 +1,13 @@
-import { rest } from "msw";
-import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
-import { mockMembersStorage } from "../members/membersHandlers";
-import { Role } from "../types";
-import { DeleteRoleArgs } from "./deleteRole";
-import { InsertRoleArgs } from "./insertRole";
-import { UpdateRolesArgs } from "./updateRole";
+import {
+  DeleteRoleArgs,
+  InsertRoleArgs,
+  Role,
+  SUPABASE_ENDPOINT,
+  TABLES,
+  UpdateRolesArgs,
+} from '@music-room/data-access';
+import { rest } from 'msw';
+import { mockMembersStorage } from './membersHandlers';
 
 export const mockRolesStorage = {
   get: (): Role[] =>
@@ -17,7 +20,7 @@ export const mockRolesStorage = {
   set: (roles: Role[]): void => {
     const member = mockMembersStorage.getContext();
     if (!member) {
-      console.warn("no mock member context");
+      console.warn('no mock member context');
       return;
     }
 
@@ -34,7 +37,7 @@ export const mockRolesStorage = {
 };
 
 export const rolesHandlers = [
-  rest.post<InsertRoleArgs, Role>(
+  rest.post<InsertRoleArgs, never, Role>(
     `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
     ({ body }, res, ctx) => {
       const roles = mockRolesStorage.get();
@@ -48,7 +51,7 @@ export const rolesHandlers = [
       return res(ctx.json(role));
     }
   ),
-  rest.patch<UpdateRolesArgs, Role>(
+  rest.patch<UpdateRolesArgs, never, Role>(
     `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
     ({ body }, res, ctx) => {
       const roles = [...mockRolesStorage.get()];
@@ -65,7 +68,7 @@ export const rolesHandlers = [
   rest.delete<DeleteRoleArgs>(
     `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
     ({ url }, res, ctx) => {
-      const query = url.searchParams.get("id")?.split(".")[1];
+      const query = url.searchParams.get('id')?.split('.')[1];
       if (!query) return res(ctx.json({}));
       const id = Number(query);
 

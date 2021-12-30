@@ -2,7 +2,7 @@ import { Alert, Button, Debug, Input, Typography } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import useText from '../../../../utils/translations/useText';
+import { useText } from '../../../../utils';
 import {
   SignUpViewContext,
   SignUpViewData,

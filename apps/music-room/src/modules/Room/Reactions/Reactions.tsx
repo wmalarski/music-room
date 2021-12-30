@@ -1,10 +1,10 @@
 import {
+  useRole,
   useSelectAction,
   useSelectCurrentMessage,
   useUpsertAction,
 } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRole } from '../../../utils/contexts/RoleContext';
 import { ReactionsView } from './ReactionsView/ReactionsView';
 
 type Props = {

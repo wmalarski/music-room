@@ -1,18 +1,15 @@
-import { defaultMember } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { ComponentProps } from 'react';
 import { Settings } from './Settings';
 
-type Props = ComponentProps<typeof Settings>;
-
-const defaultProps: Props = {
-  member: defaultMember,
-};
-
-const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Settings {...defaultProps} {...props} />);
+const renderComponent = () => {
+  return render(
+    <TestWrapper>
+      <Settings />
+    </TestWrapper>
+  );
 };
 
 describe('<Settings />', () => {

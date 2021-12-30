@@ -1,6 +1,5 @@
-/* eslint-disable jest/require-top-level-describe */
-import "@testing-library/jest-dom";
-import server from "./mockServer";
+import { server } from '@music-room/util-tests';
+import '@testing-library/jest-dom';
 
 beforeAll(() => {
   server.listen();

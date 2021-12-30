@@ -1,25 +1,24 @@
 import {
   Profile,
-  Room,
   SupabaseErrorCode,
   useInsertRole,
+  useRoom,
 } from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import paths from '../../../utils/routing/paths';
+import { paths } from '../../../utils';
 import { InviteAcceptView } from './InviteAcceptView/InviteAcceptView';
 
 type Props = {
-  room: Room;
   profile: Profile;
   View?: typeof InviteAcceptView;
 };
 
 export const InviteAccept = ({
-  room,
   profile,
   View = InviteAcceptView,
 }: Props): ReactElement => {
+  const room = useRoom();
   const router = useRouter();
 
   const { mutate: insertRole, isLoading } = useInsertRole({
