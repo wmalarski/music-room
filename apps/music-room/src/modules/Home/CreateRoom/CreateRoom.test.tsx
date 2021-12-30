@@ -4,12 +4,12 @@ import {
   mockMembersStorage,
   mockProfilesStorage,
 } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
-import { TestWrapper } from '../../../tests/TestWrapper';
 import { CreateRoom } from './CreateRoom';
 
 type Props = ComponentProps<typeof CreateRoom>;

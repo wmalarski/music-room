@@ -22,7 +22,6 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    "../../libs/util-tests/src/mockServer.ts"
   ],
   "exclude": [
     "node_modules",

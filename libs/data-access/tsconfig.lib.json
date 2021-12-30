@@ -21,7 +21,5 @@
     "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    "../util-tests/src/handlers/roomsHandlers.ts",
-    "../util-tests/src/handlers/rolesHandlers.ts"
   ]
 }
