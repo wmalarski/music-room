@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SignOutView } from './SignOutView';
 
 export default {
-  title: 'SignOut/SignOutView',
+  title: 'Headers/SignOutView',
   component: SignOutView,
   argTypes: {
     onSubmit: { action: 'onSubmit' },

@@ -3,12 +3,14 @@ import type { AppProps } from 'next/app';
 import { ReactElement } from 'react';
 import { QueryClientProvider } from 'react-query';
 
-const MyApp = ({ Component, pageProps }: AppProps): ReactElement => (
-  <UserContextProvider>
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
-  </UserContextProvider>
-);
+const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
+  return (
+    <UserContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </UserContextProvider>
+  );
+};
 
 export default MyApp;

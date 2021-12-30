@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ReactionsView } from './ReactionsView';
 
 export default {
-  title: 'Chat/ReactionsView',
+  title: 'Room/ReactionsView',
   component: ReactionsView,
 } as ComponentMeta<typeof ReactionsView>;
 

@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { PlayerControls } from './PlayerControls';
 
 export default {
-  title: 'Chat/PlayerControls',
+  title: 'Room/PlayerControls',
   component: PlayerControls,
 } as ComponentMeta<typeof PlayerControls>;
 

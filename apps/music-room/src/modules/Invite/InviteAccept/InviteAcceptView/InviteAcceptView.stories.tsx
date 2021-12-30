@@ -5,7 +5,7 @@ import { InviteAcceptView } from './InviteAcceptView';
 export default {
   title: 'Invite/InviteAcceptView',
   component: InviteAcceptView,
-  argTypes: { onAcceptClicked: { type: 'action' } },
+  argTypes: { onAcceptClicked: { type: 'function' } },
 } as ComponentMeta<typeof InviteAcceptView>;
 
 const Template: ComponentStory<typeof InviteAcceptView> = (args) => (

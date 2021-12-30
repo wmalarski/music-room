@@ -2067,7 +2067,7 @@
     webpack "^5.58.1"
     webpack-merge "^5.8.0"
 
-"@nrwl/storybook@13.4.1":
+"@nrwl/storybook@13.4.1", "@nrwl/storybook@^13.4.1":
   version "13.4.1"
   resolved "https://registry.yarnpkg.com/@nrwl/storybook/-/storybook-13.4.1.tgz#09fc4fc2c1d33dafa9e761e84fa521921529d582"
   integrity sha512-EhsIZnWJIhZikI17+AL2YHdsXZzXNs+GVmbPCig6gV3EjfQyc9lfx455ydiy/VYJ8QbAX6+XEixPtXigX30wUg==

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ChatInputView } from './ChatInputView';
 
 export default {
-  title: 'Chat/ChatInputView',
+  title: 'Room/ChatInputView',
   component: ChatInputView,
   argTypes: { onSubmit: { action: 'onSubmit' } },
 } as ComponentMeta<typeof ChatInputView>;
