@@ -1,10 +1,10 @@
 import {
   useDeleteRole,
+  useRoom,
   useSelectMembers,
   useUpdateRole,
 } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRoom } from '../../../utils/contexts/RoomContext';
 import { RoomUsersList } from './RoomUsersList/RoomUsersList';
 
 type Props = {

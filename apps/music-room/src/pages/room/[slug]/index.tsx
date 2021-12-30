@@ -1,12 +1,12 @@
 import {
   getServerSideMembers,
   Member,
+  MemberContextProvider,
   supabase,
 } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { Room } from '../../../modules/Room/Room';
-import { MemberContextProvider } from '../../../utils/contexts/MemberContext';
 
 type Props = {
   member: Member;

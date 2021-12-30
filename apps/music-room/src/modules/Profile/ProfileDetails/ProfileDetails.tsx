@@ -1,6 +1,5 @@
-import { useUpdateProfile } from '@music-room/data-access';
+import { useProfile, useUpdateProfile } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useProfile } from '../../../utils/contexts/ProfileContext';
 import { ProfileDetailsView } from './ProfileDetailsView/ProfileDetailsView';
 
 type Props = {

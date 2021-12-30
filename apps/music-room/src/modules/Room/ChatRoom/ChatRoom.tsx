@@ -1,9 +1,9 @@
 import {
+  useRoom,
   useSelectMessages,
   useSubscribeToMessages,
 } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRoom } from '../../../utils/contexts/RoomContext';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 
 type Props = {

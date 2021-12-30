@@ -1,6 +1,6 @@
+import { useRoom } from '@music-room/data-access';
 import { Link } from '@music-room/ui';
 import { ReactElement } from 'react';
-import { useRoom } from '../../../utils/contexts/RoomContext';
 import paths from '../../../utils/routing/paths';
 import useText from '../../../utils/translations/useText';
 

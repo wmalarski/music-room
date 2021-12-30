@@ -1,4 +1,5 @@
 import {
+  useRole,
   useSelectControls,
   useSelectCurrentMessage,
   useSubscribeToControls,
@@ -6,7 +7,6 @@ import {
   useUpdateMessage,
 } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRole } from '../../../utils/contexts/RoleContext';
 import { VideoPlayerView } from './VideoPlayerView/VideoPlayerView';
 
 type Props = {

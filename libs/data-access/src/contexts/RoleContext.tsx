@@ -1,4 +1,3 @@
-import { Role, RoomRole } from '@music-room/data-access';
 import {
   createContext,
   PropsWithChildren,
@@ -6,6 +5,7 @@ import {
   ReactNode,
   useContext,
 } from 'react';
+import { Role, RoomRole } from '../data/types';
 
 const RoleContext = createContext<Role | null>(null);
 
@@ -35,13 +35,13 @@ type RoleGuardProps = {
 
 export const RoleGuard = ({
   visibleFor,
-  children,
+  children = null,
   fallback = null,
   role,
-}: PropsWithChildren<RoleGuardProps>): ReactElement => {
+}: PropsWithChildren<RoleGuardProps>): ReactNode => {
   const { role: defaultRole } = useRole();
 
-  return <>{visibleFor.includes(role ?? defaultRole) ? children : fallback}</>;
+  return visibleFor.includes(role ?? defaultRole) ? children : fallback;
 };
 
 export type RoleGuardArgs<T> = Partial<Record<RoomRole, T>> & { default?: T };

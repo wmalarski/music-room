@@ -1,6 +1,5 @@
-import { Member } from '@music-room/data-access';
+import { Member, useRoleGuard } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useRoleGuard } from '../../utils/contexts/RoleContext';
 import { RoomHeader } from '../Headers/RoomHeader/RoomHeader';
 import { Layout } from '../Layout/Layout';
 import { DeleteRoom } from './DeleteRoom/DeleteRoom';

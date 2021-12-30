@@ -18,5 +18,6 @@
   "include": [
     "../src/**/*",
     "*.js",
+    "../../../libs/data-access/src/contexts",
   ],
 }
