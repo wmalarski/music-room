@@ -1,10 +1,13 @@
-import { rest } from "msw";
-import { SUPABASE_ENDPOINT, TABLES } from "../../supabase";
-import { mockMembersStorage } from "../members/membersHandlers";
-import { Room } from "../types";
-import { DeleteRoomArgs } from "./deleteRoom";
-import { InsertRoomArgs } from "./insertRoom";
-import { UpdateRoomArgs } from "./updateRoom";
+import {
+  DeleteRoomArgs,
+  InsertRoomArgs,
+  Room,
+  SUPABASE_ENDPOINT,
+  TABLES,
+  UpdateRoomArgs,
+} from '@music-room/data-access';
+import { rest } from 'msw';
+import { mockMembersStorage } from './membersHandlers';
 
 export const mockRoomsStorage = {
   get: (): Room[] =>
@@ -14,12 +17,12 @@ export const mockRoomsStorage = {
       id: member.room_id,
       name: member.room_name,
       slug: member.room_slug,
-      data: { kind: "room#0.0.1" },
+      data: { kind: 'room#0.0.1' },
     })),
   set: (rooms: Room[]): void => {
     const member = mockMembersStorage.getContext();
     if (!member) {
-      console.warn("no mock member context");
+      console.warn('no mock member context');
       return;
     }
     mockMembersStorage.set(
@@ -37,7 +40,7 @@ export const mockRoomsStorage = {
 };
 
 export const roomsHandlers = [
-  rest.post<InsertRoomArgs, Room>(
+  rest.post<InsertRoomArgs, never, Room>(
     `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
     ({ body }, res, ctx) => {
       const rooms = mockRoomsStorage.get();
@@ -51,7 +54,7 @@ export const roomsHandlers = [
       return res(ctx.json(room));
     }
   ),
-  rest.patch<UpdateRoomArgs, Room>(
+  rest.patch<UpdateRoomArgs, never, Room>(
     `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
     ({ body }, res, ctx) => {
       const rooms = [...mockRoomsStorage.get()];
@@ -68,7 +71,7 @@ export const roomsHandlers = [
   rest.delete<DeleteRoomArgs>(
     `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
     ({ url }, res, ctx) => {
-      const query = url.searchParams.get("id")?.split(".")[1];
+      const query = url.searchParams.get('id')?.split('.')[1];
       if (!query) return res(ctx.json({}));
       const id = Number(query);
 

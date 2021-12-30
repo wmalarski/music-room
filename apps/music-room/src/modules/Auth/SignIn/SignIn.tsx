@@ -1,5 +1,5 @@
+import { useSignIn } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { useSignIn } from '../../../../../../libs/data-access/src/auth/signIn';
 import { SignInView } from './SignInView/SignInView';
 
 type Props = {

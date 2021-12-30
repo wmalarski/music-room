@@ -1,6 +1,6 @@
+import { useSignOut } from '@music-room/data-access';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import { useSignOut } from '../../../../../../libs/data-access/src/auth/signOut';
 import paths from '../../../utils/routing/paths';
 import { SignOutView } from './SignOutView/SignOutView';
 

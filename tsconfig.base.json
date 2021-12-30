@@ -17,7 +17,8 @@
     "paths": {
       "@music-room/data-access": ["libs/data-access/src/index.ts"],
       "@music-room/ui": ["libs/ui/src/index.ts"],
-      "@music-room/util-styles": ["libs/util-styles/src/index.ts"]
+      "@music-room/util-styles": ["libs/util-styles/src/index.ts"],
+      "@music-room/util-tests": ["libs/util-tests/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
