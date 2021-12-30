@@ -18,7 +18,7 @@ const InvitePage = ({ room }: Props): ReactElement => {
 
   return user ? (
     <RoomContextProvider room={room}>
-      <Invite room={room} />
+      <Invite />
     </RoomContextProvider>
   ) : (
     <Auth />
@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   const [room] = await selectRoomByHash({
     queryKey: ['roomByHash', { hash: roomHash }],
+    meta: {},
   });
 
   if (!room) return { notFound: true };

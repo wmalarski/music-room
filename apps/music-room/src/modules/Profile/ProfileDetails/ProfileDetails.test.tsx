@@ -1,4 +1,5 @@
-import { defaultProfile, mockProfilesStorage } from '@music-room/data-access';
+import { defaultProfile } from '@music-room/data-access';
+import { mockProfilesStorage, TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -19,7 +20,6 @@ const View: Props['View'] = ({ profile, onSubmit }) => (
 
 const defaultProps: Props = {
   View,
-  profile: defaultProfile,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

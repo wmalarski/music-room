@@ -14,7 +14,7 @@ type Props = {
 
 const RoomSettingsPage = ({ member }: Props): ReactElement => (
   <MemberContextProvider member={member}>
-    <Settings member={member} />
+    <Settings />
   </MemberContextProvider>
 );
 

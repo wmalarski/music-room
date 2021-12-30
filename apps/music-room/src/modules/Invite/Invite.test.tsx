@@ -1,8 +1,5 @@
-import {
-  defaultProfile,
-  defaultRoom,
-  defaultUser,
-} from '@music-room/data-access';
+import { defaultRoom } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
@@ -13,12 +10,14 @@ type Props = ComponentProps<typeof Invite>;
 
 const defaultProps: Props = {
   room: defaultRoom,
-  user: defaultUser,
-  profile: defaultProfile,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Invite {...defaultProps} {...props} />);
+  return render(
+    <TestWrapper>
+      <Invite {...defaultProps} {...props} />
+    </TestWrapper>
+  );
 };
 
 describe('<Invite />', () => {

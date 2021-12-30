@@ -28,6 +28,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   const profile = await selectProfile({
     queryKey: ['profile', { userId: user.id }],
+    meta: {},
   });
 
   return profile ? { props: { profile } } : { notFound: true };

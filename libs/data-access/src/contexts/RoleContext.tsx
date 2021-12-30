@@ -38,10 +38,12 @@ export const RoleGuard = ({
   children = null,
   fallback = null,
   role,
-}: PropsWithChildren<RoleGuardProps>): ReactNode => {
+}: PropsWithChildren<RoleGuardProps>): ReactElement => {
   const { role: defaultRole } = useRole();
 
-  return visibleFor.includes(role ?? defaultRole) ? children : fallback;
+  return (
+    <div>{visibleFor.includes(role ?? defaultRole) ? children : fallback}</div>
+  );
 };
 
 export type RoleGuardArgs<T> = Partial<Record<RoomRole, T>> & { default?: T };

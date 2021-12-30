@@ -22,6 +22,7 @@ export const getServerSideMembers = async ({
         user_id: user.id,
       },
     ],
+    meta: {},
   });
 
   return roles?.[0] ?? null;
