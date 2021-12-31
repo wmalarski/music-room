@@ -68,6 +68,8 @@ export const {
       md: '1rem',
       lg: '1.5rem',
       xl: '2rem',
+
+      dialogMd: '30rem',
     },
     space: {
       xs: '0.25rem',
@@ -80,6 +82,8 @@ export const {
       smallGray: '0 2px 10px $gray1A9',
       bottom1: '0 0 0 1px $gray1',
       bottom2: '0 0 0 2px $gray1',
+      dialog1:
+        'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
     },
   },
   media: {

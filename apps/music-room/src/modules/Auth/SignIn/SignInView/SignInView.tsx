@@ -39,7 +39,7 @@ export const SignInView = ({
             {...register('email', options.email)}
           />
           {errors.email && (
-            <Typography kind="error" size="sm">
+            <Typography kind="error" size="sm" role="alert">
               {errors.email.message}
             </Typography>
           )}
@@ -52,13 +52,13 @@ export const SignInView = ({
             {...register('password', options.password)}
           />
           {errors.password && (
-            <Typography kind="error" size="sm">
+            <Typography kind="error" size="sm" role="alert">
               {errors.password.message}
             </Typography>
           )}
         </Flex>
         {error && (
-          <Typography kind="error" size="sm">
+          <Typography kind="error" size="sm" role="alert">
             {error.message}
           </Typography>
         )}

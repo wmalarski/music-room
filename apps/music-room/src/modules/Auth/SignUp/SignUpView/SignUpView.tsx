@@ -43,7 +43,7 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
             {...register('email', options.email)}
           />
           {errors.email && (
-            <Typography kind="error" size="sm">
+            <Typography kind="error" size="sm" role="alert">
               {errors.email.message}
             </Typography>
           )}
@@ -56,7 +56,7 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
             {...register('password', options.password)}
           />
           {errors.password && (
-            <Typography kind="error" size="sm">
+            <Typography kind="error" size="sm" role="alert">
               {errors.password.message}
             </Typography>
           )}
@@ -69,13 +69,13 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
             {...register('confirmPassword', options.confirmPassword)}
           />
           {errors.confirmPassword && (
-            <Typography kind="error">
+            <Typography size="sm" kind="error" role="alert">
               {errors.confirmPassword.message}
             </Typography>
           )}
         </Flex>
         {error && (
-          <Typography kind="error" size="sm">
+          <Typography kind="error" size="sm" role="alert">
             {error.message}
           </Typography>
         )}
