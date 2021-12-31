@@ -8,12 +8,16 @@ export const Button = styled('button', {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: '$gray9',
-  backgroundColor: '$gray1',
+  backgroundColor: '$gray2',
   boxShadow: '$small',
   padding: '0 $md',
-  '&:hover': { backgroundColor: '$gray1', color: '$brand8' },
-  '&:focus': { outline: '$border2Brand8' },
+  border: '$border1Gray2',
+  '&:hover': {
+    backgroundColor: '$gray1A9',
+    color: '$brand9',
+    border: '$border1Brand8',
+  },
+  '&:focus': { outline: '$border1Brand9' },
 
   variants: {
     primary: {
@@ -22,7 +26,7 @@ export const Button = styled('button', {
         backgroundColor: '$gray9',
         '&:hover': { backgroundColor: '$brand9', color: '$gray1' },
         '&:focus': {
-          outline: '$border2Brand8',
+          outline: '$border1Brand8',
         },
       },
     },

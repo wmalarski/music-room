@@ -1,4 +1,4 @@
-import { Alert, Button, Input, Typography } from '@music-room/ui';
+import { Button, Flex, Input, Typography } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -29,25 +29,43 @@ export const SignInView = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>{text('signInHeader')}</Typography>
-      <Input
-        placeholder={text('emailPlaceholder')}
-        type="email"
-        {...register('email', options.email)}
-      />
-      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
-      <Input
-        placeholder={text('passwordPlaceholder')}
-        type="password"
-        {...register('password', options.password)}
-      />
-      {errors.password && (
-        <Alert severity="error">{errors.password.message}</Alert>
-      )}
-      {error && <Alert severity="error">{error.message}</Alert>}
-      <Button isLoading={isLoading} type="submit">
-        {text('signInButton')}
-      </Button>
+      <Flex direction="column" gap="md">
+        <Typography kind="description">{text('signInHeader')}</Typography>
+        <Flex direction="column" gap="sm">
+          <Typography>{text('emailPlaceholder')}</Typography>
+          <Input
+            placeholder={text('emailPlaceholder')}
+            type="email"
+            {...register('email', options.email)}
+          />
+          {errors.email && (
+            <Typography kind="error" size="sm">
+              {errors.email.message}
+            </Typography>
+          )}
+        </Flex>
+        <Flex direction="column" gap="sm">
+          <Typography>{text('passwordPlaceholder')}</Typography>
+          <Input
+            placeholder={text('passwordPlaceholder')}
+            type="password"
+            {...register('password', options.password)}
+          />
+          {errors.password && (
+            <Typography kind="error" size="sm">
+              {errors.password.message}
+            </Typography>
+          )}
+        </Flex>
+        {error && (
+          <Typography kind="error" size="sm">
+            {error.message}
+          </Typography>
+        )}
+        <Button isLoading={isLoading} type="submit">
+          <Typography size="sm">{text('signInButton')}</Typography>
+        </Button>
+      </Flex>
     </form>
   );
 };

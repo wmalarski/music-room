@@ -36,7 +36,12 @@ export const {
       gray9: 'hsl(0, 0%, 90%)',
       gray1A9: 'hsl(0, 0%, 10%, 0.9)',
 
-      border1White3: '1px solid $gray3',
+      error1: 'hsl(0, 100%, 60%)',
+
+      border1Gray2: '1px solid $gray2',
+      border1Gray3: '1px solid $gray3',
+      border1Brand9: '1px solid $brand9',
+      border1Brand8: '1px solid $brand8',
       border2Brand8: '2px solid $brand8',
     },
     fontSizes: {
@@ -72,7 +77,9 @@ export const {
       xl: '2rem',
     },
     shadows: {
-      small: '0 2px 10px $gray1A9',
+      smallGray: '0 2px 10px $gray1A9',
+      bottom1: '0 0 0 1px $gray1',
+      bottom2: '0 0 0 2px $gray1',
     },
   },
   media: {

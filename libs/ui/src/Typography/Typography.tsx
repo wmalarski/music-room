@@ -15,15 +15,16 @@ export const Typography = styled('p', {
       regular: { fontWeight: '$regular' },
       bold: { fontWeight: '$bold' },
     },
-    opacity: {
-      0.8: { opacity: 0.8 },
-      1: { opacity: 1 },
+    kind: {
+      normal: { color: '$foreground' },
+      description: { color: '$gray7' },
+      error: { color: '$error1' },
     },
   },
 
   defaultVariants: {
     size: 'sm',
     fontWeight: 'regular',
-    opacity: '1',
+    kind: 'normal',
   },
 });

@@ -1,4 +1,4 @@
-import { Alert, Button, Debug, Input, Typography } from '@music-room/ui';
+import { Button, Flex, Input, Typography } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,12 +17,7 @@ type Props = {
   onSubmit: (data: SignUpViewData) => void;
 };
 
-const SignUpView = ({
-  isLoading,
-  error,
-  user,
-  onSubmit,
-}: Props): ReactElement => {
+const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
   const text = useText();
 
   const options = useSignUpViewOptions();
@@ -38,34 +33,56 @@ const SignUpView = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>{text('signUpHeader')}</Typography>
-      <Input
-        type="email"
-        placeholder={text('emailPlaceholder')}
-        {...register('email', options.email)}
-      />
-      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
-      <Input
-        type="password"
-        placeholder={text('passwordPlaceholder')}
-        {...register('password', options.password)}
-      />
-      {errors.password && (
-        <Alert severity="error">{errors.password.message}</Alert>
-      )}
-      <Input
-        type="password"
-        placeholder={text('confirmPasswordPlaceholder')}
-        {...register('confirmPassword', options.confirmPassword)}
-      />
-      {errors.confirmPassword && (
-        <Alert severity="error">{errors.confirmPassword.message}</Alert>
-      )}
-      {error && <Alert severity="error">{error.message}</Alert>}
-      <Button isLoading={isLoading} type="submit">
-        {text('signUpButton')}
-      </Button>
-      <Debug value={user} />
+      <Flex direction="column" gap="md">
+        <Typography kind="description">{text('signUpHeader')}</Typography>
+        <Flex direction="column" gap="sm">
+          <Typography>{text('emailPlaceholder')}</Typography>
+          <Input
+            type="email"
+            placeholder={text('emailPlaceholder')}
+            {...register('email', options.email)}
+          />
+          {errors.email && (
+            <Typography kind="error" size="sm">
+              {errors.email.message}
+            </Typography>
+          )}
+        </Flex>
+        <Flex direction="column" gap="sm">
+          <Typography>{text('passwordPlaceholder')}</Typography>
+          <Input
+            type="password"
+            placeholder={text('passwordPlaceholder')}
+            {...register('password', options.password)}
+          />
+          {errors.password && (
+            <Typography kind="error" size="sm">
+              {errors.password.message}
+            </Typography>
+          )}
+        </Flex>
+        <Flex direction="column" gap="sm">
+          <Typography>{text('confirmPasswordPlaceholder')}</Typography>
+          <Input
+            type="password"
+            placeholder={text('confirmPasswordPlaceholder')}
+            {...register('confirmPassword', options.confirmPassword)}
+          />
+          {errors.confirmPassword && (
+            <Typography kind="error">
+              {errors.confirmPassword.message}
+            </Typography>
+          )}
+        </Flex>
+        {error && (
+          <Typography kind="error" size="sm">
+            {error.message}
+          </Typography>
+        )}
+        <Button isLoading={isLoading} type="submit">
+          <Typography size="sm">{text('signUpButton')}</Typography>
+        </Button>
+      </Flex>
     </form>
   );
 };

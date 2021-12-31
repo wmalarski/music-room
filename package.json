@@ -7,10 +7,11 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "tsc": "tsc --noEmit"
+    "storybook": "nx run music-room:storybook --staticDir=apps/music-room/public"
   },
   "dependencies": {
     "@nrwl/next": "13.4.1",
+    "@radix-ui/react-tabs": "^0.1.4",
     "@stitches/react": "^1.2.6",
     "@supabase/supabase-js": "^1.29.1",
     "core-js": "^3.20.1",
