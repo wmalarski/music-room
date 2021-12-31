@@ -1,4 +1,4 @@
-import { Flex } from '@music-room/ui';
+import { Flex, StyledLink } from '@music-room/ui';
 import Head from 'next/head';
 import { PropsWithChildren, ReactElement, ReactNode } from 'react';
 
@@ -25,13 +25,13 @@ export const Layout = ({
 
     <footer>
       <Flex justifyContent="center">
-        <a
+        <StyledLink
           href="https://github.com/wmalarski"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by @me
-        </a>
+        </StyledLink>
       </Flex>
     </footer>
   </div>

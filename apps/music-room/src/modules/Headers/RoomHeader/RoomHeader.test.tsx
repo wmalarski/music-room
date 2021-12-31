@@ -3,19 +3,19 @@ import { TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import { RoomNavigation } from './RoomNavigation';
+import { RoomHeader } from './RoomHeader';
 
 const renderComponent = () => {
   return render(
     <MemberContextProvider member={defaultMember}>
       <TestWrapper>
-        <RoomNavigation />
+        <RoomHeader />
       </TestWrapper>
     </MemberContextProvider>
   );
 };
 
-describe('<RoomNavigation />', () => {
+describe('<RoomHeader />', () => {
   it('should render slug', async () => {
     expect.hasAssertions();
 

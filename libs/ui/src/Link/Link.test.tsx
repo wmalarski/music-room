@@ -2,9 +2,9 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
-import { Link } from './Link';
+import { StyledLink } from './Link';
 
-type Props = ComponentProps<typeof Link>;
+type Props = ComponentProps<typeof StyledLink>;
 
 const defaultProps: Props = {
   href: '/',
@@ -12,10 +12,10 @@ const defaultProps: Props = {
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Link {...defaultProps} {...props} />);
+  return render(<StyledLink {...defaultProps} {...props} />);
 };
 
-describe('<Link />', () => {
+describe('<StyledLink />', () => {
   it('should render', async () => {
     expect.hasAssertions();
 

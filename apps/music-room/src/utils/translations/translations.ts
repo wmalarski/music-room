@@ -1,4 +1,20 @@
 export const translation = {
+  // Auth
+  signInHeader: 'Sign In',
+  signInButton: 'Sign In',
+  emailPlaceholder: 'Email',
+  passwordPlaceholder: 'Password',
+  confirmPasswordPlaceholder: 'Confirm Password',
+  fieldIsDifferent: 'Repeat password',
+  errorMaxLength: (max: number): string => `Max ${max}`,
+  signOutButton: 'Sign Out',
+  signUpHeader: 'Sign Up',
+  signUpButton: 'Sign Up',
+
+  // Header
+  headerHome: 'Music Rooms',
+
+  // Room
   addMessage: 'Add message',
   addUrlPlaceholder: 'Url',
   loadMoreMessages: 'Load More',
@@ -12,7 +28,6 @@ export const translation = {
   confirmRemoveRoom: 'Confirm',
   inviteToRoom: (roomName: string): string => `Welcome to ${roomName}`,
   acceptInvitation: 'Accept',
-  navigationHome: 'Home',
   controlsMute: 'Mute',
   controlsPause: 'Pause',
   controlsVolume: 'Volume',
@@ -36,16 +51,6 @@ export const translation = {
   modRole: 'Mod',
   userRole: 'User',
   guestRole: 'Guest',
-  signInHeader: 'Sign In',
-  signInButton: 'Sign In',
-  emailPlaceholder: 'Email',
-  passwordPlaceholder: 'Password',
-  confirmPasswordPlaceholder: 'Confirm Password',
-  fieldIsDifferent: 'Repeat password',
-  errorMaxLength: (max: number): string => `Max ${max}`,
-  signOutButton: 'Sign Out',
-  signUpHeader: 'Sign Up',
-  signUpButton: 'Sign Up',
 };
 
 export type Translation = typeof translation;
