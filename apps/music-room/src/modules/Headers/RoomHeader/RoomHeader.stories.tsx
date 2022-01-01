@@ -8,10 +8,10 @@ export default {
   component: RoomHeader,
 } as ComponentMeta<typeof RoomHeader>;
 
-const Template: ComponentStory<typeof RoomHeader> = (args) => (
+const Template: ComponentStory<typeof RoomHeader> = () => (
   <RoomContextProvider room={defaultRoom}>
     <QueryClientProvider client={new QueryClient()}>
-      <RoomHeader {...args} />
+      <RoomHeader />
     </QueryClientProvider>
   </RoomContextProvider>
 );

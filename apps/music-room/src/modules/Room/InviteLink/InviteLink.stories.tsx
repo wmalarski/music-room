@@ -7,9 +7,9 @@ export default {
   component: InviteLink,
 } as ComponentMeta<typeof InviteLink>;
 
-const Template: ComponentStory<typeof InviteLink> = (args) => (
+const Template: ComponentStory<typeof InviteLink> = () => (
   <RoomContextProvider room={defaultRoom}>
-    <InviteLink {...args} />
+    <InviteLink />
   </RoomContextProvider>
 );
 

@@ -13,11 +13,11 @@ export default {
   component: Settings,
 } as ComponentMeta<typeof Settings>;
 
-const Template: ComponentStory<typeof Settings> = (args) => (
+const Template: ComponentStory<typeof Settings> = () => (
   <RoomContextProvider room={defaultRoom}>
     <RoleContextProvider role={defaultRole}>
       <QueryClientProvider client={new QueryClient()}>
-        <Settings {...args} />
+        <Settings />
       </QueryClientProvider>
     </RoleContextProvider>
   </RoomContextProvider>

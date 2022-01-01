@@ -11,10 +11,10 @@ export default {
   component: Profile,
 } as ComponentMeta<typeof Profile>;
 
-const Template: ComponentStory<typeof Profile> = (args) => (
+const Template: ComponentStory<typeof Profile> = () => (
   <ProfileContextProvider profile={defaultProfile}>
     <QueryClientProvider client={new QueryClient()}>
-      <Profile {...args} />
+      <Profile />
     </QueryClientProvider>
   </ProfileContextProvider>
 );

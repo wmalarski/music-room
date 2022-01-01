@@ -14,11 +14,11 @@ export default {
   component: Room,
 } as ComponentMeta<typeof Room>;
 
-const Template: ComponentStory<typeof Room> = (args) => (
+const Template: ComponentStory<typeof Room> = () => (
   <RoomContextProvider room={defaultRoom}>
     <RoleContextProvider role={defaultRole}>
       <QueryClientProvider client={new QueryClient()}>
-        <Room {...args} />
+        <Room />
       </QueryClientProvider>
     </RoleContextProvider>
   </RoomContextProvider>

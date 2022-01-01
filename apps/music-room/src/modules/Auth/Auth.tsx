@@ -1,12 +1,13 @@
-import { Flex, Tabs, TabsContent, TabsList, TabsTrigger } from '@music-room/ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { Layout } from '../Layout/Layout';
+import * as Styles from './Auth.styles';
 import { SignIn } from './SignIn/SignIn';
 import { SignUp } from './SignUp/SignUp';
 
 export const Auth = (): ReactElement => (
   <Layout>
-    <Flex justifyContent="center" alignItems="center">
+    <Styles.Container justifyContent="center" alignItems="center">
       <Tabs defaultValue="signIn">
         <TabsList aria-label="Sign In or Sign Up">
           <TabsTrigger value="signIn">Sign In</TabsTrigger>
@@ -19,6 +20,6 @@ export const Auth = (): ReactElement => (
           <SignUp />
         </TabsContent>
       </Tabs>
-    </Flex>
+    </Styles.Container>
   </Layout>
 );

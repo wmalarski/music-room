@@ -20,10 +20,11 @@ export const getServerSideMembers = async ({
       {
         room_slug: roomSlug,
         user_id: user.id,
+        offset: 0,
       },
     ],
     meta: {},
   });
 
-  return roles?.[0] ?? null;
+  return roles.members?.[0] ?? null;
 };

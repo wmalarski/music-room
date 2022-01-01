@@ -7,9 +7,9 @@ export default {
   component: RoomDetails,
 } as ComponentMeta<typeof RoomDetails>;
 
-const Template: ComponentStory<typeof RoomDetails> = (args) => (
+const Template: ComponentStory<typeof RoomDetails> = () => (
   <RoomContextProvider room={defaultRoom}>
-    <RoomDetails {...args} />
+    <RoomDetails />
   </RoomContextProvider>
 );
 

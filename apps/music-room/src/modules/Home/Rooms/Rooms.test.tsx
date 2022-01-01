@@ -8,12 +8,12 @@ import { Rooms } from './Rooms';
 
 type Props = ComponentProps<typeof Rooms>;
 
-const View: Props['View'] = ({ members }) => (
+const View: Props['View'] = ({ data }) => (
   <>
-    {members?.map((member) => (
+    {data?.members?.map((member) => (
       <p key={member.id}>{member.room_name}</p>
     ))}
-    <p>{!members && 'Empty'}</p>
+    <p>{!data && 'Empty'}</p>
   </>
 );
 

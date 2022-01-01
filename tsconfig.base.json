@@ -10,17 +10,34 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@emotion/core": ["node_modules/@emotion/react"],
-      "@music-room/data-access": ["libs/data-access/src/index.ts"],
-      "@music-room/ui": ["libs/ui/src/index.ts"],
-      "@music-room/util-styles": ["libs/util-styles/src/index.ts"],
-      "@music-room/util-tests": ["libs/util-tests/src/index.ts"]
+      "@emotion/core": [
+        "node_modules/@emotion/react"
+      ],
+      "@music-room/data-access": [
+        "libs/data-access/src/index.ts"
+      ],
+      "@music-room/ui": [
+        "libs/ui/src/index.ts"
+      ],
+      "@music-room/util-styles": [
+        "libs/util-styles/src/index.ts"
+      ],
+      "@music-room/util-tests": [
+        "libs/util-tests/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

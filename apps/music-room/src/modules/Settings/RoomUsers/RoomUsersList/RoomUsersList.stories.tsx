@@ -13,21 +13,26 @@ const Template: ComponentStory<typeof RoomUsersList> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  members: [
-    {
-      ...defaultMember,
-      profile_name: 'First',
-      room_slug: 'first',
-      room_name: 'RoomName1',
-    },
-    {
-      ...defaultMember,
-      profile_name: 'Second',
-      room_slug: 'second',
-      room_name: 'RoomName2',
-    },
-  ],
-  onLoadMore: () => null,
+  data: {
+    count: 2,
+    limit: 20,
+    offset: 0,
+    members: [
+      {
+        ...defaultMember,
+        profile_name: 'First',
+        room_slug: 'first',
+        room_name: 'RoomName1',
+      },
+      {
+        ...defaultMember,
+        profile_name: 'Second',
+        room_slug: 'second',
+        room_name: 'RoomName2',
+      },
+    ],
+  },
+  onPageChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
 };

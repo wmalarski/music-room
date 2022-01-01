@@ -1,5 +1,5 @@
-import { Member, useSelectMembers, useUser } from '@music-room/data-access';
-import { ReactElement } from 'react';
+import { useSelectMembers, useUser } from '@music-room/data-access';
+import { ReactElement, useState } from 'react';
 import { RoomsList } from './RoomsList/RoomsList';
 
 type Props = {
@@ -9,14 +9,12 @@ type Props = {
 export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
   const user = useUser();
 
-  const { data: members } = useSelectMembers({ user_id: user.id });
+  const [offset, setOffset] = useState(0);
 
-  return (
-    <View
-      members={members?.pages.reduce<Member[]>(
-        (prev, curr) => [...prev, ...curr],
-        []
-      )}
-    />
-  );
+  const { data } = useSelectMembers({
+    user_id: user.id,
+    offset,
+  });
+
+  return <View data={data} offset={offset} onPageChange={setOffset} />;
 };

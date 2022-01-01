@@ -13,10 +13,10 @@ export default {
   component: Invite,
 } as ComponentMeta<typeof Invite>;
 
-const Template: ComponentStory<typeof Invite> = (args) => (
+const Template: ComponentStory<typeof Invite> = () => (
   <UserContext.Provider value={defaultUser}>
     <QueryClientProvider client={new QueryClient()}>
-      <Invite {...args} />
+      <Invite />
     </QueryClientProvider>
   </UserContext.Provider>
 );

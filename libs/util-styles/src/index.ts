@@ -90,6 +90,24 @@ export const {
     bp1: '(min-width: 480px)',
     bp2: '(min-width: 640px)',
   },
+  utils: {
+    listRow: (value: string) => {
+      const [size, start] = value.split(' ');
+      return {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        transform: `translateY(${start}px)`,
+        height: `${size}px`,
+      };
+    },
+    listContainer: (totalSize: number) => ({
+      height: `${totalSize}px`,
+      width: '100%',
+      position: 'relative',
+    }),
+  },
 });
 
 export const globalStyles = globalCss({
