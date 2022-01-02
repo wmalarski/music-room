@@ -11,10 +11,15 @@ export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
 
   const [offset, setOffset] = useState(0);
 
-  const { data } = useSelectMembers({
-    user_id: user.id,
-    offset,
-  });
+  const { data } = useSelectMembers(
+    {
+      user_id: user.id,
+      offset,
+    },
+    {
+      keepPreviousData: true,
+    }
+  );
 
   return <View data={data} offset={offset} onPageChange={setOffset} />;
 };

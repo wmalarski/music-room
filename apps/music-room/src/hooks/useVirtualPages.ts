@@ -15,7 +15,8 @@ const getScrollStart = ({
   limit,
   overscan,
 }: GetScrollStartArgs): number => {
-  const middleCount = Math.ceil(limit / 2);
+  const end = start + limit;
+  const half = Math.ceil(limit / 2);
 
   const firstVirtualItem = items.at(0);
   const lastVirtualItem = items.at(-1);
@@ -26,15 +27,13 @@ const getScrollStart = ({
 
   const first = firstVirtualItem.index;
   const last = lastVirtualItem.index;
+  const middle = (last + first) / 2;
 
   if (first < start) {
-    const lowerStart = Math.floor((first - middleCount) / overscan) * overscan;
-    return Math.max(lowerStart, 0);
-  } else if (last > start + limit) {
-    const upperStart = Math.ceil((last - middleCount) / overscan) * overscan;
-    return Math.max(upperStart, 0);
+    return Math.max(Math.floor((middle - half) / half) * half, 0);
+  } else if (last > end) {
+    return Math.max(Math.ceil((middle - half) / half) * half, 0);
   }
-
   return start;
 };
 

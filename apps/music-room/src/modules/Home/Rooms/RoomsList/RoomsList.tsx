@@ -31,9 +31,10 @@ export const RoomsList = ({
     <Flex
       ref={parentRef}
       css={{
-        height: '60vh',
+        height: '100vh',
         // height: `100%`,
         // width: `400px`,
+        width: '100%',
         overflow: 'auto',
       }}
     >
@@ -42,10 +43,7 @@ export const RoomsList = ({
           const member = data?.members[row.index - data.offset];
           if (!member) return null;
           return (
-            <Flex
-              key={member.profile_id}
-              css={{ listRow: `${row.size} ${row.start}` }}
-            >
+            <Flex key={row.index} css={{ listRow: `${row.size} ${row.start}` }}>
               <RoomsListItem member={member} />
             </Flex>
           );

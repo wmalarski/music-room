@@ -9,7 +9,7 @@ import {
 import fromSupabase from '../../utils/fromSupabase';
 import { Member } from '../types';
 
-const MEMBERS_PAGE_LIMIT = 20;
+const MEMBERS_PAGE_LIMIT = 30;
 
 export type SelectMembersArgs = Partial<Member> & { offset: number };
 
