@@ -20,7 +20,3 @@ const Template: ComponentStory<typeof Profile> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  center: 'center',
-  header: 'header',
-};

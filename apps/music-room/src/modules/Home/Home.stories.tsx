@@ -28,10 +28,6 @@ const Template: ComponentStory<typeof Home> = () => (
 
 export const Playground = Template.bind({});
 
-Playground.args = {
-  user: defaultUser,
-};
-
 const members = randomMembers(200);
 
 Playground.parameters = {

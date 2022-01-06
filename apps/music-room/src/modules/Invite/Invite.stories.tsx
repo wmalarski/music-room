@@ -1,9 +1,4 @@
-import {
-  defaultProfile,
-  defaultRoom,
-  defaultUser,
-  UserContext,
-} from '@music-room/data-access';
+import { defaultUser, UserContext } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Invite } from './Invite';
@@ -22,8 +17,3 @@ const Template: ComponentStory<typeof Invite> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  room: defaultRoom,
-  user: defaultUser,
-  profile: defaultProfile,
-};

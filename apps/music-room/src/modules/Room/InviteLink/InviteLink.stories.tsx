@@ -14,6 +14,3 @@ const Template: ComponentStory<typeof InviteLink> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  link: 'linkToSomewhere',
-};

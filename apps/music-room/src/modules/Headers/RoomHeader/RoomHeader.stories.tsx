@@ -17,6 +17,3 @@ const Template: ComponentStory<typeof RoomHeader> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  slug: 'abc',
-};

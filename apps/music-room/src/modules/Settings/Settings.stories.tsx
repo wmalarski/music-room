@@ -24,8 +24,3 @@ const Template: ComponentStory<typeof Settings> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  appTitle: 'Title',
-  center: 'center',
-  header: 'header',
-};

@@ -1,5 +1,4 @@
 import {
-  defaultMember,
   defaultRole,
   defaultRoom,
   RoleContextProvider,
@@ -25,6 +24,3 @@ const Template: ComponentStory<typeof Room> = () => (
 );
 
 export const Playground = Template.bind({});
-Playground.args = {
-  member: defaultMember,
-};
