@@ -4,8 +4,7 @@ import {
   Member,
   Profile,
   randomMembers,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
   UserContext,
 } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -34,7 +33,7 @@ Playground.parameters = {
   msw: {
     handlers: [
       rest.get<DefaultRequestBody, { limit: string; offset: string }, Member[]>(
-        `${SUPABASE_ENDPOINT}/${TABLES.members}`,
+        TABLES_ENDPOINTS.members,
         (req, res, ctx) => {
           const offset = Number(req.url.searchParams.get('offset'));
           const limit = Number(req.url.searchParams.get('limit'));
@@ -46,7 +45,7 @@ Playground.parameters = {
         }
       ),
       rest.get<DefaultRequestBody, never, Profile>(
-        `${SUPABASE_ENDPOINT}/${TABLES.profiles}`,
+        TABLES_ENDPOINTS.profiles,
         (_req, res, ctx) => res(ctx.json(defaultProfile))
       ),
     ],

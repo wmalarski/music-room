@@ -2,8 +2,7 @@ import {
   DeleteRoomArgs,
   InsertRoomArgs,
   Room,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
   UpdateRoomArgs,
 } from '@music-room/data-access';
 import { rest } from 'msw';
@@ -41,7 +40,7 @@ export const mockRoomsStorage = {
 
 export const roomsHandlers = [
   rest.post<InsertRoomArgs, never, Room>(
-    `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
+    TABLES_ENDPOINTS.rooms,
     ({ body }, res, ctx) => {
       const rooms = mockRoomsStorage.get();
 
@@ -55,7 +54,7 @@ export const roomsHandlers = [
     }
   ),
   rest.patch<UpdateRoomArgs, never, Room>(
-    `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
+    TABLES_ENDPOINTS.rooms,
     ({ body }, res, ctx) => {
       const rooms = [...mockRoomsStorage.get()];
       const index = rooms.findIndex((room) => room.id === body.id);
@@ -68,17 +67,14 @@ export const roomsHandlers = [
       return res(ctx.json(room));
     }
   ),
-  rest.delete<DeleteRoomArgs>(
-    `${SUPABASE_ENDPOINT}/${TABLES.rooms}`,
-    ({ url }, res, ctx) => {
-      const query = url.searchParams.get('id')?.split('.')[1];
-      if (!query) return res(ctx.json({}));
-      const id = Number(query);
+  rest.delete<DeleteRoomArgs>(TABLES_ENDPOINTS.rooms, ({ url }, res, ctx) => {
+    const query = url.searchParams.get('id')?.split('.')[1];
+    if (!query) return res(ctx.json({}));
+    const id = Number(query);
 
-      const rooms = mockRoomsStorage.get();
-      mockRoomsStorage.set(rooms.filter((room) => room.id !== id));
+    const rooms = mockRoomsStorage.get();
+    mockRoomsStorage.set(rooms.filter((room) => room.id !== id));
 
-      return res(ctx.json({}));
-    }
-  ),
+    return res(ctx.json({}));
+  }),
 ];

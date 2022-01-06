@@ -1,8 +1,7 @@
 import {
   InsertMessageArgs,
   Message,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
 } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 
@@ -14,14 +13,14 @@ export const mockMessagesStorage = {
 
 export const messagesHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Message[]>(
-    `${SUPABASE_ENDPOINT}/${TABLES.messages}`,
+    TABLES_ENDPOINTS.messages,
     (req, res, ctx) =>
       res(
         ctx.json(mockMessagesStorage.get().slice(0, Number(req.params.limit)))
       )
   ),
   rest.post<InsertMessageArgs, never, Message>(
-    `${SUPABASE_ENDPOINT}/${TABLES.messages}`,
+    TABLES_ENDPOINTS.messages,
     ({ body }, res, ctx) => {
       const messages = mockMessagesStorage.get();
 

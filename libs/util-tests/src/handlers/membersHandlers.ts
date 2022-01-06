@@ -1,4 +1,4 @@
-import { Member, SUPABASE_ENDPOINT, TABLES } from '@music-room/data-access';
+import { Member, TABLES_ENDPOINTS } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 
 export const mockMembersStorage = {
@@ -16,7 +16,7 @@ export const mockMembersStorage = {
 
 export const membersHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Member[]>(
-    `${SUPABASE_ENDPOINT}/${TABLES.members}`,
+    TABLES_ENDPOINTS.members,
     (req, res, ctx) =>
       res(ctx.json(mockMembersStorage.get().slice(0, Number(req.params.limit))))
   ),

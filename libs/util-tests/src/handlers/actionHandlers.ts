@@ -1,7 +1,6 @@
 import {
   Action,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
   UpsertActionArgs,
 } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
@@ -14,12 +13,12 @@ export const mockActionsStorage = {
 
 export const actionHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Action[]>(
-    `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
+    TABLES_ENDPOINTS.actions,
     (req, res, ctx) =>
       res(ctx.json(mockActionsStorage.get().slice(0, Number(req.params.limit))))
   ),
   rest.post<UpsertActionArgs, never, Action>(
-    `${SUPABASE_ENDPOINT}/${TABLES.actions}`,
+    TABLES_ENDPOINTS.actions,
     (req, res, ctx) => {
       const actions = mockActionsStorage.get();
 
