@@ -20,7 +20,7 @@ export const useProfileDetailsViewOptions = (): Record<
         },
         minLength: {
           value: 3,
-          message: text('errorMinLength')(3),
+          message: `${text('errorMinLength')}: 3`,
         },
       },
     }),

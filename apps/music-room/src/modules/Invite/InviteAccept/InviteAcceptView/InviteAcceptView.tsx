@@ -20,7 +20,9 @@ export const InviteAcceptView = ({
   return (
     <Styles.Container justifyContent="center" alignItems="center">
       <Styles.Content direction="column" gap="md">
-        <Typography size="xl">{text('inviteToRoom')(room.name)}</Typography>
+        <Typography size="xl">{`${text('inviteToRoom')} ${
+          room.name
+        }`}</Typography>
         <Button isLoading={isLoading} onClick={onAcceptClick}>
           {text('acceptInvitation')}
         </Button>

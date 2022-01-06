@@ -21,7 +21,7 @@ export const useSignInViewOptions = (): Record<
         },
         minLength: {
           value: 3,
-          message: text('errorMinLength')(3),
+          message: `${text('errorMinLength')}: 3`,
         },
       },
       password: {

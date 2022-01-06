@@ -5,6 +5,7 @@ import {
   supabase,
 } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ReactElement } from 'react';
 import { Room } from '../../../modules/Room/Room';
 
@@ -21,12 +22,20 @@ const RoomPage = ({ member }: Props): ReactElement => (
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   params: { slug } = {},
   req,
+  locale,
 }) => {
   const { user } = await supabase.auth.api.getUserByCookie(req);
   if (!user) return { notFound: true };
 
   const member = await getServerSideMembers({ user, slug });
-  return member ? { props: { member } } : { notFound: true };
+
+  const translations = await serverSideTranslations(locale ?? 'en', [
+    'common',
+    'header',
+    'room',
+  ]);
+
+  return member ? { props: { ...translations, member } } : { notFound: true };
 };
 
 export default RoomPage;

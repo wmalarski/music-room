@@ -10,9 +10,9 @@ import {
   Typography,
 } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import * as Styles from './CreateRoomView.styles';
 import {
   CreateRoomViewData,
@@ -31,7 +31,7 @@ export const CreateRoomView = ({
   isLoading,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('home');
 
   const {
     formState: { errors },
@@ -49,10 +49,10 @@ export const CreateRoomView = ({
         </Flex>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormFieldset>
-            <FormLabel htmlFor="name">{text('roomNamePlaceholder')}</FormLabel>
+            <FormLabel htmlFor="name">{t('roomNamePlaceholder')}</FormLabel>
             <Input
               id="name"
-              placeholder={text('roomNamePlaceholder')}
+              placeholder={t('roomNamePlaceholder')}
               {...register('name', options.name)}
             />
             {errors.name && (
@@ -60,10 +60,10 @@ export const CreateRoomView = ({
             )}
           </FormFieldset>
           <FormFieldset>
-            <FormLabel htmlFor="slug">{text('roomSlugPlaceholder')}</FormLabel>
+            <FormLabel htmlFor="slug">{t('roomSlugPlaceholder')}</FormLabel>
             <Input
               id="slug"
-              placeholder={text('roomSlugPlaceholder')}
+              placeholder={t('roomSlugPlaceholder')}
               {...register('slug', options.slug)}
             />
             {errors.slug && (
@@ -72,7 +72,7 @@ export const CreateRoomView = ({
           </FormFieldset>
           {error && <FormError role="alert">{error.message}</FormError>}
           <Button isLoading={isLoading} type="submit">
-            {text('addRoom')}
+            {t('addRoom')}
           </Button>
         </Form>
       </Styles.Content>

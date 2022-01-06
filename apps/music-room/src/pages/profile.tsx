@@ -5,6 +5,7 @@ import {
   supabase,
 } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ReactElement } from 'react';
 import { Profile } from '../modules/Profile/Profile';
 
@@ -22,6 +23,7 @@ const ProfilePage = ({ profile }: Props): ReactElement => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   req,
+  locale,
 }) => {
   const { user } = await supabase.auth.api.getUserByCookie(req);
   if (!user) return { notFound: true };
@@ -31,7 +33,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     meta: {},
   });
 
-  return profile ? { props: { profile } } : { notFound: true };
+  const translations = await serverSideTranslations(locale ?? 'en', [
+    'common',
+    'header',
+    'profile',
+  ]);
+
+  return profile ? { props: { ...translations, profile } } : { notFound: true };
 };
 
 export default ProfilePage;

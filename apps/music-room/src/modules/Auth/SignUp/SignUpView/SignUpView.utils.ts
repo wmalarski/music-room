@@ -26,11 +26,11 @@ export const useSignUpViewOptions = (): Record<
         },
         minLength: {
           value: 3,
-          message: text('errorMinLength')(3),
+          message: `${text('errorMinLength')}: 3`,
         },
         maxLength: {
           value: 32,
-          message: text('errorMaxLength')(3),
+          message: `${text('errorMaxLength')}: 3`,
         },
       },
       password: {
@@ -40,7 +40,7 @@ export const useSignUpViewOptions = (): Record<
         },
         minLength: {
           value: 8,
-          message: text('errorMinLength')(8),
+          message: `${text('errorMinLength')}: 8`,
         },
       },
       confirmPassword: {
@@ -50,7 +50,7 @@ export const useSignUpViewOptions = (): Record<
         },
         minLength: {
           value: 8,
-          message: text('errorMinLength')(8),
+          message: `${text('errorMinLength')}: 8`,
         },
       },
     }),
