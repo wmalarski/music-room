@@ -19,6 +19,7 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
   const { data } = useSelectMembers({
     room_id: id,
     offset,
+    limit: 30,
   });
 
   const { mutate: deleteRole } = useDeleteRole();

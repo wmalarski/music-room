@@ -1,21 +1,27 @@
 import { Member } from '@music-room/data-access';
-import { Debug, Link } from '@music-room/ui';
+import { CircleLink, TooltipText } from '@music-room/ui';
+import { RocketIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 import { ReactElement } from 'react';
-import { paths, useText } from '../../../../../utils';
+import { paths } from '../../../../../utils';
 
 type Props = {
   member: Member;
 };
 
 export const RoomsListItem = ({ member }: Props): ReactElement => {
-  const text = useText();
-
   return (
-    <>
-      <Debug value={member} />
-      <Link href={paths.room(member.room_slug)}>
-        {text('roomLink')(member.room_name)}
-      </Link>
-    </>
+    <Link href={paths.room(member.room_slug)} passHref>
+      <CircleLink>
+        <TooltipText
+          text={member.room_name}
+          side="right"
+          asChild
+          sideOffset={5}
+        >
+          <RocketIcon />
+        </TooltipText>
+      </CircleLink>
+    </Link>
   );
 };

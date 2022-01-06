@@ -12,9 +12,9 @@ import {
 const qwerty = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
 
 const randomString = (length = 5): string =>
-  Array(length)
+  new Array(length)
     .fill(0)
-    .map(() => qwerty[Math.random() * (qwerty.length - 1)])
+    .map(() => qwerty[Math.ceil(Math.random() * (qwerty.length - 1))])
     .join('');
 
 export const defaultUser: User = {

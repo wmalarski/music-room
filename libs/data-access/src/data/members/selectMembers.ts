@@ -9,9 +9,10 @@ import {
 import fromSupabase from '../../utils/fromSupabase';
 import { Member } from '../types';
 
-const MEMBERS_PAGE_LIMIT = 30;
-
-export type SelectMembersArgs = Partial<Member> & { offset: number };
+export type SelectMembersArgs = Partial<Member> & {
+  offset: number;
+  limit: number;
+};
 
 export type SelectMembersKey = ['members', SelectMembersArgs];
 
@@ -30,7 +31,7 @@ export const selectMembersKey = (args: SelectMembersArgs): SelectMembersKey => [
 ];
 
 export const selectMembers = async ({
-  queryKey: [, { offset, ...args }],
+  queryKey: [, { offset, limit, ...args }],
 }: QueryFunctionContext<
   SelectMembersKey,
   number
@@ -39,7 +40,7 @@ export const selectMembers = async ({
     (prev, [key, value]) => prev.eq(key as keyof Member, value),
     fromSupabase('members')
       .select('*', { count: 'estimated' })
-      .range(offset, offset + MEMBERS_PAGE_LIMIT)
+      .range(offset, offset + limit)
   );
 
   if (error || !data) throw error;
@@ -47,7 +48,7 @@ export const selectMembers = async ({
   return {
     members: data,
     count: count ?? 0,
-    limit: MEMBERS_PAGE_LIMIT,
+    limit,
     offset,
   };
 };

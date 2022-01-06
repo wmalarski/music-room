@@ -23,7 +23,7 @@ export const RoomsList = ({
     onPageChange,
     size: data?.count ?? 0,
     parentRef,
-    estimateSize: useCallback(() => 250, []),
+    estimateSize: useCallback(() => 40, []),
     overscan: 5,
   });
 
@@ -31,11 +31,10 @@ export const RoomsList = ({
     <Flex
       ref={parentRef}
       css={{
-        height: '100vh',
-        // height: `100%`,
-        // width: `400px`,
-        width: '100%',
-        overflow: 'auto',
+        height: 'calc(100vh - $xl)',
+        width: '$xl',
+        overflow: 'scroll',
+        '&::-webkit-scrollbar': 'none',
       }}
     >
       <Flex direction="column" css={{ listContainer: virtualizer.totalSize }}>

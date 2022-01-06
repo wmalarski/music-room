@@ -9,4 +9,5 @@ export * from './Link/Link';
 export * from './Option/Option';
 export * from './Select/Select';
 export * from './Tabs/Tabs';
+export * from './Tooltip/Tooltip';
 export * from './Typography/Typography';

@@ -15,6 +15,7 @@ export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
     {
       user_id: user.id,
       offset,
+      limit: 50,
     },
     {
       keepPreviousData: true,
