@@ -1,7 +1,9 @@
 import {
   defaultProfile,
+  defaultRoom,
   defaultUser,
   Profile,
+  RoomContextProvider,
   TABLES_ENDPOINTS,
   UserContext,
 } from '@music-room/data-access';
@@ -17,9 +19,11 @@ export default {
 
 const Template: ComponentStory<typeof Invite> = () => (
   <UserContext.Provider value={defaultUser}>
-    <QueryClientProvider client={new QueryClient()}>
-      <Invite />
-    </QueryClientProvider>
+    <RoomContextProvider room={defaultRoom}>
+      <QueryClientProvider client={new QueryClient()}>
+        <Invite />
+      </QueryClientProvider>
+    </RoomContextProvider>
   </UserContext.Provider>
 );
 

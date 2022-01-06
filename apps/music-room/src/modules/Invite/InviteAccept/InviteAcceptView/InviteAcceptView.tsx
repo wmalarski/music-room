@@ -2,6 +2,7 @@ import { Room } from '@music-room/data-access';
 import { Button, Typography } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { useText } from '../../../../utils';
+import * as Styles from './InviteAcceptView.styles';
 
 type Props = {
   room: Room;
@@ -17,11 +18,13 @@ export const InviteAcceptView = ({
   const text = useText();
 
   return (
-    <div>
-      <Typography>{text('inviteToRoom')(room.name)}</Typography>
-      <Button isLoading={isLoading} onClick={onAcceptClick}>
-        {text('acceptInvitation')}
-      </Button>
-    </div>
+    <Styles.Container justifyContent="center" alignItems="center">
+      <Styles.Content direction="column" gap="md">
+        <Typography size="xl">{text('inviteToRoom')(room.name)}</Typography>
+        <Button isLoading={isLoading} onClick={onAcceptClick}>
+          {text('acceptInvitation')}
+        </Button>
+      </Styles.Content>
+    </Styles.Container>
   );
 };
