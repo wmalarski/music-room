@@ -31,11 +31,12 @@ export const selectMembersKey = (args: SelectMembersArgs): SelectMembersKey => [
 ];
 
 export const selectMembers = async ({
-  queryKey: [, { offset, limit, ...args }],
+  queryKey,
 }: QueryFunctionContext<
   SelectMembersKey,
   number
 >): Promise<SelectMembersResult> => {
+  const [, { limit, offset, ...args }] = queryKey;
   const { data, error, count } = await Object.entries(args).reduce(
     (prev, [key, value]) => prev.eq(key as keyof Member, value),
     fromSupabase('members')

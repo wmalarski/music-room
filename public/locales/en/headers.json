@@ -2,5 +2,6 @@
 "headerHome": "Music Rooms",
 "navigationProfile": "Profile",
 "navigationRoom": "Room",
-"navigationSettings": "Settings"
+"navigationSettings": "Settings",
+"signOutButton": "Sign Out"
 }

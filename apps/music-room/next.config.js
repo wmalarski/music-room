@@ -2,8 +2,6 @@
 const withNx = require('@nrwl/next/plugins/with-nx');
 const { i18n } = require('./next-i18next.config');
 
-console.log(i18n);
-
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  **/

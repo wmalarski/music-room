@@ -8,11 +8,17 @@ import { ChatMessagesList } from './ChatMessagesList';
 type Props = ComponentProps<typeof ChatMessagesList>;
 
 const defaultProps: Props = {
-  messages: [
-    { ...defaultMessage, id: 1 },
-    { ...defaultMessage, id: 2 },
-  ],
-  onLoadMore: () => null,
+  data: {
+    messages: [
+      { ...defaultMessage, id: 1 },
+      { ...defaultMessage, id: 2 },
+    ],
+    limit: 20,
+    offset: 0,
+    count: 2,
+  },
+  offset: 0,
+  onPageChange: () => void 0,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {
