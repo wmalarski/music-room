@@ -1,4 +1,12 @@
-import { Button, Flex, Input, Typography } from '@music-room/ui';
+import {
+  Button,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -28,44 +36,36 @@ export const SignInView = ({
   const options = useSignInViewOptions();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex direction="column" gap="md">
-        <Typography kind="description">{text('signInHeader')}</Typography>
-        <Flex direction="column" gap="sm">
-          <Typography>{text('emailPlaceholder')}</Typography>
-          <Input
-            placeholder={text('emailPlaceholder')}
-            type="email"
-            {...register('email', options.email)}
-          />
-          {errors.email && (
-            <Typography kind="error" size="sm" role="alert">
-              {errors.email.message}
-            </Typography>
-          )}
-        </Flex>
-        <Flex direction="column" gap="sm">
-          <Typography>{text('passwordPlaceholder')}</Typography>
-          <Input
-            placeholder={text('passwordPlaceholder')}
-            type="password"
-            {...register('password', options.password)}
-          />
-          {errors.password && (
-            <Typography kind="error" size="sm" role="alert">
-              {errors.password.message}
-            </Typography>
-          )}
-        </Flex>
-        {error && (
-          <Typography kind="error" size="sm" role="alert">
-            {error.message}
-          </Typography>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography kind="description">{text('signInHeader')}</Typography>
+      <FormFieldset>
+        <FormLabel htmlFor="email">{text('emailPlaceholder')}</FormLabel>
+        <Input
+          id="email"
+          placeholder={text('emailPlaceholder')}
+          type="email"
+          {...register('email', options.email)}
+        />
+        {errors.email && (
+          <FormError role="alert">{errors.email.message}</FormError>
         )}
-        <Button isLoading={isLoading} type="submit">
-          <Typography size="sm">{text('signInButton')}</Typography>
-        </Button>
-      </Flex>
-    </form>
+      </FormFieldset>
+      <FormFieldset>
+        <FormLabel htmlFor="password">{text('passwordPlaceholder')}</FormLabel>
+        <Input
+          id="password"
+          placeholder={text('passwordPlaceholder')}
+          type="password"
+          {...register('password', options.password)}
+        />
+        {errors.password && (
+          <FormError role="alert">{errors.password.message}</FormError>
+        )}
+      </FormFieldset>
+      {error && <FormError role="alert">{error.message}</FormError>}
+      <Button isLoading={isLoading} type="submit">
+        <Typography size="sm">{text('signInButton')}</Typography>
+      </Button>
+    </Form>
   );
 };

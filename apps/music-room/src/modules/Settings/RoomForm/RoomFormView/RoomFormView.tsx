@@ -1,4 +1,12 @@
-import { Alert, Button, Input } from '@music-room/ui';
+import {
+  Button,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,16 +39,23 @@ export const RoomFormView = ({
   const options = useRoomFormViewOptions();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        placeholder={text('roomNamePlaceholder')}
-        {...register('name', options.name)}
-      />
-      {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
-      {error && <Alert severity="error">{error.message}</Alert>}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography kind="description">{text('updateRoom')}</Typography>
+      <FormFieldset>
+        <FormLabel htmlFor="name">{text('roomNamePlaceholder')}</FormLabel>
+        <Input
+          id="name"
+          placeholder={text('roomNamePlaceholder')}
+          {...register('name', options.name)}
+        />
+        {errors.name && (
+          <FormError role="alert">{errors.name.message}</FormError>
+        )}
+      </FormFieldset>
+      {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} disabled={!isDirty} type="submit">
-        {text('updateRoom')}
+        <Typography size="sm">{text('updateRoom')}</Typography>
       </Button>
-    </form>
+    </Form>
   );
 };

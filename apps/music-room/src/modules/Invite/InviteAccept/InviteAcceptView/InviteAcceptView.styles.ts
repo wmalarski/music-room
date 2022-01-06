@@ -9,4 +9,5 @@ export const Container = styled(Flex, {
 export const Content = styled(Flex, {
   padding: '$lg',
   backgroundColor: '$gray1',
+  borderRadius: '$md',
 });

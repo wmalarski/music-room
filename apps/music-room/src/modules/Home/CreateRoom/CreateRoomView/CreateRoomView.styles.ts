@@ -8,4 +8,5 @@ export const Container = styled('div', {
 export const Content = styled(Flex, {
   backgroundColor: '$gray1',
   padding: '$xl',
+  borderRadius: '$md',
 });

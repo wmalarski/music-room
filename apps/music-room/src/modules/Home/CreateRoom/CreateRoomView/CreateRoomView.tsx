@@ -1,5 +1,14 @@
 import { Profile } from '@music-room/data-access';
-import { Button, Flex, Input, Typography } from '@music-room/ui';
+import {
+  Button,
+  Flex,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -38,42 +47,34 @@ export const CreateRoomView = ({
         <Flex direction="row" justifyContent="spaceBetween" alignItems="center">
           <Typography size="xl">Create new room</Typography>
         </Flex>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Flex direction="column" gap="md">
-            <Flex direction="column" gap="sm">
-              <Typography>{text('roomNamePlaceholder')}</Typography>
-              <Input
-                placeholder={text('roomNamePlaceholder')}
-                {...register('name', options.name)}
-              />
-              {errors.name && (
-                <Typography size="sm" kind="error" role="alert">
-                  {errors.name.message}
-                </Typography>
-              )}
-            </Flex>
-            <Flex direction="column" gap="sm">
-              <Typography>{text('roomSlugPlaceholder')}</Typography>
-              <Input
-                placeholder={text('roomSlugPlaceholder')}
-                {...register('slug', options.slug)}
-              />
-              {errors.slug && (
-                <Typography size="sm" kind="error" role="alert">
-                  {errors.slug.message}
-                </Typography>
-              )}
-            </Flex>
-            {error && (
-              <Typography size="sm" kind="error" role="alert">
-                {error.message}
-              </Typography>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormFieldset>
+            <FormLabel htmlFor="name">{text('roomNamePlaceholder')}</FormLabel>
+            <Input
+              id="name"
+              placeholder={text('roomNamePlaceholder')}
+              {...register('name', options.name)}
+            />
+            {errors.name && (
+              <FormError role="alert">{errors.name.message}</FormError>
             )}
-            <Button isLoading={isLoading} type="submit">
-              {text('addRoom')}
-            </Button>
-          </Flex>
-        </form>
+          </FormFieldset>
+          <FormFieldset>
+            <FormLabel htmlFor="slug">{text('roomSlugPlaceholder')}</FormLabel>
+            <Input
+              id="slug"
+              placeholder={text('roomSlugPlaceholder')}
+              {...register('slug', options.slug)}
+            />
+            {errors.slug && (
+              <FormError role="alert">{errors.slug.message}</FormError>
+            )}
+          </FormFieldset>
+          {error && <FormError role="alert">{error.message}</FormError>}
+          <Button isLoading={isLoading} type="submit">
+            {text('addRoom')}
+          </Button>
+        </Form>
       </Styles.Content>
     </Styles.Container>
   );
