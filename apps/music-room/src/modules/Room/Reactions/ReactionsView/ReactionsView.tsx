@@ -1,7 +1,7 @@
 import { Action, Message } from '@music-room/data-access';
 import { Button, Debug } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
-import { useText } from '../../../../utils';
 
 export type ReactionsViewData = {
   likeAt: string | null;
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const ReactionsView = ({ action, onChange }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('room');
 
   const handleLikeClick = () => {
     onChange({
@@ -35,12 +35,10 @@ export const ReactionsView = ({ action, onChange }: Props): ReactElement => {
     <>
       <Debug value={action} />
       <Button onClick={handleLikeClick}>
-        {action?.like_at ? text('removeLikeMessage') : text('likeMessage')}
+        {action?.like_at ? t('removeLikeMessage') : t('likeMessage')}
       </Button>
       <Button onClick={handleDislikeClick}>
-        {action?.dislike_at
-          ? text('removeDislikeMessage')
-          : text('dislikeMessage')}
+        {action?.dislike_at ? t('removeDislikeMessage') : t('dislikeMessage')}
       </Button>
     </>
   );

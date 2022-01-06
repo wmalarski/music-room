@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import { RoomFormViewData, useRoomFormViewOptions } from './RoomFormView.utils';
 
 type Props = {
@@ -26,7 +26,7 @@ export const RoomFormView = ({
   error,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('settings');
 
   const {
     formState: { errors, isDirty },
@@ -40,12 +40,12 @@ export const RoomFormView = ({
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography kind="description">{text('updateRoom')}</Typography>
+      <Typography kind="description">{t('updateRoom')}</Typography>
       <FormFieldset>
-        <FormLabel htmlFor="name">{text('roomNamePlaceholder')}</FormLabel>
+        <FormLabel htmlFor="name">{t('roomNamePlaceholder')}</FormLabel>
         <Input
           id="name"
-          placeholder={text('roomNamePlaceholder')}
+          placeholder={t('roomNamePlaceholder')}
           {...register('name', options.name)}
         />
         {errors.name && (
@@ -54,7 +54,7 @@ export const RoomFormView = ({
       </FormFieldset>
       {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} disabled={!isDirty} type="submit">
-        <Typography size="sm">{text('updateRoom')}</Typography>
+        <Typography size="sm">{t('updateRoom')}</Typography>
       </Button>
     </Form>
   );

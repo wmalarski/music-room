@@ -9,9 +9,9 @@ import {
   Typography,
 } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import * as Styles from './ProfileDetailsView.styles';
 import {
   ProfileDetailsViewData,
@@ -31,7 +31,7 @@ export const ProfileDetailsView = ({
   isLoading,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('profile');
 
   const {
     formState: { errors, isDirty },
@@ -47,14 +47,12 @@ export const ProfileDetailsView = ({
     <Styles.Container>
       <Styles.Content>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Typography size="xl">{text('profileHeader')}</Typography>
+          <Typography size="xl">{t('profileHeader')}</Typography>
           <FormFieldset>
-            <FormLabel htmlFor="name">
-              {text('profileNamePlaceholder')}
-            </FormLabel>
+            <FormLabel htmlFor="name">{t('profileNamePlaceholder')}</FormLabel>
             <Input
               id="name"
-              placeholder={text('profileNamePlaceholder')}
+              placeholder={t('profileNamePlaceholder')}
               {...register('name', options.name)}
             />
             {errors.name && (
@@ -63,7 +61,7 @@ export const ProfileDetailsView = ({
           </FormFieldset>
           {error && <FormError role="alert">{error.message}</FormError>}
           <Button isLoading={isLoading} disabled={!isDirty} type="submit">
-            <Typography size="sm">{text('profileSaveButton')}</Typography>
+            <Typography size="sm">{t('profileSaveButton')}</Typography>
           </Button>
         </Form>
       </Styles.Content>

@@ -1,7 +1,7 @@
 import { Controls, UpdateControlsArgs } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ChangeEvent, ReactElement } from 'react';
-import { useText } from '../../../../../utils';
 
 type Props = {
   profileId: number;
@@ -14,7 +14,7 @@ export const PlayerControls = ({
   controls: { id, muted, pause, volume },
   onChange,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('room');
 
   const handleMuteChange = () => {
     onChange({ id, muted: !muted });
@@ -36,27 +36,25 @@ export const PlayerControls = ({
     <div>
       <div>
         <Input type="checkbox" checked={muted} onChange={handleMuteChange} />
-        <Typography>{text('controlsMute')}</Typography>
+        <Typography>{t('controlsMute')}</Typography>
       </div>
       <div>
         <Input type="checkbox" checked={pause} onChange={handlePauseChange} />
-        <Typography>{text('controlsPause')}</Typography>
+        <Typography>{t('controlsPause')}</Typography>
       </div>
       <div>
         <Input
           type="number"
-          placeholder={text('controlsVolume')}
+          placeholder={t('controlsVolume')}
           step={1}
           min={0}
           max={100}
           value={volume}
           onChange={handleVolumeChange}
         />
-        <Typography>{text('controlsVolume')}</Typography>
+        <Typography>{t('controlsVolume')}</Typography>
       </div>
-      <Button onClick={handleAssignClick}>
-        {text('controlsAssignSpeaker')}
-      </Button>
+      <Button onClick={handleAssignClick}>{t('controlsAssignSpeaker')}</Button>
     </div>
   );
 };

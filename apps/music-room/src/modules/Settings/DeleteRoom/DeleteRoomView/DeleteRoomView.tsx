@@ -1,6 +1,6 @@
 import { Button } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ReactElement, useState } from 'react';
-import { useText } from '../../../../utils';
 
 type Props = {
   isLoading: boolean;
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('settings');
 
   const [isClicked, setIsClicked] = useState(false);
 
@@ -18,10 +18,8 @@ export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
 
   return (
     <>
-      <Button onClick={handleFirstClick}>{text('removeRoom')}</Button>
-      {isClicked && (
-        <Button onClick={onClick}>{text('confirmRemoveRoom')}</Button>
-      )}
+      <Button onClick={handleFirstClick}>{t('removeRoom')}</Button>
+      {isClicked && <Button onClick={onClick}>{t('confirmRemoveRoom')}</Button>}
     </>
   );
 };

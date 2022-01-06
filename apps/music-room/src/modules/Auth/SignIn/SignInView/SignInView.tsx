@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import { SignInViewData, useSignInViewOptions } from './SignInView.utils';
 
 type Props = {
@@ -25,7 +25,7 @@ export const SignInView = ({
   error,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('auth');
 
   const {
     formState: { errors },
@@ -37,12 +37,12 @@ export const SignInView = ({
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography kind="description">{text('signInHeader')}</Typography>
+      <Typography kind="description">{t('signInHeader')}</Typography>
       <FormFieldset>
-        <FormLabel htmlFor="email">{text('emailPlaceholder')}</FormLabel>
+        <FormLabel htmlFor="email">{t('emailPlaceholder')}</FormLabel>
         <Input
           id="email"
-          placeholder={text('emailPlaceholder')}
+          placeholder={t('emailPlaceholder')}
           type="email"
           {...register('email', options.email)}
         />
@@ -51,10 +51,10 @@ export const SignInView = ({
         )}
       </FormFieldset>
       <FormFieldset>
-        <FormLabel htmlFor="password">{text('passwordPlaceholder')}</FormLabel>
+        <FormLabel htmlFor="password">{t('passwordPlaceholder')}</FormLabel>
         <Input
           id="password"
-          placeholder={text('passwordPlaceholder')}
+          placeholder={t('passwordPlaceholder')}
           type="password"
           {...register('password', options.password)}
         />
@@ -64,7 +64,7 @@ export const SignInView = ({
       </FormFieldset>
       {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} type="submit">
-        <Typography size="sm">{text('signInButton')}</Typography>
+        <Typography size="sm">{t('signInButton')}</Typography>
       </Button>
     </Form>
   );

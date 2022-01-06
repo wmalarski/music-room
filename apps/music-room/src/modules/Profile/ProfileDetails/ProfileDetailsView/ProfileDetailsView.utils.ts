@@ -1,6 +1,6 @@
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import { RegisterOptions } from 'react-hook-form';
-import { useText } from '../../../../utils';
 
 export type ProfileDetailsViewData = {
   name: string;
@@ -10,20 +10,20 @@ export const useProfileDetailsViewOptions = (): Record<
   keyof ProfileDetailsViewData,
   RegisterOptions<ProfileDetailsViewData>
 > => {
-  const text = useText();
+  const { t } = useTranslation('common');
   return useMemo(
     () => ({
       name: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         minLength: {
           value: 3,
-          message: `${text('errorMinLength')}: 3`,
+          message: `${t('errorMinLength')}: 3`,
         },
       },
     }),
-    [text]
+    [t]
   );
 };

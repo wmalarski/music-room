@@ -1,8 +1,8 @@
 import { Message } from '@music-room/data-access';
 import { Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ChangeEvent, FormEvent, ReactElement } from 'react';
-import { useText } from '../../../../utils';
 
 export type ChatInputViewData = {
   url: string;
@@ -22,7 +22,7 @@ export const ChatInputView = ({
   onSubmit,
   onQueryChange,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('room');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -36,11 +36,11 @@ export const ChatInputView = ({
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        placeholder={text('addUrlPlaceholder')}
+        placeholder={t('addUrlPlaceholder')}
         value={query}
         onChange={handleChange}
       />
-      <Button type="submit">{text('addMessage')}</Button>
+      <Button type="submit">{t('addMessage')}</Button>
     </form>
   );
 };

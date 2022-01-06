@@ -14,7 +14,7 @@ const Index = (): ReactElement => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const translations = await serverSideTranslations(locale ?? 'en', [
     'common',
-    'header',
+    'headers',
     'home',
     'auth',
   ]);

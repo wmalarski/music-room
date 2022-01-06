@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   const translations = await serverSideTranslations(locale ?? 'en', [
     'common',
-    'header',
+    'headers',
     'settings',
   ]);
 

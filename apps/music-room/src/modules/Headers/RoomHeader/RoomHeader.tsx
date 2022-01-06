@@ -1,13 +1,14 @@
 import { useRoom } from '@music-room/data-access';
 import { Flex, StyledLink } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { ReactElement } from 'react';
-import { paths, useText } from '../../../utils';
+import { paths } from '../../../utils';
 import { HeaderView } from '../HeaderView/HeaderView';
 import { SignOut } from '../SignOut/SignOut';
 
 export const RoomHeader = (): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('headers');
 
   const { slug } = useRoom();
 
@@ -16,13 +17,13 @@ export const RoomHeader = (): ReactElement => {
       right={
         <Flex gap="md" alignItems="center">
           <Link href={paths.room(slug)} passHref>
-            <StyledLink>{text('navigationRoom')}</StyledLink>
+            <StyledLink>{t('navigationRoom')}</StyledLink>
           </Link>
           <Link href={paths.roomSettings(slug)} passHref>
-            <StyledLink>{text('navigationSettings')}</StyledLink>
+            <StyledLink>{t('navigationSettings')}</StyledLink>
           </Link>
           <Link href={paths.profile} passHref>
-            <StyledLink>{text('navigationProfile')}</StyledLink>
+            <StyledLink>{t('navigationProfile')}</StyledLink>
           </Link>
           <SignOut />
         </Flex>

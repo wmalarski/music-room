@@ -1,7 +1,8 @@
 import { StyledLink, Typography } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { ReactElement, ReactNode } from 'react';
-import { paths, useText } from '../../../utils';
+import { paths } from '../../../utils';
 import * as Styles from './HeaderView.styles';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export const HeaderView = ({ right }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('headers');
 
   return (
     <Styles.Container
@@ -20,7 +21,7 @@ export const HeaderView = ({ right }: Props): ReactElement => {
     >
       <Typography size="xl">
         <Link href={paths.home} passHref>
-          <StyledLink>{text('headerHome')}</StyledLink>
+          <StyledLink>{t('headerHome')}</StyledLink>
         </Link>
       </Typography>
       <div>{right}</div>

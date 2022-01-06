@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import {
   SignUpViewContext,
   SignUpViewData,
@@ -26,7 +26,8 @@ type Props = {
 };
 
 const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('auth');
+  const { t: tForm } = useTranslation('common');
 
   const options = useSignUpViewOptions();
 
@@ -36,18 +37,18 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
     handleSubmit,
   } = useForm<SignUpViewData, SignUpViewContext>({
     resolver: signUpViewResolver,
-    context: { text },
+    context: { t: tForm },
   });
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography kind="description">{text('signUpHeader')}</Typography>
+      <Typography kind="description">{t('signUpHeader')}</Typography>
       <FormFieldset>
-        <FormLabel htmlFor="email">{text('emailPlaceholder')}</FormLabel>
+        <FormLabel htmlFor="email">{t('emailPlaceholder')}</FormLabel>
         <Input
           id="email"
           type="email"
-          placeholder={text('emailPlaceholder')}
+          placeholder={t('emailPlaceholder')}
           {...register('email', options.email)}
         />
         {errors.email && (
@@ -55,11 +56,11 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
         )}
       </FormFieldset>
       <FormFieldset>
-        <FormLabel htmlFor="password">{text('passwordPlaceholder')}</FormLabel>
+        <FormLabel htmlFor="password">{t('passwordPlaceholder')}</FormLabel>
         <Input
           id="password"
           type="password"
-          placeholder={text('passwordPlaceholder')}
+          placeholder={t('passwordPlaceholder')}
           {...register('password', options.password)}
         />
         {errors.password && (
@@ -68,12 +69,12 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
       </FormFieldset>
       <FormFieldset>
         <FormLabel htmlFor="confirmPassword">
-          {text('confirmPasswordPlaceholder')}
+          {t('confirmPasswordPlaceholder')}
         </FormLabel>
         <Input
           id="confirmPassword"
           type="password"
-          placeholder={text('confirmPasswordPlaceholder')}
+          placeholder={t('confirmPasswordPlaceholder')}
           {...register('confirmPassword', options.confirmPassword)}
         />
         {errors.confirmPassword && (
@@ -82,7 +83,7 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
       </FormFieldset>
       {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} type="submit">
-        <Typography size="sm">{text('signUpButton')}</Typography>
+        <Typography size="sm">{t('signUpButton')}</Typography>
       </Button>
     </Form>
   );
