@@ -5,7 +5,7 @@ import { InviteAcceptView } from './InviteAcceptView';
 export default {
   title: 'Invite/InviteAcceptView',
   component: InviteAcceptView,
-  argTypes: { onAcceptClicked: { type: 'function' } },
+  argTypes: { onAcceptClick: { type: 'function' } },
 } as ComponentMeta<typeof InviteAcceptView>;
 
 const Template: ComponentStory<typeof InviteAcceptView> = (args) => (
@@ -16,5 +16,5 @@ export const Playground = Template.bind({});
 Playground.args = {
   room: defaultRoom,
   isLoading: false,
-  onAcceptClicked: () => null,
+  onAcceptClick: () => null,
 };

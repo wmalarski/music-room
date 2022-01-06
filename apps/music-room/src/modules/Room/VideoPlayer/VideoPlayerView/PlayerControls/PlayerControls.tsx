@@ -1,6 +1,6 @@
 import { Controls, UpdateControlsArgs } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
-import { ReactElement } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { useText } from '../../../../../utils';
 
 type Props = {
@@ -16,22 +16,30 @@ export const PlayerControls = ({
 }: Props): ReactElement => {
   const text = useText();
 
+  const handleMuteChange = () => {
+    onChange({ id, muted: !muted });
+  };
+
+  const handlePauseChange = () => {
+    onChange({ id, pause: !pause });
+  };
+
+  const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange({ id, volume: Number(event.target.value) });
+  };
+
+  const handleAssignClick = () => {
+    onChange({ id, speaker_id: profileId });
+  };
+
   return (
     <div>
       <div>
-        <Input
-          type="checkbox"
-          checked={muted}
-          onChange={() => onChange({ id, muted: !muted })}
-        />
+        <Input type="checkbox" checked={muted} onChange={handleMuteChange} />
         <Typography>{text('controlsMute')}</Typography>
       </div>
       <div>
-        <Input
-          type="checkbox"
-          checked={pause}
-          onChange={() => onChange({ id, pause: !pause })}
-        />
+        <Input type="checkbox" checked={pause} onChange={handlePauseChange} />
         <Typography>{text('controlsPause')}</Typography>
       </div>
       <div>
@@ -42,13 +50,11 @@ export const PlayerControls = ({
           min={0}
           max={100}
           value={volume}
-          onChange={(event) =>
-            onChange({ id, volume: Number(event.target.value) })
-          }
+          onChange={handleVolumeChange}
         />
         <Typography>{text('controlsVolume')}</Typography>
       </div>
-      <Button onClick={() => onChange({ id, speaker_id: profileId })}>
+      <Button onClick={handleAssignClick}>
         {text('controlsAssignSpeaker')}
       </Button>
     </div>

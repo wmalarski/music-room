@@ -6,20 +6,20 @@ import { useText } from '../../../../utils';
 type Props = {
   room: Room;
   isLoading: boolean;
-  onAcceptClicked: () => void;
+  onAcceptClick: () => void;
 };
 
 export const InviteAcceptView = ({
   room,
   isLoading,
-  onAcceptClicked,
+  onAcceptClick,
 }: Props): ReactElement => {
   const text = useText();
 
   return (
     <div>
       <Typography>{text('inviteToRoom')(room.name)}</Typography>
-      <Button isLoading={isLoading} onClick={onAcceptClicked}>
+      <Button isLoading={isLoading} onClick={onAcceptClick}>
         {text('acceptInvitation')}
       </Button>
     </div>

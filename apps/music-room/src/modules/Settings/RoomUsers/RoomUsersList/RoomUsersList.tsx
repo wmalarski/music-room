@@ -31,6 +31,14 @@ export const RoomUsersList = ({
     overscan: 5,
   });
 
+  const handleRoleChange = (member: Member) => (role: RoomRole) => {
+    onRoleChange(member, role);
+  };
+
+  const handleRemoveClick = (member: Member) => () => {
+    onRemoveClick(member);
+  };
+
   return (
     <Flex
       ref={parentRef}
@@ -51,8 +59,8 @@ export const RoomUsersList = ({
             >
               <RoomUsersListItem
                 member={member}
-                onRoleChange={(role) => onRoleChange(member, role)}
-                onRemoveClick={() => onRemoveClick(member)}
+                onRoleChange={handleRoleChange(member)}
+                onRemoveClick={handleRemoveClick(member)}
               />
             </Flex>
           );

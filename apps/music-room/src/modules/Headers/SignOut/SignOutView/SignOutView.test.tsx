@@ -7,7 +7,7 @@ import { SignOutView } from './SignOutView';
 type Props = ComponentProps<typeof SignOutView>;
 
 const defaultProps: Props = {
-  onSignOutClicked: () => null,
+  onSignOutClick: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

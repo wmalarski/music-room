@@ -4,19 +4,23 @@ import { useText } from '../../../../utils';
 
 type Props = {
   isLoading: boolean;
-  onClicked: () => void;
+  onClick: () => void;
 };
 
-export const DeleteRoomView = ({ onClicked }: Props): ReactElement => {
+export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
   const text = useText();
 
   const [isClicked, setIsClicked] = useState(false);
 
+  const handleFirstClick = () => {
+    setIsClicked(true);
+  };
+
   return (
     <>
-      <Button onClick={() => setIsClicked(true)}>{text('removeRoom')}</Button>
+      <Button onClick={handleFirstClick}>{text('removeRoom')}</Button>
       {isClicked && (
-        <Button onClick={onClicked}>{text('confirmRemoveRoom')}</Button>
+        <Button onClick={onClick}>{text('confirmRemoveRoom')}</Button>
       )}
     </>
   );

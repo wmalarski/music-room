@@ -1,4 +1,5 @@
 import {
+  Controls,
   useRole,
   useSelectControls,
   useSelectCurrentMessage,
@@ -23,7 +24,21 @@ export const VideoPlayer = ({
 
   const { data: controls } = useSelectControls({ roomId: room_id });
   const { mutate: updateControls } = useUpdateControls(room_id);
+
   useSubscribeToControls({ roomId: room_id });
+
+  const handleEnd = () => {
+    if (!currentMessage) return;
+    updateMessage({
+      id: currentMessage.id,
+      ended_at: new Date().toISOString(),
+    });
+  };
+
+  const handleChange = (data: Partial<Controls>) => {
+    if (!controls) return;
+    updateControls({ id: controls.id, ...data });
+  };
 
   return (
     <>
@@ -35,13 +50,8 @@ export const VideoPlayer = ({
             ...currentMessage,
             data: { kind: 'message#0.0.1', url: 'dQw4w9WgXcQ' },
           }}
-          onEnd={() =>
-            updateMessage({
-              id: currentMessage.id,
-              ended_at: new Date().toISOString(),
-            })
-          }
-          onChange={(data) => updateControls({ id: controls.id, ...data })}
+          onEnd={handleEnd}
+          onChange={handleChange}
         />
       )}
     </>

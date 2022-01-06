@@ -3,7 +3,7 @@ import { Button, Debug } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { useText } from '../../../../utils';
 
-type Data = {
+export type ReactionsViewData = {
   likeAt: string | null;
   dislikeAt: string | null;
 };
@@ -11,33 +11,33 @@ type Data = {
 type Props = {
   action: Action | null;
   message: Message | null;
-  onChange: (data: Data) => void;
+  onChange: (data: ReactionsViewData) => void;
 };
 
 export const ReactionsView = ({ action, onChange }: Props): ReactElement => {
   const text = useText();
 
+  const handleLikeClick = () => {
+    onChange({
+      likeAt: action?.like_at ? null : new Date().toISOString(),
+      dislikeAt: null,
+    });
+  };
+
+  const handleDislikeClick = () => {
+    onChange({
+      likeAt: null,
+      dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
+    });
+  };
+
   return (
     <>
       <Debug value={action} />
-      <Button
-        onClick={() =>
-          onChange({
-            likeAt: action?.like_at ? null : new Date().toISOString(),
-            dislikeAt: null,
-          })
-        }
-      >
+      <Button onClick={handleLikeClick}>
         {action?.like_at ? text('removeLikeMessage') : text('likeMessage')}
       </Button>
-      <Button
-        onClick={() =>
-          onChange({
-            likeAt: null,
-            dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
-          })
-        }
-      >
+      <Button onClick={handleDislikeClick}>
         {action?.dislike_at
           ? text('removeDislikeMessage')
           : text('dislikeMessage')}

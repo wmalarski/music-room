@@ -3,11 +3,11 @@ import { ReactElement } from 'react';
 import { useText } from '../../../../utils';
 
 type Props = {
-  onSignOutClicked: () => void;
+  onSignOutClick: () => void;
 };
 
-export const SignOutView = ({ onSignOutClicked }: Props): ReactElement => {
+export const SignOutView = ({ onSignOutClick }: Props): ReactElement => {
   const text = useText();
 
-  return <Button onClick={onSignOutClicked}>{text('signOutButton')}</Button>;
+  return <Button onClick={onSignOutClick}>{text('signOutButton')}</Button>;
 };

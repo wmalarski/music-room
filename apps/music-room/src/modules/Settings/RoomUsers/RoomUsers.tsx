@@ -1,4 +1,6 @@
 import {
+  Member,
+  RoomRole,
   useDeleteRole,
   useRoom,
   useSelectMembers,
@@ -26,13 +28,21 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
 
   const { mutate: updateRole } = useUpdateRole();
 
+  const handleRemoveClick = (profile: Member) => {
+    deleteRole({ id: profile.id });
+  };
+
+  const handleRoleChange = (profile: Member, role: RoomRole) => {
+    updateRole({ id: profile.id, role });
+  };
+
   return (
     <View
       data={data}
       offset={offset}
       onPageChange={setOffset}
-      onRemoveClick={(profile) => deleteRole({ id: profile.id })}
-      onRoleChange={(profile, role) => updateRole({ id: profile.id, role })}
+      onRemoveClick={handleRemoveClick}
+      onRoleChange={handleRoleChange}
     />
   );
 };

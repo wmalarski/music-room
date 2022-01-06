@@ -13,7 +13,7 @@ import { InviteAccept } from './InviteAccept';
 
 type Props = ComponentProps<typeof InviteAccept>;
 
-const View: Props['View'] = ({ onAcceptClicked }) => (
+const View: Props['View'] = ({ onAcceptClick: onAcceptClicked }) => (
   <>
     <button onClick={onAcceptClicked}>Click</button>
   </>

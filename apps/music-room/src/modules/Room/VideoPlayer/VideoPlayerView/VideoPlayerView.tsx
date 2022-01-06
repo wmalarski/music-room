@@ -44,6 +44,18 @@ export const VideoPlayerView = ({
     else player.playVideo();
   }, [pause]);
 
+  const handlePause = () => {
+    onChange({ pause: true });
+  };
+
+  const handlePlay = () => {
+    onChange({ pause: false });
+  };
+
+  const handleEnd = () => {
+    onEnd();
+  };
+
   return (
     <>
       <YouTube
@@ -60,9 +72,9 @@ export const VideoPlayerView = ({
             fs: 0,
           },
         }}
-        onPause={() => onChange({ pause: true })}
-        onPlay={() => onChange({ pause: false })}
-        onEnd={() => onEnd()}
+        onPause={handlePause}
+        onPlay={handlePlay}
+        onEnd={handleEnd}
       />
       <PlayerControls
         controls={controls}

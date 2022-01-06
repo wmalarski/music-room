@@ -22,24 +22,24 @@ export const InviteAccept = ({
   const router = useRouter();
 
   const { mutate: insertRole, isLoading } = useInsertRole({
-    onSuccess: () => router.push(paths.room(room.slug)),
+    onSuccess: () => {
+      router.push(paths.room(room.slug));
+    },
     onError: (error) => {
       if (error.code !== SupabaseErrorCode.UniquenessViolation) return;
       router.push(paths.room(room.slug));
     },
   });
 
+  const handleAcceptClick = () => {
+    insertRole({
+      profile_id: profile.id,
+      role: 'user',
+      room_id: room.id,
+    });
+  };
+
   return (
-    <View
-      room={room}
-      isLoading={isLoading}
-      onAcceptClicked={() =>
-        insertRole({
-          profile_id: profile.id,
-          role: 'user',
-          room_id: room.id,
-        })
-      }
-    />
+    <View room={room} isLoading={isLoading} onAcceptClick={handleAcceptClick} />
   );
 };

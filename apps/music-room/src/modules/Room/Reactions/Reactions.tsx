@@ -5,7 +5,10 @@ import {
   useUpsertAction,
 } from '@music-room/data-access';
 import { ReactElement } from 'react';
-import { ReactionsView } from './ReactionsView/ReactionsView';
+import {
+  ReactionsView,
+  ReactionsViewData,
+} from './ReactionsView/ReactionsView';
 
 type Props = {
   View?: typeof ReactionsView;
@@ -24,20 +27,18 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
     messageId: currentMessage?.id ?? null,
   });
 
+  const handleSubmit = (data: ReactionsViewData) => {
+    if (!currentMessage) return;
+    upsertMessage({
+      message_id: currentMessage.id,
+      profile_id,
+      id: action?.id ?? undefined,
+      dislike_at: data.dislikeAt,
+      like_at: data.likeAt,
+    });
+  };
+
   return (
-    <View
-      action={action}
-      message={currentMessage}
-      onChange={(data) =>
-        currentMessage &&
-        upsertMessage({
-          message_id: currentMessage.id,
-          profile_id,
-          id: action?.id ?? undefined,
-          dislike_at: data.dislikeAt,
-          like_at: data.likeAt,
-        })
-      }
-    />
+    <View action={action} message={currentMessage} onChange={handleSubmit} />
   );
 };

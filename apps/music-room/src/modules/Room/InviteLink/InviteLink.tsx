@@ -8,11 +8,15 @@ export const InviteLink = (): ReactElement => {
 
   const [href, setHref] = useState<string>();
 
+  const handleRef = (element: HTMLAnchorElement | null) => {
+    setHref(element?.href);
+  };
+
   return (
     <>
       <div style={{ display: 'none' }}>
         <Link href={`/invite/${hash}`}>
-          <a ref={(element) => setHref(element?.href)} />
+          <a ref={handleRef} />
         </Link>
       </div>
       {href && <Input readOnly value={href} />}

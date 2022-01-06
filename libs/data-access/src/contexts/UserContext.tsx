@@ -39,7 +39,9 @@ export const UserContextProvider = ({ children }: Props): ReactElement => {
 
       setUser(session?.user ?? null);
     });
-    return () => data?.unsubscribe?.();
+    return () => {
+      data?.unsubscribe?.();
+    };
   }, []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;

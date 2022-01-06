@@ -1,10 +1,10 @@
 import { Message } from '@music-room/data-access';
 import { Button, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
-import { ReactElement } from 'react';
+import { ChangeEvent, FormEvent, ReactElement } from 'react';
 import { useText } from '../../../../utils';
 
-type Data = {
+export type ChatInputViewData = {
   url: string;
 };
 
@@ -13,7 +13,7 @@ type Props = {
   message?: Message | null;
   error: PostgrestError | null;
   query: string;
-  onSubmit: (data: Data) => void;
+  onSubmit: (data: ChatInputViewData) => void;
   onQueryChange: (query: string) => void;
 };
 
@@ -24,17 +24,21 @@ export const ChatInputView = ({
 }: Props): ReactElement => {
   const text = useText();
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit({ url: query });
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onQueryChange(event.target.value);
+  };
+
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        onSubmit({ url: query });
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <Input
         placeholder={text('addUrlPlaceholder')}
         value={query}
-        onChange={(event) => onQueryChange(event.target.value)}
+        onChange={handleChange}
       />
       <Button type="submit">{text('addMessage')}</Button>
     </form>
