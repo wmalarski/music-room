@@ -45,12 +45,7 @@ export const selectMembers = async ({
 
   if (error || !data) throw error;
 
-  return {
-    members: data,
-    count: count ?? 0,
-    limit,
-    offset,
-  };
+  return { members: data, count: count ?? 0, limit, offset };
 };
 
 export const useSelectMembers = (

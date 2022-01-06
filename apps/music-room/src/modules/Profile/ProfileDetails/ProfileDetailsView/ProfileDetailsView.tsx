@@ -12,6 +12,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useText } from '../../../../utils';
+import * as Styles from './ProfileDetailsView.styles';
 import {
   ProfileDetailsViewData,
   useProfileDetailsViewOptions,
@@ -43,23 +44,29 @@ export const ProfileDetailsView = ({
   const options = useProfileDetailsViewOptions();
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography size="xl">{text('profileHeader')}</Typography>
-      <FormFieldset>
-        <FormLabel htmlFor="name">{text('profileNamePlaceholder')}</FormLabel>
-        <Input
-          id="name"
-          placeholder={text('profileNamePlaceholder')}
-          {...register('name', options.name)}
-        />
-        {errors.name && (
-          <FormError role="alert">{errors.name.message}</FormError>
-        )}
-      </FormFieldset>
-      {error && <FormError role="alert">{error.message}</FormError>}
-      <Button isLoading={isLoading} disabled={!isDirty} type="submit">
-        <Typography size="sm">{text('profileSaveButton')}</Typography>
-      </Button>
-    </Form>
+    <Styles.Container>
+      <Styles.Content>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Typography size="xl">{text('profileHeader')}</Typography>
+          <FormFieldset>
+            <FormLabel htmlFor="name">
+              {text('profileNamePlaceholder')}
+            </FormLabel>
+            <Input
+              id="name"
+              placeholder={text('profileNamePlaceholder')}
+              {...register('name', options.name)}
+            />
+            {errors.name && (
+              <FormError role="alert">{errors.name.message}</FormError>
+            )}
+          </FormFieldset>
+          {error && <FormError role="alert">{error.message}</FormError>}
+          <Button isLoading={isLoading} disabled={!isDirty} type="submit">
+            <Typography size="sm">{text('profileSaveButton')}</Typography>
+          </Button>
+        </Form>
+      </Styles.Content>
+    </Styles.Container>
   );
 };

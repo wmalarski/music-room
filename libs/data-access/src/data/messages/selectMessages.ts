@@ -1,52 +1,53 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   QueryFunctionContext,
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-  UseInfiniteQueryResult,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Message } from "../types";
-
-export const MESSAGES_PAGE_LIMIT = 20;
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Message } from '../types';
 
 export type SelectMessagesArgs = {
   roomId: number;
+  offset: number;
+  limit: number;
 };
 
-export type SelectMessagesKey = ["messages", SelectMessagesArgs];
+export type SelectMessagesKey = ['messages', SelectMessagesArgs];
+
+export type SelectMessagesReturn = {
+  messages: Message[];
+  count: number;
+  offset: number;
+  limit: number;
+};
 
 export const selectMessagesKey = (
   args: SelectMessagesArgs
-): SelectMessagesKey => ["messages", args];
+): SelectMessagesKey => ['messages', args];
 
 export const selectMessages = async ({
-  queryKey: [, { roomId }],
-  pageParam = 0,
-}: QueryFunctionContext<SelectMessagesKey>): Promise<Message[]> => {
-  const { data, error } = await fromSupabase("messages")
-    .select("*")
+  queryKey: [, { roomId, offset, limit }],
+}: QueryFunctionContext<SelectMessagesKey>): Promise<SelectMessagesReturn> => {
+  const { data, error, count } = await fromSupabase('messages')
+    .select('*', { count: 'estimated' })
     .match({ room_id: roomId })
-    .order("created_at", { ascending: false })
-    .range(pageParam, pageParam + MESSAGES_PAGE_LIMIT);
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit);
 
   if (error || !data) throw error;
 
-  return data;
+  return { messages: data, count: count ?? 0, limit, offset };
 };
 
 export const useSelectMessages = (
   args: SelectMessagesArgs,
-  options?: UseInfiniteQueryOptions<
-    Message[],
+  options?: UseQueryOptions<
+    SelectMessagesReturn,
     PostgrestError,
-    Message[],
-    Message[],
+    SelectMessagesReturn,
     SelectMessagesKey
   >
-): UseInfiniteQueryResult<Message[], PostgrestError> =>
-  useInfiniteQuery(selectMessagesKey(args), selectMessages, {
-    ...options,
-    getNextPageParam: (_, pages) =>
-      pages.reduce((prev, values) => prev + values.length, 0),
-  });
+): UseQueryResult<SelectMessagesReturn, PostgrestError> =>
+  useQuery(selectMessagesKey(args), selectMessages, options);

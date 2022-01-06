@@ -3,7 +3,7 @@ import {
   useSelectMessages,
   useSubscribeToMessages,
 } from '@music-room/data-access';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 
 type Props = {
@@ -13,14 +13,11 @@ type Props = {
 export const ChatRoom = ({ View = ChatMessagesList }: Props): ReactElement => {
   const { id: roomId } = useRoom();
 
-  useSubscribeToMessages({ roomId });
+  const [offset, setOffset] = useState(0);
 
-  const { data: pages, fetchNextPage } = useSelectMessages({ roomId });
+  const { data } = useSelectMessages({ roomId, limit: 20, offset });
 
-  return (
-    <View
-      messages={pages?.pages.reduce((prev, curr) => [...prev, ...curr])}
-      onLoadMore={fetchNextPage}
-    />
-  );
+  useSubscribeToMessages({ roomId, limit: 20, offset });
+
+  return <View data={data} offset={offset} onPageChange={setOffset} />;
 };
