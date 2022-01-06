@@ -21,6 +21,7 @@ export const getServerSideMembers = async ({
         room_slug: roomSlug,
         user_id: user.id,
         offset: 0,
+        limit: 1,
       },
     ],
     meta: {},
