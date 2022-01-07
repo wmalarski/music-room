@@ -1,9 +1,10 @@
 import { Controls, Message } from '@music-room/data-access';
-import { ReactElement, useEffect, useRef } from 'react';
+import { ReactElement, RefObject } from 'react';
 import YouTube from 'react-youtube';
 import { PlayerControls } from './PlayerControls/PlayerControls';
 
 type Props = {
+  ytRef: RefObject<YouTube>;
   profileId: number;
   message: Message;
   controls: Controls;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export const VideoPlayerView = ({
+  ytRef,
   profileId,
   message,
   controls,
@@ -20,29 +22,28 @@ export const VideoPlayerView = ({
 }: Props): ReactElement => {
   const { muted, pause, volume, speaker_id } = controls;
 
-  const ref = useRef<YouTube>(null);
-
   const isSpeaker = profileId === speaker_id;
+  const player = ytRef.current?.getInternalPlayer();
 
-  useEffect(() => {
-    const player = ref.current?.getInternalPlayer();
-    if (!player || !isSpeaker) return;
-    player.setVolume(volume);
-  }, [isSpeaker, volume]);
+  // useEffect(() => {
+  //   const player = ref.current?.getInternalPlayer();
+  //   if (!player || !isSpeaker) return;
+  //   player.setVolume(volume);
+  // }, [isSpeaker, volume]);
 
-  useEffect(() => {
-    const player = ref.current?.getInternalPlayer();
-    if (!player || !isSpeaker) return;
-    if (muted) player.mute();
-    else player.unMute();
-  }, [isSpeaker, muted]);
+  // useEffect(() => {
+  //   const player = ref.current?.getInternalPlayer();
+  //   if (!player || !isSpeaker) return;
+  //   if (muted) player.mute();
+  //   else player.unMute();
+  // }, [isSpeaker, muted]);
 
-  useEffect(() => {
-    const player = ref.current?.getInternalPlayer();
-    if (!player) return;
-    if (pause) player.pauseVideo();
-    else player.playVideo();
-  }, [pause]);
+  // useEffect(() => {
+  //   const player = ref.current?.getInternalPlayer();
+  //   if (!player) return;
+  //   if (pause) player.pauseVideo();
+  //   else player.playVideo();
+  // }, [pause]);
 
   const handlePause = () => {
     onChange({ pause: true });
@@ -56,10 +57,35 @@ export const VideoPlayerView = ({
     onEnd();
   };
 
+  const handleAssignClick = () => {
+    if (!player) return;
+    onChange({ speaker_id: profileId });
+  };
+
+  const handleMuteChange = () => {
+    if (!player) return;
+    if (!muted) player.mute();
+    else player.unMute();
+    onChange({ muted: !muted });
+  };
+
+  const handlePauseChange = () => {
+    if (!player) return;
+    if (!pause) player.pauseVideo();
+    else player.playVideo();
+    onChange({ pause: !pause });
+  };
+
+  const handleVolumeChange = (volume: number) => {
+    if (!player) return;
+    player.setVolume(volume);
+    onChange({ volume });
+  };
+
   return (
     <>
       <YouTube
-        ref={ref}
+        ref={ytRef}
         videoId={message.data.url}
         opts={{
           height: '390',
@@ -78,8 +104,10 @@ export const VideoPlayerView = ({
       />
       <PlayerControls
         controls={controls}
-        onChange={onChange}
-        profileId={profileId}
+        onAssignClick={handleAssignClick}
+        onMuteChange={handleMuteChange}
+        onPauseChange={handlePauseChange}
+        onVolumeChange={handleVolumeChange}
       />
     </>
   );

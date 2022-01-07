@@ -1,35 +1,39 @@
-import { Controls, UpdateControlsArgs } from '@music-room/data-access';
+import { Controls } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
 import { ChangeEvent, ReactElement } from 'react';
 
 type Props = {
-  profileId: number;
   controls: Controls;
-  onChange: (controls: UpdateControlsArgs) => void;
+  onMuteChange: () => void;
+  onPauseChange: () => void;
+  onVolumeChange: (volume: number) => void;
+  onAssignClick: () => void;
 };
 
 export const PlayerControls = ({
-  profileId,
-  controls: { id, muted, pause, volume },
-  onChange,
+  controls: { muted, pause, volume },
+  onAssignClick,
+  onMuteChange,
+  onPauseChange,
+  onVolumeChange,
 }: Props): ReactElement => {
   const { t } = useTranslation('room');
 
   const handleMuteChange = () => {
-    onChange({ id, muted: !muted });
+    onMuteChange();
   };
 
   const handlePauseChange = () => {
-    onChange({ id, pause: !pause });
+    onPauseChange();
   };
 
   const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange({ id, volume: Number(event.target.value) });
+    onVolumeChange(Number(event.target.value));
   };
 
   const handleAssignClick = () => {
-    onChange({ id, speaker_id: profileId });
+    onAssignClick();
   };
 
   return (

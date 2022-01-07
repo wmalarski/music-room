@@ -9,19 +9,26 @@ export type SubscribeToMessageArgs = {
   roomId: number;
   offset: number;
   limit: number;
+  profileId: number;
 };
 
 export const useSubscribeToMessages = ({
   roomId,
   offset,
   limit,
+  profileId,
 }: SubscribeToMessageArgs): void => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
     const subscription = supabase
       .from<Message>(`messages:room_id=eq.${roomId}`)
-      .on('*', () => {
+      .on('*', (payload) => {
+        if (
+          payload.new.profile_id === profileId ||
+          payload.old.profile_id === profileId
+        )
+          return;
         queryClient.invalidateQueries([selectCurrentMessageKey({ roomId })]);
         queryClient.invalidateQueries<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId, limit, offset })
@@ -32,5 +39,5 @@ export const useSubscribeToMessages = ({
     return () => {
       subscription.unsubscribe();
     };
-  }, [limit, offset, queryClient, roomId]);
+  }, [limit, offset, profileId, queryClient, roomId]);
 };

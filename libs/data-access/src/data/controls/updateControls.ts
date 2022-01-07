@@ -1,17 +1,16 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Controls } from "../types";
-import { selectControlsKey } from "./selectControls";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Controls } from '../types';
+import { selectControlsKey } from './selectControls';
 
-export type ControlsVariables = Partial<Omit<Controls, "id" | "room_id">>;
-
-export type UpdateControlsArgs = Pick<Controls, "id"> & ControlsVariables;
+export type UpdateControlsArgs = Partial<Omit<Controls, 'room_id'>> &
+  Pick<Controls, 'id' | 'change_by'>;
 
 export type UpdateControlsContext = {
   previous?: Controls;
@@ -21,9 +20,9 @@ export type UpdateControlsContext = {
 export const updateControls = async (
   args: UpdateControlsArgs
 ): Promise<Controls> => {
-  const { data, error } = await fromSupabase("controls")
+  const { data, error } = await fromSupabase('controls')
     .update(args)
-    .eq("id", args.id)
+    .eq('id', args.id)
     .single();
 
   if (error || !data) throw error;
@@ -40,7 +39,7 @@ export const useUpdateControls = (
       UpdateControlsArgs,
       UpdateControlsContext
     >,
-    "onMutate"
+    'onMutate'
   >
 ): UseMutationResult<
   Controls,

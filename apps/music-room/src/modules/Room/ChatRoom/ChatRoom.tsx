@@ -1,5 +1,5 @@
 import {
-  useRoom,
+  useRole,
   useSelectMessages,
   useSubscribeToMessages,
 } from '@music-room/data-access';
@@ -11,13 +11,13 @@ type Props = {
 };
 
 export const ChatRoom = ({ View = ChatMessagesList }: Props): ReactElement => {
-  const { id: roomId } = useRoom();
+  const { room_id: roomId, profile_id: profileId } = useRole();
 
   const [offset, setOffset] = useState(0);
 
   const { data } = useSelectMessages({ roomId, limit: 20, offset });
 
-  useSubscribeToMessages({ roomId, limit: 20, offset });
+  useSubscribeToMessages({ roomId, limit: 20, offset, profileId });
 
   return <View data={data} offset={offset} onPageChange={setOffset} />;
 };

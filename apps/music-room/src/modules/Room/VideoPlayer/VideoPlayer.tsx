@@ -7,7 +7,8 @@ import {
   useUpdateControls,
   useUpdateMessage,
 } from '@music-room/data-access';
-import { ReactElement } from 'react';
+import { ReactElement, useRef } from 'react';
+import YouTube from 'react-youtube';
 import { VideoPlayerView } from './VideoPlayerView/VideoPlayerView';
 
 type Props = {
@@ -19,13 +20,31 @@ export const VideoPlayer = ({
 }: Props): ReactElement => {
   const { room_id, profile_id } = useRole();
 
+  const ytRef = useRef<YouTube>(null);
+
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
   const { mutate: updateMessage } = useUpdateMessage(room_id);
 
-  const { data: controls } = useSelectControls({ roomId: room_id });
+  const { data: controls } = useSelectControls(
+    { roomId: room_id },
+    {
+      onSuccess: (data) => {
+        const player = ytRef.current?.getInternalPlayer();
+        if (!data || !player) return;
+
+        if (data.muted && !player.mute) player.mute();
+        else if (player.mute) player.unMute();
+
+        if (data.pause) player.pauseVideo();
+        else player.playVideo();
+
+        if (profile_id !== data.change_by) player.mute();
+      },
+    }
+  );
   const { mutate: updateControls } = useUpdateControls(room_id);
 
-  useSubscribeToControls({ roomId: room_id });
+  useSubscribeToControls({ roomId: room_id, profileId: profile_id });
 
   const handleEnd = () => {
     if (!currentMessage) return;
@@ -37,13 +56,14 @@ export const VideoPlayer = ({
 
   const handleChange = (data: Partial<Controls>) => {
     if (!controls) return;
-    updateControls({ id: controls.id, ...data });
+    updateControls({ id: controls.id, change_by: profile_id, ...data });
   };
 
   return (
     <>
       {currentMessage && controls && (
         <View
+          ytRef={ytRef}
           profileId={profile_id}
           controls={controls}
           message={{
@@ -51,7 +71,7 @@ export const VideoPlayer = ({
             data: { kind: 'message#0.0.1', url: 'dQw4w9WgXcQ' },
           }}
           onEnd={handleEnd}
-          onChange={handleChange}
+          onChange={() => void 0}
         />
       )}
     </>

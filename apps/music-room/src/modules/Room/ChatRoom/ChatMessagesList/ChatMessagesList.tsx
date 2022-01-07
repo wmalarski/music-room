@@ -31,7 +31,7 @@ export const ChatMessagesList = ({
     <Flex
       ref={parentRef}
       css={{
-        height: 'calc(100vh - $xl)',
+        height: '20vh',
         width: '$xl',
       }}
     >

@@ -12,9 +12,9 @@ type Props = {
 export const ChatInput = ({ View = ChatInputView }: Props): ReactElement => {
   const { profile_id, room_id } = useRole();
 
-  const { mutate: insertMessage, isLoading, data, error } = useInsertMessage();
-
   const [query, setQuery] = useState('');
+
+  const { mutate: insertMessage, isLoading, data, error } = useInsertMessage();
 
   // const { data: selections } = useSelectSuggestions({ query });
 
