@@ -1,16 +1,16 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { selectAllMembersKey } from "../members/selectMembers";
-import { Member, Profile } from "../types";
-import { selectProfileKey } from "./selectProfile";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { selectAllMembersKey } from '../members/selectMembers';
+import { Member, Profile } from '../types';
+import { selectProfileKey } from './selectProfile';
 
-export type UpdateProfileArgs = Pick<Profile, "id" | "name">;
+export type UpdateProfileArgs = Pick<Profile, 'id' | 'name'>;
 
 export type UpdateProfileContext = {
   previousProfile?: Profile;
@@ -23,9 +23,9 @@ export const updateProfile = async ({
   id,
   name,
 }: UpdateProfileArgs): Promise<Profile> => {
-  const { data, error } = await fromSupabase("profiles")
+  const { data, error } = await fromSupabase('profiles')
     .update({ id, name })
-    .eq("id", id)
+    .eq('id', id)
     .single();
 
   if (error || !data) throw error;
@@ -63,11 +63,10 @@ export const useUpdateProfile = (
       const previousMembers = queryClient.getQueryData<Member[]>(membersKey);
 
       const nextProfile = { ...previousProfile, ...profile };
-      const nextMembers = previousMembers?.map((member) =>
-        member.profile_id === profile.id
-          ? { ...member, profile_name: profile.name }
-          : member
-      );
+      const nextMembers = previousMembers?.map((member) => {
+        if (member.profile_id !== profile.id) return member;
+        return { ...member, profile_name: profile.name };
+      });
 
       queryClient.setQueryData(profileKey, nextProfile);
       queryClient.setQueryData(membersKey, nextMembers);

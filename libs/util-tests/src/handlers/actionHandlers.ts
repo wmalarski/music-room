@@ -7,15 +7,19 @@ import { DefaultRequestBody, rest } from 'msw';
 
 export const mockActionsStorage = {
   get: (): Action[] => JSON.parse(sessionStorage.getItem('actions') ?? '[]'),
-  set: (actions: Action[]): void =>
-    sessionStorage.setItem('actions', JSON.stringify(actions)),
+  set: (actions: Action[]): void => {
+    sessionStorage.setItem('actions', JSON.stringify(actions));
+  },
 };
 
 export const actionHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Action[]>(
     TABLES_ENDPOINTS.actions,
-    (req, res, ctx) =>
-      res(ctx.json(mockActionsStorage.get().slice(0, Number(req.params.limit))))
+    (req, res, ctx) => {
+      return res(
+        ctx.json(mockActionsStorage.get().slice(0, Number(req.params.limit)))
+      );
+    }
   ),
   rest.post<UpsertActionArgs, never, Action>(
     TABLES_ENDPOINTS.actions,

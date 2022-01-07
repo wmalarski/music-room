@@ -57,5 +57,6 @@ export const useSelectMembers = (
     SelectMembersResult,
     SelectMembersKey
   >
-): UseQueryResult<SelectMembersResult, PostgrestError> =>
-  useQuery(selectMembersKey(args), selectMembers, options);
+): UseQueryResult<SelectMembersResult, PostgrestError> => {
+  return useQuery(selectMembersKey(args), selectMembers, options);
+};

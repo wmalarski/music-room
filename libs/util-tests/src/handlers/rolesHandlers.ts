@@ -9,13 +9,14 @@ import { rest } from 'msw';
 import { mockMembersStorage } from './membersHandlers';
 
 export const mockRolesStorage = {
-  get: (): Role[] =>
-    mockMembersStorage.get().map((member) => ({
+  get: (): Role[] => {
+    return mockMembersStorage.get().map((member) => ({
       id: member.id,
       profile_id: member.profile_id,
       role: member.role,
       room_id: member.room_id,
-    })),
+    }));
+  },
   set: (roles: Role[]): void => {
     const member = mockMembersStorage.getContext();
     if (!member) {

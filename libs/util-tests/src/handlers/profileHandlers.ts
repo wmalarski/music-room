@@ -7,8 +7,9 @@ import { DefaultRequestBody, rest } from 'msw';
 
 export const mockProfilesStorage = {
   get: (): Profile[] => JSON.parse(sessionStorage.getItem('profiles') ?? '[]'),
-  set: (profiles: Profile[]): void =>
-    sessionStorage.setItem('profiles', JSON.stringify(profiles)),
+  set: (profiles: Profile[]): void => {
+    return sessionStorage.setItem('profiles', JSON.stringify(profiles));
+  },
 };
 
 export const profilesHandlers = [

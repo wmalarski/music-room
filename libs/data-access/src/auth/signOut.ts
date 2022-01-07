@@ -1,10 +1,10 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
-} from "react-query";
-import { supabase } from "../supabase";
+} from 'react-query';
+import { supabase } from '../supabase';
 
 export const signOut = async (): Promise<void> => {
   const { error } = await supabase.auth.signOut();
@@ -16,5 +16,6 @@ export const signOut = async (): Promise<void> => {
 
 export const useSignOut = (
   options?: UseMutationOptions<void, PostgrestError, void>
-): UseMutationResult<void, PostgrestError, void> =>
-  useMutation(signOut, options);
+): UseMutationResult<void, PostgrestError, void> => {
+  return useMutation(signOut, options);
+};

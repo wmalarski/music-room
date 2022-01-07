@@ -1,22 +1,22 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   QueryFunctionContext,
   useQuery,
   UseQueryOptions,
   UseQueryResult,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Action } from "../types";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Action } from '../types';
 
 export type SelectActionArgs = {
   messageId: number | null;
   profileId: number;
 };
 
-export type SelectActionKey = ["action", SelectActionArgs];
+export type SelectActionKey = ['action', SelectActionArgs];
 
 export const selectActionKey = (args: SelectActionArgs): SelectActionKey => [
-  "action",
+  'action',
   args,
 ];
 
@@ -25,10 +25,10 @@ export const selectAction = async ({
 }: QueryFunctionContext<SelectActionKey>): Promise<Action | null> => {
   if (!messageId) return null;
 
-  const { data, error } = await fromSupabase("actions")
-    .select("*")
-    .eq("message_id", messageId)
-    .eq("profile_id", profileId)
+  const { data, error } = await fromSupabase('actions')
+    .select('*')
+    .eq('message_id', messageId)
+    .eq('profile_id', profileId)
     .limit(1);
 
   if (error) throw error;
@@ -44,5 +44,6 @@ export const useSelectAction = (
     Action | null,
     SelectActionKey
   >
-): UseQueryResult<Action | null, PostgrestError> =>
-  useQuery(selectActionKey(args), selectAction, options);
+): UseQueryResult<Action | null, PostgrestError> => {
+  return useQuery(selectActionKey(args), selectAction, options);
+};

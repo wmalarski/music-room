@@ -1,38 +1,38 @@
-import { PostgrestError } from "@supabase/supabase-js";
-import fetch from "cross-fetch";
+import { PostgrestError } from '@supabase/supabase-js';
+import fetch from 'cross-fetch';
 import {
   QueryFunctionContext,
   useQuery,
   UseQueryOptions,
   UseQueryResult,
-} from "react-query";
+} from 'react-query';
 
 const SUGGESTIONS_ENDPOINT =
-  "https://suggestqueries.google.com/complete/search";
+  'https://suggestqueries.google.com/complete/search';
 
 export type SelectSuggestionsArgs = {
   query: string;
 };
 
-export type SelectSuggestionsKey = ["suggestions", SelectSuggestionsArgs];
+export type SelectSuggestionsKey = ['suggestions', SelectSuggestionsArgs];
 
 export const selectSuggestionsKey = (
   args: SelectSuggestionsArgs
-): SelectSuggestionsKey => ["suggestions", args];
+): SelectSuggestionsKey => ['suggestions', args];
 
 export const selectSuggestions = async ({
   queryKey: [, { query }],
 }: QueryFunctionContext<SelectSuggestionsKey>): Promise<unknown> => {
   const params = new URLSearchParams({
-    client: "youtube",
-    hl: "en",
-    ds: "yt",
+    client: 'youtube',
+    hl: 'en',
+    ds: 'yt',
     query,
   });
   const url = `${SUGGESTIONS_ENDPOINT}?${params}`;
   const response = await fetch(url, {
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      'Access-Control-Allow-Origin': '*',
     },
   });
 
@@ -42,7 +42,7 @@ export const selectSuggestions = async ({
   // );
   const text = response.text();
 
-  console.log("suggestions", text, url);
+  console.log('suggestions', text, url);
 
   return text;
 };
@@ -55,5 +55,6 @@ export const useSelectSuggestions = (
     unknown,
     SelectSuggestionsKey
   >
-): UseQueryResult<unknown, PostgrestError> =>
-  useQuery(selectSuggestionsKey(args), selectSuggestions, options);
+): UseQueryResult<unknown, PostgrestError> => {
+  return useQuery(selectSuggestionsKey(args), selectSuggestions, options);
+};

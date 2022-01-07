@@ -49,5 +49,6 @@ export const useSelectMessages = (
     SelectMessagesReturn,
     SelectMessagesKey
   >
-): UseQueryResult<SelectMessagesReturn, PostgrestError> =>
-  useQuery(selectMessagesKey(args), selectMessages, options);
+): UseQueryResult<SelectMessagesReturn, PostgrestError> => {
+  return useQuery(selectMessagesKey(args), selectMessages, options);
+};

@@ -8,8 +8,9 @@ import { rest } from 'msw';
 
 export const mockUserStorage = {
   get: (): User[] => JSON.parse(sessionStorage.getItem('users') ?? '[]'),
-  set: (users: User[]): void =>
-    sessionStorage.setItem('users', JSON.stringify(users)),
+  set: (users: User[]): void => {
+    return sessionStorage.setItem('users', JSON.stringify(users));
+  },
 };
 
 export const usersHandlers = [

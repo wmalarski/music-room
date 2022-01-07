@@ -6,18 +6,22 @@ import {
 import { DefaultRequestBody, rest } from 'msw';
 
 export const mockMessagesStorage = {
-  get: (): Message[] => JSON.parse(sessionStorage.getItem('messages') ?? '[]'),
-  set: (actions: Message[]): void =>
-    sessionStorage.setItem('messages', JSON.stringify(actions)),
+  get: (): Message[] => {
+    return JSON.parse(sessionStorage.getItem('messages') ?? '[]');
+  },
+  set: (actions: Message[]): void => {
+    return sessionStorage.setItem('messages', JSON.stringify(actions));
+  },
 };
 
 export const messagesHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Message[]>(
     TABLES_ENDPOINTS.messages,
-    (req, res, ctx) =>
-      res(
+    (req, res, ctx) => {
+      return res(
         ctx.json(mockMessagesStorage.get().slice(0, Number(req.params.limit)))
-      )
+      );
+    }
   ),
   rest.post<InsertMessageArgs, never, Message>(
     TABLES_ENDPOINTS.messages,

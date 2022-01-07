@@ -1,10 +1,10 @@
-import { PostgrestError, User, UserCredentials } from "@supabase/supabase-js";
+import { PostgrestError, User, UserCredentials } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
-} from "react-query";
-import { supabase } from "../supabase";
+} from 'react-query';
+import { supabase } from '../supabase';
 
 export const signIn = async (args: UserCredentials): Promise<User> => {
   const { error, user } = await supabase.auth.signIn(args);
@@ -16,5 +16,6 @@ export const signIn = async (args: UserCredentials): Promise<User> => {
 
 export const useSignIn = (
   options?: UseMutationOptions<User, PostgrestError, UserCredentials>
-): UseMutationResult<User, PostgrestError, UserCredentials> =>
-  useMutation(signIn, options);
+): UseMutationResult<User, PostgrestError, UserCredentials> => {
+  return useMutation(signIn, options);
+};

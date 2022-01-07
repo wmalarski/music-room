@@ -11,11 +11,12 @@ import {
 
 const qwerty = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
 
-const randomString = (length = 5): string =>
-  new Array(length)
+const randomString = (length = 5): string => {
+  return new Array(length)
     .fill(0)
     .map(() => qwerty[Math.ceil(Math.random() * (qwerty.length - 1))])
     .join('');
+};
 
 export const defaultUser: User = {
   app_metadata: { provider: 'email' },
@@ -59,8 +60,8 @@ export const defaultMember: Member = {
   profile_avatar: null,
 };
 
-export const randomMembers = (length: number): Member[] =>
-  Array(length)
+export const randomMembers = (length: number): Member[] => {
+  return Array(length)
     .fill(0)
     .map((_, index) => ({
       id: index,
@@ -76,6 +77,7 @@ export const randomMembers = (length: number): Member[] =>
       room_avatar: null,
       profile_avatar: null,
     }));
+};
 
 export const defaultRoom: Room = {
   author_id: 1,
@@ -108,4 +110,5 @@ export const defaultControls: Controls = {
   room_id: 1,
   speaker_id: 1,
   volume: 0,
+  change_by: 1,
 };
