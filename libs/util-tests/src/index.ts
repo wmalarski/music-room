@@ -6,4 +6,3 @@ export * from './handlers/profileHandlers';
 export * from './handlers/rolesHandlers';
 export * from './handlers/roomsHandlers';
 export * from './mockServer';
-export * from './TestWrapper';

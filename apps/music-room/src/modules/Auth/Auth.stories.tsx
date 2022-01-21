@@ -2,11 +2,11 @@ import {
   AUTH_ENDPOINT,
   defaultUser,
   ResponseError,
+  TestWrapper,
 } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Session } from '@supabase/supabase-js';
 import { rest } from 'msw';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Auth } from './Auth';
 
 export default {
@@ -15,9 +15,9 @@ export default {
 } as ComponentMeta<typeof Auth>;
 
 const Template: ComponentStory<never> = () => (
-  <QueryClientProvider client={new QueryClient()}>
+  <TestWrapper>
     <Auth />
-  </QueryClientProvider>
+  </TestWrapper>
 );
 
 export const Failure = Template.bind({});

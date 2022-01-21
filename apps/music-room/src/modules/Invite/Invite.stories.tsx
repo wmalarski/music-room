@@ -1,15 +1,11 @@
 import {
   defaultProfile,
-  defaultRoom,
-  defaultUser,
   Profile,
-  RoomContextProvider,
   TABLES_ENDPOINTS,
-  UserContext,
+  TestWrapper,
 } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DefaultRequestBody, rest } from 'msw';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Invite } from './Invite';
 
 export default {
@@ -18,13 +14,9 @@ export default {
 } as ComponentMeta<typeof Invite>;
 
 const Template: ComponentStory<typeof Invite> = () => (
-  <UserContext.Provider value={defaultUser}>
-    <RoomContextProvider room={defaultRoom}>
-      <QueryClientProvider client={new QueryClient()}>
-        <Invite />
-      </QueryClientProvider>
-    </RoomContextProvider>
-  </UserContext.Provider>
+  <TestWrapper>
+    <Invite />
+  </TestWrapper>
 );
 
 export const Playground = Template.bind({});

@@ -32,3 +32,4 @@ export * from './suggest/selectSuggestions';
 export * from './supabase';
 export * from './utils/defaults';
 export * from './utils/getServerSideMembers';
+export * from './utils/TestWrapper';

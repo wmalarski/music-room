@@ -1,5 +1,5 @@
-import { defaultProfile } from '@music-room/data-access';
-import { mockProfilesStorage, TestWrapper } from '@music-room/util-tests';
+import { defaultProfile, TestWrapper } from '@music-room/data-access';
+import { mockProfilesStorage } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';

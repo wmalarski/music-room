@@ -1,4 +1,4 @@
-import { defaultRoom, RoomContextProvider } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { InviteLink } from './InviteLink';
 
@@ -8,9 +8,9 @@ export default {
 } as ComponentMeta<typeof InviteLink>;
 
 const Template: ComponentStory<typeof InviteLink> = () => (
-  <RoomContextProvider room={defaultRoom}>
+  <TestWrapper>
     <InviteLink />
-  </RoomContextProvider>
+  </TestWrapper>
 );
 
 export const Playground = Template.bind({});

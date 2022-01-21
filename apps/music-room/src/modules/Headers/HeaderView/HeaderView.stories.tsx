@@ -1,5 +1,5 @@
+import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { HeaderView } from './HeaderView';
 
 export default {
@@ -8,9 +8,9 @@ export default {
 } as ComponentMeta<typeof HeaderView>;
 
 const Template: ComponentStory<typeof HeaderView> = (args) => (
-  <QueryClientProvider client={new QueryClient()}>
+  <TestWrapper>
     <HeaderView {...args} />
-  </QueryClientProvider>
+  </TestWrapper>
 );
 
 export const Playground = Template.bind({});

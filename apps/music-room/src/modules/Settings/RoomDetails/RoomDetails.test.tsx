@@ -1,5 +1,4 @@
-import { defaultMember, MemberContextProvider } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import { defaultMember, TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
@@ -7,11 +6,9 @@ import { RoomDetails } from './RoomDetails';
 
 const renderComponent = () => {
   return render(
-    <MemberContextProvider member={defaultMember}>
-      <TestWrapper>
-        <RoomDetails />
-      </TestWrapper>
-    </MemberContextProvider>
+    <TestWrapper>
+      <RoomDetails />
+    </TestWrapper>
   );
 };
 

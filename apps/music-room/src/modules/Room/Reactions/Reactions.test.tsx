@@ -1,7 +1,7 @@
+import { TestWrapper } from '@music-room/data-access';
 import {
   mockActionsStorage,
   mockMessagesStorage,
-  TestWrapper,
 } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';

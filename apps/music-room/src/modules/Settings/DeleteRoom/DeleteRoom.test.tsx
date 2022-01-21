@@ -1,8 +1,11 @@
-import { defaultMember, defaultProfile } from '@music-room/data-access';
+import {
+  defaultMember,
+  defaultProfile,
+  TestWrapper,
+} from '@music-room/data-access';
 import {
   mockMembersStorage,
   mockProfilesStorage,
-  TestWrapper,
 } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';

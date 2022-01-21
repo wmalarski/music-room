@@ -1,5 +1,5 @@
+import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ProfileHeader } from './ProfileHeader';
 
 export default {
@@ -8,9 +8,9 @@ export default {
 } as ComponentMeta<typeof ProfileHeader>;
 
 const Template: ComponentStory<typeof ProfileHeader> = () => (
-  <QueryClientProvider client={new QueryClient()}>
+  <TestWrapper>
     <ProfileHeader />
-  </QueryClientProvider>
+  </TestWrapper>
 );
 
 export const Primary = Template.bind({});

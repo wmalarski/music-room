@@ -2,8 +2,9 @@ import {
   defaultMember,
   defaultProfile,
   defaultRoom,
+  TestWrapper,
 } from '@music-room/data-access';
-import { mockMembersStorage, TestWrapper } from '@music-room/util-tests';
+import { mockMembersStorage } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';

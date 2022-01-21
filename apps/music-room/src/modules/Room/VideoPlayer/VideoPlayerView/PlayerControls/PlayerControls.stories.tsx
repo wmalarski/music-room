@@ -14,6 +14,8 @@ const Template: ComponentStory<typeof PlayerControls> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   controls: defaultControls,
-  onChange: () => null,
-  profileId: 1,
+  onAssignClick: () => null,
+  onPauseChange: () => null,
+  onVolumeChange: () => null,
+  onMuteChange: () => null,
 };
