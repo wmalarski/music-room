@@ -12,11 +12,7 @@ import {
 } from './ChatInputView/ChatInputView';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 
-type Props = {
-  View?: typeof ChatMessagesList;
-};
-
-export const ChatRoom = ({ View = ChatMessagesList }: Props): ReactElement => {
+export const ChatRoom = (): ReactElement => {
   const { room_id: roomId, profile_id: profileId } = useRole();
 
   const [offset, setOffset] = useState(0);

@@ -1,19 +1,20 @@
 import { Profile } from '@music-room/data-access';
 import {
   Button,
+  Card,
   Flex,
   Form,
   FormError,
   FormFieldset,
   FormLabel,
   Input,
+  Inset,
   Typography,
 } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Styles from './CreateRoomView.styles';
 import {
   CreateRoomViewData,
   useCreateRoomViewOptions,
@@ -42,8 +43,8 @@ export const CreateRoomView = ({
   const options = useCreateRoomViewOptions();
 
   return (
-    <Styles.Container>
-      <Styles.Content direction="column" gap="lg">
+    <Inset space="xl">
+      <Card direction="column" gap="lg" space="xl">
         <Flex direction="row" justifyContent="spaceBetween" alignItems="center">
           <Typography size="xl">Create new room</Typography>
         </Flex>
@@ -75,7 +76,7 @@ export const CreateRoomView = ({
             {t('addRoom')}
           </Button>
         </Form>
-      </Styles.Content>
-    </Styles.Container>
+      </Card>
+    </Inset>
   );
 };

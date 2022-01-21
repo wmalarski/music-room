@@ -1,5 +1,5 @@
 import { Room } from '@music-room/data-access';
-import { Button, Typography } from '@music-room/ui';
+import { Button, Card, Typography } from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import * as Styles from './InviteAcceptView.styles';
@@ -19,12 +19,12 @@ export const InviteAcceptView = ({
 
   return (
     <Styles.Container justifyContent="center" alignItems="center">
-      <Styles.Content direction="column" gap="md">
+      <Card direction="column" gap="md" space="lg">
         <Typography size="xl">{`${t('inviteToRoom')} ${room.name}`}</Typography>
         <Button isLoading={isLoading} onClick={onAcceptClick}>
           {t('acceptInvitation')}
         </Button>
-      </Styles.Content>
+      </Card>
     </Styles.Container>
   );
 };

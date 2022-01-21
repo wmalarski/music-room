@@ -1,6 +1,7 @@
 import { styled } from '@music-room/util-styles';
+import { Inset } from '../Inset/Inset';
 
-export const Container = styled('div', {
+export const Container = styled(Inset, {
   display: 'flex',
 
   variants: {

@@ -3,7 +3,6 @@ import { Flex } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { RoomHeader } from '../Headers/RoomHeader/RoomHeader';
 import { Layout } from '../Layout/Layout';
-import { ChatInput } from './ChatInput/ChatInput';
 import { ChatRoom } from './ChatRoom/ChatRoom';
 import { InviteLink } from './InviteLink/InviteLink';
 import { Reactions } from './Reactions/Reactions';
@@ -19,7 +18,6 @@ export const Room = (): ReactElement => {
         <InviteLink />
         <Flex direction="column">
           <ChatRoom />
-          <ChatInput />
         </Flex>
         <Reactions />
       </Flex>
