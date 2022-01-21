@@ -40,9 +40,9 @@ describe('<ProfileDetails />', () => {
 
     userEvent.click(await screen.findByText('Update'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText('Username')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText('Username')).toBeInTheDocument();
+    });
 
     expect(await screen.findByText('Username')).toBeInTheDocument();
   });

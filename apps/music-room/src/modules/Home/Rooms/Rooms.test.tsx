@@ -45,9 +45,9 @@ describe('<Rooms />', () => {
 
     renderComponent();
 
-    await waitFor(async () =>
-      expect(screen.getByText(defaultMember.room_name)).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(screen.getByText(defaultMember.room_name)).toBeInTheDocument();
+    });
 
     expect(screen.queryByText('Empty')).toBeNull();
   });

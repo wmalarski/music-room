@@ -102,6 +102,15 @@ export const {
         height: `${size}px`,
       };
     },
+    dynamicRow: (value: number) => {
+      return {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        transform: `translateY(${value}px)`,
+      };
+    },
     listContainer: (totalSize: number) => ({
       height: `${totalSize}px`,
       width: '100%',

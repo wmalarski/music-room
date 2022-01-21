@@ -16,12 +16,12 @@ const View: Props['View'] = ({ user, error, onSubmit }) => (
     <p>{user?.email}</p>
     <p>{error?.message}</p>
     <button
-      onClick={() =>
+      onClick={() => {
         onSubmit({
           email: defaultUserEmail,
           password: 'Passw0rd',
-        })
-      }
+        });
+      }}
     >
       Click
     </button>
@@ -50,9 +50,9 @@ describe('<SignIn />', () => {
 
     userEvent.click(await screen.findByText('Click'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
+    });
 
     expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
   });
@@ -65,9 +65,9 @@ describe('<SignIn />', () => {
 
     userEvent.click(await screen.findByText('Click'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText(message)).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText(message)).toBeInTheDocument();
+    });
 
     expect(await screen.findByText(message)).toBeInTheDocument();
   });

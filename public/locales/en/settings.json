@@ -1,5 +1,6 @@
 {
   "removeRoom": "Remove Room",
+  "roomNamePlaceholder": "Name",
   "confirmRemoveRoom": "Confirm",
   "updateRoom": "Update Room",
   "removeFromRoom": "Remove from group",

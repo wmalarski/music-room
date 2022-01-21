@@ -74,9 +74,9 @@ describe('<RoomUsers />', () => {
       await screen.findByText(`Remove ${defaultMember.profile_name}`)
     );
 
-    await waitFor(async () =>
-      expect(screen.queryByText(defaultMember.profile_name)).toBeNull()
-    );
+    await waitFor(async () => {
+      expect(screen.queryByText(defaultMember.profile_name)).toBeNull();
+    });
 
     expect(screen.queryByText(defaultMember.profile_name)).toBeNull();
   });
@@ -95,9 +95,9 @@ describe('<RoomUsers />', () => {
       await screen.findByText(`Change ${defaultMember.profile_name}`)
     );
 
-    await waitFor(async () =>
-      expect(await screen.findByText('mod')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText('mod')).toBeInTheDocument();
+    });
 
     expect(await screen.findByText('mod')).toBeInTheDocument();
   });

@@ -67,7 +67,7 @@ export const randomMembers = (length: number): Member[] => {
       id: index,
       room_author_id: 1,
       room_hash: randomString(),
-      profile_id: 1,
+      profile_id: index,
       room_id: index,
       room_name: randomString(),
       user_id: '',

@@ -17,12 +17,12 @@ const View: Props['View'] = ({ action, message, onChange }) => (
     <p>{action ? 'action' : 'emptyAction'}</p>
     <p>{message ? 'message' : 'emptyMessage'}</p>
     <button
-      onClick={() =>
+      onClick={() => {
         onChange({
           likeAt: action?.like_at ? null : new Date().toISOString(),
           dislikeAt: null,
-        })
-      }
+        });
+      }}
     >
       Like
     </button>
@@ -64,15 +64,15 @@ describe('<Reactions />', () => {
 
     renderComponent();
 
-    await waitFor(async () =>
-      expect(await screen.findByText('message')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText('message')).toBeInTheDocument();
+    });
 
     userEvent.click(await screen.findByText('Like'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText('action')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText('action')).toBeInTheDocument();
+    });
 
     expect(mockActionsStorage.get()[0]).toBeDefined();
   });

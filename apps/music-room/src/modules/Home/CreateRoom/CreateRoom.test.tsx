@@ -43,9 +43,9 @@ describe('<CreateRoom />', () => {
 
     renderComponent();
 
-    await waitFor(async () =>
-      expect(screen.getByText('Add')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(screen.getByText('Add')).toBeInTheDocument();
+    });
 
     userEvent.click(await screen.findByText('Add'));
 

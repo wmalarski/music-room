@@ -1,7 +1,8 @@
-import { Member, RoleGuard, RoomRole } from '@music-room/data-access';
-import { Button, Debug, Option, Select } from '@music-room/ui';
+import { Member, RoomRole, useRoleGuard } from '@music-room/data-access';
+import { Button, Option, Select, Typography } from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
 import { ChangeEvent, ReactElement } from 'react';
+import * as Styles from './RoomUsersListItem.styles';
 
 type Props = {
   member: Member;
@@ -20,19 +21,29 @@ export const RoomUsersListItem = ({
     onRoleChange(event.target.value as RoomRole);
   };
 
+  const isCurrentUser = member.room_author_id === member.profile_id;
+  const isMod = useRoleGuard({ mod: false, owner: false, default: true });
+  const isDisabled = isCurrentUser || !isMod;
+
   return (
-    <>
-      <Debug value={member} />
-      {member.room_author_id !== member.profile_id && (
-        <RoleGuard visibleFor={['owner', 'mod']}>
-          <Button onClick={onRemoveClick}>{t('removeFromRoom')}</Button>
-          <Select value={member.role} onChange={handleRoleChange}>
-            <Option value="mod">{t('modRole')}</Option>
-            <Option value="user">{t('userRole')}</Option>
-            <Option value="guest">{t('guestRole')}</Option>
-          </Select>
-        </RoleGuard>
-      )}
-    </>
+    <Styles.Container>
+      <Typography size="sm" kind="description">
+        {member.profile_id}
+      </Typography>
+      <Typography>{member.profile_avatar}</Typography>
+      <Typography>{member.profile_name}</Typography>
+      <Select
+        disabled={isDisabled}
+        value={member.role}
+        onChange={handleRoleChange}
+      >
+        <Option value="mod">{t('modRole')}</Option>
+        <Option value="user">{t('userRole')}</Option>
+        <Option value="guest">{t('guestRole')}</Option>
+      </Select>
+      <Button disabled={isDisabled} onClick={onRemoveClick}>
+        <Typography size="sm">{t('removeFromRoom')}</Typography>
+      </Button>
+    </Styles.Container>
   );
 };

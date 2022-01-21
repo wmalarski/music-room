@@ -15,6 +15,10 @@ export type TestWrapperProps = {
   user?: User | null;
 };
 
+export type PropsWithTestWrapper<T = unknown> = T & {
+  wrapperProps?: Omit<TestWrapperProps, 'children'>;
+};
+
 export const TestWrapper = ({
   children,
   member,

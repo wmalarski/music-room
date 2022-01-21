@@ -46,6 +46,7 @@ export const RoleGuard = ({
   );
 };
 
+export type RoleGuardValues<T> = Partial<Record<RoomRole, T>>;
 export type RoleGuardArgs<T> = Partial<Record<RoomRole, T>> & { default?: T };
 
 export function roleGuard<T>(

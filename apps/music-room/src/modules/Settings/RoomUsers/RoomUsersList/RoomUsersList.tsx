@@ -1,5 +1,6 @@
 import { Member, RoomRole, SelectMembersResult } from '@music-room/data-access';
-import { Flex } from '@music-room/ui';
+import { Card, Flex, Typography } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ReactElement, useCallback, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
 import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
@@ -19,6 +20,8 @@ export const RoomUsersList = ({
   onRoleChange,
   onRemoveClick,
 }: Props): ReactElement => {
+  const { t } = useTranslation('settings');
+
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
@@ -40,32 +43,37 @@ export const RoomUsersList = ({
   };
 
   return (
-    <Flex
-      ref={parentRef}
-      css={{
-        height: `200px`,
-        width: `400px`,
-        overflow: 'auto',
-      }}
-    >
-      <Flex direction="column" css={{ listContainer: virtualizer.totalSize }}>
-        {virtualizer.virtualItems.map((row) => {
-          const member = data?.members[row.index - data.offset];
-          if (!member) return null;
-          return (
-            <Flex
-              key={member.profile_id}
-              css={{ listRow: `${row.size} ${row.start}` }}
-            >
-              <RoomUsersListItem
-                member={member}
-                onRoleChange={handleRoleChange(member)}
-                onRemoveClick={handleRemoveClick(member)}
-              />
-            </Flex>
-          );
-        })}
+    <Card space="xl" gap="md" direction="column">
+      <Typography size="md" kind="description">
+        {t('updateRoom')}
+      </Typography>
+      <Flex
+        ref={parentRef}
+        css={{
+          height: `200px`,
+          overflow: 'auto',
+        }}
+      >
+        <Flex css={{ listContainer: virtualizer.totalSize }}>
+          {virtualizer.virtualItems.map((row) => {
+            const member = data?.members[row.index - data.offset];
+            if (!member) return null;
+            return (
+              <Flex
+                ref={row.measureRef}
+                key={row.key}
+                css={{ dynamicRow: row.start }}
+              >
+                <RoomUsersListItem
+                  member={member}
+                  onRoleChange={handleRoleChange(member)}
+                  onRemoveClick={handleRemoveClick(member)}
+                />
+              </Flex>
+            );
+          })}
+        </Flex>
       </Flex>
-    </Flex>
+    </Card>
   );
 };

@@ -41,9 +41,9 @@ describe('<RoomForm />', () => {
 
     userEvent.click(await screen.findByText('Change'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText('RoomName')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText('RoomName')).toBeInTheDocument();
+    });
 
     expect(await screen.findByText('RoomName')).toBeInTheDocument();
   });

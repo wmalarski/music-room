@@ -27,25 +27,27 @@ Failure.parameters = {
     handlers: [
       rest.post<string, never, Session | ResponseError>(
         `${AUTH_ENDPOINT}/token`,
-        (_req, res, ctx) =>
-          res(
+        (_req, res, ctx) => {
+          return res(
             ctx.json<ResponseError>({
               error: 'invalid_grant',
               error_description: 'Invalid login credentials',
             }),
             ctx.status(400)
-          )
+          );
+        }
       ),
       rest.post<string, never, Session | ResponseError>(
         `${AUTH_ENDPOINT}/signup`,
-        (_req, res, ctx) =>
-          res(
+        (_req, res, ctx) => {
+          return res(
             ctx.json<ResponseError>({
               error: 'invalid_grant',
               error_description: 'User with this username exists',
             }),
             ctx.status(400)
-          )
+          );
+        }
       ),
     ],
   },
@@ -58,8 +60,8 @@ Success.parameters = {
     handlers: [
       rest.post<string, never, Session | ResponseError>(
         `${AUTH_ENDPOINT}/token`,
-        (_req, res, ctx) =>
-          res(
+        (_req, res, ctx) => {
+          return res(
             ctx.json<Session>({
               access_token: 'eyJ.eyJ.CY80',
               token_type: 'bearer',
@@ -67,12 +69,13 @@ Success.parameters = {
               refresh_token: 'kHMih_-mwYUn08FTYMhx2g',
               user: defaultUser,
             })
-          )
+          );
+        }
       ),
       rest.post<string, never, Session | ResponseError>(
         `${AUTH_ENDPOINT}/signup`,
-        (_req, res, ctx) =>
-          res(
+        (_req, res, ctx) => {
+          return res(
             ctx.json<Session>({
               access_token: 'eyJ.eyJ.CY80',
               token_type: 'bearer',
@@ -80,7 +83,8 @@ Success.parameters = {
               refresh_token: 'kHMih_-mwYUn08FTYMhx2g',
               user: defaultUser,
             })
-          )
+          );
+        }
       ),
     ],
   },

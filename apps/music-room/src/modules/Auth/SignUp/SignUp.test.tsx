@@ -16,13 +16,13 @@ const View: Props['View'] = ({ onSubmit, user, error }) => (
     <p>{user?.email}</p>
     <p>{error?.message}</p>
     <button
-      onClick={() =>
+      onClick={() => {
         onSubmit({
           confirmPassword: 'Passw0rd',
           email: defaultUserEmail,
           password: 'Passw0rd',
-        })
-      }
+        });
+      }}
     >
       Click
     </button>
@@ -49,9 +49,9 @@ describe('<SignUp />', () => {
 
     userEvent.click(await screen.findByText('Click'));
 
-    await waitFor(async () =>
-      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
+    });
 
     expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
     expect(mockUserStorage.get()).toHaveLength(1);

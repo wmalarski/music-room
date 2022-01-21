@@ -17,7 +17,7 @@ export const Typography = styled('p', {
     },
     kind: {
       normal: { color: '$foreground' },
-      description: { color: '$gray7' },
+      description: { color: '$gray8' },
       error: { color: '$error1' },
     },
   },
