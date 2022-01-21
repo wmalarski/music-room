@@ -48,26 +48,26 @@ export const useUpdateControls = (
   UpdateControlsContext
 > => {
   const queryClient = useQueryClient();
-  const selectKey = selectControlsKey({ roomId });
+  const key = selectControlsKey({ roomId });
 
   return useMutation(updateControls, {
     ...options,
     onMutate: async (controls) => {
-      await queryClient.cancelQueries(selectKey);
+      await queryClient.cancelQueries(key);
 
-      const previous = queryClient.getQueryData<Controls>(selectKey);
+      const previous = queryClient.getQueryData<Controls>(key);
       const next = { ...previous, ...controls };
 
-      queryClient.setQueryData(selectKey, next);
+      queryClient.setQueryData(key, next);
 
       return { previous, next };
     },
     onError: (err, controls, context) => {
-      queryClient.setQueryData(selectKey, context?.previous);
+      queryClient.setQueryData(key, context?.previous);
       options?.onError?.(err, controls, context);
     },
     onSettled: (...args) => {
-      queryClient.invalidateQueries(selectKey);
+      queryClient.invalidateQueries(key);
       options?.onSettled?.(...args);
     },
   });

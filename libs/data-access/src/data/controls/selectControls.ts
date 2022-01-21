@@ -28,6 +28,8 @@ export const selectControls = async ({
 
   if (error) throw error;
 
+  if (!data) throw Error('Controls not defined');
+
   return data;
 };
 

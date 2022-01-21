@@ -29,7 +29,7 @@ export const useSubscribeToMessages = ({
           payload.old.profile_id === profileId
         )
           return;
-        queryClient.invalidateQueries([selectCurrentMessageKey({ roomId })]);
+        queryClient.invalidateQueries(selectCurrentMessageKey({ roomId }));
         queryClient.invalidateQueries<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId, limit, offset })
         );

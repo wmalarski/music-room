@@ -1,30 +1,25 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Message } from "../types";
-import { selectCurrentMessageKey } from "./selectCurrentMessage";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Message } from '../types';
+import { selectCurrentMessageKey } from './selectCurrentMessage';
 
 export type UpdateMessageArgs = {
   id: number;
   ended_at?: string;
 };
 
-export type UpdateMessageContext = {
-  previous?: Message;
-  next?: Partial<Message>;
-};
-
 export const updateMessage = async (
   args: UpdateMessageArgs
 ): Promise<Message> => {
-  const { data, error } = await fromSupabase("messages")
+  const { data, error } = await fromSupabase('messages')
     .update(args)
-    .eq("id", args.id)
+    .eq('id', args.id)
     .single();
 
   if (error || !data) throw error;
@@ -34,39 +29,24 @@ export const updateMessage = async (
 
 export const useUpdateMessage = (
   roomId: number,
-  options?: UseMutationOptions<
-    Message,
-    PostgrestError,
-    UpdateMessageArgs,
-    UpdateMessageContext
-  >
-): UseMutationResult<
-  Message,
-  PostgrestError,
-  UpdateMessageArgs,
-  UpdateMessageContext
-> => {
-  const queryClient = useQueryClient();
-  const selectKey = selectCurrentMessageKey({ roomId });
+  options?: UseMutationOptions<Message, PostgrestError, UpdateMessageArgs>
+): UseMutationResult<Message, PostgrestError, UpdateMessageArgs> => {
+  const client = useQueryClient();
+  const keyCurrent = selectCurrentMessageKey({ roomId });
 
   return useMutation(updateMessage, {
     ...options,
-    onMutate: async (action) => {
-      await queryClient.cancelQueries(selectKey);
+    onMutate: async () => {
+      await client.cancelQueries(keyCurrent);
 
-      const previous = queryClient.getQueryData<Message>(selectKey);
-      const next = { ...previous, ...action };
-
-      queryClient.setQueryData(selectKey, next);
-
-      return { previous, next };
+      client.setQueryData<Message | null>(keyCurrent, null);
     },
     onError: (err, action, context) => {
-      queryClient.setQueryData(selectKey, context?.previous);
+      client.setQueryData(keyCurrent, null);
       options?.onError?.(err, action, context);
     },
     onSettled: (message, ...args) => {
-      queryClient.invalidateQueries(selectKey);
+      client.invalidateQueries(keyCurrent);
       options?.onSettled?.(message, ...args);
     },
   });
