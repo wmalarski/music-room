@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ChatMessage } from './ChatMessage';
 
 export default {
-  title: 'Chat/ChatMessage',
+  title: 'Room/ChatMessage',
   component: ChatMessage,
 } as ComponentMeta<typeof ChatMessage>;
 

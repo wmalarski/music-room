@@ -8,7 +8,7 @@ type Props = ComponentProps<typeof DeleteRoomView>;
 
 const defaultProps: Props = {
   isLoading: false,
-  onClicked: () => null,
+  onClick: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

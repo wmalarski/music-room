@@ -6,9 +6,7 @@ export default {
   component: Option,
 } as ComponentMeta<typeof Option>;
 
-const Template: ComponentStory<typeof Option> = (args) => (
-  <Option {...args} css={{}} />
-);
+const Template: ComponentStory<typeof Option> = (args) => <Option {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

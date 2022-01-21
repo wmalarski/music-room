@@ -9,7 +9,7 @@ type Props = ComponentProps<typeof Select>;
 const defaultProps: Props = {};
 
 const renderComponent = (props: Partial<Props> = {}) => {
-  return render(<Select {...defaultProps} {...props} css={{}} />);
+  return render(<Select {...defaultProps} {...props} />);
 };
 
 describe('<Select />', () => {

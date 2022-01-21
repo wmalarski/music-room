@@ -1,15 +1,25 @@
 import { Profile } from '@music-room/data-access';
-import { Alert, Button, Input } from '@music-room/ui';
+import {
+  Button,
+  Flex,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
+import * as Styles from './CreateRoomView.styles';
 import {
   CreateRoomViewData,
   useCreateRoomViewOptions,
 } from './CreateRoomView.utils';
 
-export type Props = {
+type Props = {
   isLoading: boolean;
   profile: Profile | null;
   error: PostgrestError | null;
@@ -21,7 +31,7 @@ export const CreateRoomView = ({
   isLoading,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('home');
 
   const {
     formState: { errors },
@@ -32,21 +42,40 @@ export const CreateRoomView = ({
   const options = useCreateRoomViewOptions();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        placeholder={text('roomNamePlaceholder')}
-        {...register('name', options.name)}
-      />
-      {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
-      <Input
-        placeholder={text('roomSlugPlaceholder')}
-        {...register('slug', options.slug)}
-      />
-      {errors.slug && <Alert severity="error">{errors.slug.message}</Alert>}
-      {error && <Alert severity="error">{error.message}</Alert>}
-      <Button isLoading={isLoading} type="submit">
-        {text('addRoom')}
-      </Button>
-    </form>
+    <Styles.Container>
+      <Styles.Content direction="column" gap="lg">
+        <Flex direction="row" justifyContent="spaceBetween" alignItems="center">
+          <Typography size="xl">Create new room</Typography>
+        </Flex>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormFieldset>
+            <FormLabel htmlFor="name">{t('roomNamePlaceholder')}</FormLabel>
+            <Input
+              id="name"
+              placeholder={t('roomNamePlaceholder')}
+              {...register('name', options.name)}
+            />
+            {errors.name && (
+              <FormError role="alert">{errors.name.message}</FormError>
+            )}
+          </FormFieldset>
+          <FormFieldset>
+            <FormLabel htmlFor="slug">{t('roomSlugPlaceholder')}</FormLabel>
+            <Input
+              id="slug"
+              placeholder={t('roomSlugPlaceholder')}
+              {...register('slug', options.slug)}
+            />
+            {errors.slug && (
+              <FormError role="alert">{errors.slug.message}</FormError>
+            )}
+          </FormFieldset>
+          {error && <FormError role="alert">{error.message}</FormError>}
+          <Button isLoading={isLoading} type="submit">
+            {t('addRoom')}
+          </Button>
+        </Form>
+      </Styles.Content>
+    </Styles.Container>
   );
 };

@@ -1,30 +1,30 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   QueryFunctionContext,
   useQuery,
   UseQueryOptions,
   UseQueryResult,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Profile } from "../types";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Profile } from '../types';
 
 export type SelectProfileArgs = {
   userId: string;
 };
 
-export type SelectProfileKey = ["profile", SelectProfileArgs];
+export type SelectProfileKey = ['profile', SelectProfileArgs];
 
 export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
-  "profile",
+  'profile',
   args,
 ];
 
 export const selectProfile = async ({
   queryKey: [, { userId }],
 }: QueryFunctionContext<SelectProfileKey>): Promise<Profile | null> => {
-  const { data, error } = await fromSupabase("profiles")
-    .select("*")
-    .eq("user_id", userId)
+  const { data, error } = await fromSupabase('profiles')
+    .select('*')
+    .eq('user_id', userId)
     .single();
 
   if (error) throw error;
@@ -40,5 +40,6 @@ export const useSelectProfile = (
     Profile | null,
     SelectProfileKey
   >
-): UseQueryResult<Profile | null, PostgrestError> =>
-  useQuery(selectProfileKey(args), selectProfile, options);
+): UseQueryResult<Profile | null, PostgrestError> => {
+  return useQuery(selectProfileKey(args), selectProfile, options);
+};

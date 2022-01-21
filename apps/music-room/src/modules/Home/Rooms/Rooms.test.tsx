@@ -1,5 +1,5 @@
-import { defaultMember, mockMembersStorage } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import { defaultMember } from '@music-room/data-access';
+import { mockMembersStorage, TestWrapper } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -8,12 +8,12 @@ import { Rooms } from './Rooms';
 
 type Props = ComponentProps<typeof Rooms>;
 
-const View: Props['View'] = ({ members }) => (
+const View: Props['View'] = ({ data }) => (
   <>
-    {members?.map((member) => (
+    {data?.members?.map((member) => (
       <p key={member.id}>{member.room_name}</p>
     ))}
-    <p>{!members && 'Empty'}</p>
+    <p>{!data && 'Empty'}</p>
   </>
 );
 

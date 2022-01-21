@@ -1,13 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Link } from './Link';
+import { StyledLink } from './Link';
 
 export default {
   title: 'atoms/Link',
-  component: Link,
-} as ComponentMeta<typeof Link>;
+  component: StyledLink,
+} as ComponentMeta<typeof StyledLink>;
 
-const Template: ComponentStory<typeof Link> = (args) => (
-  <Link {...args} css={{}} />
+const Template: ComponentStory<typeof StyledLink> = (args) => (
+  <StyledLink {...args} />
 );
 
 export const Playground = Template.bind({});

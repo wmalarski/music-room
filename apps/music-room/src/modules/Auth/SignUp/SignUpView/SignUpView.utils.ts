@@ -1,6 +1,6 @@
+import { TFunction, useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import { RegisterOptions, Resolver } from 'react-hook-form';
-import { useText, UseTextFnc } from '../../../../utils';
 
 export type SignUpViewData = {
   email: string;
@@ -9,52 +9,52 @@ export type SignUpViewData = {
 };
 
 export type SignUpViewContext = {
-  text: UseTextFnc;
+  t: TFunction;
 };
 
 export const useSignUpViewOptions = (): Record<
   keyof SignUpViewData,
   RegisterOptions<SignUpViewData>
 > => {
-  const text = useText();
+  const { t } = useTranslation('common');
   return useMemo(
     () => ({
       email: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         minLength: {
           value: 3,
-          message: text('errorMinLength')(3),
+          message: `${t('errorMinLength')}: 3`,
         },
         maxLength: {
           value: 32,
-          message: text('errorMaxLength')(3),
+          message: `${t('errorMaxLength')}: 3`,
         },
       },
       password: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         minLength: {
           value: 8,
-          message: text('errorMinLength')(8),
+          message: `${t('errorMinLength')}: 8`,
         },
       },
       confirmPassword: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         minLength: {
           value: 8,
-          message: text('errorMinLength')(8),
+          message: `${t('errorMinLength')}: 8`,
         },
       },
     }),
-    [text]
+    [t]
   );
 };
 
@@ -72,7 +72,7 @@ export const signUpViewResolver: Resolver<SignUpViewData, SignUpViewContext> = (
         ? {
             confirmPassword: {
               type: 'required',
-              message: context.text('fieldIsDifferent'),
+              message: context.t('fieldIsDifferent'),
               types: [],
             },
           }

@@ -1,9 +1,9 @@
 import { Action, Message } from '@music-room/data-access';
 import { Button, Debug } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
-import { useText } from '../../../../utils';
 
-type Data = {
+export type ReactionsViewData = {
   likeAt: string | null;
   dislikeAt: string | null;
 };
@@ -11,36 +11,34 @@ type Data = {
 type Props = {
   action: Action | null;
   message: Message | null;
-  onChange: (data: Data) => void;
+  onChange: (data: ReactionsViewData) => void;
 };
 
 export const ReactionsView = ({ action, onChange }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('room');
+
+  const handleLikeClick = () => {
+    onChange({
+      likeAt: action?.like_at ? null : new Date().toISOString(),
+      dislikeAt: null,
+    });
+  };
+
+  const handleDislikeClick = () => {
+    onChange({
+      likeAt: null,
+      dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
+    });
+  };
 
   return (
     <>
       <Debug value={action} />
-      <Button
-        onClick={() =>
-          onChange({
-            likeAt: action?.like_at ? null : new Date().toISOString(),
-            dislikeAt: null,
-          })
-        }
-      >
-        {action?.like_at ? text('removeLikeMessage') : text('likeMessage')}
+      <Button onClick={handleLikeClick}>
+        {action?.like_at ? t('removeLikeMessage') : t('likeMessage')}
       </Button>
-      <Button
-        onClick={() =>
-          onChange({
-            likeAt: null,
-            dislikeAt: action?.dislike_at ? null : new Date().toISOString(),
-          })
-        }
-      >
-        {action?.dislike_at
-          ? text('removeDislikeMessage')
-          : text('dislikeMessage')}
+      <Button onClick={handleDislikeClick}>
+        {action?.dislike_at ? t('removeDislikeMessage') : t('dislikeMessage')}
       </Button>
     </>
   );

@@ -1,8 +1,16 @@
-import { Alert, Button, Input, Typography } from '@music-room/ui';
+import {
+  Button,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import { SignInViewData, useSignInViewOptions } from './SignInView.utils';
 
 type Props = {
@@ -17,7 +25,7 @@ export const SignInView = ({
   error,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('auth');
 
   const {
     formState: { errors },
@@ -28,26 +36,36 @@ export const SignInView = ({
   const options = useSignInViewOptions();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>{text('signInHeader')}</Typography>
-      <Input
-        placeholder={text('emailPlaceholder')}
-        type="email"
-        {...register('email', options.email)}
-      />
-      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
-      <Input
-        placeholder={text('passwordPlaceholder')}
-        type="password"
-        {...register('password', options.password)}
-      />
-      {errors.password && (
-        <Alert severity="error">{errors.password.message}</Alert>
-      )}
-      {error && <Alert severity="error">{error.message}</Alert>}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography kind="description">{t('signInHeader')}</Typography>
+      <FormFieldset>
+        <FormLabel htmlFor="email">{t('emailPlaceholder')}</FormLabel>
+        <Input
+          id="email"
+          placeholder={t('emailPlaceholder')}
+          type="email"
+          {...register('email', options.email)}
+        />
+        {errors.email && (
+          <FormError role="alert">{errors.email.message}</FormError>
+        )}
+      </FormFieldset>
+      <FormFieldset>
+        <FormLabel htmlFor="password">{t('passwordPlaceholder')}</FormLabel>
+        <Input
+          id="password"
+          placeholder={t('passwordPlaceholder')}
+          type="password"
+          {...register('password', options.password)}
+        />
+        {errors.password && (
+          <FormError role="alert">{errors.password.message}</FormError>
+        )}
+      </FormFieldset>
+      {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} type="submit">
-        {text('signInButton')}
+        <Typography size="sm">{t('signInButton')}</Typography>
       </Button>
-    </form>
+    </Form>
   );
 };

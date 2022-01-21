@@ -1,4 +1,5 @@
 import { useRoom } from '@music-room/data-access';
+import { Flex } from '@music-room/ui';
 import { ReactElement } from 'react';
 import { RoomHeader } from '../Headers/RoomHeader/RoomHeader';
 import { Layout } from '../Layout/Layout';
@@ -13,11 +14,15 @@ export const Room = (): ReactElement => {
 
   return (
     <Layout header={<RoomHeader />} appTitle={name}>
-      <VideoPlayer />
-      <ChatRoom />
-      <InviteLink />
-      <ChatInput />
-      <Reactions />
+      <Flex>
+        <VideoPlayer />
+        <InviteLink />
+        <Flex direction="column">
+          <ChatRoom />
+          <ChatInput />
+        </Flex>
+        <Reactions />
+      </Flex>
     </Layout>
   );
 };

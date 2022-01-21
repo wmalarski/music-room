@@ -1,27 +1,30 @@
 import {
   InsertMessageArgs,
   Message,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
 } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 
 export const mockMessagesStorage = {
-  get: (): Message[] => JSON.parse(sessionStorage.getItem('messages') ?? '[]'),
-  set: (actions: Message[]): void =>
-    sessionStorage.setItem('messages', JSON.stringify(actions)),
+  get: (): Message[] => {
+    return JSON.parse(sessionStorage.getItem('messages') ?? '[]');
+  },
+  set: (actions: Message[]): void => {
+    return sessionStorage.setItem('messages', JSON.stringify(actions));
+  },
 };
 
 export const messagesHandlers = [
   rest.get<DefaultRequestBody, { limit: string }, Message[]>(
-    `${SUPABASE_ENDPOINT}/${TABLES.messages}`,
-    (req, res, ctx) =>
-      res(
+    TABLES_ENDPOINTS.messages,
+    (req, res, ctx) => {
+      return res(
         ctx.json(mockMessagesStorage.get().slice(0, Number(req.params.limit)))
-      )
+      );
+    }
   ),
   rest.post<InsertMessageArgs, never, Message>(
-    `${SUPABASE_ENDPOINT}/${TABLES.messages}`,
+    TABLES_ENDPOINTS.messages,
     ({ body }, res, ctx) => {
       const messages = mockMessagesStorage.get();
 

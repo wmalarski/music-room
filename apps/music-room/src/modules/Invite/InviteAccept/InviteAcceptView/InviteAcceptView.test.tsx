@@ -10,7 +10,7 @@ type Props = ComponentProps<typeof InviteAcceptView>;
 const defaultProps: Props = {
   room: defaultRoom,
   isLoading: false,
-  onAcceptClicked: () => null,
+  onAcceptClick: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

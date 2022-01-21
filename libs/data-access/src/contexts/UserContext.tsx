@@ -1,4 +1,3 @@
-import { supabase } from '@music-room/data-access';
 import { User } from '@supabase/supabase-js';
 import {
   createContext,
@@ -8,6 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { supabase } from '../supabase';
 
 export type UserContextValue = User | null;
 
@@ -39,7 +39,9 @@ export const UserContextProvider = ({ children }: Props): ReactElement => {
 
       setUser(session?.user ?? null);
     });
-    return () => data?.unsubscribe?.();
+    return () => {
+      data?.unsubscribe?.();
+    };
   }, []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;

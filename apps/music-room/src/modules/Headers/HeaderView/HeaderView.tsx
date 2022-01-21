@@ -1,18 +1,30 @@
-import { Link } from '@music-room/ui';
+import { StyledLink, Typography } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
 import { ReactElement, ReactNode } from 'react';
-import { paths, useText } from '../../../utils';
+import { paths } from '../../../utils';
+import * as Styles from './HeaderView.styles';
 
 type Props = {
   right?: ReactNode;
 };
 
 export const HeaderView = ({ right }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('headers');
 
   return (
-    <div>
-      <Link href={paths.home}>{text('navigationHome')}</Link>
-      {right}
-    </div>
+    <Styles.Container
+      direction="row"
+      justifyContent="spaceBetween"
+      alignItems="center"
+      gap="md"
+    >
+      <Typography size="xl">
+        <Link href={paths.home} passHref>
+          <StyledLink>{t('headerHome')}</StyledLink>
+        </Link>
+      </Typography>
+      <div>{right}</div>
+    </Styles.Container>
   );
 };

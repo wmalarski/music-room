@@ -9,9 +9,14 @@ import { RoomUsers } from './RoomUsers';
 
 type Props = ComponentProps<typeof RoomUsers>;
 
-const View = ({ members, onLoadMore, onRoleChange, onRemoveClick }) => (
+const View: Props['View'] = ({
+  data,
+  onPageChange,
+  onRoleChange,
+  onRemoveClick,
+}) => (
   <>
-    {members?.map((member) => (
+    {data?.members?.map((member) => (
       <div key={member.id}>
         <p>{member.profile_name}</p>
         <p>{member.role}</p>
@@ -23,7 +28,7 @@ const View = ({ members, onLoadMore, onRoleChange, onRemoveClick }) => (
         >{`Remove ${member.profile_name}`}</button>
       </div>
     ))}
-    <button onClick={onLoadMore}>Load More</button>
+    <button onClick={() => onPageChange(1)}>Load More</button>
   </>
 );
 

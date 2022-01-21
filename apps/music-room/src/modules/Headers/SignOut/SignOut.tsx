@@ -12,8 +12,10 @@ export const SignOut = ({ View = SignOutView }: Props): ReactElement => {
   const router = useRouter();
 
   const { mutate: signOut } = useSignOut({
-    onSettled: () => router.push(paths.home),
+    onSettled: () => {
+      router.push(paths.home);
+    },
   });
 
-  return <View onSignOutClicked={signOut} />;
+  return <View onSignOutClick={signOut} />;
 };

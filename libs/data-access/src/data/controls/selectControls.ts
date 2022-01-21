@@ -1,32 +1,34 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   QueryFunctionContext,
   useQuery,
   UseQueryOptions,
   UseQueryResult,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Controls } from "../types";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Controls } from '../types';
 
 export type SelectControlsArgs = {
   roomId: number;
 };
 
-export type SelectControlsKey = ["controls", SelectControlsArgs];
+export type SelectControlsKey = ['controls', SelectControlsArgs];
 
 export const selectControlsKey = (
   args: SelectControlsArgs
-): SelectControlsKey => ["controls", args];
+): SelectControlsKey => ['controls', args];
 
 export const selectControls = async ({
   queryKey: [, { roomId }],
 }: QueryFunctionContext<SelectControlsKey>): Promise<Controls | null> => {
-  const { data, error } = await fromSupabase("controls")
-    .select("*")
-    .eq("room_id", roomId)
+  const { data, error } = await fromSupabase('controls')
+    .select('*')
+    .eq('room_id', roomId)
     .single();
 
   if (error) throw error;
+
+  if (!data) throw Error('Controls not defined');
 
   return data;
 };
@@ -39,5 +41,6 @@ export const useSelectControls = (
     Controls | null,
     SelectControlsKey
   >
-): UseQueryResult<Controls | null, PostgrestError> =>
-  useQuery(selectControlsKey(args), selectControls, options);
+): UseQueryResult<Controls | null, PostgrestError> => {
+  return useQuery(selectControlsKey(args), selectControls, options);
+};

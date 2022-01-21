@@ -1,6 +1,6 @@
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import { RegisterOptions } from 'react-hook-form';
-import { useText } from '../../../../utils';
 
 export type CreateRoomViewData = {
   name: string;
@@ -11,30 +11,31 @@ export const useCreateRoomViewOptions = (): Record<
   keyof CreateRoomViewData,
   RegisterOptions<CreateRoomViewData>
 > => {
-  const text = useText();
+  const { t } = useTranslation('home');
+
   return useMemo(
     () => ({
       name: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         minLength: {
           value: 3,
-          message: text('errorMinLength')(3),
+          message: `${t('errorMinLength')}: 3`,
         },
       },
       slug: {
         required: {
           value: true,
-          message: text('fieldIsRequired'),
+          message: t('fieldIsRequired'),
         },
         pattern: {
           value: /[A-Za-z0-9]{3,32}/,
-          message: text('slugPatternIsRequired'),
+          message: t('slugPatternIsRequired'),
         },
       },
     }),
-    [text]
+    [t]
   );
 };

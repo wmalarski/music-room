@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { VideoPlayerView } from './VideoPlayerView';
 
 export default {
-  title: 'Chat/VideoPlayerView',
+  title: 'Room/VideoPlayerView',
   component: VideoPlayerView,
   argTypes: {
     onEnd: { action: 'onEnd' },

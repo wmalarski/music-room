@@ -1,8 +1,16 @@
-import { Alert, Button, Debug, Input, Typography } from '@music-room/ui';
+import {
+  Button,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError, User } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
 import {
   SignUpViewContext,
   SignUpViewData,
@@ -17,13 +25,9 @@ type Props = {
   onSubmit: (data: SignUpViewData) => void;
 };
 
-const SignUpView = ({
-  isLoading,
-  error,
-  user,
-  onSubmit,
-}: Props): ReactElement => {
-  const text = useText();
+const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
+  const { t } = useTranslation('auth');
+  const { t: tForm } = useTranslation('common');
 
   const options = useSignUpViewOptions();
 
@@ -33,40 +37,55 @@ const SignUpView = ({
     handleSubmit,
   } = useForm<SignUpViewData, SignUpViewContext>({
     resolver: signUpViewResolver,
-    context: { text },
+    context: { t: tForm },
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>{text('signUpHeader')}</Typography>
-      <Input
-        type="email"
-        placeholder={text('emailPlaceholder')}
-        {...register('email', options.email)}
-      />
-      {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
-      <Input
-        type="password"
-        placeholder={text('passwordPlaceholder')}
-        {...register('password', options.password)}
-      />
-      {errors.password && (
-        <Alert severity="error">{errors.password.message}</Alert>
-      )}
-      <Input
-        type="password"
-        placeholder={text('confirmPasswordPlaceholder')}
-        {...register('confirmPassword', options.confirmPassword)}
-      />
-      {errors.confirmPassword && (
-        <Alert severity="error">{errors.confirmPassword.message}</Alert>
-      )}
-      {error && <Alert severity="error">{error.message}</Alert>}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography kind="description">{t('signUpHeader')}</Typography>
+      <FormFieldset>
+        <FormLabel htmlFor="email">{t('emailPlaceholder')}</FormLabel>
+        <Input
+          id="email"
+          type="email"
+          placeholder={t('emailPlaceholder')}
+          {...register('email', options.email)}
+        />
+        {errors.email && (
+          <FormError role="alert">{errors.email.message}</FormError>
+        )}
+      </FormFieldset>
+      <FormFieldset>
+        <FormLabel htmlFor="password">{t('passwordPlaceholder')}</FormLabel>
+        <Input
+          id="password"
+          type="password"
+          placeholder={t('passwordPlaceholder')}
+          {...register('password', options.password)}
+        />
+        {errors.password && (
+          <FormError role="alert">{errors.password.message}</FormError>
+        )}
+      </FormFieldset>
+      <FormFieldset>
+        <FormLabel htmlFor="confirmPassword">
+          {t('confirmPasswordPlaceholder')}
+        </FormLabel>
+        <Input
+          id="confirmPassword"
+          type="password"
+          placeholder={t('confirmPasswordPlaceholder')}
+          {...register('confirmPassword', options.confirmPassword)}
+        />
+        {errors.confirmPassword && (
+          <FormError role="alert">{errors.confirmPassword.message}</FormError>
+        )}
+      </FormFieldset>
+      {error && <FormError role="alert">{error.message}</FormError>}
       <Button isLoading={isLoading} type="submit">
-        {text('signUpButton')}
+        <Typography size="sm">{t('signUpButton')}</Typography>
       </Button>
-      <Debug value={user} />
-    </form>
+    </Form>
   );
 };
 

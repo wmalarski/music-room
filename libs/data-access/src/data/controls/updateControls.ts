@@ -1,17 +1,16 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Controls } from "../types";
-import { selectControlsKey } from "./selectControls";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Controls } from '../types';
+import { selectControlsKey } from './selectControls';
 
-export type ControlsVariables = Partial<Omit<Controls, "id" | "room_id">>;
-
-export type UpdateControlsArgs = Pick<Controls, "id"> & ControlsVariables;
+export type UpdateControlsArgs = Partial<Omit<Controls, 'room_id'>> &
+  Pick<Controls, 'id' | 'change_by'>;
 
 export type UpdateControlsContext = {
   previous?: Controls;
@@ -21,9 +20,9 @@ export type UpdateControlsContext = {
 export const updateControls = async (
   args: UpdateControlsArgs
 ): Promise<Controls> => {
-  const { data, error } = await fromSupabase("controls")
+  const { data, error } = await fromSupabase('controls')
     .update(args)
-    .eq("id", args.id)
+    .eq('id', args.id)
     .single();
 
   if (error || !data) throw error;
@@ -40,7 +39,7 @@ export const useUpdateControls = (
       UpdateControlsArgs,
       UpdateControlsContext
     >,
-    "onMutate"
+    'onMutate'
   >
 ): UseMutationResult<
   Controls,
@@ -49,26 +48,26 @@ export const useUpdateControls = (
   UpdateControlsContext
 > => {
   const queryClient = useQueryClient();
-  const selectKey = selectControlsKey({ roomId });
+  const key = selectControlsKey({ roomId });
 
   return useMutation(updateControls, {
     ...options,
     onMutate: async (controls) => {
-      await queryClient.cancelQueries(selectKey);
+      await queryClient.cancelQueries(key);
 
-      const previous = queryClient.getQueryData<Controls>(selectKey);
+      const previous = queryClient.getQueryData<Controls>(key);
       const next = { ...previous, ...controls };
 
-      queryClient.setQueryData(selectKey, next);
+      queryClient.setQueryData(key, next);
 
       return { previous, next };
     },
     onError: (err, controls, context) => {
-      queryClient.setQueryData(selectKey, context?.previous);
+      queryClient.setQueryData(key, context?.previous);
       options?.onError?.(err, controls, context);
     },
     onSettled: (...args) => {
-      queryClient.invalidateQueries(selectKey);
+      queryClient.invalidateQueries(key);
       options?.onSettled?.(...args);
     },
   });

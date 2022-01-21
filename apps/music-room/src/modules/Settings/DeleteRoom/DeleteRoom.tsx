@@ -14,8 +14,14 @@ export const DeleteRoom = ({ View = DeleteRoomView }: Props): ReactElement => {
   const { id, hash } = useRoom();
 
   const { mutate: deleteRoom, isLoading } = useDeleteRoom(hash, {
-    onSuccess: () => router.push(paths.home),
+    onSuccess: () => {
+      router.push(paths.home);
+    },
   });
 
-  return <View isLoading={isLoading} onClicked={() => deleteRoom({ id })} />;
+  const handleClick = () => {
+    deleteRoom({ id });
+  };
+
+  return <View isLoading={isLoading} onClick={handleClick} />;
 };

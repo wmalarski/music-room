@@ -1,23 +1,25 @@
 import { Button } from '@music-room/ui';
+import { useTranslation } from 'next-i18next';
 import { ReactElement, useState } from 'react';
-import { useText } from '../../../../utils';
 
 type Props = {
   isLoading: boolean;
-  onClicked: () => void;
+  onClick: () => void;
 };
 
-export const DeleteRoomView = ({ onClicked }: Props): ReactElement => {
-  const text = useText();
+export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
+  const { t } = useTranslation('settings');
 
   const [isClicked, setIsClicked] = useState(false);
 
+  const handleFirstClick = () => {
+    setIsClicked(true);
+  };
+
   return (
     <>
-      <Button onClick={() => setIsClicked(true)}>{text('removeRoom')}</Button>
-      {isClicked && (
-        <Button onClick={onClicked}>{text('confirmRemoveRoom')}</Button>
-      )}
+      <Button onClick={handleFirstClick}>{t('removeRoom')}</Button>
+      {isClicked && <Button onClick={onClick}>{t('confirmRemoveRoom')}</Button>}
     </>
   );
 };

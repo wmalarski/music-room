@@ -9,4 +9,4 @@ export default {
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { children: 'Hello' };
+Primary.args = { children: 'Hello', appTitle: 'App Title', header: 'Header' };

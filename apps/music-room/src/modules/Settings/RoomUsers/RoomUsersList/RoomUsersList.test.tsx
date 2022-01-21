@@ -9,27 +9,33 @@ import { RoomUsersList } from './RoomUsersList';
 type Props = ComponentProps<typeof RoomUsersList>;
 
 const defaultProps: Props = {
-  members: [
-    {
-      ...defaultMember,
-      room_id: 1,
-      profile_id: 1,
-      profile_name: 'First',
-      room_slug: 'first',
-      room_name: 'RoomName1',
-    },
-    {
-      ...defaultMember,
-      room_id: 2,
-      profile_id: 2,
-      profile_name: 'Second',
-      room_slug: 'second',
-      room_name: 'RoomName2',
-    },
-  ],
-  onLoadMore: () => null,
+  offset: 0,
+  data: {
+    count: 2,
+    limit: 20,
+    offset: 0,
+    members: [
+      {
+        ...defaultMember,
+        room_id: 1,
+        profile_id: 1,
+        profile_name: 'First',
+        room_slug: 'first',
+        room_name: 'RoomName1',
+      },
+      {
+        ...defaultMember,
+        room_id: 2,
+        profile_id: 2,
+        profile_name: 'Second',
+        room_slug: 'second',
+        room_name: 'RoomName2',
+      },
+    ],
+  },
   onRemoveClick: () => null,
   onRoleChange: () => null,
+  onPageChange: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

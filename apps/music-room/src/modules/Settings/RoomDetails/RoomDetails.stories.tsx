@@ -1,3 +1,4 @@
+import { defaultRoom, RoomContextProvider } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { RoomDetails } from './RoomDetails';
 
@@ -6,8 +7,10 @@ export default {
   component: RoomDetails,
 } as ComponentMeta<typeof RoomDetails>;
 
-const Template: ComponentStory<typeof RoomDetails> = (args) => (
-  <RoomDetails {...args} />
+const Template: ComponentStory<typeof RoomDetails> = () => (
+  <RoomContextProvider room={defaultRoom}>
+    <RoomDetails />
+  </RoomContextProvider>
 );
 
 export const Primary = Template.bind({});

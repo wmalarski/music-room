@@ -65,7 +65,7 @@ RETURNS TRIGGER AS $$
   BEGIN
     INSERT INTO public.profiles (user_id, name)
     VALUES(new.id, new.email);
-  
+
     RETURN NEW;
   END;
 $$
@@ -83,9 +83,9 @@ RETURNS TRIGGER AS $$
     INSERT INTO public.roles (room_id, profile_id, role)
     VALUES(new.id, new.author_id, 'owner');
 
-    INSERT INTO public.controls (room_id, speaker_id)
-    VALUES(new.id, new.author_id);
-  
+    INSERT INTO public.controls (room_id, speaker_id, change_by)
+    VALUES(new.id, new.author_id, new.author_id);
+
     RETURN NEW;
   END;
 $$
@@ -99,40 +99,40 @@ FOR EACH ROW EXECUTE PROCEDURE insert_role_and_controls_for_room();
 ---- Updated_at ----
 create extension if not exists moddatetime schema extensions;
 
-create trigger handle_updated_at before update on actions 
+create trigger handle_updated_at before update on actions
   for each row execute procedure moddatetime (updated_at);
 
 ---- roomRoles view ----
 create or replace view members as
-  select 
+  select
     roles.id as id,
     roles.role
-    profiles.id as profile_id, 
+    profiles.id as profile_id,
     profiles.user_id as user_id,
     profiles.name as profile_name,
     profiles.avatar as profile_avatar,
-    rooms.id as room_id, 
-    rooms.name as room_name, 
+    rooms.id as room_id,
+    rooms.name as room_name,
     rooms.slug as room_slug,
     rooms.hash as room_hash,
     rooms.author_id as room_author_id,
     rooms.avatar as room_avatar,
-  from 
-    profiles 
-    inner join roles on profiles.id = roles.profile_id 
+  from
+    profiles
+    inner join roles on profiles.id = roles.profile_id
     inner join rooms on roles.room_id = rooms.id;
 
 ---- select room function ----
 CREATE OR REPLACE FUNCTION room_by_hash (input_hash text)
 RETURNS TABLE(
-  id BIGINT, 
-  author_id BIGINT, 
-  name TEXT, 
+  id BIGINT,
+  author_id BIGINT,
+  name TEXT,
   slug TEXT,
   data JSON,
   hash TEXT) AS $$
-    SELECT * 
-    FROM rooms 
+    SELECT *
+    FROM rooms
     WHERE rooms.hash=input_hash;
 $$ LANGUAGE SQL;
 
@@ -140,7 +140,7 @@ $$ LANGUAGE SQL;
 CREATE POLICY "Enable access to users having role" ON public.rooms FOR
 SELECT true;
 
-CREATE POLICY "Enable insert for authenticated users only" ON public.rooms FOR 
+CREATE POLICY "Enable insert for authenticated users only" ON public.rooms FOR
 INSERT WITH CHECK (auth.role() = 'authenticated');
 
 CREATE POLICY "Enable update for users based on email" ON public.rooms FOR
@@ -195,7 +195,7 @@ CREATE POLICY "Enable delete for users based on user_id" ON public.rooms FOR DEL
 CREATE POLICY "Enable access to all users" ON public.roles FOR
 SELECT USING (auth.role() = 'authenticated');
 
-CREATE POLICY "Enable insert for authenticated users only" ON public.roles FOR 
+CREATE POLICY "Enable insert for authenticated users only" ON public.roles FOR
 INSERT WITH CHECK (auth.role() = 'authenticated');
 
 CREATE POLICY "Enable update for users based on email" ON public.roles FOR
@@ -253,7 +253,7 @@ CREATE POLICY "Enable delete for users based on user_id" ON public.roles FOR DEL
 CREATE POLICY "Enable access to all users" ON public.profiles FOR
 SELECT true;
 
-CREATE POLICY "Enable insert for authenticated users only" ON public.profiles FOR 
+CREATE POLICY "Enable insert for authenticated users only" ON public.profiles FOR
 INSERT WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Enable update for users based on email" ON public.profiles FOR

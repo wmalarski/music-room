@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SignOutView } from './SignOutView';
 
 export default {
-  title: 'SignOut/SignOutView',
+  title: 'Headers/SignOutView',
   component: SignOutView,
   argTypes: {
     onSubmit: { action: 'onSubmit' },
@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof SignOutView> = (args) => (
 
 export const Playground = Template.bind({});
 Playground.args = {
-  onSignOutClicked: () => null,
+  onSignOutClick: () => null,
 };

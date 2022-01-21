@@ -13,18 +13,23 @@ const Template: ComponentStory<typeof RoomsList> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  members: [
-    {
-      ...defaultMember,
-      id: 1,
-      profile_name: 'First',
-      room_slug: 'first',
-    },
-    {
-      ...defaultMember,
-      id: 2,
-      profile_name: 'Second',
-      room_slug: 'second',
-    },
-  ],
+  data: {
+    count: 2,
+    offset: 0,
+    limit: 20,
+    members: [
+      {
+        ...defaultMember,
+        id: 1,
+        profile_name: 'First',
+        room_slug: 'first',
+      },
+      {
+        ...defaultMember,
+        id: 2,
+        profile_name: 'Second',
+        room_slug: 'second',
+      },
+    ],
+  },
 };

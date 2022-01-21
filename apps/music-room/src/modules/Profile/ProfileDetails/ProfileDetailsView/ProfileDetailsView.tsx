@@ -1,9 +1,18 @@
 import { Profile } from '@music-room/data-access';
-import { Alert, Button, Input, Typography } from '@music-room/ui';
+import {
+  Button,
+  Form,
+  FormError,
+  FormFieldset,
+  FormLabel,
+  Input,
+  Typography,
+} from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useText } from '../../../../utils';
+import * as Styles from './ProfileDetailsView.styles';
 import {
   ProfileDetailsViewData,
   useProfileDetailsViewOptions,
@@ -22,7 +31,7 @@ export const ProfileDetailsView = ({
   isLoading,
   onSubmit,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('profile');
 
   const {
     formState: { errors, isDirty },
@@ -35,17 +44,27 @@ export const ProfileDetailsView = ({
   const options = useProfileDetailsViewOptions();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>{text('profileHeader')}</Typography>
-      <Input
-        placeholder={text('profileNamePlaceholder')}
-        {...register('name', options.name)}
-      />
-      {errors.name && <Alert severity="error">{errors.name.message}</Alert>}
-      {error && <Alert severity="error">{error.message}</Alert>}
-      <Button isLoading={isLoading} disabled={!isDirty} type="submit">
-        {text('profileSaveButton')}
-      </Button>
-    </form>
+    <Styles.Container>
+      <Styles.Content>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Typography size="xl">{t('profileHeader')}</Typography>
+          <FormFieldset>
+            <FormLabel htmlFor="name">{t('profileNamePlaceholder')}</FormLabel>
+            <Input
+              id="name"
+              placeholder={t('profileNamePlaceholder')}
+              {...register('name', options.name)}
+            />
+            {errors.name && (
+              <FormError role="alert">{errors.name.message}</FormError>
+            )}
+          </FormFieldset>
+          {error && <FormError role="alert">{error.message}</FormError>}
+          <Button isLoading={isLoading} disabled={!isDirty} type="submit">
+            <Typography size="sm">{t('profileSaveButton')}</Typography>
+          </Button>
+        </Form>
+      </Styles.Content>
+    </Styles.Container>
   );
 };

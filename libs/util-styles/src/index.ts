@@ -36,7 +36,12 @@ export const {
       gray9: 'hsl(0, 0%, 90%)',
       gray1A9: 'hsl(0, 0%, 10%, 0.9)',
 
-      border1White3: '1px solid $gray3',
+      error1: 'hsl(0, 100%, 60%)',
+
+      border1Gray2: '1px solid $gray2',
+      border1Gray3: '1px solid $gray3',
+      border1Brand9: '1px solid $brand9',
+      border1Brand8: '1px solid $brand8',
       border2Brand8: '2px solid $brand8',
     },
     fontSizes: {
@@ -63,6 +68,8 @@ export const {
       md: '1rem',
       lg: '1.5rem',
       xl: '2rem',
+
+      dialogMd: '30rem',
     },
     space: {
       xs: '0.25rem',
@@ -72,12 +79,34 @@ export const {
       xl: '2rem',
     },
     shadows: {
-      small: '0 2px 10px $gray1A9',
+      smallGray: '0 2px 10px $gray1A9',
+      bottom1: '0 0 0 1px $gray1',
+      bottom2: '0 0 0 2px $gray1',
+      dialog1:
+        'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
     },
   },
   media: {
     bp1: '(min-width: 480px)',
     bp2: '(min-width: 640px)',
+  },
+  utils: {
+    listRow: (value: string) => {
+      const [size, start] = value.split(' ');
+      return {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        transform: `translateY(${start}px)`,
+        height: `${size}px`,
+      };
+    },
+    listContainer: (totalSize: number) => ({
+      height: `${totalSize}px`,
+      width: '100%',
+      position: 'relative',
+    }),
   },
 });
 
@@ -94,6 +123,8 @@ export const globalStyles = globalCss({
     margin: 0,
     backgroundColor: '$background',
     color: '$foreground',
+    fontFamily:
+      '-apple-system, "Segoe UI", Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji"',
   },
   '*, *::before, *::after': {
     boxSizing: 'inherit',

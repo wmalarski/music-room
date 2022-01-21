@@ -15,10 +15,11 @@ export type Controls = {
   volume: number;
   pause: boolean;
   speaker_id: number;
+  change_by: number;
 };
 
 export type MessageData = {
-  kind: "message#0.0.1";
+  kind: 'message#0.0.1';
   url: string;
 };
 
@@ -38,7 +39,7 @@ export type Profile = {
   avatar: string | null;
 };
 
-export type RoomRole = "owner" | "mod" | "user" | "guest";
+export type RoomRole = 'owner' | 'mod' | 'user' | 'guest';
 
 export type Role = {
   id: number;
@@ -48,7 +49,7 @@ export type Role = {
 };
 
 export type RoomData = {
-  kind: "room#0.0.1";
+  kind: 'room#0.0.1';
 };
 
 export type Room = {

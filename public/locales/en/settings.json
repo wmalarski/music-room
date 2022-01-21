@@ -1,0 +1,9 @@
+{
+  "removeRoom": "Remove Room",
+  "confirmRemoveRoom": "Confirm",
+  "updateRoom": "Update Room",
+  "removeFromRoom": "Remove from group",
+  "modRole": "Mod",
+  "userRole": "User",
+  "guestRole": "Guest"
+}

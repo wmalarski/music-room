@@ -13,7 +13,7 @@ import { DeleteRoom } from './DeleteRoom';
 
 type Props = ComponentProps<typeof DeleteRoom>;
 
-const View: Props['View'] = ({ onClicked }) => (
+const View: Props['View'] = ({ onClick: onClicked }) => (
   <button onClick={() => onClicked()}>Delete</button>
 );
 

@@ -1,5 +1,5 @@
-import { Room } from '@music-room/data-access';
 import { createContext, ReactElement, ReactNode, useContext } from 'react';
+import { Room } from '../data/types';
 
 const RoomContext = createContext<Room | null>(null);
 

@@ -1,56 +1,64 @@
-import { Controls, UpdateControlsArgs } from '@music-room/data-access';
+import { Controls } from '@music-room/data-access';
 import { Button, Input, Typography } from '@music-room/ui';
-import { ReactElement } from 'react';
-import { useText } from '../../../../../utils';
+import { useTranslation } from 'next-i18next';
+import { ChangeEvent, ReactElement } from 'react';
 
 type Props = {
-  profileId: number;
   controls: Controls;
-  onChange: (controls: UpdateControlsArgs) => void;
+  onMuteChange: () => void;
+  onPauseChange: () => void;
+  onVolumeChange: (volume: number) => void;
+  onAssignClick: () => void;
 };
 
 export const PlayerControls = ({
-  profileId,
-  controls: { id, muted, pause, volume },
-  onChange,
+  controls: { muted, pause, volume },
+  onAssignClick,
+  onMuteChange,
+  onPauseChange,
+  onVolumeChange,
 }: Props): ReactElement => {
-  const text = useText();
+  const { t } = useTranslation('room');
+
+  const handleMuteChange = () => {
+    onMuteChange();
+  };
+
+  const handlePauseChange = () => {
+    onPauseChange();
+  };
+
+  const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onVolumeChange(Number(event.target.value));
+  };
+
+  const handleAssignClick = () => {
+    onAssignClick();
+  };
 
   return (
     <div>
       <div>
-        <Input
-          type="checkbox"
-          checked={muted}
-          onChange={() => onChange({ id, muted: !muted })}
-        />
-        <Typography>{text('controlsMute')}</Typography>
+        <Input type="checkbox" checked={muted} onChange={handleMuteChange} />
+        <Typography>{t('controlsMute')}</Typography>
       </div>
       <div>
-        <Input
-          type="checkbox"
-          checked={pause}
-          onChange={() => onChange({ id, pause: !pause })}
-        />
-        <Typography>{text('controlsPause')}</Typography>
+        <Input type="checkbox" checked={pause} onChange={handlePauseChange} />
+        <Typography>{t('controlsPause')}</Typography>
       </div>
       <div>
         <Input
           type="number"
-          placeholder={text('controlsVolume')}
+          placeholder={t('controlsVolume')}
           step={1}
           min={0}
           max={100}
           value={volume}
-          onChange={(event) =>
-            onChange({ id, volume: Number(event.target.value) })
-          }
+          onChange={handleVolumeChange}
         />
-        <Typography>{text('controlsVolume')}</Typography>
+        <Typography>{t('controlsVolume')}</Typography>
       </div>
-      <Button onClick={() => onChange({ id, speaker_id: profileId })}>
-        {text('controlsAssignSpeaker')}
-      </Button>
+      <Button onClick={handleAssignClick}>{t('controlsAssignSpeaker')}</Button>
     </div>
   );
 };

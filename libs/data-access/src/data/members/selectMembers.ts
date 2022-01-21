@@ -1,51 +1,62 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   QueryFunctionContext,
   QueryKey,
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-  UseInfiniteQueryResult,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Member } from "../types";
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Member } from '../types';
 
-const MEMBERS_PAGE_LIMIT = 20;
+export type SelectMembersArgs = Partial<Member> & {
+  offset: number;
+  limit: number;
+};
 
-export type SelectMembersArgs = Partial<Member>;
+export type SelectMembersKey = ['members', SelectMembersArgs];
 
-export type SelectMembersKey = ["members", SelectMembersArgs];
+export type SelectMembersResult = {
+  members: Member[];
+  count: number;
+  offset: number;
+  limit: number;
+};
 
-export const selectAllMembersKey = (): QueryKey => ["members"];
+export const selectAllMembersKey = (): QueryKey => ['members'];
 
 export const selectMembersKey = (args: SelectMembersArgs): SelectMembersKey => [
-  "members",
+  'members',
   args,
 ];
 
 export const selectMembers = async ({
-  queryKey: [, args],
-  pageParam = 0,
-}: QueryFunctionContext<SelectMembersKey>): Promise<Member[]> => {
-  const { data, error } = await Object.entries(args).reduce(
+  queryKey,
+}: QueryFunctionContext<
+  SelectMembersKey,
+  number
+>): Promise<SelectMembersResult> => {
+  const [, { limit, offset, ...args }] = queryKey;
+  const { data, error, count } = await Object.entries(args).reduce(
     (prev, [key, value]) => prev.eq(key as keyof Member, value),
-    fromSupabase("members")
-      .select("*")
-      .range(pageParam, pageParam + MEMBERS_PAGE_LIMIT)
+    fromSupabase('members')
+      .select('*', { count: 'estimated' })
+      .range(offset, offset + limit)
   );
 
   if (error || !data) throw error;
 
-  return data;
+  return { members: data, count: count ?? 0, limit, offset };
 };
 
 export const useSelectMembers = (
   args: SelectMembersArgs,
-  options?: UseInfiniteQueryOptions<
-    Member[],
+  options?: UseQueryOptions<
+    SelectMembersResult,
     PostgrestError,
-    Member[],
-    Member[],
+    SelectMembersResult,
     SelectMembersKey
   >
-): UseInfiniteQueryResult<Member[], PostgrestError> =>
-  useInfiniteQuery(selectMembersKey(args), selectMembers, options);
+): UseQueryResult<SelectMembersResult, PostgrestError> => {
+  return useQuery(selectMembersKey(args), selectMembers, options);
+};

@@ -5,6 +5,7 @@ import {
   useUserContext,
 } from '@music-room/data-access';
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ReactElement } from 'react';
 import { Auth } from '../../modules/Auth/Auth';
 import { Invite } from '../../modules/Invite/Invite';
@@ -27,6 +28,7 @@ const InvitePage = ({ room }: Props): ReactElement => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   params: { hash } = {},
+  locale,
 }) => {
   const roomHash = Array.isArray(hash) ? undefined : hash;
   if (!roomHash) return { notFound: true };
@@ -38,7 +40,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   if (!room) return { notFound: true };
 
-  return { props: { room } };
+  const translations = await serverSideTranslations(locale ?? 'en', [
+    'common',
+    'header',
+    'auth',
+    'invite',
+  ]);
+
+  return { props: { ...translations, room } };
 };
 
 export default InvitePage;

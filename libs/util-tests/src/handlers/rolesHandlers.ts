@@ -2,21 +2,21 @@ import {
   DeleteRoleArgs,
   InsertRoleArgs,
   Role,
-  SUPABASE_ENDPOINT,
-  TABLES,
+  TABLES_ENDPOINTS,
   UpdateRolesArgs,
 } from '@music-room/data-access';
 import { rest } from 'msw';
 import { mockMembersStorage } from './membersHandlers';
 
 export const mockRolesStorage = {
-  get: (): Role[] =>
-    mockMembersStorage.get().map((member) => ({
+  get: (): Role[] => {
+    return mockMembersStorage.get().map((member) => ({
       id: member.id,
       profile_id: member.profile_id,
       role: member.role,
       room_id: member.room_id,
-    })),
+    }));
+  },
   set: (roles: Role[]): void => {
     const member = mockMembersStorage.getContext();
     if (!member) {
@@ -38,7 +38,7 @@ export const mockRolesStorage = {
 
 export const rolesHandlers = [
   rest.post<InsertRoleArgs, never, Role>(
-    `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
+    TABLES_ENDPOINTS.roles,
     ({ body }, res, ctx) => {
       const roles = mockRolesStorage.get();
 
@@ -52,7 +52,7 @@ export const rolesHandlers = [
     }
   ),
   rest.patch<UpdateRolesArgs, never, Role>(
-    `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
+    TABLES_ENDPOINTS.roles,
     ({ body }, res, ctx) => {
       const roles = [...mockRolesStorage.get()];
       const index = roles.findIndex((room) => room.id === body.id);
@@ -65,17 +65,14 @@ export const rolesHandlers = [
       return res(ctx.json(role));
     }
   ),
-  rest.delete<DeleteRoleArgs>(
-    `${SUPABASE_ENDPOINT}/${TABLES.roles}`,
-    ({ url }, res, ctx) => {
-      const query = url.searchParams.get('id')?.split('.')[1];
-      if (!query) return res(ctx.json({}));
-      const id = Number(query);
+  rest.delete<DeleteRoleArgs>(TABLES_ENDPOINTS.roles, ({ url }, res, ctx) => {
+    const query = url.searchParams.get('id')?.split('.')[1];
+    if (!query) return res(ctx.json({}));
+    const id = Number(query);
 
-      const roles = mockRolesStorage.get();
-      mockRolesStorage.set(roles.filter((role) => role.id !== id));
+    const roles = mockRolesStorage.get();
+    mockRolesStorage.set(roles.filter((role) => role.id !== id));
 
-      return res(ctx.json({}));
-    }
-  ),
+    return res(ctx.json({}));
+  }),
 ];

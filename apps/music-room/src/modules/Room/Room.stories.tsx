@@ -1,5 +1,11 @@
-import { defaultMember } from '@music-room/data-access';
+import {
+  defaultRole,
+  defaultRoom,
+  RoleContextProvider,
+  RoomContextProvider,
+} from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Room } from './Room';
 
 export default {
@@ -7,9 +13,14 @@ export default {
   component: Room,
 } as ComponentMeta<typeof Room>;
 
-const Template: ComponentStory<typeof Room> = (args) => <Room {...args} />;
+const Template: ComponentStory<typeof Room> = () => (
+  <RoomContextProvider room={defaultRoom}>
+    <RoleContextProvider role={defaultRole}>
+      <QueryClientProvider client={new QueryClient()}>
+        <Room />
+      </QueryClientProvider>
+    </RoleContextProvider>
+  </RoomContextProvider>
+);
 
 export const Playground = Template.bind({});
-Playground.args = {
-  member: defaultMember,
-};

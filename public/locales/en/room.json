@@ -1,0 +1,12 @@
+{
+"addMessage": "Add message",
+"addUrlPlaceholder": "Url",
+"controlsMute": "Mute",
+"controlsPause": "Pause",
+"controlsVolume": "Volume",
+"controlsAssignSpeaker": "Assign Speaker",
+"likeMessage": "Like",
+"removeLikeMessage": "Remove Like",
+"dislikeMessage": "Dislike",
+"removeDislikeMessage": "Remove Dislike"
+}

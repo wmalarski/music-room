@@ -8,7 +8,7 @@ import { SignOut } from './SignOut';
 
 type Props = ComponentProps<typeof SignOut>;
 
-const View = ({ onSignOutClicked }) => (
+const View: Props['View'] = ({ onSignOutClick: onSignOutClicked }) => (
   <button onClick={onSignOutClicked}>Click</button>
 );
 
