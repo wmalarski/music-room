@@ -1,55 +1,41 @@
 import { useEffect } from 'react';
 import { Options, useVirtual, VirtualItem } from 'react-virtual';
-import { useDebounce } from './useDebounce';
+import { useCallbackRef } from './useCallbackRef';
 
 type GetScrollStartArgs = {
-  start: number;
   items: VirtualItem[];
   limit: number;
-  overscan: number;
 };
 
-const getScrollStart = ({
-  start,
-  items,
-  limit,
-  overscan,
-}: GetScrollStartArgs): number => {
-  const end = start + limit;
-  const half = Math.ceil(limit / 2);
+const getScrollStart = ({ items, limit }: GetScrollStartArgs): number => {
+  const half = Math.floor(limit / 2);
 
   const firstVirtualItem = items.at(0);
-  const lastVirtualItem = items.at(-1);
 
-  if (!firstVirtualItem || !lastVirtualItem) {
-    return start;
-  }
+  if (!firstVirtualItem) return 0;
 
   const first = firstVirtualItem.index;
-  const last = lastVirtualItem.index;
-  const middle = (last + first) / 2;
+  return Math.floor(first / half) * half;
+};
 
-  if (first < start) {
-    return Math.max(Math.floor((middle - half) / half) * half, 0);
-  } else if (last > end) {
-    return Math.max(Math.ceil((middle - half) / half) * half, 0);
-  }
-  return start;
+export type UseVirtualPagesArgs<T> = Options<T> & {
+  start: number;
+  limit: number;
+  onOffsetChange: (offset: number) => void;
 };
 
 export const useVirtualPages = <T>({
   size,
   start,
-  limit = 20,
+  limit,
   overscan,
   onOffsetChange,
   ...args
-}: Options<T> & {
-  start: number;
-  limit?: number;
-  overscan: number;
-  onOffsetChange: (offset: number) => void;
-}): ReturnType<typeof useVirtual> => {
+}: UseVirtualPagesArgs<T>): ReturnType<typeof useVirtual> => {
+  const changeOffsetRef = useCallbackRef((offset: number) =>
+    onOffsetChange(offset)
+  );
+
   const virtualizer = useVirtual({
     size,
     overscan,
@@ -59,19 +45,12 @@ export const useVirtualPages = <T>({
   const neededStart = getScrollStart({
     items: virtualizer.virtualItems,
     limit,
-    overscan,
-    start,
   });
-
-  const debouncedPageChange = useDebounce(
-    (offset: number) => onOffsetChange(offset),
-    500
-  );
 
   useEffect(() => {
     if (neededStart === start) return;
-    debouncedPageChange(neededStart);
-  }, [debouncedPageChange, neededStart, start]);
+    changeOffsetRef(neededStart);
+  }, [changeOffsetRef, neededStart, start]);
 
   return virtualizer;
 };

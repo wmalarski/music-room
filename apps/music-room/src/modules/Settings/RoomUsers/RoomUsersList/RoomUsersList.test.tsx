@@ -10,6 +10,7 @@ type Props = ComponentProps<typeof RoomUsersList>;
 const defaultProps: Props = {
   offset: 0,
   query: '',
+  limit: 40,
   data: {
     count: 2,
     limit: 20,

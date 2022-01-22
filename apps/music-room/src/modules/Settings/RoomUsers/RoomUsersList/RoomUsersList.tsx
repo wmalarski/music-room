@@ -11,6 +11,7 @@ type Props = {
   data?: SelectMembersResult;
   offset: number;
   query: string;
+  limit: number;
   onQueryChange: (query: string) => void;
   onOffsetChange: (offset: number) => void;
   onRoleChange: (profile: Member, role: RoomRole) => void;
@@ -20,6 +21,7 @@ type Props = {
 export const RoomUsersList = ({
   data,
   offset,
+  limit,
   query,
   onQueryChange,
   onOffsetChange,
@@ -29,13 +31,12 @@ export const RoomUsersList = ({
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
-    onOffsetChange,
     start: offset,
-    limit: data?.limit,
+    limit,
     size: data?.count ?? 0,
     parentRef,
+    onOffsetChange,
     estimateSize: useCallback(() => 35, []),
-    overscan: 1,
   });
 
   const handleRoleChange = (member: Member) => (role: RoomRole) => {

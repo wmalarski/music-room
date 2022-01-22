@@ -14,18 +14,25 @@ type Props = {
   View?: typeof RoomUsersList;
 };
 
+const selectLimit = 40;
+
 export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
   const { id } = useRoom();
 
   const [offset, setOffset] = useState(0);
   const [query, setQuery] = useState<string>('');
 
-  const { data } = useSelectMembers({
-    room_id: id,
-    offset,
-    limit: 30,
-    query,
-  });
+  const { data } = useSelectMembers(
+    {
+      room_id: id,
+      offset,
+      limit: selectLimit,
+      query,
+    },
+    {
+      keepPreviousData: true,
+    }
+  );
 
   const { mutate: deleteRole } = useDeleteRole();
 
@@ -52,6 +59,7 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
       data={data}
       offset={offset}
       query={query}
+      limit={selectLimit}
       onOffsetChange={handleOffsetChange}
       onQueryChange={handleQueryChange}
       onRemoveClick={handleRemoveClick}

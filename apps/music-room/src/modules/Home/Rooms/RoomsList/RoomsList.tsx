@@ -1,11 +1,13 @@
 import { SelectMembersResult } from '@music-room/data-access';
-import { Flex } from '@music-room/ui';
+import { Divider, Flex } from '@music-room/ui';
 import { ReactElement, useCallback, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
+import * as Styles from './RoomsList.styles';
 import { RoomsListItem } from './RoomsListItem/RoomsListItem';
 
 type Props = {
   offset: number;
+  limit: number;
   data?: SelectMembersResult;
   onOffsetChange: (offset: number) => void;
 };
@@ -13,41 +15,41 @@ type Props = {
 export const RoomsList = ({
   data,
   offset,
+  limit,
   onOffsetChange,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
     start: offset,
-    limit: data?.limit,
-    onOffsetChange,
+    limit,
     size: data?.count ?? 0,
     parentRef,
+    onOffsetChange,
     estimateSize: useCallback(() => 40, []),
-    overscan: 5,
   });
 
   return (
-    <Flex
-      ref={parentRef}
-      css={{
-        height: 'calc(100vh - $xl)',
-        width: '$xl',
-        overflow: 'scroll',
-        '&::-webkit-scrollbar': 'none',
-      }}
-    >
-      <Flex direction="column" css={{ listContainer: virtualizer.totalSize }}>
+    <Styles.Container ref={parentRef}>
+      <Flex css={{ listContainer: virtualizer.totalSize }}>
         {virtualizer.virtualItems.map((row) => {
           const member = data?.members[row.index - data.offset];
           if (!member) return null;
           return (
-            <Flex key={row.index} css={{ listRow: `${row.size} ${row.start}` }}>
+            <Flex
+              ref={row.measureRef}
+              key={row.key}
+              css={{ dynamicRow: row.start }}
+              direction="column"
+              gap="xs"
+              spaceY="xs"
+            >
               <RoomsListItem member={member} />
+              <Divider orientation="horizontal" color={5} />
             </Flex>
           );
         })}
       </Flex>
-    </Flex>
+    </Styles.Container>
   );
 };
