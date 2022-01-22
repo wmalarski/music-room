@@ -1,6 +1,6 @@
 import { styled } from '@music-room/util-styles';
 
-export const Container = styled('div', {
+export const RoomUsersRow = styled('div', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 3fr 2fr 1fr',
   width: '100%',

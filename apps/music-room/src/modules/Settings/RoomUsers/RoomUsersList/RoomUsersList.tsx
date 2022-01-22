@@ -1,8 +1,9 @@
 import { Member, RoomRole, SelectMembersResult } from '@music-room/data-access';
-import { Card, Flex, Typography } from '@music-room/ui';
+import { Card, Divider, Flex, Typography } from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
 import { ReactElement, useCallback, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
+import { RoomUsersHeader } from './RoomUsersHeader/RoomUsersHeader';
 import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
 
 type Props = {
@@ -45,8 +46,9 @@ export const RoomUsersList = ({
   return (
     <Card space="xl" gap="md" direction="column">
       <Typography size="md" kind="description">
-        {t('updateRoom')}
+        {t('roomUsers')}
       </Typography>
+      <RoomUsersHeader />
       <Flex
         ref={parentRef}
         css={{
@@ -63,12 +65,16 @@ export const RoomUsersList = ({
                 ref={row.measureRef}
                 key={row.key}
                 css={{ dynamicRow: row.start }}
+                direction="column"
+                gap="xs"
+                spaceY="xs"
               >
                 <RoomUsersListItem
                   member={member}
                   onRoleChange={handleRoleChange(member)}
                   onRemoveClick={handleRemoveClick(member)}
                 />
+                <Divider orientation="horizontal" color={5} />
               </Flex>
             );
           })}

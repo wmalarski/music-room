@@ -1,8 +1,17 @@
 import { Member, RoomRole, useRoleGuard } from '@music-room/data-access';
-import { Button, Option, Select, Typography } from '@music-room/ui';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  Flex,
+  Option,
+  Select,
+  Typography,
+} from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
 import { ChangeEvent, ReactElement } from 'react';
-import * as Styles from './RoomUsersListItem.styles';
+import { RoomUsersRow } from '../RoomUsersRow/RoomUsersRow';
 
 type Props = {
   member: Member;
@@ -26,11 +35,23 @@ export const RoomUsersListItem = ({
   const isDisabled = isCurrentUser || !isMod;
 
   return (
-    <Styles.Container>
+    <RoomUsersRow>
       <Typography size="sm" kind="description">
         {member.profile_id}
       </Typography>
-      <Typography>{member.profile_avatar}</Typography>
+      <Flex>
+        <Avatar size="md">
+          {member.profile_avatar && (
+            <AvatarImage
+              src={member.profile_avatar}
+              alt={member.profile_name}
+            />
+          )}
+          <AvatarFallback delayMs={member.profile_avatar ? 600 : 0}>
+            {member.profile_name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+      </Flex>
       <Typography>{member.profile_name}</Typography>
       <Select
         disabled={isDisabled}
@@ -44,6 +65,6 @@ export const RoomUsersListItem = ({
       <Button disabled={isDisabled} onClick={onRemoveClick}>
         <Typography size="sm">{t('removeFromRoom')}</Typography>
       </Button>
-    </Styles.Container>
+    </RoomUsersRow>
   );
 };

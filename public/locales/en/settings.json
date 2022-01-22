@@ -3,8 +3,14 @@
   "roomNamePlaceholder": "Name",
   "confirmRemoveRoom": "Confirm",
   "updateRoom": "Update Room",
+  "roomUsers": "Users",
   "removeFromRoom": "Remove from group",
   "modRole": "Mod",
   "userRole": "User",
-  "guestRole": "Guest"
+  "guestRole": "Guest",
+  "profileId": "Id",
+  "profileAvatar": "Avatar",
+  "profileName": "Name",
+  "profileRole": "Role",
+  "profileRemove": "Remove"
 }
