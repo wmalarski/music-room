@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof ChatMessagesList> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   offset: 1,
-  onPageChange: () => void 0,
+  onOffsetChange: () => void 0,
   data: {
     messages: [
       { ...defaultMessage, id: 1 },

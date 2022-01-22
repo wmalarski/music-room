@@ -32,7 +32,7 @@ Primary.args = {
       },
     ],
   },
-  onPageChange: () => null,
+  onOffsetChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
 };

@@ -49,7 +49,12 @@ export const ChatRoom = (): ReactElement => {
 
   return (
     <Flex direction="column">
-      <ChatMessagesList data={data} offset={offset} onPageChange={setOffset} />;
+      <ChatMessagesList
+        data={data}
+        offset={offset}
+        onOffsetChange={setOffset}
+      />
+      ;
       <ChatInputView
         error={error}
         isLoading={isLoading}

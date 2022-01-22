@@ -18,7 +18,7 @@ const defaultProps: Props = {
     count: 2,
   },
   offset: 0,
-  onPageChange: () => void 0,
+  onOffsetChange: () => void 0,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

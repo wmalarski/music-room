@@ -7,20 +7,20 @@ import { RoomsListItem } from './RoomsListItem/RoomsListItem';
 type Props = {
   offset: number;
   data?: SelectMembersResult;
-  onPageChange: (offset: number) => void;
+  onOffsetChange: (offset: number) => void;
 };
 
 export const RoomsList = ({
   data,
   offset,
-  onPageChange,
+  onOffsetChange,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
     start: offset,
     limit: data?.limit,
-    onPageChange,
+    onOffsetChange,
     size: data?.count ?? 0,
     parentRef,
     estimateSize: useCallback(() => 40, []),

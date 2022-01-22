@@ -11,7 +11,7 @@ type Props = ComponentProps<typeof RoomUsers>;
 
 const View: Props['View'] = ({
   data,
-  onPageChange,
+  onOffsetChange: onPageChange,
   onRoleChange,
   onRemoveClick,
 }) => (

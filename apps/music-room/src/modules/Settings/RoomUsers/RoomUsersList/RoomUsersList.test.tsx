@@ -36,7 +36,7 @@ const defaultProps: Props = {
   onQueryChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
-  onPageChange: () => null,
+  onOffsetChange: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

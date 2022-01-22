@@ -7,20 +7,20 @@ import { ChatMessage } from './ChatMessage/ChatMessage';
 type Props = {
   data?: SelectMessagesReturn;
   offset: number;
-  onPageChange: (offset: number) => void;
+  onOffsetChange: (offset: number) => void;
 };
 
 export const ChatMessagesList = ({
   data,
   offset,
-  onPageChange,
+  onOffsetChange,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
     start: offset,
     limit: data?.limit,
-    onPageChange,
+    onOffsetChange,
     size: data?.count ?? 0,
     parentRef,
     estimateSize: useCallback(() => 40, []),

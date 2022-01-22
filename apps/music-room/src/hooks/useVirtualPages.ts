@@ -42,13 +42,13 @@ export const useVirtualPages = <T>({
   start,
   limit = 20,
   overscan,
-  onPageChange,
+  onOffsetChange,
   ...args
 }: Options<T> & {
   start: number;
   limit?: number;
   overscan: number;
-  onPageChange: (offset: number) => void;
+  onOffsetChange: (offset: number) => void;
 }): ReturnType<typeof useVirtual> => {
   const virtualizer = useVirtual({
     size,
@@ -64,7 +64,7 @@ export const useVirtualPages = <T>({
   });
 
   const debouncedPageChange = useDebounce(
-    (offset: number) => onPageChange(offset),
+    (offset: number) => onOffsetChange(offset),
     500
   );
 

@@ -22,5 +22,5 @@ export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
     }
   );
 
-  return <View data={data} offset={offset} onPageChange={setOffset} />;
+  return <View data={data} offset={offset} onOffsetChange={setOffset} />;
 };

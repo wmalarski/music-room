@@ -12,7 +12,7 @@ type Props = {
   offset: number;
   query: string;
   onQueryChange: (query: string) => void;
-  onPageChange: (offset: number) => void;
+  onOffsetChange: (offset: number) => void;
   onRoleChange: (profile: Member, role: RoomRole) => void;
   onRemoveClick: (profile: Member) => void;
 };
@@ -22,14 +22,14 @@ export const RoomUsersList = ({
   offset,
   query,
   onQueryChange,
-  onPageChange,
+  onOffsetChange,
   onRoleChange,
   onRemoveClick,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
-    onPageChange,
+    onOffsetChange,
     start: offset,
     limit: data?.limit,
     size: data?.count ?? 0,

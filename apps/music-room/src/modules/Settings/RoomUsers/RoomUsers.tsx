@@ -43,7 +43,7 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
     setQuery(text);
   }, 500);
 
-  const handlePageChange = useDebounce((index: number) => {
+  const handleOffsetChange = useDebounce((index: number) => {
     setOffset(index);
   }, 500);
 
@@ -52,7 +52,7 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
       data={data}
       offset={offset}
       query={query}
-      onPageChange={handlePageChange}
+      onOffsetChange={handleOffsetChange}
       onQueryChange={handleQueryChange}
       onRemoveClick={handleRemoveClick}
       onRoleChange={handleRoleChange}
