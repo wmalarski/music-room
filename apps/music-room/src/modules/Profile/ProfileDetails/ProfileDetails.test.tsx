@@ -9,14 +9,16 @@ import { ProfileDetails } from './ProfileDetails';
 
 type Props = ComponentProps<typeof ProfileDetails>;
 
-const View: Props['View'] = ({ profile, onSubmit }) => (
-  <>
-    <button onClick={() => onSubmit({ name: 'Username' })}>
-      {profile ? 'Update' : ''}
-    </button>
-    <p>{profile.name}</p>
-  </>
-);
+const View: Props['View'] = ({ profile, onSubmit }) => {
+  return (
+    <>
+      <button onClick={() => onSubmit({ name: 'Username' })}>
+        {profile ? 'Update' : ''}
+      </button>
+      <p>{profile.name}</p>
+    </>
+  );
+};
 
 const defaultProps: Props = {
   View,

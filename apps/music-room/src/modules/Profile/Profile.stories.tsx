@@ -7,10 +7,12 @@ export default {
   component: Profile,
 } as ComponentMeta<typeof Profile>;
 
-const Template: ComponentStory<typeof Profile> = () => (
-  <TestWrapper>
-    <Profile />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof Profile> = () => {
+  return (
+    <TestWrapper>
+      <Profile />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});

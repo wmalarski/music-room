@@ -7,9 +7,9 @@ export default {
   component: PlayerControls,
 } as ComponentMeta<typeof PlayerControls>;
 
-const Template: ComponentStory<typeof PlayerControls> = (args) => (
-  <PlayerControls {...args} />
-);
+const Template: ComponentStory<typeof PlayerControls> = (args) => {
+  return <PlayerControls {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

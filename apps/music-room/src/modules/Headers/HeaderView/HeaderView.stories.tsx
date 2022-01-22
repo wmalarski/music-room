@@ -7,11 +7,13 @@ export default {
   component: HeaderView,
 } as ComponentMeta<typeof HeaderView>;
 
-const Template: ComponentStory<typeof HeaderView> = (args) => (
-  <TestWrapper>
-    <HeaderView {...args} />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof HeaderView> = (args) => {
+  return (
+    <TestWrapper>
+      <HeaderView {...args} />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

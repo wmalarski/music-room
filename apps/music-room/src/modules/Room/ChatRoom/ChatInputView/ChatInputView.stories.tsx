@@ -7,9 +7,9 @@ export default {
   argTypes: { onSubmit: { action: 'onSubmit' } },
 } as ComponentMeta<typeof ChatInputView>;
 
-const Template: ComponentStory<typeof ChatInputView> = (args) => (
-  <ChatInputView {...args} />
-);
+const Template: ComponentStory<typeof ChatInputView> = (args) => {
+  return <ChatInputView {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

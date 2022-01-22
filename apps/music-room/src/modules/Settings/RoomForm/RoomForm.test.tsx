@@ -13,12 +13,14 @@ import { RoomForm } from './RoomForm';
 
 type Props = ComponentProps<typeof RoomForm>;
 
-const View: Props['View'] = ({ roomName, onSubmit }) => (
-  <>
-    <button onClick={() => onSubmit({ name: 'RoomName' })}>Change</button>
-    <p>{roomName}</p>
-  </>
-);
+const View: Props['View'] = ({ roomName, onSubmit }) => {
+  return (
+    <>
+      <button onClick={() => onSubmit({ name: 'RoomName' })}>Change</button>
+      <p>{roomName}</p>
+    </>
+  );
+};
 
 const defaultProps: Props = { View };
 

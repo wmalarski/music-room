@@ -6,9 +6,9 @@ export default {
   component: RoomFormView,
 } as ComponentMeta<typeof RoomFormView>;
 
-const Template: ComponentStory<typeof RoomFormView> = (args) => (
-  <RoomFormView {...args} />
-);
+const Template: ComponentStory<typeof RoomFormView> = (args) => {
+  return <RoomFormView {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

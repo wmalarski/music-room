@@ -11,23 +11,25 @@ type Props = ComponentProps<typeof SignUp>;
 
 const defaultUserEmail = defaultUser.email ?? '';
 
-const View: Props['View'] = ({ onSubmit, user, error }) => (
-  <>
-    <p>{user?.email}</p>
-    <p>{error?.message}</p>
-    <button
-      onClick={() => {
-        onSubmit({
-          confirmPassword: 'Passw0rd',
-          email: defaultUserEmail,
-          password: 'Passw0rd',
-        });
-      }}
-    >
-      Click
-    </button>
-  </>
-);
+const View: Props['View'] = ({ onSubmit, user, error }) => {
+  return (
+    <>
+      <p>{user?.email}</p>
+      <p>{error?.message}</p>
+      <button
+        onClick={() => {
+          onSubmit({
+            confirmPassword: 'Passw0rd',
+            email: defaultUserEmail,
+            password: 'Passw0rd',
+          });
+        }}
+      >
+        Click
+      </button>
+    </>
+  );
+};
 
 const defaultProps: Props = {
   View,

@@ -7,11 +7,13 @@ export default {
   component: RoomDetails,
 } as ComponentMeta<typeof RoomDetails>;
 
-const Template: ComponentStory<typeof RoomDetails> = () => (
-  <TestWrapper>
-    <RoomDetails />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof RoomDetails> = () => {
+  return (
+    <TestWrapper>
+      <RoomDetails />
+    </TestWrapper>
+  );
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

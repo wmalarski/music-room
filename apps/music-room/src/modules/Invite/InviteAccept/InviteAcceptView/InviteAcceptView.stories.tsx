@@ -8,9 +8,9 @@ export default {
   argTypes: { onAcceptClick: { type: 'function' } },
 } as ComponentMeta<typeof InviteAcceptView>;
 
-const Template: ComponentStory<typeof InviteAcceptView> = (args) => (
-  <InviteAcceptView {...args} />
-);
+const Template: ComponentStory<typeof InviteAcceptView> = (args) => {
+  return <InviteAcceptView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

@@ -7,10 +7,12 @@ export default {
   component: RoomHeader,
 } as ComponentMeta<typeof RoomHeader>;
 
-const Template: ComponentStory<typeof RoomHeader> = () => (
-  <TestWrapper>
-    <RoomHeader />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof RoomHeader> = () => {
+  return (
+    <TestWrapper>
+      <RoomHeader />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});

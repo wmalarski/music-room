@@ -20,11 +20,13 @@ export default {
   component: Settings,
 } as ComponentMeta<typeof Settings>;
 
-const SettingsStory = ({ wrapperProps }: PropsWithTestWrapper) => (
-  <TestWrapper {...wrapperProps}>
-    <Settings />
-  </TestWrapper>
-);
+const SettingsStory = ({ wrapperProps }: PropsWithTestWrapper) => {
+  return (
+    <TestWrapper {...wrapperProps}>
+      <Settings />
+    </TestWrapper>
+  );
+};
 
 const Template: ComponentStory<typeof SettingsStory> = SettingsStory;
 

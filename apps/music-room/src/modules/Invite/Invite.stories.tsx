@@ -13,11 +13,13 @@ export default {
   component: Invite,
 } as ComponentMeta<typeof Invite>;
 
-const Template: ComponentStory<typeof Invite> = () => (
-  <TestWrapper>
-    <Invite />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof Invite> = () => {
+  return (
+    <TestWrapper>
+      <Invite />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});
 

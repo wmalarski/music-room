@@ -15,11 +15,13 @@ export default {
   component: Home,
 } as ComponentMeta<typeof Home>;
 
-const Template: ComponentStory<typeof Home> = () => (
-  <TestWrapper>
-    <Home />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof Home> = () => {
+  return (
+    <TestWrapper>
+      <Home />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});
 

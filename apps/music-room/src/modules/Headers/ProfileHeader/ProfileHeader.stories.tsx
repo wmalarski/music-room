@@ -7,11 +7,13 @@ export default {
   component: ProfileHeader,
 } as ComponentMeta<typeof ProfileHeader>;
 
-const Template: ComponentStory<typeof ProfileHeader> = () => (
-  <TestWrapper>
-    <ProfileHeader />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof ProfileHeader> = () => {
+  return (
+    <TestWrapper>
+      <ProfileHeader />
+    </TestWrapper>
+  );
+};
 
 export const Primary = Template.bind({});
 Primary.args = {};

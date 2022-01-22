@@ -7,10 +7,12 @@ export default {
   component: InviteLink,
 } as ComponentMeta<typeof InviteLink>;
 
-const Template: ComponentStory<typeof InviteLink> = () => (
-  <TestWrapper>
-    <InviteLink />
-  </TestWrapper>
-);
+const Template: ComponentStory<typeof InviteLink> = () => {
+  return (
+    <TestWrapper>
+      <InviteLink />
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});

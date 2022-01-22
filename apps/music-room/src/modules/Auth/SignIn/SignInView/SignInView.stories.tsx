@@ -10,9 +10,9 @@ export default {
   },
 } as ComponentMeta<typeof SignInView>;
 
-const Template: ComponentStory<typeof SignInView> = (args) => (
-  <SignInView {...args} />
-);
+const Template: ComponentStory<typeof SignInView> = (args) => {
+  return <SignInView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

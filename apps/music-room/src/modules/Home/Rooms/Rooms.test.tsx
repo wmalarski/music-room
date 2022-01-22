@@ -8,14 +8,16 @@ import { Rooms } from './Rooms';
 
 type Props = ComponentProps<typeof Rooms>;
 
-const View: Props['View'] = ({ data }) => (
-  <>
-    {data?.members?.map((member) => (
-      <p key={member.id}>{member.room_name}</p>
-    ))}
-    <p>{!data && 'Empty'}</p>
-  </>
-);
+const View: Props['View'] = ({ data }) => {
+  return (
+    <>
+      {data?.members?.map((member) => (
+        <p key={member.id}>{member.room_name}</p>
+      ))}
+      <p>{!data && 'Empty'}</p>
+    </>
+  );
+};
 
 const defaultProps: Props = {
   View,

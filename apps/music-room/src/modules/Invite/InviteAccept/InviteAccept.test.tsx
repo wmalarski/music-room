@@ -14,11 +14,13 @@ import { InviteAccept } from './InviteAccept';
 
 type Props = ComponentProps<typeof InviteAccept>;
 
-const View: Props['View'] = ({ onAcceptClick: onAcceptClicked }) => (
-  <>
-    <button onClick={onAcceptClicked}>Click</button>
-  </>
-);
+const View: Props['View'] = ({ onAcceptClick: onAcceptClicked }) => {
+  return (
+    <>
+      <button onClick={onAcceptClicked}>Click</button>
+    </>
+  );
+};
 
 const defaultProps: Props = {
   View,

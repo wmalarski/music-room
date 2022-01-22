@@ -14,11 +14,13 @@ export default {
   component: Auth,
 } as ComponentMeta<typeof Auth>;
 
-const Template: ComponentStory<never> = () => (
-  <TestWrapper>
-    <Auth />
-  </TestWrapper>
-);
+const Template: ComponentStory<never> = () => {
+  return (
+    <TestWrapper>
+      <Auth />
+    </TestWrapper>
+  );
+};
 
 export const Failure = Template.bind({});
 

@@ -14,23 +14,25 @@ const View: Props['View'] = ({
   onOffsetChange: onPageChange,
   onRoleChange,
   onRemoveClick,
-}) => (
-  <>
-    {data?.members?.map((member) => (
-      <div key={member.id}>
-        <p>{member.profile_name}</p>
-        <p>{member.role}</p>
-        <button
-          onClick={() => onRoleChange(member, 'mod')}
-        >{`Change ${member.profile_name}`}</button>
-        <button
-          onClick={() => onRemoveClick(member)}
-        >{`Remove ${member.profile_name}`}</button>
-      </div>
-    ))}
-    <button onClick={() => onPageChange(1)}>Load More</button>
-  </>
-);
+}) => {
+  return (
+    <>
+      {data?.members?.map((member) => (
+        <div key={member.id}>
+          <p>{member.profile_name}</p>
+          <p>{member.role}</p>
+          <button
+            onClick={() => onRoleChange(member, 'mod')}
+          >{`Change ${member.profile_name}`}</button>
+          <button
+            onClick={() => onRemoveClick(member)}
+          >{`Remove ${member.profile_name}`}</button>
+        </div>
+      ))}
+      <button onClick={() => onPageChange(1)}>Load More</button>
+    </>
+  );
+};
 
 const defaultProps: Props = {
   View,

@@ -7,9 +7,9 @@ export default {
   component: RoomUsersList,
 } as ComponentMeta<typeof RoomUsersList>;
 
-const Template: ComponentStory<typeof RoomUsersList> = (args) => (
-  <RoomUsersList {...args} />
-);
+const Template: ComponentStory<typeof RoomUsersList> = (args) => {
+  return <RoomUsersList {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

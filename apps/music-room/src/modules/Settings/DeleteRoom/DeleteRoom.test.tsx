@@ -16,9 +16,9 @@ import { DeleteRoom } from './DeleteRoom';
 
 type Props = ComponentProps<typeof DeleteRoom>;
 
-const View: Props['View'] = ({ onClick: onClicked }) => (
-  <button onClick={() => onClicked()}>Delete</button>
-);
+const View: Props['View'] = ({ onClick: onClicked }) => {
+  return <button onClick={() => onClicked()}>Delete</button>;
+};
 
 const renderComponent = (props: Partial<Props> = {}) => {
   const defaultProps: Props = {

@@ -12,22 +12,24 @@ import { Reactions } from './Reactions';
 
 type Props = ComponentProps<typeof Reactions>;
 
-const View: Props['View'] = ({ action, message, onChange }) => (
-  <>
-    <p>{action ? 'action' : 'emptyAction'}</p>
-    <p>{message ? 'message' : 'emptyMessage'}</p>
-    <button
-      onClick={() => {
-        onChange({
-          likeAt: action?.like_at ? null : new Date().toISOString(),
-          dislikeAt: null,
-        });
-      }}
-    >
-      Like
-    </button>
-  </>
-);
+const View: Props['View'] = ({ action, message, onChange }) => {
+  return (
+    <>
+      <p>{action ? 'action' : 'emptyAction'}</p>
+      <p>{message ? 'message' : 'emptyMessage'}</p>
+      <button
+        onClick={() => {
+          onChange({
+            likeAt: action?.like_at ? null : new Date().toISOString(),
+            dislikeAt: null,
+          });
+        }}
+      >
+        Like
+      </button>
+    </>
+  );
+};
 
 const defaultProps: Props = { View };
 

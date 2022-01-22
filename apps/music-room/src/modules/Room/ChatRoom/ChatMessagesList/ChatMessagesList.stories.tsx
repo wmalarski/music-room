@@ -7,9 +7,9 @@ export default {
   component: ChatMessagesList,
 } as ComponentMeta<typeof ChatMessagesList>;
 
-const Template: ComponentStory<typeof ChatMessagesList> = (args) => (
-  <ChatMessagesList {...args} />
-);
+const Template: ComponentStory<typeof ChatMessagesList> = (args) => {
+  return <ChatMessagesList {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
