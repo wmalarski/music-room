@@ -1,6 +1,6 @@
 import { SelectMessagesReturn } from '@music-room/data-access';
 import { Card, Divider, Flex } from '@music-room/ui';
-import { ReactElement, useCallback, useRef } from 'react';
+import { ReactElement, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 import * as Styles from './ChatMessagesList.styles';
@@ -11,6 +11,8 @@ type Props = {
   limit: number;
   onOffsetChange: (offset: number) => void;
 };
+
+const estimateSize = (): number => 40;
 
 export const ChatMessagesList = ({
   data,
@@ -26,30 +28,31 @@ export const ChatMessagesList = ({
     size: data?.count ?? 0,
     parentRef,
     onOffsetChange,
-    estimateSize: useCallback(() => 40, []),
+    estimateSize,
   });
+
+  const pairs = virtualizer.virtualItems.map((row) => ({
+    message: data?.messages.at(row.index - data.offset),
+    row,
+  }));
 
   return (
     <Card space="xl" gap="md" direction="column">
       <Styles.Container ref={parentRef}>
         <Flex css={{ listContainer: virtualizer.totalSize }}>
-          {virtualizer.virtualItems.map((row) => {
-            const message = data?.messages[row.index - data.offset];
-            if (!message) return null;
-            return (
-              <Flex
-                ref={row.measureRef}
-                key={row.key}
-                css={{ dynamicRow: row.start }}
-                direction="column"
-                gap="xs"
-                spaceY="xs"
-              >
-                <ChatMessage key={message.id} message={message} />;
-                <Divider orientation="horizontal" color={5} />
-              </Flex>
-            );
-          })}
+          {pairs.map(({ row, message }) => (
+            <Flex
+              ref={row.measureRef}
+              key={row.key}
+              css={{ dynamicRow: row.start }}
+              direction="column"
+              gap="xs"
+              spaceY="xs"
+            >
+              <ChatMessage message={message} />
+              <Divider orientation="horizontal" color={5} />
+            </Flex>
+          ))}
         </Flex>
       </Styles.Container>
     </Card>

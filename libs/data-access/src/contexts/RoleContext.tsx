@@ -4,28 +4,49 @@ import {
   ReactElement,
   ReactNode,
   useContext,
+  useState,
 } from 'react';
 import { Role, RoomRole } from '../data/types';
 
-const RoleContext = createContext<Role | null>(null);
+type RoleContextValue =
+  | {
+      role: null;
+    }
+  | {
+      role: Role;
+      setRole: (role: Role) => void;
+    };
+
+const RoleContext = createContext<RoleContextValue>({ role: null });
 
 export const useRole = (): Role => {
-  const value = useContext(RoleContext);
-  if (!value) throw new Error('Role context not defined');
-  return value;
+  const { role } = useContext(RoleContext);
+  if (!role) throw new Error('Role context not defined');
+  return role;
+};
+
+export const useSetRole = (): ((role: Role) => void) => {
+  const context = useContext(RoleContext);
+  if (!context.role) throw new Error('Role context not defined');
+  return context.setRole;
 };
 
 type Props = {
   children: ReactNode;
-  role: Role;
+  initialRole: Role;
 };
 
 export const RoleContextProvider = ({
   children,
-  role,
-}: Props): ReactElement => (
-  <RoleContext.Provider value={role}>{children}</RoleContext.Provider>
-);
+  initialRole,
+}: Props): ReactElement => {
+  const [role, setRole] = useState(initialRole);
+  return (
+    <RoleContext.Provider value={{ role, setRole }}>
+      {children}
+    </RoleContext.Provider>
+  );
+};
 
 type RoleGuardProps = {
   visibleFor: RoomRole[];

@@ -7,6 +7,7 @@ import {
   Flex,
   Option,
   Select,
+  SkeletonBox,
   Typography,
 } from '@music-room/ui';
 import { useTranslation } from 'next-i18next';
@@ -14,7 +15,7 @@ import { ChangeEvent, ReactElement } from 'react';
 import { RoomUsersRow } from '../RoomUsersRow/RoomUsersRow';
 
 type Props = {
-  member: Member;
+  member?: Member;
   onRoleChange: (role: RoomRole) => void;
   onRemoveClick: () => void;
 };
@@ -30,9 +31,11 @@ export const RoomUsersListItem = ({
     onRoleChange(event.target.value as RoomRole);
   };
 
-  const isCurrentUser = member.room_author_id === member.profile_id;
+  const isCurrentUser = member?.room_author_id === member?.profile_id;
   const isMod = useRoleGuard({ mod: true, owner: true, default: false });
   const isDisabled = isCurrentUser || !isMod;
+
+  if (!member) return <SkeletonBox height="xl" />;
 
   return (
     <RoomUsersRow>

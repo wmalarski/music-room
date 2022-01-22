@@ -5,4 +5,5 @@ export const RoomUsersRow = styled('div', {
   gridTemplateColumns: '1fr 1fr 5fr 2fr 1fr',
   width: '100%',
   columnGap: '$sm',
+  alignItems: 'center',
 });

@@ -14,7 +14,7 @@ export const MemberContextProvider = ({
   member,
 }: Props): ReactElement => (
   <ProfileContextProvider
-    profile={{
+    initialProfile={{
       avatar: member.profile_avatar,
       id: member.profile_id,
       name: member.profile_name,
@@ -22,7 +22,7 @@ export const MemberContextProvider = ({
     }}
   >
     <RoomContextProvider
-      room={{
+      initialRoom={{
         author_id: member.room_author_id,
         data: { kind: 'room#0.0.1' },
         hash: member.room_hash,
@@ -32,7 +32,7 @@ export const MemberContextProvider = ({
       }}
     >
       <RoleContextProvider
-        role={{
+        initialRole={{
           id: member.id,
           profile_id: member.profile_id,
           role: member.role,
