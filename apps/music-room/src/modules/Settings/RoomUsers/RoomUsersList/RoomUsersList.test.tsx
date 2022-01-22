@@ -13,7 +13,6 @@ const defaultProps: Props = {
   limit: 40,
   data: {
     count: 2,
-    limit: 20,
     offset: 0,
     members: [
       {

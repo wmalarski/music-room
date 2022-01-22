@@ -13,11 +13,11 @@ const defaultProps: Props = {
       { ...defaultMessage, id: 1 },
       { ...defaultMessage, id: 2 },
     ],
-    limit: 20,
     offset: 0,
     count: 2,
   },
   offset: 0,
+  limit: 40,
   onOffsetChange: () => void 0,
 };
 

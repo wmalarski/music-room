@@ -21,7 +21,6 @@ export type SelectMembersResult = {
   members: Member[];
   count: number;
   offset: number;
-  limit: number;
 };
 
 export const selectAllMembersKey = (): QueryKey => ['members'];
@@ -50,7 +49,7 @@ export const selectMembers = async ({
 
   if (error || !data) throw error;
 
-  return { members: data, count: count ?? 0, limit, offset };
+  return { members: data, count: count ?? 0, offset };
 };
 
 export const useSelectMembers = (

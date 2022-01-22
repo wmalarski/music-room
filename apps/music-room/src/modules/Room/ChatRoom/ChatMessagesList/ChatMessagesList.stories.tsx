@@ -22,6 +22,5 @@ Primary.args = {
     ],
     count: 2,
     offset: 0,
-    limit: 20,
   },
 };
