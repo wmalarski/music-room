@@ -1,14 +1,17 @@
 import { Member, RoomRole, SelectMembersResult } from '@music-room/data-access';
-import { Card, Divider, Flex, Typography } from '@music-room/ui';
-import { useTranslation } from 'next-i18next';
+import { Card, Divider, Flex } from '@music-room/ui';
 import { ReactElement, useCallback, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
 import { RoomUsersHeader } from './RoomUsersHeader/RoomUsersHeader';
+import * as Styles from './RoomUsersList.styles';
+import { RoomUsersListHeader } from './RoomUsersListHeader/RoomUsersListHeader';
 import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
 
 type Props = {
   data?: SelectMembersResult;
   offset: number;
+  query: string;
+  onQueryChange: (query: string) => void;
   onPageChange: (offset: number) => void;
   onRoleChange: (profile: Member, role: RoomRole) => void;
   onRemoveClick: (profile: Member) => void;
@@ -17,12 +20,12 @@ type Props = {
 export const RoomUsersList = ({
   data,
   offset,
+  query,
+  onQueryChange,
   onPageChange,
   onRoleChange,
   onRemoveClick,
 }: Props): ReactElement => {
-  const { t } = useTranslation('settings');
-
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
@@ -32,7 +35,7 @@ export const RoomUsersList = ({
     size: data?.count ?? 0,
     parentRef,
     estimateSize: useCallback(() => 35, []),
-    overscan: 5,
+    overscan: 1,
   });
 
   const handleRoleChange = (member: Member) => (role: RoomRole) => {
@@ -45,17 +48,9 @@ export const RoomUsersList = ({
 
   return (
     <Card space="xl" gap="md" direction="column">
-      <Typography size="md" kind="description">
-        {t('roomUsers')}
-      </Typography>
-      <RoomUsersHeader />
-      <Flex
-        ref={parentRef}
-        css={{
-          height: `200px`,
-          overflow: 'auto',
-        }}
-      >
+      <RoomUsersHeader query={query} onQueryChange={onQueryChange} />
+      <RoomUsersListHeader />
+      <Styles.Container ref={parentRef}>
         <Flex css={{ listContainer: virtualizer.totalSize }}>
           {virtualizer.virtualItems.map((row) => {
             const member = data?.members[row.index - data.offset];
@@ -79,7 +74,7 @@ export const RoomUsersList = ({
             );
           })}
         </Flex>
-      </Flex>
+      </Styles.Container>
     </Card>
   );
 };

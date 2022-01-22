@@ -9,6 +9,7 @@ type Props = ComponentProps<typeof RoomUsersList>;
 
 const defaultProps: Props = {
   offset: 0,
+  query: '',
   data: {
     count: 2,
     limit: 20,
@@ -32,6 +33,7 @@ const defaultProps: Props = {
       },
     ],
   },
+  onQueryChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
   onPageChange: () => null,

@@ -12,6 +12,7 @@ import { Member } from '../types';
 export type SelectMembersArgs = Partial<Member> & {
   offset: number;
   limit: number;
+  query?: string;
 };
 
 export type SelectMembersKey = ['members', SelectMembersArgs];
@@ -36,12 +37,15 @@ export const selectMembers = async ({
   SelectMembersKey,
   number
 >): Promise<SelectMembersResult> => {
-  const [, { limit, offset, ...args }] = queryKey;
+  const [, { limit, offset, query, ...args }] = queryKey;
+
+  const select = fromSupabase('members').select('*', { count: 'estimated' });
+  const queried = query ? select.ilike('profile_name', query) : select;
+  const range = queried.range(offset, offset + limit);
+
   const { data, error, count } = await Object.entries(args).reduce(
     (prev, [key, value]) => prev.eq(key as keyof Member, value),
-    fromSupabase('members')
-      .select('*', { count: 'estimated' })
-      .range(offset, offset + limit)
+    range
   );
 
   if (error || !data) throw error;

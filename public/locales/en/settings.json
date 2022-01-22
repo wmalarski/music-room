@@ -12,5 +12,6 @@
   "profileAvatar": "Avatar",
   "profileName": "Name",
   "profileRole": "Role",
-  "profileRemove": "Remove"
+  "profileRemove": "Remove",
+  "listSearch": "Search"
 }

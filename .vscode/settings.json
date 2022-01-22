@@ -6,8 +6,9 @@
     "source.fixAll": true
   },
   "cSpell.words": [
+    "ilike",
     "Postgrest",
-    "Upsert",
-    "supabase"
+    "supabase",
+    "Upsert"
   ]
 }

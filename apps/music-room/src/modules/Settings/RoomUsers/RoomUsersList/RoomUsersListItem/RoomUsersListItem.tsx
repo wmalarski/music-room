@@ -31,7 +31,7 @@ export const RoomUsersListItem = ({
   };
 
   const isCurrentUser = member.room_author_id === member.profile_id;
-  const isMod = useRoleGuard({ mod: false, owner: false, default: true });
+  const isMod = useRoleGuard({ mod: true, owner: true, default: false });
   const isDisabled = isCurrentUser || !isMod;
 
   return (
