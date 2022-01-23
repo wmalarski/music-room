@@ -16,9 +16,7 @@ export const Room = (): ReactElement => {
       <Flex>
         <VideoPlayer />
         <InviteLink />
-        <Flex direction="column">
-          <ChatRoom />
-        </Flex>
+        <ChatRoom />
         <Reactions />
       </Flex>
     </Layout>

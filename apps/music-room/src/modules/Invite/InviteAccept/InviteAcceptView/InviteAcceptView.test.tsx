@@ -1,4 +1,4 @@
-import { defaultRoom } from '@music-room/data-access';
+import { defaultProfile, defaultRoom } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
@@ -11,6 +11,7 @@ const defaultProps: Props = {
   room: defaultRoom,
   isLoading: false,
   onAcceptClick: () => null,
+  profile: defaultProfile,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

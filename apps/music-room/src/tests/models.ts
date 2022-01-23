@@ -2,7 +2,9 @@ import { factory, nullable, oneOf, primaryKey } from '@mswjs/data';
 import { Entity } from '@mswjs/data/lib/glossary';
 import {
   Action,
+  Controls,
   defaultAction,
+  defaultControls,
   defaultMember,
   defaultMessage,
   defaultRole,
@@ -174,6 +176,22 @@ export const convert = {
       data: entity.data as MessageData,
       ended_at: entity.ended_at ?? undefined,
       room_id: entity.room_id.id,
+    };
+  },
+  toControls: (
+    entity?: MockEntity<'controls'> | null
+  ): Controls | undefined => {
+    if (!entity || !entity.room_id || !entity.change_by || !entity.speaker_id)
+      return undefined;
+    return {
+      ...defaultControls,
+      change_by: entity.change_by.id,
+      id: entity.id,
+      muted: entity.muted,
+      pause: entity.pause,
+      room_id: entity.room_id.id,
+      speaker_id: entity.speaker_id?.id,
+      volume: entity.volume,
     };
   },
 };

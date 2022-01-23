@@ -1,4 +1,4 @@
-import { defaultRoom } from '@music-room/data-access';
+import { defaultProfile, defaultRoom } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { InviteAcceptView } from './InviteAcceptView';
 
@@ -17,4 +17,5 @@ Playground.args = {
   room: defaultRoom,
   isLoading: false,
   onAcceptClick: () => null,
+  profile: defaultProfile,
 };

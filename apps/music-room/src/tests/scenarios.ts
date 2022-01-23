@@ -1,3 +1,7 @@
+import {
+  createMockControls,
+  createMockControlsForRooms,
+} from './creators/controls';
 import { createMockMessages } from './creators/message';
 import { createMockProfile, createMockProfiles } from './creators/profile';
 import { createMockRole, createMockRoles } from './creators/roles';
@@ -11,18 +15,20 @@ export const userWithRoomsScenario = (roomsCount: number) => {
   const user = createMockUser();
   const author = createMockProfile({ user });
   const rooms = createMockRoomsWithAuthor({ author, count: roomsCount });
+  const controls = createMockControlsForRooms({ rooms });
   const roles = createMockRoles({
     profiles: [author],
     rooms,
     role: { role: 'owner' },
   });
-  return { user, author, rooms, roles };
+  return { user, author, rooms, controls, roles };
 };
 
 export const roomWithUsersScenario = (usersCount: number) => {
   const users = createMockUsers({ count: usersCount });
   const [author, mod, ...profiles] = createMockProfiles({ users });
   const room = createMockRoom({ author });
+  const controls = createMockControls({ room });
   const [authorRole] = createMockRoles({
     profiles: [author],
     rooms: [room],
@@ -38,13 +44,24 @@ export const roomWithUsersScenario = (usersCount: number) => {
     rooms: [room],
     role: { role: 'user' },
   });
-  return { users, author, mod, profiles, room, authorRole, modRole, userRoles };
+  return {
+    users,
+    author,
+    mod,
+    profiles,
+    room,
+    controls,
+    authorRole,
+    modRole,
+    userRoles,
+  };
 };
 
 export const roomWithMessagesScenario = (messagesCount: number) => {
   const user = createMockUser();
   const profile = createMockProfile({ user });
   const room = createMockRoom({ author: profile });
+  const controls = createMockControls({ room });
   const role = createMockRole({
     profile: profile,
     room: room,
@@ -55,7 +72,7 @@ export const roomWithMessagesScenario = (messagesCount: number) => {
     room,
     count: messagesCount,
   });
-  return { user, profile, room, role, messages };
+  return { user, profile, room, controls, role, messages };
 };
 
 type ScenariosResults = {
