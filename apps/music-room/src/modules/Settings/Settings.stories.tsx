@@ -1,14 +1,16 @@
 import {
-  defaultMember,
+  defaultRole,
   defaultRoom,
   defaultUser,
   Member,
   PropsWithTestWrapper,
   randomMembers,
   ResponseError,
+  Role,
   Room,
   TABLES_ENDPOINTS,
   TestWrapper,
+  UpdateRolesArgs,
   UpdateRoomArgs,
 } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
@@ -35,7 +37,7 @@ const members = randomMembers(200);
 const parameters = {
   msw: {
     handlers: [
-      rest.get<DefaultRequestBody, { limit: string; offset: string }, Member[]>(
+      rest.get<DefaultRequestBody, never, Member[]>(
         TABLES_ENDPOINTS.members,
         (req, res, ctx) => {
           const offset = Number(req.url.searchParams.get('offset'));
@@ -53,6 +55,21 @@ const parameters = {
           return res(ctx.json<Room>({ ...defaultRoom, ...req.body }));
         }
       ),
+      rest.patch<UpdateRolesArgs, never, Role | ResponseError>(
+        TABLES_ENDPOINTS.roles,
+        (req, res, ctx) => {
+          const member = members.find((member) => member.id === req.body.id);
+          if (!member)
+            return res(
+              ctx.json<ResponseError>({
+                error: 'No entry',
+                error_description: 'Wrong item id',
+              })
+            );
+          member.role = req.body.role;
+          return res(ctx.json<Role>(member));
+        }
+      ),
     ],
   },
 };
@@ -61,7 +78,7 @@ export const User = Template.bind({});
 User.parameters = parameters;
 User.args = {
   wrapperProps: {
-    member: defaultMember,
+    role: defaultRole,
     user: defaultUser,
   },
 };
@@ -70,7 +87,7 @@ export const Mod = Template.bind({});
 Mod.parameters = parameters;
 Mod.args = {
   wrapperProps: {
-    member: { ...defaultMember, role: 'mod' },
+    role: { ...defaultRole, role: 'mod' },
     user: defaultUser,
   },
 };
@@ -79,7 +96,7 @@ export const Owner = Template.bind({});
 Owner.parameters = parameters;
 Owner.args = {
   wrapperProps: {
-    member: { ...defaultMember, role: 'owner' },
+    role: { ...defaultRole, role: 'owner' },
     user: defaultUser,
   },
 };

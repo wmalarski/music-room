@@ -41,6 +41,7 @@ describe('<CreateRoom />', () => {
     expect.hasAssertions();
 
     mockMembersStorage.setContext(defaultMember);
+
     mockProfilesStorage.set([defaultProfile]);
 
     renderComponent();

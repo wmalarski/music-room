@@ -1,13 +1,9 @@
-import {
-  defaultProfile,
-  Member,
-  Profile,
-  randomMembers,
-  TABLES_ENDPOINTS,
-  TestWrapper,
-} from '@music-room/data-access';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DefaultRequestBody, rest } from 'msw';
+import { membersHandlers } from '../../tests/handlers/members';
+import { profilesHandlers } from '../../tests/handlers/profile';
+import { convert } from '../../tests/models';
+import { scenarios } from '../../tests/scenarios';
 import { Home } from './Home';
 
 export default {
@@ -15,37 +11,42 @@ export default {
   component: Home,
 } as ComponentMeta<typeof Home>;
 
-const Template: ComponentStory<typeof Home> = () => {
+const HomeStory = ({ wrapperProps }: PropsWithTestWrapper) => {
   return (
-    <TestWrapper>
+    <TestWrapper {...wrapperProps}>
       <Home />
     </TestWrapper>
   );
 };
 
-export const Playground = Template.bind({});
+const Template: ComponentStory<typeof HomeStory> = HomeStory;
 
-const members = randomMembers(200);
-
-Playground.parameters = {
+const parameters = {
   msw: {
-    handlers: [
-      rest.get<DefaultRequestBody, { limit: string; offset: string }, Member[]>(
-        TABLES_ENDPOINTS.members,
-        (req, res, ctx) => {
-          const offset = Number(req.url.searchParams.get('offset'));
-          const limit = Number(req.url.searchParams.get('limit'));
-          const range = `${offset}-${offset + limit}/${members.length}`;
-          return res(
-            ctx.json(members.slice(offset, offset + limit)),
-            ctx.set('content-range', range)
-          );
-        }
-      ),
-      rest.get<DefaultRequestBody, never, Profile>(
-        TABLES_ENDPOINTS.profiles,
-        (_req, res, ctx) => res(ctx.json(defaultProfile))
-      ),
-    ],
+    handlers: [...membersHandlers, ...profilesHandlers],
+  },
+};
+
+export const NoRooms = Template.bind({});
+NoRooms.parameters = parameters;
+NoRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.noRoomsUserScenario.user),
+  },
+};
+
+export const ManyRooms = Template.bind({});
+ManyRooms.parameters = parameters;
+ManyRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.manyRoomsUserScenario.user),
+  },
+};
+
+export const FewRooms = Template.bind({});
+FewRooms.parameters = parameters;
+FewRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.fewRoomsUserScenario.user),
   },
 };

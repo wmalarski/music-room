@@ -5,6 +5,7 @@ import {
   Member,
   Message,
   Profile,
+  ResponseError,
   Role,
   Room,
 } from '../data/types';
@@ -111,4 +112,9 @@ export const defaultControls: Controls = {
   speaker_id: 1,
   volume: 0,
   change_by: 1,
+};
+
+export const defaultError: ResponseError = {
+  error: 'Not found',
+  error_description: 'Not found',
 };
