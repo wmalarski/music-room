@@ -33,8 +33,6 @@ const renderComponent = ({
   );
 };
 
-jest.setTimeout(10000);
-
 describe('<CreateRoom />', () => {
   it('should add room', async () => {
     expect.hasAssertions();
@@ -47,14 +45,9 @@ describe('<CreateRoom />', () => {
       },
     });
 
-    await waitFor(
-      async () => {
-        expect(screen.getByText('Add')).toBeInTheDocument();
-      },
-      {
-        timeout: 10000,
-      }
-    );
+    await waitFor(async () => {
+      expect(screen.getByText('Add')).toBeInTheDocument();
+    });
 
     userEvent.click(await screen.findByText('Add'));
 

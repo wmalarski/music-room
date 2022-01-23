@@ -1,5 +1,6 @@
+import { createMockMessages } from './creators/message';
 import { createMockProfile, createMockProfiles } from './creators/profile';
-import { createMockRoles } from './creators/roles';
+import { createMockRole, createMockRoles } from './creators/roles';
 import {
   createMockRoom,
   createMockRoomWithAuthor as createMockRoomsWithAuthor,
@@ -40,12 +41,31 @@ export const roomWithUsersScenario = (usersCount: number) => {
   return { users, author, mod, profiles, room, authorRole, modRole, userRoles };
 };
 
+export const roomWithMessagesScenario = (messagesCount: number) => {
+  const user = createMockUser();
+  const profile = createMockProfile({ user });
+  const room = createMockRoom({ author: profile });
+  const role = createMockRole({
+    profile: profile,
+    room: room,
+    role: { role: 'owner' },
+  });
+  const messages = createMockMessages({
+    profile,
+    room,
+    count: messagesCount,
+  });
+  return { user, profile, room, role, messages };
+};
+
 type ScenariosResults = {
   noRoomsUser: ReturnType<typeof userWithRoomsScenario>;
   manyRoomsUser: ReturnType<typeof userWithRoomsScenario>;
   fewRoomsUser: ReturnType<typeof userWithRoomsScenario>;
   roomWithFewUsers: ReturnType<typeof roomWithUsersScenario>;
   roomWithManyUsers: ReturnType<typeof roomWithUsersScenario>;
+  roomWithManyMessages: ReturnType<typeof roomWithMessagesScenario>;
+  roomWithNoMessages: ReturnType<typeof roomWithMessagesScenario>;
 };
 
 export let scenarios: ScenariosResults | null = null;
@@ -57,5 +77,7 @@ export const loadScenarios = (): void => {
     noRoomsUser: userWithRoomsScenario(4),
     roomWithFewUsers: roomWithUsersScenario(4),
     roomWithManyUsers: roomWithUsersScenario(100),
+    roomWithManyMessages: roomWithMessagesScenario(100),
+    roomWithNoMessages: roomWithMessagesScenario(0),
   };
 };

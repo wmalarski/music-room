@@ -20,3 +20,19 @@ export const createMockMessage = ({
     room_id: room,
   });
 };
+
+type CreateMockMessagesArgs = {
+  profile: MockEntity<'profile'>;
+  room: MockEntity<'room'>;
+  count: number;
+};
+
+export const createMockMessages = ({
+  profile,
+  room,
+  count,
+}: CreateMockMessagesArgs) => {
+  return Array(count)
+    .fill(0)
+    .map(() => createMockMessage({ profile, room }));
+};

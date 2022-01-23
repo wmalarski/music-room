@@ -1,13 +1,11 @@
-import { TestWrapper } from '@music-room/data-access';
-import {
-  mockActionsStorage,
-  mockMessagesStorage,
-} from '@music-room/util-tests';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
+import { convert } from '../../../tests/models';
+import { roomWithMessagesScenario } from '../../../tests/scenarios';
 import { Reactions } from './Reactions';
 
 type Props = ComponentProps<typeof Reactions>;
@@ -33,9 +31,12 @@ const View: Props['View'] = ({ action, message, onChange }) => {
 
 const defaultProps: Props = { View };
 
-const renderComponent = (props: Partial<Props> = {}) => {
+const renderComponent = ({
+  wrapperProps,
+  ...props
+}: PropsWithTestWrapper<Partial<Props>> = {}) => {
   return render(
-    <TestWrapper>
+    <TestWrapper {...wrapperProps}>
       <Reactions {...defaultProps} {...props} />
     </TestWrapper>
   );
@@ -54,17 +55,13 @@ describe('<Reactions />', () => {
   it('should have action after Like', async () => {
     expect.hasAssertions();
 
-    mockMessagesStorage.set([
-      {
-        created_at: new Date().toISOString(),
-        data: { kind: 'message#0.0.1', url: '' },
-        id: 1,
-        profile_id: 1,
-        room_id: 1,
-      },
-    ]);
+    const { role } = roomWithMessagesScenario(5);
 
-    renderComponent();
+    renderComponent({
+      wrapperProps: {
+        role: convert.toRole(role),
+      },
+    });
 
     await waitFor(async () => {
       expect(await screen.findByText('message')).toBeInTheDocument();
@@ -75,7 +72,5 @@ describe('<Reactions />', () => {
     await waitFor(async () => {
       expect(await screen.findByText('action')).toBeInTheDocument();
     });
-
-    expect(mockActionsStorage.get()[0]).toBeDefined();
   });
 });

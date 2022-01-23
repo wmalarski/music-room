@@ -42,7 +42,6 @@ const renderComponent = (props: Partial<Props> = {}) => {
     </TestWrapper>
   );
 };
-jest.setTimeout(10000);
 
 describe('<SignUp />', () => {
   it('should render', async () => {
@@ -52,14 +51,9 @@ describe('<SignUp />', () => {
 
     await act(async () => userEvent.click(await screen.findByText('Click')));
 
-    await waitFor(
-      async () => {
-        expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
-      },
-      {
-        timeout: 5000,
-      }
-    );
+    await waitFor(async () => {
+      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
+    });
 
     expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
     const user = mockDb.user.findFirst({

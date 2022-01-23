@@ -9,11 +9,12 @@ import { rest } from 'msw';
 import { convert, dbIndexCounter, mockDb } from '../models';
 
 export const authHandlers = [
-  rest.post<UserCredentials, never, Session | ResponseError>(
+  rest.post<string, never, Session | ResponseError>(
     `${AUTH_ENDPOINT}/token`,
     (req, res, ctx) => {
+      const credentials: UserCredentials = JSON.parse(req.body);
       const userEntity = mockDb.user.findFirst({
-        where: { email: { equals: req.body.email } },
+        where: { email: { equals: credentials.email } },
       });
       const user = convert.toUser(userEntity);
 
@@ -37,8 +38,6 @@ export const authHandlers = [
       const count = mockDb.user.count({
         where: { email: { equals: req.body.email } },
       });
-
-      console.log({ count, body: req.body });
 
       if (count > 0)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));

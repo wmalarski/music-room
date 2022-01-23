@@ -7,4 +7,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/music-room',
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
 };

@@ -21,7 +21,7 @@ const View: Props['View'] = ({
       {data?.members?.map((member) => (
         <div key={member.id}>
           <p>{member.profile_name}</p>
-          <p>{member.role}</p>
+          <p>{`${member.profile_name} ${member.role}`}</p>
           <button
             onClick={() => onRoleChange(member, 'mod')}
           >{`Change ${member.profile_name}`}</button>
@@ -100,14 +100,14 @@ describe('<RoomUsers />', () => {
       },
     });
 
-    expect(await screen.findByText('user')).toBeInTheDocument();
+    expect(await screen.findByText(`${name} user`)).toBeInTheDocument();
 
     userEvent.click(await screen.findByText(`Change ${name}`));
 
     await waitFor(async () => {
-      expect(await screen.findByText('mod')).toBeInTheDocument();
+      expect(await screen.findByText(`${name} mod`)).toBeInTheDocument();
     });
 
-    expect(await screen.findByText('mod')).toBeInTheDocument();
+    expect(await screen.findByText(`${name} mod`)).toBeInTheDocument();
   });
 });
