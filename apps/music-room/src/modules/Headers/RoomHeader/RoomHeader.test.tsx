@@ -1,4 +1,4 @@
-import { defaultMember, TestWrapper } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
@@ -13,13 +13,11 @@ const renderComponent = () => {
 };
 
 describe('<RoomHeader />', () => {
-  it('should render slug', async () => {
+  it('should render home button', async () => {
     expect.hasAssertions();
 
     renderComponent();
 
-    expect(
-      await screen.findByText(defaultMember.room_slug)
-    ).toBeInTheDocument();
+    expect(await screen.findByText('headerHome')).toBeInTheDocument();
   });
 });

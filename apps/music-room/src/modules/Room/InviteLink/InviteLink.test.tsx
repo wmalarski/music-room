@@ -18,6 +18,8 @@ describe('<InviteLink />', () => {
 
     renderComponent();
 
-    expect(await screen.findByText(/.*qwertyuiop/)).toBeInTheDocument();
+    const input = await screen.findByTestId<HTMLInputElement>('invite-input');
+
+    expect(input.value).toContain('qwertyuiop');
   });
 });

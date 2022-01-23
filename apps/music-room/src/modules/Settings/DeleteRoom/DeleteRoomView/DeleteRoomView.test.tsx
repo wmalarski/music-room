@@ -12,6 +12,10 @@ const defaultProps: Props = {
   error: null,
 };
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
+
 const renderComponent = (props: Partial<Props> = {}) => {
   return render(<DeleteRoomView {...defaultProps} {...props} />);
 };

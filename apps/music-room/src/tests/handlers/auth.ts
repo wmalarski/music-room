@@ -38,6 +38,8 @@ export const authHandlers = [
         where: { email: { equals: req.body.email } },
       });
 
+      console.log({ count, body: req.body });
+
       if (count > 0)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 

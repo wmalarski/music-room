@@ -1,10 +1,10 @@
 import { defaultUser, TestWrapper } from '@music-room/data-access';
-import { mockUserStorage } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
+import { mockDb } from '../../../tests/models';
 import { SignUp } from './SignUp';
 
 type Props = ComponentProps<typeof SignUp>;
@@ -42,6 +42,7 @@ const renderComponent = (props: Partial<Props> = {}) => {
     </TestWrapper>
   );
 };
+jest.setTimeout(10000);
 
 describe('<SignUp />', () => {
   it('should render', async () => {
@@ -49,13 +50,21 @@ describe('<SignUp />', () => {
 
     renderComponent();
 
-    userEvent.click(await screen.findByText('Click'));
+    await act(async () => userEvent.click(await screen.findByText('Click')));
 
-    await waitFor(async () => {
-      expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
-    });
+    await waitFor(
+      async () => {
+        expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
+      },
+      {
+        timeout: 5000,
+      }
+    );
 
     expect(await screen.findByText(defaultUserEmail)).toBeInTheDocument();
-    expect(mockUserStorage.get()).toHaveLength(1);
+    const user = mockDb.user.findFirst({
+      where: { email: { equals: defaultUserEmail } },
+    });
+    expect(user).toBeDefined();
   });
 });

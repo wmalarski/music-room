@@ -4,7 +4,7 @@ import {
   useUser,
 } from '@music-room/data-access';
 import { useRouter } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { paths } from '../../../utils';
 import { CreateRoomView } from './CreateRoomView/CreateRoomView';
 import { CreateRoomViewData } from './CreateRoomView/CreateRoomView.utils';
@@ -21,7 +21,7 @@ export const CreateRoom = ({ View = CreateRoomView }: Props): ReactElement => {
     data: profile = null,
     error,
     isLoading,
-  } = useSelectProfile({ userId: user.id });
+  } = useSelectProfile(useMemo(() => ({ userId: user.id }), [user.id]));
 
   const { mutate: insertRoom } = useInsertRoom({
     onSuccess: (room) => router.push(paths.room(room.slug)),

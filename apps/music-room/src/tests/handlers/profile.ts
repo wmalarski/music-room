@@ -14,6 +14,9 @@ export const profilesHandlers = [
     (req, res, ctx) => {
       const id = req.url.searchParams.get('user_id');
       const [, userId] = (id ?? '').split('.');
+
+      console.log({ id, userId });
+
       if (!userId)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 

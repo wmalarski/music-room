@@ -1,5 +1,5 @@
-import { server } from '@music-room/util-tests';
 import '@testing-library/jest-dom';
+import { server } from './server';
 
 beforeAll(() => {
   server.listen();

@@ -8,7 +8,7 @@ import { createMockUser, createMockUsers } from './creators/user';
 
 export const userWithRoomsScenario = (roomsCount: number) => {
   const user = createMockUser();
-  const author = createMockProfile({ userEntity: user });
+  const author = createMockProfile({ user });
   const rooms = createMockRoomsWithAuthor({ author, count: roomsCount });
   const roles = createMockRoles({
     profiles: [author],

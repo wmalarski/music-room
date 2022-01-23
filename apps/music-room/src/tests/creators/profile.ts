@@ -4,18 +4,18 @@ import { createMockUser } from './user';
 import { randomString } from './utils';
 
 type CreateMockProfileArgs = {
-  userEntity: MockEntity<'user'>;
+  user: MockEntity<'user'>;
   profile?: Partial<Omit<Profile, 'id' | 'user_id'>>;
 };
 
 export const createMockProfile = ({
-  userEntity,
+  user,
   profile,
 }: CreateMockProfileArgs): MockEntity<'profile'> => {
   return mockDb.profile.create({
     avatar: profile?.avatar ?? null,
     name: profile?.name ?? randomString(),
-    user_id: userEntity,
+    user_id: user,
   });
 };
 
@@ -26,5 +26,5 @@ type CreateMockProfilesArgs = {
 export const createMockProfiles = ({
   users,
 }: CreateMockProfilesArgs): MockEntity<'profile'>[] => {
-  return users.map(() => createMockProfile({ userEntity: createMockUser() }));
+  return users.map(() => createMockProfile({ user: createMockUser() }));
 };

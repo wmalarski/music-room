@@ -22,10 +22,14 @@ export const selectProfileKey = (args: SelectProfileArgs): SelectProfileKey => [
 export const selectProfile = async ({
   queryKey: [, { userId }],
 }: QueryFunctionContext<SelectProfileKey>): Promise<Profile | null> => {
+  console.log({ userId });
+
   const { data, error } = await fromSupabase('profiles')
     .select('*')
     .eq('user_id', userId)
     .single();
+
+  console.log({ data, error });
 
   if (error) throw error;
 
