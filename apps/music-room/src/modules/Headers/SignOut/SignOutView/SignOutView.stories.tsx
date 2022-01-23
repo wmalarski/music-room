@@ -9,9 +9,9 @@ export default {
   },
 } as ComponentMeta<typeof SignOutView>;
 
-const Template: ComponentStory<typeof SignOutView> = (args) => (
-  <SignOutView {...args} />
-);
+const Template: ComponentStory<typeof SignOutView> = (args) => {
+  return <SignOutView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

@@ -20,7 +20,6 @@ export type SelectMessagesReturn = {
   messages: Message[];
   count: number;
   offset: number;
-  limit: number;
 };
 
 export const selectMessagesKey = (
@@ -32,13 +31,13 @@ export const selectMessages = async ({
 }: QueryFunctionContext<SelectMessagesKey>): Promise<SelectMessagesReturn> => {
   const { data, error, count } = await fromSupabase('messages')
     .select('*', { count: 'estimated' })
-    .match({ room_id: roomId })
+    .eq('room_id', roomId)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit);
 
   if (error || !data) throw error;
 
-  return { messages: data, count: count ?? 0, limit, offset };
+  return { messages: data, count: count ?? 0, offset };
 };
 
 export const useSelectMessages = (

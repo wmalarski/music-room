@@ -18,6 +18,8 @@ export const HeaderView = ({ right }: Props): ReactElement => {
       justifyContent="spaceBetween"
       alignItems="center"
       gap="md"
+      spaceY="md"
+      spaceX="lg"
     >
       <Typography size="xl">
         <Link href={paths.home} passHref>

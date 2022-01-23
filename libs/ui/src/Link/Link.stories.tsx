@@ -6,9 +6,9 @@ export default {
   component: StyledLink,
 } as ComponentMeta<typeof StyledLink>;
 
-const Template: ComponentStory<typeof StyledLink> = (args) => (
-  <StyledLink {...args} />
-);
+const Template: ComponentStory<typeof StyledLink> = (args) => {
+  return <StyledLink {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

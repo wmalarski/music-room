@@ -1,9 +1,11 @@
 import { globalStyles, styled } from '@music-room/util-styles';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { I18nextProvider } from 'react-i18next';
+import { loadScenarios } from '../src/tests/scenarios';
 import i18n from './i18n';
 
 // Initialize MSW
+loadScenarios();
 initialize();
 
 const Wrapper = styled('div', {

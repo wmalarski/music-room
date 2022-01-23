@@ -6,9 +6,9 @@ export default {
   component: Typography,
 } as ComponentMeta<typeof Typography>;
 
-const Template: ComponentStory<typeof Typography> = (args) => (
-  <Typography {...args} />
-);
+const Template: ComponentStory<typeof Typography> = (args) => {
+  return <Typography {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

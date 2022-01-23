@@ -9,9 +9,9 @@ export default {
   },
 } as ComponentMeta<typeof DeleteRoomView>;
 
-const Template: ComponentStory<typeof DeleteRoomView> = (args) => (
-  <DeleteRoomView {...args} />
-);
+const Template: ComponentStory<typeof DeleteRoomView> = (args) => {
+  return <DeleteRoomView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

@@ -1,51 +1,60 @@
 import { SelectMessagesReturn } from '@music-room/data-access';
-import { Flex } from '@music-room/ui';
-import { ReactElement, useCallback, useRef } from 'react';
+import { Card, Divider, Flex } from '@music-room/ui';
+import { ReactElement, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
 import { ChatMessage } from './ChatMessage/ChatMessage';
+import * as Styles from './ChatMessagesList.styles';
 
 type Props = {
   data?: SelectMessagesReturn;
   offset: number;
-  onPageChange: (offset: number) => void;
+  limit: number;
+  onOffsetChange: (offset: number) => void;
 };
+
+const estimateSize = (): number => 40;
 
 export const ChatMessagesList = ({
   data,
   offset,
-  onPageChange,
+  limit,
+  onOffsetChange,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
     start: offset,
-    limit: data?.limit,
-    onPageChange,
+    limit,
     size: data?.count ?? 0,
     parentRef,
-    estimateSize: useCallback(() => 40, []),
-    overscan: 5,
+    onOffsetChange,
+    estimateSize,
   });
 
+  const pairs = virtualizer.virtualItems.map((row) => ({
+    message: data?.messages.at(row.index - data.offset),
+    row,
+  }));
+
   return (
-    <Flex
-      ref={parentRef}
-      css={{
-        height: '20vh',
-        width: '$xl',
-      }}
-    >
-      <Flex direction="column" css={{ listContainer: virtualizer.totalSize }}>
-        {virtualizer.virtualItems.map((row) => {
-          const message = data?.messages[row.index - data.offset];
-          if (!message) return null;
-          return (
-            <Flex key={row.index} css={{ listRow: `${row.size} ${row.start}` }}>
-              <ChatMessage key={message.id} message={message} />;
+    <Card space="xl" gap="md" direction="column">
+      <Styles.Container ref={parentRef}>
+        <Flex css={{ listContainer: virtualizer.totalSize }}>
+          {pairs.map(({ row, message }) => (
+            <Flex
+              ref={row.measureRef}
+              key={row.key}
+              css={{ dynamicRow: row.start }}
+              direction="column"
+              gap="xs"
+              spaceY="xs"
+            >
+              <ChatMessage message={message} />
+              <Divider orientation="horizontal" color={5} />
             </Flex>
-          );
-        })}
-      </Flex>
-    </Flex>
+          ))}
+        </Flex>
+      </Styles.Container>
+    </Card>
   );
 };

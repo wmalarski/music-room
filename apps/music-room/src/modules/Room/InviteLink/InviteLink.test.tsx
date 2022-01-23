@@ -1,5 +1,4 @@
-import { defaultMember, MemberContextProvider } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import { TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
@@ -7,11 +6,9 @@ import { InviteLink } from './InviteLink';
 
 const renderComponent = () => {
   return render(
-    <MemberContextProvider member={defaultMember}>
-      <TestWrapper>
-        <InviteLink />
-      </TestWrapper>
-    </MemberContextProvider>
+    <TestWrapper>
+      <InviteLink />
+    </TestWrapper>
   );
 };
 
@@ -21,6 +18,8 @@ describe('<InviteLink />', () => {
 
     renderComponent();
 
-    expect(await screen.findByText(/.*qwertyuiop/)).toBeInTheDocument();
+    const input = await screen.findByTestId<HTMLInputElement>('invite-input');
+
+    expect(input.value).toContain('qwertyuiop');
   });
 });

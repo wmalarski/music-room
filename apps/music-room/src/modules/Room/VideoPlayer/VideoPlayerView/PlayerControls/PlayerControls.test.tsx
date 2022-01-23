@@ -9,8 +9,10 @@ type Props = ComponentProps<typeof PlayerControls>;
 
 const defaultProps: Props = {
   controls: defaultControls,
-  onChange: () => null,
-  profileId: 1,
+  onAssignClick: () => null,
+  onPauseChange: () => null,
+  onVolumeChange: () => null,
+  onMuteChange: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

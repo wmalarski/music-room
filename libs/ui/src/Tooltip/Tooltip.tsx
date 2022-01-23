@@ -17,18 +17,22 @@ export const TooltipText = ({
   side,
   sideOffset,
   alignOffset,
-}: Props): ReactElement => (
-  <Styles.Tooltip>
-    <Styles.TooltipTrigger asChild={asChild}>{children}</Styles.TooltipTrigger>
-    <Styles.TooltipContent
-      side={side}
-      sideOffset={sideOffset}
-      alignOffset={alignOffset}
-    >
-      {text}
-      <Styles.TooltipArrow />
-    </Styles.TooltipContent>
-  </Styles.Tooltip>
-);
+}: Props): ReactElement => {
+  return (
+    <Styles.Tooltip>
+      <Styles.TooltipTrigger asChild={asChild}>
+        {children}
+      </Styles.TooltipTrigger>
+      <Styles.TooltipContent
+        side={side}
+        sideOffset={sideOffset}
+        alignOffset={alignOffset}
+      >
+        {text}
+        <Styles.TooltipArrow />
+      </Styles.TooltipContent>
+    </Styles.Tooltip>
+  );
+};
 
 export { TooltipProvider } from './Tooltip.styles';

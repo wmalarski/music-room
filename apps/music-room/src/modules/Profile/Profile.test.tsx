@@ -1,5 +1,8 @@
-import { defaultProfile, defaultUser } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import {
+  defaultProfile,
+  defaultUser,
+  TestWrapper,
+} from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';

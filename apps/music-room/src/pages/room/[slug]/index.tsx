@@ -13,11 +13,13 @@ type Props = {
   member: Member;
 };
 
-const RoomPage = ({ member }: Props): ReactElement => (
-  <MemberContextProvider member={member}>
-    <Room />
-  </MemberContextProvider>
-);
+const RoomPage = ({ member }: Props): ReactElement => {
+  return (
+    <MemberContextProvider member={member}>
+      <Room />
+    </MemberContextProvider>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   params: { slug } = {},

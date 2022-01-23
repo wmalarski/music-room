@@ -7,9 +7,9 @@ export default {
   component: ReactionsView,
 } as ComponentMeta<typeof ReactionsView>;
 
-const Template: ComponentStory<typeof ReactionsView> = (args) => (
-  <ReactionsView {...args} />
-);
+const Template: ComponentStory<typeof ReactionsView> = (args) => {
+  return <ReactionsView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

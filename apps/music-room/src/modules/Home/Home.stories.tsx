@@ -1,15 +1,8 @@
-import {
-  defaultProfile,
-  defaultUser,
-  Member,
-  Profile,
-  randomMembers,
-  TABLES_ENDPOINTS,
-  UserContext,
-} from '@music-room/data-access';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DefaultRequestBody, rest } from 'msw';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { handlers } from '../../tests/handlers';
+import { convert } from '../../tests/models';
+import { scenarios } from '../../tests/scenarios';
 import { Home } from './Home';
 
 export default {
@@ -17,37 +10,36 @@ export default {
   component: Home,
 } as ComponentMeta<typeof Home>;
 
-const Template: ComponentStory<typeof Home> = () => (
-  <UserContext.Provider value={defaultUser}>
-    <QueryClientProvider client={new QueryClient()}>
+const HomeStory = ({ wrapperProps }: PropsWithTestWrapper) => {
+  return (
+    <TestWrapper {...wrapperProps}>
       <Home />
-    </QueryClientProvider>
-  </UserContext.Provider>
-);
+    </TestWrapper>
+  );
+};
 
-export const Playground = Template.bind({});
+const Template: ComponentStory<typeof HomeStory> = HomeStory;
 
-const members = randomMembers(200);
+export const NoRooms = Template.bind({});
+NoRooms.parameters = { msw: { handlers } };
+NoRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.noRoomsUser.user),
+  },
+};
 
-Playground.parameters = {
-  msw: {
-    handlers: [
-      rest.get<DefaultRequestBody, { limit: string; offset: string }, Member[]>(
-        TABLES_ENDPOINTS.members,
-        (req, res, ctx) => {
-          const offset = Number(req.url.searchParams.get('offset'));
-          const limit = Number(req.url.searchParams.get('limit'));
-          const range = `${offset}-${offset + limit}/${members.length}`;
-          return res(
-            ctx.json(members.slice(offset, offset + limit)),
-            ctx.set('content-range', range)
-          );
-        }
-      ),
-      rest.get<DefaultRequestBody, never, Profile>(
-        TABLES_ENDPOINTS.profiles,
-        (_req, res, ctx) => res(ctx.json(defaultProfile))
-      ),
-    ],
+export const ManyRooms = Template.bind({});
+ManyRooms.parameters = { msw: { handlers } };
+ManyRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.manyRoomsUser.user),
+  },
+};
+
+export const FewRooms = Template.bind({});
+FewRooms.parameters = { msw: { handlers } };
+FewRooms.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.fewRoomsUser.user),
   },
 };

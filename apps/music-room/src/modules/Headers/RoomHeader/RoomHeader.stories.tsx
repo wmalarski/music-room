@@ -1,6 +1,5 @@
-import { defaultRoom, RoomContextProvider } from '@music-room/data-access';
+import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { RoomHeader } from './RoomHeader';
 
 export default {
@@ -8,12 +7,12 @@ export default {
   component: RoomHeader,
 } as ComponentMeta<typeof RoomHeader>;
 
-const Template: ComponentStory<typeof RoomHeader> = () => (
-  <RoomContextProvider room={defaultRoom}>
-    <QueryClientProvider client={new QueryClient()}>
+const Template: ComponentStory<typeof RoomHeader> = () => {
+  return (
+    <TestWrapper>
       <RoomHeader />
-    </QueryClientProvider>
-  </RoomContextProvider>
-);
+    </TestWrapper>
+  );
+};
 
 export const Playground = Template.bind({});

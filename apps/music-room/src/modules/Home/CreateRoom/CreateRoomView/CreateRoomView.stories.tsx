@@ -10,9 +10,9 @@ export default {
   },
 } as ComponentMeta<typeof CreateRoomView>;
 
-const Template: ComponentStory<typeof CreateRoomView> = (args) => (
-  <CreateRoomView {...args} />
-);
+const Template: ComponentStory<typeof CreateRoomView> = (args) => {
+  return <CreateRoomView {...args} />;
+};
 
 export const Playground = Template.bind({});
 Playground.args = {

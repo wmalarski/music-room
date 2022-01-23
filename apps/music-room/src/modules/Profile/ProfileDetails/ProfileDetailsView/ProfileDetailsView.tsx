@@ -1,18 +1,19 @@
 import { Profile } from '@music-room/data-access';
 import {
   Button,
+  Card,
   Form,
   FormError,
   FormFieldset,
   FormLabel,
   Input,
+  Inset,
   Typography,
 } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Styles from './ProfileDetailsView.styles';
 import {
   ProfileDetailsViewData,
   useProfileDetailsViewOptions,
@@ -44,8 +45,8 @@ export const ProfileDetailsView = ({
   const options = useProfileDetailsViewOptions();
 
   return (
-    <Styles.Container>
-      <Styles.Content>
+    <Inset space="xl">
+      <Card space="xl">
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Typography size="xl">{t('profileHeader')}</Typography>
           <FormFieldset>
@@ -64,7 +65,7 @@ export const ProfileDetailsView = ({
             <Typography size="sm">{t('profileSaveButton')}</Typography>
           </Button>
         </Form>
-      </Styles.Content>
-    </Styles.Container>
+      </Card>
+    </Inset>
   );
 };

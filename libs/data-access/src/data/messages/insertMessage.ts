@@ -67,7 +67,6 @@ export const useInsertMessage = ({
 
       client.setQueryData<SelectMessagesReturn>(key, {
         count: previous.count + 1,
-        limit,
         offset,
         messages: [...previous.messages, message],
       });

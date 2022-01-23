@@ -7,15 +7,14 @@ export default {
   component: RoomUsersList,
 } as ComponentMeta<typeof RoomUsersList>;
 
-const Template: ComponentStory<typeof RoomUsersList> = (args) => (
-  <RoomUsersList {...args} />
-);
+const Template: ComponentStory<typeof RoomUsersList> = (args) => {
+  return <RoomUsersList {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
   data: {
     count: 2,
-    limit: 20,
     offset: 0,
     members: [
       {
@@ -32,7 +31,7 @@ Primary.args = {
       },
     ],
   },
-  onPageChange: () => null,
+  onOffsetChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
 };

@@ -40,6 +40,11 @@ export const InviteAccept = ({
   };
 
   return (
-    <View room={room} isLoading={isLoading} onAcceptClick={handleAcceptClick} />
+    <View
+      room={room}
+      profile={profile}
+      isLoading={isLoading}
+      onAcceptClick={handleAcceptClick}
+    />
   );
 };

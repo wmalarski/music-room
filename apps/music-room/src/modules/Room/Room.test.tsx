@@ -1,21 +1,15 @@
-import { defaultMember } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { ComponentProps } from 'react';
+import { convert } from '../../tests/models';
+import { roomWithMessagesScenario } from '../../tests/scenarios';
 import { Room } from './Room';
 
-type Props = ComponentProps<typeof Room>;
-
-const defaultProps: Props = {
-  member: defaultMember,
-};
-
-function renderComponent(props: Partial<Props> = {}) {
+function renderComponent({ wrapperProps }: PropsWithTestWrapper = {}) {
   return render(
-    <TestWrapper>
-      <Room {...defaultProps} {...props} />
+    <TestWrapper {...wrapperProps}>
+      <Room />
     </TestWrapper>
   );
 }
@@ -24,7 +18,14 @@ describe('<Room />', () => {
   it('should render', async () => {
     expect.hasAssertions();
 
-    renderComponent();
+    const { room, role } = roomWithMessagesScenario(20);
+
+    renderComponent({
+      wrapperProps: {
+        room: convert.toRoom(room),
+        role: convert.toRole(role),
+      },
+    });
 
     expect(true).toBeTruthy();
   });

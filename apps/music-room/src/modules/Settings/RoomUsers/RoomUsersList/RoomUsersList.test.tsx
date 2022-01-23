@@ -1,5 +1,4 @@
-import { defaultMember } from '@music-room/data-access';
-import { TestWrapper } from '@music-room/util-tests';
+import { defaultMember, TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
@@ -10,9 +9,10 @@ type Props = ComponentProps<typeof RoomUsersList>;
 
 const defaultProps: Props = {
   offset: 0,
+  query: '',
+  limit: 40,
   data: {
     count: 2,
-    limit: 20,
     offset: 0,
     members: [
       {
@@ -33,9 +33,10 @@ const defaultProps: Props = {
       },
     ],
   },
+  onQueryChange: () => null,
   onRemoveClick: () => null,
   onRoleChange: () => null,
-  onPageChange: () => null,
+  onOffsetChange: () => null,
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

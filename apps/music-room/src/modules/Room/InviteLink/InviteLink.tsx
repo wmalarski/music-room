@@ -19,7 +19,7 @@ export const InviteLink = (): ReactElement => {
           <a ref={handleRef} />
         </Link>
       </div>
-      {href && <Input readOnly value={href} />}
+      {href && <Input data-testid="invite-input" readOnly value={href} />}
     </>
   );
 };

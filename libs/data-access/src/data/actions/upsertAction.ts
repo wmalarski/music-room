@@ -1,13 +1,13 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { Action } from "../types";
-import { selectActionKey } from "./selectAction";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { Action } from '../types';
+import { selectActionKey } from './selectAction';
 
 export type UpsertActionArgs = {
   id?: number;
@@ -23,7 +23,7 @@ export type UpsertActionContext = {
 };
 
 export const upsertAction = async (args: UpsertActionArgs): Promise<Action> => {
-  const { data, error } = await fromSupabase("actions").upsert(args).single();
+  const { data, error } = await fromSupabase('actions').upsert(args).single();
 
   if (error || !data) throw error;
 
@@ -38,7 +38,7 @@ export const useUpsertAction = (
       UpsertActionArgs,
       UpsertActionContext
     >,
-    "onMutate"
+    'onMutate'
   >
 ): UseMutationResult<
   Action,

@@ -5,6 +5,7 @@ import {
   Member,
   Message,
   Profile,
+  ResponseError,
   Role,
   Room,
 } from '../data/types';
@@ -67,7 +68,7 @@ export const randomMembers = (length: number): Member[] => {
       id: index,
       room_author_id: 1,
       room_hash: randomString(),
-      profile_id: 1,
+      profile_id: index,
       room_id: index,
       room_name: randomString(),
       user_id: '',
@@ -111,4 +112,9 @@ export const defaultControls: Controls = {
   speaker_id: 1,
   volume: 0,
   change_by: 1,
+};
+
+export const defaultError: ResponseError = {
+  error: 'Not found',
+  error_description: 'Not found',
 };

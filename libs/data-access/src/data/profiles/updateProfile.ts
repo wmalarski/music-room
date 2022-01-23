@@ -5,6 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from 'react-query';
+import { useSetProfile } from '../../contexts/ProfileContext';
 import fromSupabase from '../../utils/fromSupabase';
 import { selectAllMembersKey } from '../members/selectMembers';
 import { Member, Profile } from '../types';
@@ -47,6 +48,7 @@ export const useUpdateProfile = (
   UpdateProfileArgs,
   UpdateProfileContext
 > => {
+  const setProfile = useSetProfile();
   const queryClient = useQueryClient();
   const profileKey = selectProfileKey({ userId });
   const membersKey = selectAllMembersKey();
@@ -78,10 +80,11 @@ export const useUpdateProfile = (
       queryClient.setQueryData(membersKey, context?.previousMembers);
       options?.onError?.(err, controls, context);
     },
-    onSettled: (role, ...args) => {
+    onSettled: (profile, ...args) => {
+      if (profile) setProfile(profile);
       queryClient.invalidateQueries(profileKey);
       queryClient.invalidateQueries(membersKey);
-      options?.onSettled?.(role, ...args);
+      options?.onSettled?.(profile, ...args);
     },
   });
 };

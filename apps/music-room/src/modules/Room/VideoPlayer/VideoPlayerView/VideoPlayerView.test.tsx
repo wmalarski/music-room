@@ -11,8 +11,9 @@ const defaultProps: Props = {
   profileId: 1,
   message: defaultMessage,
   controls: defaultControls,
-  onChange: () => null,
   onEnd: () => null,
+  onChange: () => null,
+  ytRef: { current: null },
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

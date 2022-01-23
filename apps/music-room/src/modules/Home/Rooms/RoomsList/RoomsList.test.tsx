@@ -8,11 +8,11 @@ import { RoomsList } from './RoomsList';
 type Props = ComponentProps<typeof RoomsList>;
 
 const defaultProps: Props = {
-  onPageChange: () => void 0,
+  onOffsetChange: () => void 0,
   offset: 0,
+  limit: 40,
   data: {
     count: 2,
-    limit: 20,
     offset: 0,
     members: [
       {

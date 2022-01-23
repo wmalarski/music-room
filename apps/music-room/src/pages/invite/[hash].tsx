@@ -18,7 +18,7 @@ const InvitePage = ({ room }: Props): ReactElement => {
   const user = useUserContext();
 
   return user ? (
-    <RoomContextProvider room={room}>
+    <RoomContextProvider initialRoom={room}>
       <Invite />
     </RoomContextProvider>
   ) : (

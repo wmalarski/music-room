@@ -15,7 +15,7 @@ type Props = {
 
 const ProfilePage = ({ profile }: Props): ReactElement => {
   return (
-    <ProfileContextProvider profile={profile}>
+    <ProfileContextProvider initialProfile={profile}>
       <Profile />
     </ProfileContextProvider>
   );

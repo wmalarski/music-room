@@ -1,71 +1,86 @@
 import { Member, RoomRole, SelectMembersResult } from '@music-room/data-access';
-import { Flex } from '@music-room/ui';
-import { ReactElement, useCallback, useRef } from 'react';
+import { Card, Divider, Flex } from '@music-room/ui';
+import { ReactElement, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
+import { RoomUsersHeader } from './RoomUsersHeader/RoomUsersHeader';
+import * as Styles from './RoomUsersList.styles';
+import { RoomUsersListHeader } from './RoomUsersListHeader/RoomUsersListHeader';
 import { RoomUsersListItem } from './RoomUsersListItem/RoomUsersListItem';
 
 type Props = {
   data?: SelectMembersResult;
   offset: number;
-  onPageChange: (offset: number) => void;
+  query: string;
+  limit: number;
+  onQueryChange: (query: string) => void;
+  onOffsetChange: (offset: number) => void;
   onRoleChange: (profile: Member, role: RoomRole) => void;
   onRemoveClick: (profile: Member) => void;
 };
 
+const estimateSize = (): number => 35;
+
 export const RoomUsersList = ({
   data,
   offset,
-  onPageChange,
+  limit,
+  query,
+  onQueryChange,
+  onOffsetChange,
   onRoleChange,
   onRemoveClick,
 }: Props): ReactElement => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualPages({
-    onPageChange,
     start: offset,
-    limit: data?.limit,
-    size: data?.count ?? 0,
+    limit,
+    size: data?.count ?? 10,
     parentRef,
-    estimateSize: useCallback(() => 35, []),
-    overscan: 5,
+    onOffsetChange,
+    estimateSize,
   });
 
-  const handleRoleChange = (member: Member) => (role: RoomRole) => {
+  const handleRoleChange = (member?: Member) => (role: RoomRole) => {
+    if (!member) return;
     onRoleChange(member, role);
   };
 
-  const handleRemoveClick = (member: Member) => () => {
+  const handleRemoveClick = (member?: Member) => () => {
+    if (!member) return;
     onRemoveClick(member);
   };
 
+  const pairs = virtualizer.virtualItems.map((row) => ({
+    member: data?.members.at(row.index - data.offset),
+    row,
+  }));
+
   return (
-    <Flex
-      ref={parentRef}
-      css={{
-        height: `200px`,
-        width: `400px`,
-        overflow: 'auto',
-      }}
-    >
-      <Flex direction="column" css={{ listContainer: virtualizer.totalSize }}>
-        {virtualizer.virtualItems.map((row) => {
-          const member = data?.members[row.index - data.offset];
-          if (!member) return null;
-          return (
+    <Card space="xl" gap="md" direction="column">
+      <RoomUsersHeader query={query} onQueryChange={onQueryChange} />
+      <RoomUsersListHeader />
+      <Styles.Container ref={parentRef}>
+        <Flex css={{ listContainer: virtualizer.totalSize }}>
+          {pairs.map(({ row, member }) => (
             <Flex
-              key={member.profile_id}
-              css={{ listRow: `${row.size} ${row.start}` }}
+              ref={row.measureRef}
+              key={row.key}
+              css={{ dynamicRow: row.start }}
+              direction="column"
+              gap="xs"
+              spaceY="xs"
             >
               <RoomUsersListItem
                 member={member}
                 onRoleChange={handleRoleChange(member)}
                 onRemoveClick={handleRemoveClick(member)}
               />
+              <Divider orientation="horizontal" color={5} />
             </Flex>
-          );
-        })}
-      </Flex>
-    </Flex>
+          ))}
+        </Flex>
+      </Styles.Container>
+    </Card>
   );
 };

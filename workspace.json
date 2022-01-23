@@ -182,29 +182,6 @@
         }
       },
       "tags": []
-    },
-    "util-tests": {
-      "root": "libs/util-tests",
-      "sourceRoot": "libs/util-tests/src",
-      "projectType": "library",
-      "tags": [],
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/util-tests/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/util-tests"],
-          "options": {
-            "jestConfig": "libs/util-tests/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
     }
   }
 }

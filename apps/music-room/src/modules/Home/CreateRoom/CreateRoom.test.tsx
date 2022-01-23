@@ -1,31 +1,33 @@
-import { defaultMember, defaultProfile } from '@music-room/data-access';
-import {
-  mockMembersStorage,
-  mockProfilesStorage,
-  TestWrapper,
-} from '@music-room/util-tests';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
+import { convert } from '../../../tests/models';
+import { userWithRoomsScenario } from '../../../tests/scenarios';
 import { CreateRoom } from './CreateRoom';
 
 type Props = ComponentProps<typeof CreateRoom>;
 
-const View: Props['View'] = ({ profile, onSubmit }) => (
-  <button onClick={() => onSubmit({ name: 'RoomName', slug: 'RoomName' })}>
-    {profile ? 'Add' : ''}
-  </button>
-);
+const View: Props['View'] = ({ profile, onSubmit }) => {
+  return (
+    <button onClick={() => onSubmit({ name: 'RoomName', slug: 'RoomName' })}>
+      {profile ? 'Add' : ''}
+    </button>
+  );
+};
 
 const defaultProps: Props = {
   View,
 };
 
-const renderComponent = (props: Partial<Props> = {}) => {
+const renderComponent = ({
+  wrapperProps,
+  ...props
+}: PropsWithTestWrapper<Partial<Props>> = {}) => {
   return render(
-    <TestWrapper>
+    <TestWrapper {...wrapperProps}>
       <CreateRoom {...defaultProps} {...props} />
     </TestWrapper>
   );
@@ -35,14 +37,17 @@ describe('<CreateRoom />', () => {
   it('should add room', async () => {
     expect.hasAssertions();
 
-    mockMembersStorage.setContext(defaultMember);
-    mockProfilesStorage.set([defaultProfile]);
+    const { user } = userWithRoomsScenario(0);
 
-    renderComponent();
+    renderComponent({
+      wrapperProps: {
+        user: convert.toUser(user),
+      },
+    });
 
-    await waitFor(async () =>
-      expect(screen.getByText('Add')).toBeInTheDocument()
-    );
+    await waitFor(async () => {
+      expect(screen.getByText('Add')).toBeInTheDocument();
+    });
 
     userEvent.click(await screen.findByText('Add'));
 

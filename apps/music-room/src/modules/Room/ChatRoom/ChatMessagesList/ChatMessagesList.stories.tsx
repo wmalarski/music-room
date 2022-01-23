@@ -7,14 +7,14 @@ export default {
   component: ChatMessagesList,
 } as ComponentMeta<typeof ChatMessagesList>;
 
-const Template: ComponentStory<typeof ChatMessagesList> = (args) => (
-  <ChatMessagesList {...args} />
-);
+const Template: ComponentStory<typeof ChatMessagesList> = (args) => {
+  return <ChatMessagesList {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
   offset: 1,
-  onPageChange: () => void 0,
+  onOffsetChange: () => void 0,
   data: {
     messages: [
       { ...defaultMessage, id: 1 },
@@ -22,6 +22,5 @@ Primary.args = {
     ],
     count: 2,
     offset: 0,
-    limit: 20,
   },
 };
