@@ -1,11 +1,8 @@
-import {
-  defaultProfile,
-  Profile,
-  TABLES_ENDPOINTS,
-  TestWrapper,
-} from '@music-room/data-access';
+import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DefaultRequestBody, rest } from 'msw';
+import { profilesHandlers } from '../../tests/handlers/profile';
+import { convert } from '../../tests/models';
+import { scenarios } from '../../tests/scenarios';
 import { Invite } from './Invite';
 
 export default {
@@ -13,7 +10,7 @@ export default {
   component: Invite,
 } as ComponentMeta<typeof Invite>;
 
-const Template: ComponentStory<typeof Invite> = () => {
+const InviteStory = () => {
   return (
     <TestWrapper>
       <Invite />
@@ -21,15 +18,16 @@ const Template: ComponentStory<typeof Invite> = () => {
   );
 };
 
-export const Playground = Template.bind({});
+const Template: ComponentStory<typeof InviteStory> = InviteStory;
 
+export const Playground = Template.bind({});
 Playground.parameters = {
   msw: {
-    handlers: [
-      rest.get<DefaultRequestBody, never, Profile>(
-        TABLES_ENDPOINTS.profiles,
-        (_req, res, ctx) => res(ctx.json(defaultProfile))
-      ),
-    ],
+    handlers: [...profilesHandlers],
+  },
+};
+Playground.args = {
+  wrapperProps: {
+    user: convert.toUser(scenarios?.noRoomsUser.user),
   },
 };

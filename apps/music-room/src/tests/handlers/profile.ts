@@ -15,31 +15,14 @@ export const profilesHandlers = [
       const id = req.url.searchParams.get('user_id');
       const [, userId] = (id ?? '').split('.');
       if (!userId)
-        return res(
-          ctx.json<ResponseError>({
-            ...defaultError,
-            error_description: JSON.stringify(userId),
-          }),
-          ctx.status(400)
-        );
+        return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 
       const entity = mockDb.profile.findFirst({
         where: { user_id: { id: { equals: userId } } },
       });
       const profile = convert.toProfile(entity);
       if (!profile)
-        return res(
-          ctx.json<ResponseError>({
-            ...defaultError,
-            error_description: JSON.stringify({
-              userId,
-              entity,
-              profile,
-              count: mockDb.profile.count(),
-            }),
-          }),
-          ctx.status(400)
-        );
+        return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 
       return res(ctx.json<Profile>(profile));
     }

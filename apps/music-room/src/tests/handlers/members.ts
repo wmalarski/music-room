@@ -37,8 +37,7 @@ export const membersHandlers = [
             return member ? [member] : [];
           })
         ),
-        ctx.set('content-range', range),
-        ctx.set('debug', JSON.stringify({ userId, count: mockDb.role.count() }))
+        ctx.set('content-range', range)
       );
     }
   ),

@@ -1,18 +1,8 @@
-import {
-  defaultRoom,
-  PropsWithTestWrapper,
-  randomMembers,
-  ResponseError,
-  Role,
-  Room,
-  TABLES_ENDPOINTS,
-  TestWrapper,
-  UpdateRolesArgs,
-  UpdateRoomArgs,
-} from '@music-room/data-access';
+import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { rest } from 'msw';
 import { membersHandlers } from '../../tests/handlers/members';
+import { rolesHandlers } from '../../tests/handlers/roles';
+import { roomHandlers } from '../../tests/handlers/rooms';
 import { convert } from '../../tests/models';
 import { scenarios } from '../../tests/scenarios';
 import { Settings } from './Settings';
@@ -32,34 +22,9 @@ const SettingsStory = ({ wrapperProps }: PropsWithTestWrapper) => {
 
 const Template: ComponentStory<typeof SettingsStory> = SettingsStory;
 
-const members = randomMembers(200);
-
 const parameters = {
   msw: {
-    handlers: [
-      ...membersHandlers,
-      rest.patch<UpdateRoomArgs, never, Room | ResponseError>(
-        TABLES_ENDPOINTS.rooms,
-        (req, res, ctx) => {
-          return res(ctx.json<Room>({ ...defaultRoom, ...req.body }));
-        }
-      ),
-      rest.patch<UpdateRolesArgs, never, Role | ResponseError>(
-        TABLES_ENDPOINTS.roles,
-        (req, res, ctx) => {
-          const member = members.find((member) => member.id === req.body.id);
-          if (!member)
-            return res(
-              ctx.json<ResponseError>({
-                error: 'No entry',
-                error_description: 'Wrong item id',
-              })
-            );
-          member.role = req.body.role;
-          return res(ctx.json<Role>(member));
-        }
-      ),
-    ],
+    handlers: [...membersHandlers, ...roomHandlers, ...rolesHandlers],
   },
 };
 

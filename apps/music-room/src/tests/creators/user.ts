@@ -12,8 +12,8 @@ export const createMockUser = ({
   const userId = String(dbIndexCounter());
 
   return mockDb.user.create({
-    email: user?.email ?? `${randomString()}@${randomString()}.com`,
     id: userId,
+    email: user?.email ?? `${randomString()}@${randomString()}.com`,
   });
 };
 
