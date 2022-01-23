@@ -1,11 +1,16 @@
 import { factory, nullable, oneOf, primaryKey } from '@mswjs/data';
-import { Entity, Value } from '@mswjs/data/lib/glossary';
+import { Entity } from '@mswjs/data/lib/glossary';
 import {
+  Action,
+  defaultAction,
   defaultMember,
+  defaultMessage,
   defaultRole,
   defaultRoom,
   defaultUser,
   Member,
+  Message,
+  MessageData,
   Profile,
   Role,
   Room,
@@ -27,14 +32,27 @@ const directory = {
     id: primaryKey(String),
     email: String,
   },
-  action: {
+  profile: {
+    id: primaryKey(dbIndexCounter),
+    name: String,
+    user_id: oneOf('user', { nullable: false }),
+    avatar: nullable(String),
+  },
+  room: {
+    id: primaryKey(dbIndexCounter),
+    author_id: oneOf('profile'),
+    name: String,
+    slug: String,
+    data: {
+      kind: String,
+    },
+    hash: String,
+  },
+  role: {
     id: primaryKey(dbIndexCounter),
     profile_id: oneOf('profile'),
-    message_id: oneOf('message'),
-    created_at: String,
-    updated_at: String,
-    like_at: nullable(String),
-    dislike_at: nullable(String),
+    room_id: oneOf('room'),
+    role: String,
   },
   controls: {
     id: primaryKey(dbIndexCounter),
@@ -56,27 +74,14 @@ const directory = {
       url: String,
     },
   },
-  profile: {
-    id: primaryKey(dbIndexCounter),
-    name: String,
-    user_id: oneOf('user', { nullable: false }),
-    avatar: nullable(String),
-  },
-  role: {
+  action: {
     id: primaryKey(dbIndexCounter),
     profile_id: oneOf('profile'),
-    room_id: oneOf('room'),
-    role: String,
-  },
-  room: {
-    id: primaryKey(dbIndexCounter),
-    author_id: oneOf('profile'),
-    name: String,
-    slug: String,
-    data: {
-      kind: String,
-    },
-    hash: String,
+    message_id: oneOf('message'),
+    created_at: String,
+    updated_at: String,
+    like_at: nullable(String),
+    dislike_at: nullable(String),
   },
 };
 
@@ -85,15 +90,10 @@ export type MockEntity<Key extends keyof typeof directory> = Entity<
   Key
 >;
 
-export type MockValue<Key extends keyof typeof directory> = Value<
-  MockEntity<Key>,
-  typeof directory
->;
-
 export const mockDb = factory(directory);
 
 export const convert = {
-  toProfile: (entity?: MockValue<'profile'> | null): Profile | undefined => {
+  toProfile: (entity?: MockEntity<'profile'> | null): Profile | undefined => {
     if (!entity || !entity.user_id) return undefined;
     return {
       avatar: entity.avatar,
@@ -103,7 +103,7 @@ export const convert = {
     };
   },
   toUser: (
-    entity?: MockValue<'user'> | MockValue<'profile'>['user_id'] | null
+    entity?: MockEntity<'user'> | MockEntity<'profile'>['user_id'] | null
   ): User | undefined => {
     if (!entity) return undefined;
     return {
@@ -112,7 +112,7 @@ export const convert = {
       email: entity.email,
     };
   },
-  toMember: (entity?: MockValue<'role'> | null): Member | undefined => {
+  toMember: (entity?: MockEntity<'role'> | null): Member | undefined => {
     if (!entity || !entity.profile_id?.user_id || !entity.room_id?.author_id)
       return undefined;
     return {
@@ -130,7 +130,7 @@ export const convert = {
       room_slug: entity.room_id.slug,
     };
   },
-  toRole: (entity?: MockValue<'role'> | null): Role | undefined => {
+  toRole: (entity?: MockEntity<'role'> | null): Role | undefined => {
     if (!entity || !entity.profile_id || !entity.room_id) return undefined;
     return {
       ...defaultRole,
@@ -140,7 +140,7 @@ export const convert = {
       room_id: entity.room_id.id,
     };
   },
-  toRoom: (entity?: MockValue<'room'> | null): Room | undefined => {
+  toRoom: (entity?: MockEntity<'room'> | null): Room | undefined => {
     if (!entity || !entity.author_id) return undefined;
     return {
       ...defaultRoom,
@@ -149,6 +149,31 @@ export const convert = {
       hash: entity.hash,
       name: entity.name,
       slug: entity.slug,
+    };
+  },
+  toAction: (entity?: MockEntity<'action'> | null): Action | undefined => {
+    if (!entity || !entity.message_id || !entity.profile_id) return undefined;
+    return {
+      ...defaultAction,
+      created_at: entity.created_at,
+      dislike_at: entity.dislike_at,
+      id: entity.id,
+      like_at: entity.like_at,
+      message_id: entity.message_id.id,
+      profile_id: entity.profile_id.id,
+      updated_at: entity.updated_at,
+    };
+  },
+  toMessage: (entity?: MockEntity<'message'> | null): Message | undefined => {
+    if (!entity || !entity.room_id || !entity.profile_id) return undefined;
+    return {
+      ...defaultMessage,
+      created_at: entity.created_at,
+      id: entity.id,
+      profile_id: entity.profile_id.id,
+      data: entity.data as MessageData,
+      ended_at: entity.ended_at ?? undefined,
+      room_id: entity.room_id.id,
     };
   },
 };

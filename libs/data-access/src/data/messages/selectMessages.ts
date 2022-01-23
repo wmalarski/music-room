@@ -31,7 +31,7 @@ export const selectMessages = async ({
 }: QueryFunctionContext<SelectMessagesKey>): Promise<SelectMessagesReturn> => {
   const { data, error, count } = await fromSupabase('messages')
     .select('*', { count: 'estimated' })
-    .match({ room_id: roomId })
+    .eq('room_id', roomId)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit);
 

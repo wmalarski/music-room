@@ -22,23 +22,20 @@ export const membersHandlers = [
       };
 
       const count = mockDb.role.count({ where });
-      const roles = mockDb.role.findMany({
+      const rolesEntities = mockDb.role.findMany({
         where,
         take: limit,
         skip: offset,
       });
 
+      const roles = rolesEntities.flatMap((role) => {
+        const member = convert.toMember(role);
+        return member ? [member] : [];
+      });
+
       const range = `${offset}-${offset + limit}/${count}`;
 
-      return res(
-        ctx.json(
-          roles.flatMap((role) => {
-            const member = convert.toMember(role);
-            return member ? [member] : [];
-          })
-        ),
-        ctx.set('content-range', range)
-      );
+      return res(ctx.json(roles), ctx.set('content-range', range));
     }
   ),
 ];
