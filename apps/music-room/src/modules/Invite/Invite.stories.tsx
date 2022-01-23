@@ -1,6 +1,6 @@
 import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { profilesHandlers } from '../../tests/handlers/profile';
+import { handlers } from '../../tests/handlers';
 import { convert } from '../../tests/models';
 import { scenarios } from '../../tests/scenarios';
 import { Invite } from './Invite';
@@ -21,11 +21,7 @@ const InviteStory = () => {
 const Template: ComponentStory<typeof InviteStory> = InviteStory;
 
 export const Playground = Template.bind({});
-Playground.parameters = {
-  msw: {
-    handlers: [...profilesHandlers],
-  },
-};
+Playground.parameters = { msw: { handlers } };
 Playground.args = {
   wrapperProps: {
     user: convert.toUser(scenarios?.noRoomsUser.user),

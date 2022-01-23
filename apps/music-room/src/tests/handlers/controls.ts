@@ -7,12 +7,13 @@ import {
 } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 import { convert, mockDb } from '../models';
+import { getEqParam } from './utils';
 
 export const controlsHandlers = [
   rest.get<DefaultRequestBody, never, Controls | ResponseError>(
     TABLES_ENDPOINTS.controls,
     (req, res, ctx) => {
-      const [, roomId] = (req.url.searchParams.get('room_id') ?? '').split('.');
+      const roomId = getEqParam(req, 'room_id');
 
       if (!roomId)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
@@ -22,6 +23,7 @@ export const controlsHandlers = [
       });
 
       const controls = convert.toControls(entity);
+
       if (!controls)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 

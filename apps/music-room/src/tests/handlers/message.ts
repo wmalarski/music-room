@@ -8,6 +8,7 @@ import {
 import { DefaultRequestBody, rest } from 'msw';
 import { createMockMessage } from '../creators/message';
 import { convert, mockDb } from '../models';
+import { getEqParam } from './utils';
 
 export const messagesHandlers = [
   rest.get<DefaultRequestBody, never, Message[]>(
@@ -15,18 +16,20 @@ export const messagesHandlers = [
     (req, res, ctx) => {
       const offset = Number(req.url.searchParams.get('offset') ?? '0');
       const limit = Number(req.url.searchParams.get('limit'));
-      const [, roomId] = (req.url.searchParams.get('room_id') ?? '').split('.');
+      const roomId = getEqParam(req, 'room_id');
 
       const where = {
         ...(roomId ? { room_id: { id: { equals: Number(roomId) } } } : {}),
       };
 
       const count = mockDb.message.count({ where });
+
       const messagesEntities = mockDb.message.findMany({
         where,
         take: limit,
         skip: offset,
       });
+
       const messages = messagesEntities.flatMap((entity) => {
         const message = convert.toMessage(entity);
         return message ? [message] : [];

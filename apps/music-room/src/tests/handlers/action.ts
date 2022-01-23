@@ -8,18 +8,15 @@ import {
 import { DefaultRequestBody, rest } from 'msw';
 import { createMockAction } from '../creators/action';
 import { convert, mockDb } from '../models';
+import { getEqParam } from './utils';
 
 export const actionHandlers = [
   rest.get<DefaultRequestBody, never, Action[] | ResponseError>(
     TABLES_ENDPOINTS.actions,
     (req, res, ctx) => {
-      const limit = Number(req.url.searchParams.get('limit') ?? 0);
-      const [, messageId] = (
-        req.url.searchParams.get('message_id') ?? ''
-      ).split('.');
-      const [, profileId] = (
-        req.url.searchParams.get('profile_id') ?? ''
-      ).split('.');
+      const limit = Number(req.url.searchParams.get('limit') ?? '0');
+      const messageId = getEqParam(req, 'message_id');
+      const profileId = getEqParam(req, 'profile_id');
 
       const actionsEntities = mockDb.action.findMany({
         take: limit,
@@ -54,8 +51,10 @@ export const actionHandlers = [
           data: { like_at: req.body.like_at, dislike_at: req.body.dislike_at },
         });
         const action = convert.toAction(actionEntity);
+
         if (!action)
           return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+
         return res(ctx.json<Action>(action));
       }
 
@@ -76,8 +75,10 @@ export const actionHandlers = [
       });
 
       const action = convert.toAction(actionEntity);
+
       if (!action)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+
       return res(ctx.json<Action>(action));
     }
   ),

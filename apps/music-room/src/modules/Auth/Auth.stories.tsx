@@ -1,6 +1,6 @@
 import { TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { authHandlers } from '../../tests/handlers/auth';
+import { handlers } from '../../tests/handlers';
 import { scenarios } from '../../tests/scenarios';
 import { Auth } from './Auth';
 
@@ -19,9 +19,4 @@ const Template: ComponentStory<never> = () => {
 };
 
 export const Playground = Template.bind({});
-
-Playground.parameters = {
-  msw: {
-    handlers: [...authHandlers],
-  },
-};
+Playground.parameters = { msw: { handlers } };

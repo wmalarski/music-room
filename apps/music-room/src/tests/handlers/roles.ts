@@ -19,7 +19,9 @@ export const rolesHandlers = [
         where: { id: { equals: req.body.id } },
         data: req.body,
       });
+
       const role = convert.toRole(roleEntity);
+
       if (!role)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 
@@ -32,6 +34,7 @@ export const rolesHandlers = [
       const profile = mockDb.profile.findFirst({
         where: { id: { equals: req.body.profile_id } },
       });
+
       const room = mockDb.room.findFirst({
         where: { id: { equals: req.body.room_id } },
       });
@@ -44,7 +47,9 @@ export const rolesHandlers = [
         room,
         role: { role: req.body.role },
       });
+
       const role = convert.toRole(roleEntity);
+
       if (!role)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 
@@ -58,6 +63,7 @@ export const rolesHandlers = [
     mockDb.role.delete({
       where: { id: { equals: Number(id) } },
     });
+
     return res(ctx.json({}));
   }),
 ];

@@ -13,9 +13,11 @@ export const authHandlers = [
     `${AUTH_ENDPOINT}/token`,
     (req, res, ctx) => {
       const credentials: UserCredentials = JSON.parse(req.body);
+
       const userEntity = mockDb.user.findFirst({
         where: { email: { equals: credentials.email } },
       });
+
       const user = convert.toUser(userEntity);
 
       if (!user)
@@ -44,6 +46,7 @@ export const authHandlers = [
 
       const id = String(dbIndexCounter());
       const user = { ...defaultUser, ...req.body };
+
       mockDb.user.create({
         id,
         email: req.body.email,

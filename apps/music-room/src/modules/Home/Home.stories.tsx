@@ -1,7 +1,6 @@
 import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { membersHandlers } from '../../tests/handlers/members';
-import { profilesHandlers } from '../../tests/handlers/profile';
+import { handlers } from '../../tests/handlers';
 import { convert } from '../../tests/models';
 import { scenarios } from '../../tests/scenarios';
 import { Home } from './Home';
@@ -21,14 +20,8 @@ const HomeStory = ({ wrapperProps }: PropsWithTestWrapper) => {
 
 const Template: ComponentStory<typeof HomeStory> = HomeStory;
 
-const parameters = {
-  msw: {
-    handlers: [...membersHandlers, ...profilesHandlers],
-  },
-};
-
 export const NoRooms = Template.bind({});
-NoRooms.parameters = parameters;
+NoRooms.parameters = { msw: { handlers } };
 NoRooms.args = {
   wrapperProps: {
     user: convert.toUser(scenarios?.noRoomsUser.user),
@@ -36,7 +29,7 @@ NoRooms.args = {
 };
 
 export const ManyRooms = Template.bind({});
-ManyRooms.parameters = parameters;
+ManyRooms.parameters = { msw: { handlers } };
 ManyRooms.args = {
   wrapperProps: {
     user: convert.toUser(scenarios?.manyRoomsUser.user),
@@ -44,7 +37,7 @@ ManyRooms.args = {
 };
 
 export const FewRooms = Template.bind({});
-FewRooms.parameters = parameters;
+FewRooms.parameters = { msw: { handlers } };
 FewRooms.args = {
   wrapperProps: {
     user: convert.toUser(scenarios?.fewRoomsUser.user),

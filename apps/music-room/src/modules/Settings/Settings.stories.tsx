@@ -1,8 +1,6 @@
 import { PropsWithTestWrapper, TestWrapper } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { membersHandlers } from '../../tests/handlers/members';
-import { rolesHandlers } from '../../tests/handlers/roles';
-import { roomHandlers } from '../../tests/handlers/rooms';
+import { handlers } from '../../tests/handlers';
 import { convert } from '../../tests/models';
 import { scenarios } from '../../tests/scenarios';
 import { Settings } from './Settings';
@@ -22,14 +20,8 @@ const SettingsStory = ({ wrapperProps }: PropsWithTestWrapper) => {
 
 const Template: ComponentStory<typeof SettingsStory> = SettingsStory;
 
-const parameters = {
-  msw: {
-    handlers: [...membersHandlers, ...roomHandlers, ...rolesHandlers],
-  },
-};
-
 export const User = Template.bind({});
-User.parameters = parameters;
+User.parameters = { msw: { handlers } };
 User.args = {
   wrapperProps: {
     role: convert.toRole(scenarios?.roomWithManyUsers.userRoles[0]),
@@ -40,7 +32,7 @@ User.args = {
 };
 
 export const Mod = Template.bind({});
-Mod.parameters = parameters;
+Mod.parameters = { msw: { handlers } };
 Mod.args = {
   wrapperProps: {
     role: convert.toRole(scenarios?.roomWithManyUsers.modRole),
@@ -51,7 +43,7 @@ Mod.args = {
 };
 
 export const Owner = Template.bind({});
-Owner.parameters = parameters;
+Owner.parameters = { msw: { handlers } };
 Owner.args = {
   wrapperProps: {
     role: convert.toRole(scenarios?.roomWithManyUsers.authorRole),

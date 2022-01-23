@@ -7,13 +7,13 @@ import {
 } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 import { convert, mockDb } from '../models';
+import { getEqParam } from './utils';
 
 export const profilesHandlers = [
   rest.get<DefaultRequestBody, never, Profile | ResponseError>(
     TABLES_ENDPOINTS.profiles,
     (req, res, ctx) => {
-      const id = req.url.searchParams.get('user_id');
-      const [, userId] = (id ?? '').split('.');
+      const userId = getEqParam(req, 'user_id');
 
       if (!userId)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
@@ -21,7 +21,9 @@ export const profilesHandlers = [
       const entity = mockDb.profile.findFirst({
         where: { user_id: { id: { equals: userId } } },
       });
+
       const profile = convert.toProfile(entity);
+
       if (!profile)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 
@@ -35,7 +37,9 @@ export const profilesHandlers = [
         where: { id: { equals: req.body.id } },
         data: req.body,
       });
+
       const profile = convert.toProfile(entity);
+
       if (!profile)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
 

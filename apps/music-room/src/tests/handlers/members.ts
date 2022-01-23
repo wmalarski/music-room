@@ -1,6 +1,7 @@
 import { Member, TABLES_ENDPOINTS } from '@music-room/data-access';
 import { DefaultRequestBody, rest } from 'msw';
 import { convert, mockDb } from '../models';
+import { getEqParam } from './utils';
 
 export const membersHandlers = [
   rest.get<DefaultRequestBody, never, Member[]>(
@@ -8,11 +9,8 @@ export const membersHandlers = [
     (req, res, ctx) => {
       const offset = Number(req.url.searchParams.get('offset'));
       const limit = Number(req.url.searchParams.get('limit'));
-      const userEqId = req.url.searchParams.get('user_id');
-      const roomEqId = req.url.searchParams.get('room_id');
-
-      const [, userId] = (userEqId ?? '').split('.');
-      const [, roomId] = (roomEqId ?? '').split('.');
+      const roomId = getEqParam(req, 'room_id');
+      const userId = getEqParam(req, 'user_id');
 
       const where = {
         ...(userId

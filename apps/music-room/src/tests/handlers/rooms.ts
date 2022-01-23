@@ -20,8 +20,10 @@ export const roomHandlers = [
         data: req.body,
       });
       const room = convert.toRoom(roomEntity);
+
       if (!room)
         return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+
       return res(ctx.json<Room>(room));
     }
   ),
