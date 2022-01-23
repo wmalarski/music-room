@@ -1,8 +1,5 @@
 import {
-  defaultRole,
   defaultRoom,
-  defaultUser,
-  Member,
   PropsWithTestWrapper,
   randomMembers,
   ResponseError,
@@ -14,7 +11,10 @@ import {
   UpdateRoomArgs,
 } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DefaultRequestBody, rest } from 'msw';
+import { rest } from 'msw';
+import { membersHandlers } from '../../tests/handlers/members';
+import { convert } from '../../tests/models';
+import { scenarios } from '../../tests/scenarios';
 import { Settings } from './Settings';
 
 export default {
@@ -37,18 +37,7 @@ const members = randomMembers(200);
 const parameters = {
   msw: {
     handlers: [
-      rest.get<DefaultRequestBody, never, Member[]>(
-        TABLES_ENDPOINTS.members,
-        (req, res, ctx) => {
-          const offset = Number(req.url.searchParams.get('offset'));
-          const limit = Number(req.url.searchParams.get('limit'));
-          const range = `${offset}-${offset + limit}/${members.length}`;
-          return res(
-            ctx.json(members.slice(offset, offset + limit)),
-            ctx.set('content-range', range)
-          );
-        }
-      ),
+      ...membersHandlers,
       rest.patch<UpdateRoomArgs, never, Room | ResponseError>(
         TABLES_ENDPOINTS.rooms,
         (req, res, ctx) => {
@@ -78,8 +67,10 @@ export const User = Template.bind({});
 User.parameters = parameters;
 User.args = {
   wrapperProps: {
-    role: defaultRole,
-    user: defaultUser,
+    role: convert.toRole(scenarios?.roomWithManyUsers.userRoles[0]),
+    profile: convert.toProfile(scenarios?.roomWithManyUsers.profiles[0]),
+    user: convert.toUser(scenarios?.roomWithManyUsers.users[0]),
+    room: convert.toRoom(scenarios?.roomWithManyUsers.room),
   },
 };
 
@@ -87,8 +78,10 @@ export const Mod = Template.bind({});
 Mod.parameters = parameters;
 Mod.args = {
   wrapperProps: {
-    role: { ...defaultRole, role: 'mod' },
-    user: defaultUser,
+    role: convert.toRole(scenarios?.roomWithManyUsers.modRole),
+    profile: convert.toProfile(scenarios?.roomWithManyUsers.mod),
+    user: convert.toUser(scenarios?.roomWithManyUsers.mod.user_id),
+    room: convert.toRoom(scenarios?.roomWithManyUsers.room),
   },
 };
 
@@ -96,7 +89,9 @@ export const Owner = Template.bind({});
 Owner.parameters = parameters;
 Owner.args = {
   wrapperProps: {
-    role: { ...defaultRole, role: 'owner' },
-    user: defaultUser,
+    role: convert.toRole(scenarios?.roomWithManyUsers.authorRole),
+    profile: convert.toProfile(scenarios?.roomWithManyUsers.author),
+    user: convert.toUser(scenarios?.roomWithManyUsers.author.user_id),
+    room: convert.toRoom(scenarios?.roomWithManyUsers.room),
   },
 };

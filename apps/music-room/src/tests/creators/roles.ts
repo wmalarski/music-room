@@ -16,21 +16,23 @@ export const createMockRole = ({ profile, room, role }: CreateMockRoleArgs) => {
 };
 
 type CreateMockRolesArgs = {
-  profile: MockEntity<'profile'>;
+  profiles: MockEntity<'profile'>[];
   rooms: MockEntity<'room'>[];
   role?: Pick<Role, 'role'>;
 };
 
 export const createMockRoles = ({
-  profile,
+  profiles,
   rooms,
   role,
 }: CreateMockRolesArgs) => {
-  return rooms.map((room) =>
-    createMockRole({
-      profile,
-      room,
-      role,
-    })
+  return profiles.flatMap((profile) =>
+    rooms.map((room) =>
+      createMockRole({
+        profile,
+        room,
+        role,
+      })
+    )
   );
 };

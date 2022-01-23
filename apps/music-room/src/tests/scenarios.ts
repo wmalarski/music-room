@@ -1,77 +1,61 @@
-import { createMockProfile } from './creators/profile';
+import { createMockProfile, createMockProfiles } from './creators/profile';
 import { createMockRoles } from './creators/roles';
-import { createMockRoomWithAuthor as createMockRoomsWithAuthor } from './creators/room';
-import { createMockUser } from './creators/user';
+import {
+  createMockRoom,
+  createMockRoomWithAuthor as createMockRoomsWithAuthor,
+} from './creators/room';
+import { createMockUser, createMockUsers } from './creators/user';
 
-export const noRoomsUserScenario = () => {
-  const userEntity = createMockUser();
-  return {
-    user: userEntity,
-    profile: createMockProfile({
-      userEntity,
-      profile: { name: 'noRoomsUserName' },
-    }),
-  };
-};
-
-export const manyRoomsUserScenario = () => {
+export const userWithRoomsScenario = (roomsCount: number) => {
   const user = createMockUser();
-  const profile = createMockProfile({
-    userEntity: user,
-    profile: { name: 'manyRoomsUserName' },
-  });
-  const rooms = createMockRoomsWithAuthor({
-    author: profile,
-    count: 200,
-  });
+  const author = createMockProfile({ userEntity: user });
+  const rooms = createMockRoomsWithAuthor({ author, count: roomsCount });
   const roles = createMockRoles({
-    profile,
+    profiles: [author],
     rooms,
     role: { role: 'owner' },
   });
-  return {
-    user,
-    profile,
-    rooms,
-    roles,
-  };
+  return { user, author, rooms, roles };
 };
 
-export const fewRoomsUserScenario = () => {
-  const user = createMockUser();
-  const profile = createMockProfile({
-    userEntity: user,
-    profile: { name: 'fewRoomsUserName' },
-  });
-  const rooms = createMockRoomsWithAuthor({
-    author: profile,
-    count: 4,
-  });
-  const roles = createMockRoles({
-    profile,
-    rooms,
+export const roomWithUsersScenario = (usersCount: number) => {
+  const users = createMockUsers({ count: usersCount });
+  const [author, mod, ...profiles] = createMockProfiles({ users });
+  const room = createMockRoom({ author });
+  const [authorRole] = createMockRoles({
+    profiles: [author],
+    rooms: [room],
     role: { role: 'owner' },
   });
-  return {
-    user: user,
-    profile: profile,
-    rooms,
-    roles,
-  };
+  const [modRole] = createMockRoles({
+    profiles: [mod],
+    rooms: [room],
+    role: { role: 'mod' },
+  });
+  const userRoles = createMockRoles({
+    profiles: profiles,
+    rooms: [room],
+    role: { role: 'user' },
+  });
+  return { users, author, mod, profiles, room, authorRole, modRole, userRoles };
 };
 
 type ScenariosResults = {
-  noRoomsUserScenario: ReturnType<typeof noRoomsUserScenario>;
-  manyRoomsUserScenario: ReturnType<typeof manyRoomsUserScenario>;
-  fewRoomsUserScenario: ReturnType<typeof fewRoomsUserScenario>;
+  noRoomsUser: ReturnType<typeof userWithRoomsScenario>;
+  manyRoomsUser: ReturnType<typeof userWithRoomsScenario>;
+  fewRoomsUser: ReturnType<typeof userWithRoomsScenario>;
+  roomWithFewUsers: ReturnType<typeof roomWithUsersScenario>;
+  roomWithManyUsers: ReturnType<typeof roomWithUsersScenario>;
 };
 
 export let scenarios: ScenariosResults | null = null;
 
 export const loadScenarios = (): void => {
   scenarios = {
-    fewRoomsUserScenario: fewRoomsUserScenario(),
-    manyRoomsUserScenario: manyRoomsUserScenario(),
-    noRoomsUserScenario: noRoomsUserScenario(),
+    fewRoomsUser: userWithRoomsScenario(0),
+    manyRoomsUser: userWithRoomsScenario(200),
+    noRoomsUser: userWithRoomsScenario(4),
+    roomWithFewUsers: roomWithUsersScenario(4),
+    roomWithManyUsers: roomWithUsersScenario(100),
   };
 };

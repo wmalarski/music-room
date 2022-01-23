@@ -31,7 +31,7 @@ export const NoRooms = Template.bind({});
 NoRooms.parameters = parameters;
 NoRooms.args = {
   wrapperProps: {
-    user: convert.toUser(scenarios?.noRoomsUserScenario.user),
+    user: convert.toUser(scenarios?.noRoomsUser.user),
   },
 };
 
@@ -39,7 +39,7 @@ export const ManyRooms = Template.bind({});
 ManyRooms.parameters = parameters;
 ManyRooms.args = {
   wrapperProps: {
-    user: convert.toUser(scenarios?.manyRoomsUserScenario.user),
+    user: convert.toUser(scenarios?.manyRoomsUser.user),
   },
 };
 
@@ -47,6 +47,6 @@ export const FewRooms = Template.bind({});
 FewRooms.parameters = parameters;
 FewRooms.args = {
   wrapperProps: {
-    user: convert.toUser(scenarios?.fewRoomsUserScenario.user),
+    user: convert.toUser(scenarios?.fewRoomsUser.user),
   },
 };

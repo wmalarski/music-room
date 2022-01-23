@@ -20,13 +20,11 @@ export const createMockProfile = ({
 };
 
 type CreateMockProfilesArgs = {
-  count: number;
+  users: MockEntity<'user'>[];
 };
 
 export const createMockProfiles = ({
-  count,
+  users,
 }: CreateMockProfilesArgs): MockEntity<'profile'>[] => {
-  return Array(count)
-    .fill(0)
-    .map(() => createMockProfile({ userEntity: createMockUser() }));
+  return users.map(() => createMockProfile({ userEntity: createMockUser() }));
 };
