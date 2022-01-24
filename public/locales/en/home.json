@@ -1,7 +1,7 @@
 {
   "createRoomHeader": "Create new room",
-"addRoom": "Add Room",
-"slugPatternIsRequired": "Use [A-Za-z0-9]+",
-"roomNamePlaceholder": "Name",
-"roomSlugPlaceholder": "Slug"
+  "addRoom": "Add Room",
+  "slugPatternIsRequired": "Use [A-Za-z0-9]+",
+  "roomNamePlaceholder": "Name",
+  "roomSlugPlaceholder": "Slug"
 }
