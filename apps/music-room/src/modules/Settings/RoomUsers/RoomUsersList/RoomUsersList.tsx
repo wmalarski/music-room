@@ -1,5 +1,5 @@
 import { Member, RoomRole, SelectMembersResult } from '@music-room/data-access';
-import { Card, Divider, Flex } from '@music-room/ui';
+import { Card, Divider, Flex, SkeletonBox } from '@music-room/ui';
 import { ReactElement, useRef } from 'react';
 import { useVirtualPages } from '../../../../hooks/useVirtualPages';
 import { RoomUsersHeader } from './RoomUsersHeader/RoomUsersHeader';
@@ -41,18 +41,16 @@ export const RoomUsersList = ({
     estimateSize,
   });
 
-  const handleRoleChange = (member?: Member) => (role: RoomRole) => {
-    if (!member) return;
+  const handleRoleChange = (member: Member) => (role: RoomRole) => {
     onRoleChange(member, role);
   };
 
-  const handleRemoveClick = (member?: Member) => () => {
-    if (!member) return;
+  const handleRemoveClick = (member: Member) => () => {
     onRemoveClick(member);
   };
 
   const pairs = virtualizer.virtualItems.map((row) => ({
-    member: data?.members.at(row.index - data.offset),
+    member: data?.members[row.index - offset],
     row,
   }));
 
@@ -71,11 +69,15 @@ export const RoomUsersList = ({
               gap="xs"
               spaceY="xs"
             >
-              <RoomUsersListItem
-                member={member}
-                onRoleChange={handleRoleChange(member)}
-                onRemoveClick={handleRemoveClick(member)}
-              />
+              {member ? (
+                <RoomUsersListItem
+                  member={member}
+                  onRoleChange={handleRoleChange(member)}
+                  onRemoveClick={handleRemoveClick(member)}
+                />
+              ) : (
+                <SkeletonBox height="xl" />
+              )}
               <Divider orientation="horizontal" color={5} />
             </Flex>
           ))}

@@ -9,6 +9,7 @@ export const membersHandlers = [
     (req, res, ctx) => {
       const offset = Number(req.url.searchParams.get('offset'));
       const limit = Number(req.url.searchParams.get('limit'));
+      const profileName = getEqParam(req, 'profile_name');
       const roomId = getEqParam(req, 'room_id');
       const userId = getEqParam(req, 'user_id');
 
@@ -17,6 +18,9 @@ export const membersHandlers = [
           ? { profile_id: { user_id: { id: { equals: userId } } } }
           : {}),
         ...(roomId ? { room_id: { id: { equals: Number(roomId) } } } : {}),
+        ...(profileName
+          ? { profile_id: { name: { contains: profileName } } }
+          : {}),
       };
 
       const count = mockDb.role.count({ where });

@@ -48,4 +48,19 @@ describe('<DeleteRoom />', () => {
 
     expect(push).toHaveBeenCalledWith(`/`);
   });
+
+  it('should render default view', async () => {
+    expect.hasAssertions();
+
+    const { room } = roomWithUsersScenario(3);
+
+    renderComponent({
+      View: undefined,
+      wrapperProps: {
+        room: convert.toRoom(room),
+      },
+    });
+
+    expect(await screen.findByRole('button')).toBeInTheDocument();
+  });
 });

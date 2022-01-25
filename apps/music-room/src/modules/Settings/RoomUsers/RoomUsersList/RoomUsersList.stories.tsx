@@ -15,7 +15,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   data: {
     count: 2,
-    offset: 0,
     members: [
       {
         ...defaultMember,
