@@ -18,8 +18,7 @@ describe('<Home />', () => {
   it('should render', async () => {
     expect.hasAssertions();
 
-    const { author, rooms, user } = userWithRoomsScenario(4);
-    const firstRoomName = rooms[0].name;
+    const { author, user } = userWithRoomsScenario(4);
 
     renderComponent({
       wrapperProps: {
