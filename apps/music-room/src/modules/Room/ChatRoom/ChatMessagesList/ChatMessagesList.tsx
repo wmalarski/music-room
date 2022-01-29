@@ -1,38 +1,23 @@
 import { SelectMessagesReturn } from '@music-room/data-access';
 import { Card, Divider, Flex } from '@music-room/ui';
-import { ReactElement, useRef } from 'react';
-import { useVirtualPages } from '../../../../hooks/useVirtualPages';
+import { ReactElement, Ref } from 'react';
+import { useVirtual } from 'react-virtual';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 import * as Styles from './ChatMessagesList.styles';
 
 type Props = {
   data?: SelectMessagesReturn;
-  offset: number;
-  limit: number;
-  onOffsetChange: (offset: number) => void;
+  virtualizer: ReturnType<typeof useVirtual>;
+  parentRef: Ref<HTMLDivElement>;
 };
-
-const estimateSize = (): number => 40;
 
 export const ChatMessagesList = ({
   data,
-  offset,
-  limit,
-  onOffsetChange,
+  virtualizer,
+  parentRef,
 }: Props): ReactElement => {
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const virtualizer = useVirtualPages({
-    start: offset,
-    limit,
-    size: data?.count ?? 0,
-    parentRef,
-    onOffsetChange,
-    estimateSize,
-  });
-
   const pairs = virtualizer.virtualItems.map((row) => ({
-    message: data?.messages.at(row.index - data.offset),
+    message: data?.messages[row.index - data.offset],
     row,
   }));
 

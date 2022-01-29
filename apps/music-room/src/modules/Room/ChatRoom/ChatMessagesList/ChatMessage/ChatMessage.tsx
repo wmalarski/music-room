@@ -1,5 +1,5 @@
 import { Message } from '@music-room/data-access';
-import { Debug, SkeletonBox } from '@music-room/ui';
+import { Flex, SkeletonBox, Typography } from '@music-room/ui';
 import { ReactElement } from 'react';
 
 type Props = {
@@ -8,5 +8,10 @@ type Props = {
 
 export const ChatMessage = ({ message }: Props): ReactElement => {
   if (!message) return <SkeletonBox height="xl" />;
-  return <Debug value={message} />;
+  return (
+    <Flex direction="column">
+      <Typography>{message.data.url}</Typography>
+      <Typography>{message.created_at}</Typography>
+    </Flex>
+  );
 };

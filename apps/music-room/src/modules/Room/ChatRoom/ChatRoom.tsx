@@ -5,21 +5,24 @@ import {
   useSubscribeToMessages,
 } from '@music-room/data-access';
 import { Flex } from '@music-room/ui';
-import { ReactElement, useState } from 'react';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { ReactElement, useRef } from 'react';
+import { useDebouncedState } from '../../../hooks/useDebouncedState';
+import {
+  getOffsetsForIndex,
+  useVirtualPages,
+} from '../../../hooks/useVirtualPages';
 import {
   ChatInputView,
   ChatInputViewData,
 } from './ChatInputView/ChatInputView';
 import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
-
-const selectLimit = 40;
+import { estimateSize, selectLimit } from './ChatRoom.utils';
 
 export const ChatRoom = (): ReactElement => {
   const { room_id: roomId, profile_id: profileId } = useRole();
 
-  const [offset, setOffset] = useState(0);
-  const [query, setQuery] = useState('');
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useDebouncedState(0, 500);
 
   const { data } = useSelectMessages(
     {
@@ -32,7 +35,14 @@ export const ChatRoom = (): ReactElement => {
     }
   );
 
-  useSubscribeToMessages({ roomId, limit: 20, offset, profileId });
+  const virtualizer = useVirtualPages({
+    start: offset,
+    limit: selectLimit,
+    size: data?.count ?? 0,
+    parentRef,
+    onOffsetChange: setOffset,
+    estimateSize,
+  });
 
   const {
     mutate: insertMessage,
@@ -40,40 +50,40 @@ export const ChatRoom = (): ReactElement => {
     isLoading,
   } = useInsertMessage({
     roomId,
-    limit: 20,
-    offset,
+    limit: selectLimit,
+    offsets: getOffsetsForIndex({
+      index: data?.count,
+      limit: selectLimit,
+    }),
   });
 
-  const handleSubmit = (data: ChatInputViewData) => {
+  useSubscribeToMessages({
+    roomId,
+    limit: selectLimit,
+    offset,
+    profileId,
+  });
+
+  const handleSubmit = (args: ChatInputViewData) => {
     insertMessage({
       profile_id: profileId,
       room_id: roomId,
-      data: { kind: 'message#0.0.1', url: data.url },
+      data: { kind: 'message#0.0.1', url: args.url },
     });
+    virtualizer.scrollToIndex(data?.count ?? 0);
   };
-
-  const handleQueryChange = useDebounce((index: number) => {
-    setOffset(index);
-  }, 500);
-
-  // const { data: selections } = useSelectSuggestions({ query });
-
-  // useEffect(() => console.log("selections", selections), [selections]);
 
   return (
     <Flex direction="column">
       <ChatMessagesList
         data={data}
-        offset={offset}
-        limit={selectLimit}
-        onOffsetChange={handleQueryChange}
+        parentRef={parentRef}
+        virtualizer={virtualizer}
       />
       ;
       <ChatInputView
         error={error}
         isLoading={isLoading}
-        onQueryChange={setQuery}
-        query={query}
         onSubmit={handleSubmit}
       />
     </Flex>

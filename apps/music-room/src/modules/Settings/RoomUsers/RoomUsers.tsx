@@ -6,8 +6,8 @@ import {
   useSelectMembers,
   useUpdateRole,
 } from '@music-room/data-access';
-import { ReactElement, useState } from 'react';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { ReactElement } from 'react';
+import { useDebouncedState } from '../../../hooks/useDebouncedState';
 import { RoomUsersList } from './RoomUsersList/RoomUsersList';
 
 type Props = {
@@ -19,8 +19,8 @@ const selectLimit = 40;
 export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
   const { id } = useRoom();
 
-  const [offset, setOffset] = useState(0);
-  const [query, setQuery] = useState<string>('');
+  const [offset, setOffset] = useDebouncedState(0, 500);
+  const [query, setQuery] = useDebouncedState('', 500);
 
   const { data } = useSelectMembers(
     {
@@ -46,22 +46,14 @@ export const RoomUsers = ({ View = RoomUsersList }: Props): ReactElement => {
     updateRole({ id: profile.id, role });
   };
 
-  const handleQueryChange = useDebounce((text: string) => {
-    setQuery(text);
-  }, 500);
-
-  const handleOffsetChange = useDebounce((index: number) => {
-    setOffset(index);
-  }, 500);
-
   return (
     <View
       data={data}
       offset={offset}
       query={query}
       limit={selectLimit}
-      onOffsetChange={handleOffsetChange}
-      onQueryChange={handleQueryChange}
+      onOffsetChange={setOffset}
+      onQueryChange={setQuery}
       onRemoveClick={handleRemoveClick}
       onRoleChange={handleRoleChange}
     />
