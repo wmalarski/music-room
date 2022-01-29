@@ -1,7 +1,6 @@
 export * from './Avatar/Avatar';
 export * from './Button/Button';
 export * from './Card/Card';
-export * from './Debug/Debug';
 export * from './Dialog/Dialog';
 export * from './Divider/Divider';
 export * from './Flex/Flex';

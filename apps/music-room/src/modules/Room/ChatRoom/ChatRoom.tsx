@@ -19,14 +19,14 @@ import { ChatMessagesList } from './ChatMessagesList/ChatMessagesList';
 import { estimateSize, selectLimit } from './ChatRoom.utils';
 
 export const ChatRoom = (): ReactElement => {
-  const { room_id: roomId, profile_id: profileId } = useRole();
+  const { room_id, profile_id } = useRole();
 
   const parentRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useDebouncedState(0, 500);
 
   const { data } = useSelectMessages(
     {
-      roomId,
+      roomId: room_id,
       limit: selectLimit,
       offset,
     },
@@ -49,7 +49,7 @@ export const ChatRoom = (): ReactElement => {
     error,
     isLoading,
   } = useInsertMessage({
-    roomId,
+    roomId: room_id,
     limit: selectLimit,
     offsets: getOffsetsForIndex({
       index: data?.count,
@@ -58,19 +58,19 @@ export const ChatRoom = (): ReactElement => {
   });
 
   useSubscribeToMessages({
-    roomId,
+    roomId: room_id,
     limit: selectLimit,
+    profileId: profile_id,
     offset,
-    profileId,
   });
 
   const handleSubmit = (args: ChatInputViewData) => {
     insertMessage({
-      profile_id: profileId,
-      room_id: roomId,
+      profile_id,
+      room_id,
       data: { kind: 'message#0.0.1', url: args.url },
     });
-    virtualizer.scrollToIndex(data?.count ?? 0);
+    virtualizer.scrollToOffset(virtualizer.totalSize);
   };
 
   return (

@@ -28,9 +28,8 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
   });
 
   const handleSubmit = (data: ReactionsViewData) => {
-    if (!currentMessage) return;
     upsertMessage({
-      message_id: currentMessage.id,
+      message_id: data.message_id,
       profile_id,
       id: action?.id ?? undefined,
       dislike_at: data.dislikeAt,
