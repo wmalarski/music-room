@@ -63,7 +63,7 @@ export const SignInView = ({
         )}
       </FormFieldset>
       {error && <FormError role="alert">{error.message}</FormError>}
-      <Button isLoading={isLoading} type="submit">
+      <Button isLoading={isLoading} type="submit" name="signIn">
         <Typography size="sm">{t('signInButton')}</Typography>
       </Button>
     </Form>
