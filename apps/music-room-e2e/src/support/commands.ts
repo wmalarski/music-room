@@ -18,8 +18,12 @@ declare namespace Cypress {
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  cy.get('[name=email]').type(email);
-  cy.get('[name=password]').type(password);
+  if (email.length > 0) {
+    cy.get('[name=email]').type(email);
+  }
+  if (password.length > 0) {
+    cy.get('[name=password]').type(password);
+  }
   cy.get('[name=signIn]').click();
 });
 //

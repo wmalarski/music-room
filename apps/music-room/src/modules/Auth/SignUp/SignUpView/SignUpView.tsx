@@ -74,7 +74,7 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
         )}
       </FormFieldset>
       {error && <FormError role="alert">{error.message}</FormError>}
-      <Button isLoading={isLoading} type="submit">
+      <Button isLoading={isLoading} name="signUp" type="submit">
         <Typography size="sm">{t('signUpButton')}</Typography>
       </Button>
     </Form>
