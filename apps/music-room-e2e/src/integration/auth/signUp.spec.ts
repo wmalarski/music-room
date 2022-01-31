@@ -1,7 +1,7 @@
-describe('music-room', () => {
+describe('signUp', () => {
   beforeEach(() => cy.visit('/?tab=signUp'));
 
-  it('should redirect to login after register', function () {
+  it('should redirect to login after register', () => {
     cy.fixture('session').then((data) => {
       cy.intercept(
         {
@@ -17,8 +17,9 @@ describe('music-room', () => {
     cy.get('[name=email]').type('hello@example.com');
     cy.get('[name=password]').type('password');
     cy.get('[name=confirmPassword]').type('password');
-    cy.get('[name=signUp]').click();
 
-    cy.contains('Music Room', { timeout: 10000 });
+    cy.get('form').submit();
+
+    cy.contains('Music Room');
   });
 });

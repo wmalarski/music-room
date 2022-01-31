@@ -25,3 +25,7 @@ export const FormError = styled('p', {
   color: '$error1',
   margin: 0,
 });
+
+FormError.defaultProps = {
+  role: 'alert',
+};

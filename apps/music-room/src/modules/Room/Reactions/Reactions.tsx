@@ -21,7 +21,7 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
     roomId: room_id,
   });
 
-  const { mutate: upsertMessage } = useUpsertAction();
+  const { mutate: upsertMessage, error } = useUpsertAction();
   const { data: action = null } = useSelectAction({
     profileId: profile_id,
     messageId: currentMessage?.id ?? null,
@@ -38,6 +38,11 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
   };
 
   return (
-    <View action={action} message={currentMessage} onChange={handleSubmit} />
+    <View
+      action={action}
+      message={currentMessage}
+      error={error}
+      onChange={handleSubmit}
+    />
   );
 };

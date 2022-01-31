@@ -19,11 +19,11 @@ export const CreateRoom = ({ View = CreateRoomView }: Props): ReactElement => {
 
   const {
     data: profile = null,
-    error,
+    error: selectError,
     isLoading,
   } = useSelectProfile({ userId: user.id });
 
-  const { mutate: insertRoom } = useInsertRoom({
+  const { mutate: insertRoom, error: insertError } = useInsertRoom({
     onSuccess: (room) => router.push(paths.room(room.slug)),
   });
 
@@ -39,7 +39,7 @@ export const CreateRoom = ({ View = CreateRoomView }: Props): ReactElement => {
   return (
     <View
       isLoading={isLoading}
-      error={error}
+      error={selectError ?? insertError}
       profile={profile}
       onSubmit={handleSubmit}
     />

@@ -1,8 +1,9 @@
 import { Message } from '@music-room/data-access';
-import { Button, Input } from '@music-room/ui';
+import { Button, FormError, Input } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ChangeEvent, FormEvent, ReactElement, useState } from 'react';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 
 export type ChatInputViewData = {
   url: string;
@@ -15,7 +16,7 @@ type Props = {
   onSubmit: (data: ChatInputViewData) => void;
 };
 
-export const ChatInputView = ({ onSubmit }: Props): ReactElement => {
+export const ChatInputView = ({ error, onSubmit }: Props): ReactElement => {
   const { t } = useTranslation('room');
 
   const [query, setQuery] = useState('');
@@ -33,6 +34,8 @@ export const ChatInputView = ({ onSubmit }: Props): ReactElement => {
     setQuery(event.target.value);
   };
 
+  const errorMessage = useErrorMessage({ error });
+
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -40,6 +43,7 @@ export const ChatInputView = ({ onSubmit }: Props): ReactElement => {
         value={query}
         onChange={handleChange}
       />
+      {error && <FormError role="alert">{errorMessage}</FormError>}
       <Button type="submit">{t('addMessage')}</Button>
     </form>
   );

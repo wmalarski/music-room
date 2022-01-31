@@ -1,7 +1,9 @@
 import { Action, Message } from '@music-room/data-access';
-import { Button, Flex } from '@music-room/ui';
+import { Button, Flex, FormError } from '@music-room/ui';
+import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 
 export type ReactionsViewData = {
   likeAt: string | null;
@@ -12,12 +14,14 @@ export type ReactionsViewData = {
 type Props = {
   action: Action | null;
   message: Message | null;
+  error: PostgrestError | null;
   onChange: (data: ReactionsViewData) => void;
 };
 
 export const ReactionsView = ({
   action,
   message,
+  error,
   onChange,
 }: Props): ReactElement => {
   const { t } = useTranslation('room');
@@ -40,6 +44,8 @@ export const ReactionsView = ({
     });
   };
 
+  const errorMessage = useErrorMessage({ error });
+
   return (
     <Flex direction="row">
       <Button onClick={handleLikeClick}>
@@ -48,6 +54,7 @@ export const ReactionsView = ({
       <Button onClick={handleDislikeClick}>
         {action?.dislike_at ? t('removeDislikeMessage') : t('dislikeMessage')}
       </Button>
+      {error && <FormError>{errorMessage}</FormError>}
     </Flex>
   );
 };

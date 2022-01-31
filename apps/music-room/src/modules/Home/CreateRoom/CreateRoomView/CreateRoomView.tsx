@@ -15,6 +15,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 import {
   CreateRoomFormData,
   CreateRoomViewData,
@@ -48,6 +49,7 @@ export const CreateRoomView = ({
   };
 
   const options = useCreateRoomViewOptions();
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Inset space="xl">
@@ -78,7 +80,7 @@ export const CreateRoomView = ({
               <FormError role="alert">{errors.slug.message}</FormError>
             )}
           </FormFieldset>
-          {error && <FormError role="alert">{error.message}</FormError>}
+          {error && <FormError role="alert">{errorMessage}</FormError>}
           <Button isLoading={isLoading} type="submit">
             {t('addRoom')}
           </Button>

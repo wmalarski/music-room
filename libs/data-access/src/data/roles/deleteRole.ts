@@ -1,18 +1,18 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { selectAllMembersKey } from "../members/selectMembers";
-import { Role } from "../types";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { selectAllMembersKey } from '../members/selectMembers';
+import { Role } from '../types';
 
-export type DeleteRoleArgs = Pick<Role, "id">;
+export type DeleteRoleArgs = Pick<Role, 'id'>;
 
 export const deleteRole = async ({ id }: DeleteRoleArgs): Promise<void> => {
-  const { error } = await fromSupabase("roles").delete().eq("id", id).single();
+  const { error } = await fromSupabase('roles').delete().eq('id', id);
 
   if (error) throw error;
 };

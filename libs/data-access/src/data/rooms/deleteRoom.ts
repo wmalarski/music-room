@@ -1,23 +1,20 @@
-import { PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   useMutation,
   UseMutationOptions,
   UseMutationResult,
   useQueryClient,
-} from "react-query";
-import fromSupabase from "../../utils/fromSupabase";
-import { selectAllMembersKey } from "../members/selectMembers";
-import { selectRoomByHashKey } from "./selectRoomByHash";
+} from 'react-query';
+import fromSupabase from '../../utils/fromSupabase';
+import { selectAllMembersKey } from '../members/selectMembers';
+import { selectRoomByHashKey } from './selectRoomByHash';
 
 export type DeleteRoomArgs = {
   id: number;
 };
 
 export const deleteRoom = async (args: DeleteRoomArgs): Promise<void> => {
-  const { error } = await fromSupabase("rooms")
-    .delete()
-    .eq("id", args.id)
-    .single();
+  const { error } = await fromSupabase('rooms').delete().eq('id', args.id);
 
   if (error) throw error;
 };

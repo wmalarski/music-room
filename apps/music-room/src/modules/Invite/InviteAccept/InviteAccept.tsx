@@ -21,7 +21,11 @@ export const InviteAccept = ({
   const room = useRoom();
   const router = useRouter();
 
-  const { mutate: insertRole, isLoading } = useInsertRole({
+  const {
+    mutate: insertRole,
+    isLoading,
+    error,
+  } = useInsertRole({
     onSuccess: () => {
       router.push(paths.room(room.slug));
     },
@@ -42,6 +46,7 @@ export const InviteAccept = ({
   return (
     <View
       room={room}
+      error={error}
       profile={profile}
       isLoading={isLoading}
       onAcceptClick={handleAcceptClick}
