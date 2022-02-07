@@ -14,7 +14,13 @@ export type DeleteRoomArgs = {
 };
 
 export const deleteRoom = async (args: DeleteRoomArgs): Promise<void> => {
-  const { error } = await fromSupabase('rooms').delete().eq('id', args.id);
+  const { error, body, count, data, status, statusText } = await fromSupabase(
+    'rooms'
+  )
+    .delete({ count: 'exact', returning: 'representation' })
+    .match({ id: args.id });
+
+  console.log({ args, error, body, count, data, status, statusText });
 
   if (error) throw error;
 };
