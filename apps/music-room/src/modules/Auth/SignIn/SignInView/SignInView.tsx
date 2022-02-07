@@ -11,6 +11,7 @@ import { PostgrestError, User } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 import { SignInViewData, useSignInViewOptions } from './SignInView.utils';
 
 type Props = {
@@ -34,6 +35,7 @@ export const SignInView = ({
   } = useForm<SignInViewData>();
 
   const options = useSignInViewOptions();
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -62,8 +64,8 @@ export const SignInView = ({
           <FormError role="alert">{errors.password.message}</FormError>
         )}
       </FormFieldset>
-      {error && <FormError role="alert">{error.message}</FormError>}
-      <Button isLoading={isLoading} type="submit">
+      {error && <FormError role="alert">{errorMessage}</FormError>}
+      <Button isLoading={isLoading} type="submit" name="signIn">
         <Typography size="sm">{t('signInButton')}</Typography>
       </Button>
     </Form>

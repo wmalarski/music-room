@@ -1,0 +1,15 @@
+{
+  "access_token": "eyJ.eyJ.CY80",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_token": "kHMih_-mwYUn08FTYMhx2g",
+  "user": {
+    "app_metadata": { "provider": "email" },
+    "aud": "authenticated",
+    "created_at": "",
+    "id": "qwertyuiop",
+    "user_metadata": {},
+    "role": "authenticated",
+    "email": "example@example.com"
+  }
+}

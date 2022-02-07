@@ -32,7 +32,7 @@ export const selectMessages = async ({
   const { data, error, count } = await fromSupabase('messages')
     .select('*', { count: 'estimated' })
     .eq('room_id', roomId)
-    .order('created_at', { ascending: false })
+    .order('created_at', { ascending: true })
     .range(offset, offset + limit);
 
   if (error || !data) throw error;

@@ -20,7 +20,6 @@ Primary.args = {
   offset: 0,
   data: {
     count: 2,
-    offset: 0,
     members: [
       {
         ...defaultMember,

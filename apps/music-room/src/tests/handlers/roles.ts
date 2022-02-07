@@ -1,18 +1,19 @@
 import {
-  defaultError,
+  defaultPostgrestError,
   DeleteRoleArgs,
   InsertRoleArgs,
-  ResponseError,
   Role,
+  SupabaseErrorCode,
   TABLES_ENDPOINTS,
   UpdateRolesArgs,
 } from '@music-room/data-access';
+import { PostgrestError } from '@supabase/supabase-js';
 import { rest } from 'msw';
 import { createMockRole } from '../creators/roles';
 import { convert, mockDb } from '../models';
 
 export const rolesHandlers = [
-  rest.patch<UpdateRolesArgs, never, Role | ResponseError>(
+  rest.patch<UpdateRolesArgs, never, Role | PostgrestError>(
     TABLES_ENDPOINTS.roles,
     (req, res, ctx) => {
       const roleEntity = mockDb.role.update({
@@ -23,12 +24,15 @@ export const rolesHandlers = [
       const role = convert.toRole(roleEntity);
 
       if (!role)
-        return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+        return res(
+          ctx.json<PostgrestError>(defaultPostgrestError),
+          ctx.status(400)
+        );
 
       return res(ctx.json<Role>(role));
     }
   ),
-  rest.post<InsertRoleArgs, never, Role | ResponseError>(
+  rest.post<InsertRoleArgs, never, Role | PostgrestError>(
     TABLES_ENDPOINTS.roles,
     (req, res, ctx) => {
       const profile = mockDb.profile.findFirst({
@@ -40,7 +44,26 @@ export const rolesHandlers = [
       });
 
       if (!profile || !room)
-        return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+        return res(
+          ctx.json<PostgrestError>(defaultPostgrestError),
+          ctx.status(400)
+        );
+
+      const existingProfile = mockDb.role.findFirst({
+        where: {
+          profile_id: { id: { equals: req.body.profile_id } },
+          room_id: { id: { equals: req.body.room_id } },
+        },
+      });
+
+      if (existingProfile)
+        return res(
+          ctx.json<PostgrestError>({
+            ...defaultPostgrestError,
+            code: SupabaseErrorCode.UniquenessViolation,
+          }),
+          ctx.status(400)
+        );
 
       const roleEntity = createMockRole({
         profile,
@@ -51,14 +74,21 @@ export const rolesHandlers = [
       const role = convert.toRole(roleEntity);
 
       if (!role)
-        return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+        return res(
+          ctx.json<PostgrestError>(defaultPostgrestError),
+          ctx.status(400)
+        );
 
       return res(ctx.json<Role>(role));
     }
   ),
   rest.delete<DeleteRoleArgs>(TABLES_ENDPOINTS.roles, (req, res, ctx) => {
     const [, id] = req.url.searchParams.get('id')?.split('.') ?? '';
-    if (!id) return res(ctx.json<ResponseError>(defaultError), ctx.status(400));
+    if (!id)
+      return res(
+        ctx.json<PostgrestError>(defaultPostgrestError),
+        ctx.status(400)
+      );
 
     mockDb.role.delete({
       where: { id: { equals: Number(id) } },

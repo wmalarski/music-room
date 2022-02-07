@@ -1,5 +1,6 @@
 {
 "fieldIsRequired": "Field is required",
 "errorMaxLength": "Max:",
-"errorMinLength": "Min:"
+"errorMinLength": "Min:",
+"uniquenessViolation": "Uniqueness Violation"
 }

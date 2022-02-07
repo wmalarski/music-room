@@ -17,7 +17,7 @@ const Wrapper = styled('div', {
 const styleDecorator = (Story) => {
   globalStyles();
   return (
-    <I18nextProvider i18n={i18n}>
+    <I18nextProvider i18n={i18n} useSuspense={false}>
       <Wrapper>
         <Story />
       </Wrapper>

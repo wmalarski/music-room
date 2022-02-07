@@ -1,6 +1,6 @@
-import { TFunction, useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
-import { RegisterOptions, Resolver } from 'react-hook-form';
+import { RegisterOptions, UseFormWatch } from 'react-hook-form';
 
 export type SignUpViewData = {
   email: string;
@@ -8,14 +8,9 @@ export type SignUpViewData = {
   confirmPassword: string;
 };
 
-export type SignUpViewContext = {
-  t: TFunction;
-};
-
-export const useSignUpViewOptions = (): Record<
-  keyof SignUpViewData,
-  RegisterOptions<SignUpViewData>
-> => {
+export const useSignUpViewOptions = (
+  watch: UseFormWatch<SignUpViewData>
+): Record<keyof SignUpViewData, RegisterOptions<SignUpViewData>> => {
   const { t } = useTranslation('common');
   return useMemo(
     () => ({
@@ -30,7 +25,7 @@ export const useSignUpViewOptions = (): Record<
         },
         maxLength: {
           value: 32,
-          message: `${t('errorMaxLength')}: 3`,
+          message: `${t('errorMaxLength')}: 32`,
         },
       },
       password: {
@@ -52,32 +47,12 @@ export const useSignUpViewOptions = (): Record<
           value: 8,
           message: `${t('errorMinLength')}: 8`,
         },
+        validate: (value: string) => {
+          if (value === watch('password', '')) return;
+          return `${t('fieldIsDifferent')}`;
+        },
       },
     }),
-    [t]
+    [t, watch]
   );
-};
-
-export const signUpViewResolver: Resolver<SignUpViewData, SignUpViewContext> = (
-  values,
-  context
-) => {
-  const { confirmPassword, password } = values;
-
-  if (!context) return { values, errors: {} };
-
-  return {
-    errors: {
-      ...(confirmPassword !== password
-        ? {
-            confirmPassword: {
-              type: 'required',
-              message: context.t('fieldIsDifferent'),
-              types: [],
-            },
-          }
-        : {}),
-    },
-    values,
-  };
 };

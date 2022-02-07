@@ -12,6 +12,10 @@ type Props = ComponentProps<typeof RoomUsers>;
 
 const View: Props['View'] = ({
   data,
+  limit,
+  offset,
+  query,
+  onQueryChange,
   onOffsetChange,
   onRoleChange,
   onRemoveClick,
@@ -23,14 +27,31 @@ const View: Props['View'] = ({
           <p>{member.profile_name}</p>
           <p>{`${member.profile_name} ${member.role}`}</p>
           <button
-            onClick={() => onRoleChange(member, 'mod')}
+            onClick={() => {
+              onRoleChange(member, 'mod');
+            }}
           >{`Change ${member.profile_name}`}</button>
           <button
-            onClick={() => onRemoveClick(member)}
+            onClick={() => {
+              onRemoveClick(member);
+            }}
           >{`Remove ${member.profile_name}`}</button>
         </div>
       ))}
-      <button onClick={() => onOffsetChange(1)}>Load More</button>
+      <input
+        value={query}
+        placeholder="query"
+        onChange={(event) => {
+          onQueryChange(event.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          onOffsetChange(offset + limit);
+        }}
+      >
+        Load More
+      </button>
     </>
   );
 };
@@ -109,5 +130,69 @@ describe('<RoomUsers />', () => {
     });
 
     expect(await screen.findByText(`${name} mod`)).toBeInTheDocument();
+  });
+
+  it('should receive debounced query change', async () => {
+    expect.hasAssertions();
+
+    const { room, profiles } = roomWithUsersScenario(50);
+    const firstName = profiles.at(0)?.name ?? '';
+    const lastName = profiles.at(-1)?.name ?? '';
+
+    renderComponent({
+      wrapperProps: {
+        room: convert.toRoom(room),
+      },
+    });
+
+    expect(await screen.findByText(firstName)).toBeInTheDocument();
+    expect(screen.queryByText(lastName)).toBeNull();
+
+    userEvent.type(await screen.findByPlaceholderText('query'), lastName);
+
+    await waitFor(async () => {
+      expect(await screen.findByText(lastName)).toBeInTheDocument();
+    });
+
+    expect(await screen.findByText(lastName)).toBeInTheDocument();
+  });
+
+  it('should fetch correct data after offset change', async () => {
+    expect.hasAssertions();
+
+    const { room, profiles } = roomWithUsersScenario(50);
+    const lastName = profiles.at(-1)?.name ?? '';
+
+    renderComponent({
+      wrapperProps: {
+        room: convert.toRoom(room),
+      },
+    });
+
+    expect(screen.queryByText(lastName)).toBeNull();
+
+    userEvent.click(await screen.findByText('Load More'));
+
+    await waitFor(async () => {
+      expect(await screen.findByText(lastName)).toBeInTheDocument();
+    });
+
+    expect(await screen.findByText(lastName)).toBeInTheDocument();
+  });
+
+  it('should render default view', async () => {
+    expect.hasAssertions();
+
+    const { room, profiles } = roomWithUsersScenario(4);
+    const lastName = profiles.at(-1)?.name ?? '';
+
+    renderComponent({
+      View: undefined,
+      wrapperProps: {
+        room: convert.toRoom(room),
+      },
+    });
+
+    expect(await screen.findByText('roomUsers')).toBeInTheDocument();
   });
 });

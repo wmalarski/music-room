@@ -7,10 +7,7 @@ import { InviteAccept } from './InviteAccept/InviteAccept';
 export const Invite = (): ReactElement => {
   const user = useUser();
 
-  const { data: profile } = useSelectProfile(
-    { userId: user?.id ?? '' },
-    { enabled: !!user }
-  );
+  const { data: profile } = useSelectProfile({ userId: user.id });
 
   return (
     <Layout header={<ProfileHeader />}>

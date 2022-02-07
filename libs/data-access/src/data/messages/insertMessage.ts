@@ -8,12 +8,31 @@ import {
 import fromSupabase from '../../utils/fromSupabase';
 import { Message } from '../types';
 import { selectCurrentMessageKey } from './selectCurrentMessage';
-import { selectMessagesKey, SelectMessagesReturn } from './selectMessages';
+import {
+  SelectMessagesKey,
+  selectMessagesKey,
+  SelectMessagesReturn,
+} from './selectMessages';
 
 export type InsertMessageArgs = Omit<Message, 'id' | 'created_at' | 'ended_at'>;
 
 export type InsertMessageContext = {
-  previous?: SelectMessagesReturn;
+  previous: {
+    key: SelectMessagesKey;
+    offset: number;
+    data?: SelectMessagesReturn;
+  }[];
+};
+
+type InsertMessageOptions = UseMutationOptions<
+  Message,
+  PostgrestError,
+  InsertMessageArgs,
+  InsertMessageContext
+> & {
+  roomId: number;
+  limit: number;
+  offsets: number[];
 };
 
 export const insertMessage = async (
@@ -29,56 +48,55 @@ export const insertMessage = async (
 export const useInsertMessage = ({
   roomId,
   limit,
-  offset,
+  offsets,
   ...options
-}: UseMutationOptions<
-  Message,
-  PostgrestError,
-  InsertMessageArgs,
-  InsertMessageContext
-> & {
-  roomId: number;
-  limit: number;
-  offset: number;
-}): UseMutationResult<
+}: InsertMessageOptions): UseMutationResult<
   Message,
   PostgrestError,
   InsertMessageArgs,
   InsertMessageContext
 > => {
   const client = useQueryClient();
-  const key = selectMessagesKey({ roomId, limit, offset });
   const keyCurrent = selectCurrentMessageKey({ roomId });
+  const keys = offsets.map((offset) => ({
+    key: selectMessagesKey({ roomId, limit, offset }),
+    offset,
+  }));
 
   return useMutation(insertMessage, {
     ...options,
-    onMutate: async (action) => {
-      await client.cancelQueries(key);
+    onMutate: async (message) => {
+      await Promise.all(keys.map(({ key }) => client.cancelQueries(key)));
 
-      const previous = client.getQueryData<SelectMessagesReturn>(key);
-
-      if (!previous || previous.count <= offset + limit) return {};
-
-      const message: Message = {
-        id: Math.max(...previous.messages.map((message) => message.id)) + 1,
-        created_at: new Date().toISOString(),
-        ...action,
-      };
-
-      client.setQueryData<SelectMessagesReturn>(key, {
-        count: previous.count + 1,
+      const previous = keys.map(({ key, offset }) => ({
+        data: client.getQueryData<SelectMessagesReturn>(key),
         offset,
-        messages: [...previous.messages, message],
+        key,
+      }));
+
+      previous.forEach(({ key, data, offset }) => {
+        const messages = data?.messages ?? [];
+        const id = Math.max(...messages.map((current) => current.id)) + 1;
+        const next = { id, created_at: new Date().toISOString(), ...message };
+        client.setQueryData<SelectMessagesReturn>(key, {
+          messages: [...messages, next],
+          count: (data?.count ?? 0) + 1,
+          offset,
+        });
       });
 
       return { previous };
     },
-    onError: (err, action, context) => {
-      client.setQueryData(key, context?.previous);
-      options?.onError?.(err, action, context);
+    onError: (err, message, context) => {
+      context?.previous.forEach(({ key, data }) => {
+        client.setQueryData(key, data);
+      });
+      options?.onError?.(err, message, context);
     },
     onSettled: (message, ...args) => {
-      client.invalidateQueries(key);
+      keys.forEach(({ key }) => {
+        client.invalidateQueries(key);
+      });
       client.invalidateQueries(keyCurrent);
       options?.onSettled?.(message, ...args);
     },

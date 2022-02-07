@@ -1,6 +1,9 @@
 import { Controls, Message } from '@music-room/data-access';
+import { FormError } from '@music-room/ui';
+import { PostgrestError } from '@supabase/supabase-js';
 import { ReactElement, RefObject } from 'react';
 import YouTube from 'react-youtube';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 import { PlayerControls } from './PlayerControls/PlayerControls';
 
 type Props = {
@@ -8,6 +11,7 @@ type Props = {
   profileId: number;
   message: Message;
   controls: Controls;
+  error: PostgrestError | null;
   onEnd: () => void;
   onChange: (controls: Partial<Controls>) => void;
 };
@@ -17,6 +21,7 @@ export const VideoPlayerView = ({
   profileId,
   message,
   controls,
+  error,
   onEnd,
   onChange,
 }: Props): ReactElement => {
@@ -82,6 +87,8 @@ export const VideoPlayerView = ({
     onChange({ volume });
   };
 
+  const errorMessage = useErrorMessage({ error });
+
   return (
     <>
       <YouTube
@@ -109,6 +116,7 @@ export const VideoPlayerView = ({
         onPauseChange={handlePauseChange}
         onVolumeChange={handleVolumeChange}
       />
+      {error && <FormError role="alert">{errorMessage}</FormError>}
     </>
   );
 };

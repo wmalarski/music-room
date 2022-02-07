@@ -23,7 +23,9 @@ export const VideoPlayer = ({
   const ytRef = useRef<YouTube>(null);
 
   const { data: currentMessage } = useSelectCurrentMessage({ roomId: room_id });
-  const { mutate: updateMessage } = useUpdateMessage(room_id);
+
+  const { mutate: updateMessage, error: messageError } =
+    useUpdateMessage(room_id);
 
   const { data: controls } = useSelectControls(
     { roomId: room_id },
@@ -42,7 +44,8 @@ export const VideoPlayer = ({
       },
     }
   );
-  const { mutate: updateControls } = useUpdateControls(room_id);
+  const { mutate: updateControls, error: updateError } =
+    useUpdateControls(room_id);
 
   useSubscribeToControls({ roomId: room_id, profileId: profile_id });
 
@@ -66,6 +69,7 @@ export const VideoPlayer = ({
           ytRef={ytRef}
           profileId={profile_id}
           controls={controls}
+          error={messageError ?? updateError}
           message={{
             ...currentMessage,
             data: { kind: 'message#0.0.1', url: 'dQw4w9WgXcQ' },

@@ -32,7 +32,7 @@ export const RoomsList = ({
   });
 
   const pairs = virtualizer.virtualItems.map((row) => ({
-    member: data?.members.at(row.index - data.offset),
+    member: data?.members[row.index - offset],
     row,
   }));
 

@@ -1,7 +1,7 @@
 import { defaultMember } from '@music-room/data-access';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ComponentProps } from 'react';
 import { RoomsListItem } from './RoomsListItem';
 
@@ -21,6 +21,16 @@ describe('<RoomsListItem />', () => {
 
     renderComponent();
 
-    expect(true).toBeTruthy();
+    expect(await screen.findByRole('link')).toBeInTheDocument();
+  });
+
+  it('should render skelton', async () => {
+    expect.hasAssertions();
+
+    renderComponent({
+      member: undefined,
+    });
+
+    expect(screen.queryByRole('link')).toBeNull();
   });
 });

@@ -6,18 +6,19 @@ import { Layout } from '../Layout/Layout';
 import { ChatRoom } from './ChatRoom/ChatRoom';
 import { InviteLink } from './InviteLink/InviteLink';
 import { Reactions } from './Reactions/Reactions';
-import { VideoPlayer } from './VideoPlayer/VideoPlayer';
 
 export const Room = (): ReactElement => {
   const { name } = useRoom();
 
   return (
     <Layout header={<RoomHeader />} appTitle={name}>
-      <Flex>
-        <VideoPlayer />
-        <InviteLink />
+      <Flex justifyContent="center" gap="lg" space="lg">
+        <Flex direction="column" gap="lg">
+          {/* <VideoPlayer /> */}
+          <InviteLink />
+          <Reactions />
+        </Flex>
         <ChatRoom />
-        <Reactions />
       </Flex>
     </Layout>
   );

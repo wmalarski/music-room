@@ -10,11 +10,23 @@ import { CreateRoom } from './CreateRoom';
 
 type Props = ComponentProps<typeof CreateRoom>;
 
-const View: Props['View'] = ({ profile, onSubmit }) => {
+const View: Props['View'] = ({ profile, error, onSubmit }) => {
   return (
-    <button onClick={() => onSubmit({ name: 'RoomName', slug: 'RoomName' })}>
-      {profile ? 'Add' : ''}
-    </button>
+    <>
+      <button
+        onClick={() => {
+          if (!profile) return;
+          onSubmit({
+            name: 'RoomName',
+            slug: 'RoomName',
+            profileId: profile.id,
+          });
+        }}
+      >
+        {profile ? 'Add' : 'Click'}
+      </button>
+      <p>{error && 'Error'}</p>
+    </>
   );
 };
 

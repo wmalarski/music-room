@@ -12,6 +12,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 import { RoomFormViewData, useRoomFormViewOptions } from './RoomFormView.utils';
 
 type Props = {
@@ -38,6 +39,7 @@ export const RoomFormView = ({
   });
 
   const options = useRoomFormViewOptions();
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Card space="xl" direction="column">
@@ -56,7 +58,7 @@ export const RoomFormView = ({
             <FormError role="alert">{errors.name.message}</FormError>
           )}
         </FormFieldset>
-        {error && <FormError role="alert">{error.message}</FormError>}
+        {error && <FormError role="alert">{errorMessage}</FormError>}
         <Button isLoading={isLoading} disabled={!isDirty} type="submit">
           <Typography size="sm">{t('updateRoom')}</Typography>
         </Button>

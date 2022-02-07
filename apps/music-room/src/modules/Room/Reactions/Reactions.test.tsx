@@ -18,6 +18,7 @@ const View: Props['View'] = ({ action, message, onChange }) => {
       <button
         onClick={() => {
           onChange({
+            message_id: message?.id ?? 0,
             likeAt: action?.like_at ? null : new Date().toISOString(),
             dislikeAt: null,
           });

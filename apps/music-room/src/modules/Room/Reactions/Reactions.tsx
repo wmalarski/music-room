@@ -21,16 +21,15 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
     roomId: room_id,
   });
 
-  const { mutate: upsertMessage } = useUpsertAction();
+  const { mutate: upsertMessage, error } = useUpsertAction();
   const { data: action = null } = useSelectAction({
     profileId: profile_id,
     messageId: currentMessage?.id ?? null,
   });
 
   const handleSubmit = (data: ReactionsViewData) => {
-    if (!currentMessage) return;
     upsertMessage({
-      message_id: currentMessage.id,
+      message_id: data.message_id,
       profile_id,
       id: action?.id ?? undefined,
       dislike_at: data.dislikeAt,
@@ -39,6 +38,11 @@ export const Reactions = ({ View = ReactionsView }: Props): ReactElement => {
   };
 
   return (
-    <View action={action} message={currentMessage} onChange={handleSubmit} />
+    <View
+      action={action}
+      message={currentMessage}
+      error={error}
+      onChange={handleSubmit}
+    />
   );
 };

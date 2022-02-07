@@ -15,11 +15,17 @@ declare namespace Cypress {
     login(email: string, password: string): void;
   }
 }
-//
-// -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+
+Cypress.Commands.add('login', (email: string, password: string): void => {
+  if (email.length > 0) {
+    cy.get('form').get('[name=email]').type(email);
+  }
+  if (password.length > 0) {
+    cy.get('form').get('[name=password]').type(password);
+  }
+  cy.get('form').submit();
 });
+
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })

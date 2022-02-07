@@ -61,4 +61,12 @@ describe('<SignUp />', () => {
     });
     expect(user).toBeDefined();
   });
+
+  it('should render default', async () => {
+    expect.hasAssertions();
+
+    renderComponent({ View: undefined });
+
+    expect(await screen.findByText('signUpHeader')).toBeInTheDocument();
+  });
 });

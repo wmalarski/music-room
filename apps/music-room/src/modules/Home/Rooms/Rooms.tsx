@@ -1,6 +1,6 @@
 import { useSelectMembers, useUser } from '@music-room/data-access';
-import { ReactElement, useState } from 'react';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { ReactElement } from 'react';
+import { useDebouncedState } from '../../../hooks/useDebouncedState';
 import { RoomsList } from './RoomsList/RoomsList';
 
 type Props = {
@@ -12,7 +12,7 @@ const selectLimit = 50;
 export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
   const user = useUser();
 
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useDebouncedState(0, 500);
 
   const { data } = useSelectMembers(
     {
@@ -25,16 +25,12 @@ export const Rooms = ({ View = RoomsList }: Props): ReactElement => {
     }
   );
 
-  const handleOffsetChange = useDebounce((index: number) => {
-    setOffset(index);
-  }, 500);
-
   return (
     <View
       limit={selectLimit}
       data={data}
       offset={offset}
-      onOffsetChange={handleOffsetChange}
+      onOffsetChange={setOffset}
     />
   );
 };

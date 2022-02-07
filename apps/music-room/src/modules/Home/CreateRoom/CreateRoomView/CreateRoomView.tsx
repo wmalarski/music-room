@@ -15,7 +15,9 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 import {
+  CreateRoomFormData,
   CreateRoomViewData,
   useCreateRoomViewOptions,
 } from './CreateRoomView.utils';
@@ -29,6 +31,7 @@ type Props = {
 
 export const CreateRoomView = ({
   error,
+  profile,
   isLoading,
   onSubmit,
 }: Props): ReactElement => {
@@ -38,17 +41,23 @@ export const CreateRoomView = ({
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<CreateRoomViewData>();
+  } = useForm<CreateRoomFormData>();
+
+  const handleFormSubmit = (data: CreateRoomFormData) => {
+    if (!profile) return;
+    onSubmit({ ...data, profileId: profile?.id });
+  };
 
   const options = useCreateRoomViewOptions();
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Inset space="xl">
       <Card direction="column" gap="lg" space="xl">
         <Flex direction="row" justifyContent="spaceBetween" alignItems="center">
-          <Typography size="xl">Create new room</Typography>
+          <Typography size="xl">{t('createRoomHeader')}</Typography>
         </Flex>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(handleFormSubmit)}>
           <FormFieldset>
             <FormLabel htmlFor="name">{t('roomNamePlaceholder')}</FormLabel>
             <Input
@@ -71,7 +80,7 @@ export const CreateRoomView = ({
               <FormError role="alert">{errors.slug.message}</FormError>
             )}
           </FormFieldset>
-          {error && <FormError role="alert">{error.message}</FormError>}
+          {error && <FormError role="alert">{errorMessage}</FormError>}
           <Button isLoading={isLoading} type="submit">
             {t('addRoom')}
           </Button>

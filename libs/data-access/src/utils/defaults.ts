@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js';
+import { PostgrestError, User } from '@supabase/supabase-js';
 import {
   Action,
   Controls,
@@ -9,15 +9,6 @@ import {
   Role,
   Room,
 } from '../data/types';
-
-const qwerty = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-
-const randomString = (length = 5): string => {
-  return new Array(length)
-    .fill(0)
-    .map(() => qwerty[Math.ceil(Math.random() * (qwerty.length - 1))])
-    .join('');
-};
 
 export const defaultUser: User = {
   app_metadata: { provider: 'email' },
@@ -61,25 +52,6 @@ export const defaultMember: Member = {
   profile_avatar: null,
 };
 
-export const randomMembers = (length: number): Member[] => {
-  return Array(length)
-    .fill(0)
-    .map((_, index) => ({
-      id: index,
-      room_author_id: 1,
-      room_hash: randomString(),
-      profile_id: index,
-      room_id: index,
-      room_name: randomString(),
-      user_id: '',
-      profile_name: randomString(),
-      room_slug: randomString(),
-      role: 'user',
-      room_avatar: null,
-      profile_avatar: null,
-    }));
-};
-
 export const defaultRoom: Room = {
   author_id: 1,
   data: { kind: 'room#0.0.1' },
@@ -117,4 +89,11 @@ export const defaultControls: Controls = {
 export const defaultError: ResponseError = {
   error: 'Not found',
   error_description: 'Not found',
+};
+
+export const defaultPostgrestError: PostgrestError = {
+  code: '2137',
+  details: 'Default error',
+  hint: 'Ignore',
+  message: 'Important mock message',
 };

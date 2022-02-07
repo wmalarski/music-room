@@ -1,7 +1,8 @@
-import { Button, Card, Typography } from '@music-room/ui';
+import { Button, Card, FormError, Typography } from '@music-room/ui';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement, useState } from 'react';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
 
 type Props = {
   isLoading: boolean;
@@ -9,7 +10,7 @@ type Props = {
   onClick: () => void;
 };
 
-export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
+export const DeleteRoomView = ({ onClick, error }: Props): ReactElement => {
   const { t } = useTranslation('settings');
 
   const [isClicked, setIsClicked] = useState(false);
@@ -17,6 +18,8 @@ export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
   const handleFirstClick = () => {
     setIsClicked(true);
   };
+
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Card space="xl" direction="column" gap="md">
@@ -31,6 +34,7 @@ export const DeleteRoomView = ({ onClick }: Props): ReactElement => {
           <Typography size="sm">{t('confirmRemoveRoom')}</Typography>
         </Button>
       )}
+      {error && <FormError role="alert">{errorMessage}</FormError>}
     </Card>
   );
 };

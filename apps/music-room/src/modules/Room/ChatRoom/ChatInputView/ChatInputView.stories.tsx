@@ -13,7 +13,5 @@ const Template: ComponentStory<typeof ChatInputView> = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-  onQueryChange: () => null,
   onSubmit: () => null,
-  query: '',
 };

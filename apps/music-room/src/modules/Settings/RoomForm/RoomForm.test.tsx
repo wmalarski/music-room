@@ -55,4 +55,22 @@ describe('<RoomForm />', () => {
 
     expect(await screen.findByText('RoomName')).toBeInTheDocument();
   });
+
+  it('should render default view', async () => {
+    expect.hasAssertions();
+
+    const { author, roles, rooms, user } = userWithRoomsScenario(1);
+
+    renderComponent({
+      View: undefined,
+      wrapperProps: {
+        profile: convert.toProfile(author),
+        role: convert.toRole(roles[0]),
+        room: convert.toRoom(rooms[0]),
+        user: convert.toUser(user),
+      },
+    });
+
+    expect(await screen.findByText('roomNamePlaceholder')).toBeInTheDocument();
+  });
 });

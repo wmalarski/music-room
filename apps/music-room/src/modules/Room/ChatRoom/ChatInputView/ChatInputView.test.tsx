@@ -8,9 +8,7 @@ import { ChatInputView } from './ChatInputView';
 type Props = ComponentProps<typeof ChatInputView>;
 
 const defaultProps: Props = {
-  onQueryChange: () => null,
   onSubmit: () => null,
-  query: '',
   error: null,
   isLoading: false,
   message: defaultMessage,

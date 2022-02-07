@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ComponentProps } from 'react';
 import { DeleteRoomView } from './DeleteRoomView';
 
@@ -17,11 +18,19 @@ const renderComponent = (props: Partial<Props> = {}) => {
 };
 
 describe('<DeleteRoomView />', () => {
-  it('should render', async () => {
+  it('should render and receive approve click', async () => {
     expect.hasAssertions();
 
-    renderComponent();
+    const onClick = jest.fn();
 
-    expect(true).toBeTruthy();
+    renderComponent({
+      onClick,
+    });
+
+    userEvent.click(await screen.findByRole('button'));
+
+    userEvent.click(await screen.findByText('confirmRemoveRoom'));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });

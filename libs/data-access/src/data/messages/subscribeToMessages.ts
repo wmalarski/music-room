@@ -22,13 +22,10 @@ export const useSubscribeToMessages = ({
 
   useEffect(() => {
     const subscription = supabase
-      .from<Message>(`messages:room_id=eq.${roomId}`)
-      .on('*', (payload) => {
-        if (
-          payload.new.profile_id === profileId ||
-          payload.old.profile_id === profileId
-        )
-          return;
+      .from<Message>(
+        `messages:room_id=eq.${roomId}&profile_id=neq.${profileId}`
+      )
+      .on('*', () => {
         queryClient.invalidateQueries(selectCurrentMessageKey({ roomId }));
         queryClient.invalidateQueries<InfiniteData<Message[]>>(
           selectMessagesKey({ roomId, limit, offset })

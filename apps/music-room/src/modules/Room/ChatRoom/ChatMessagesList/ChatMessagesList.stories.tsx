@@ -1,5 +1,6 @@
 import { defaultMessage } from '@music-room/data-access';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { defaultVirtualizer } from '../../../../tests/mocks';
 import { ChatMessagesList } from './ChatMessagesList';
 
 export default {
@@ -13,8 +14,6 @@ const Template: ComponentStory<typeof ChatMessagesList> = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-  offset: 1,
-  onOffsetChange: () => void 0,
   data: {
     messages: [
       { ...defaultMessage, id: 1 },
@@ -23,4 +22,10 @@ Primary.args = {
     count: 2,
     offset: 0,
   },
+  parentRef: { current: null },
+  virtualizer: defaultVirtualizer({
+    count: 2,
+    height: 80,
+    totalLength: 2,
+  }),
 };

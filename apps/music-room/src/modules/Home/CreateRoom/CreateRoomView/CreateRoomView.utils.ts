@@ -2,14 +2,18 @@ import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import { RegisterOptions } from 'react-hook-form';
 
-export type CreateRoomViewData = {
+export type CreateRoomFormData = {
   name: string;
   slug: string;
 };
 
+export type CreateRoomViewData = CreateRoomFormData & {
+  profileId: number;
+};
+
 export const useCreateRoomViewOptions = (): Record<
-  keyof CreateRoomViewData,
-  RegisterOptions<CreateRoomViewData>
+  keyof CreateRoomFormData,
+  RegisterOptions<CreateRoomFormData>
 > => {
   const { t } = useTranslation('home');
 

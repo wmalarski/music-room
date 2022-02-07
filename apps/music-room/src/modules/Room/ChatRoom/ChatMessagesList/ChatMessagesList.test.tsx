@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { ComponentProps } from 'react';
+import { defaultVirtualizer } from '../../../../tests/mocks';
 import { ChatMessagesList } from './ChatMessagesList';
 
 type Props = ComponentProps<typeof ChatMessagesList>;
@@ -16,9 +17,12 @@ const defaultProps: Props = {
     offset: 0,
     count: 2,
   },
-  offset: 0,
-  limit: 40,
-  onOffsetChange: () => void 0,
+  parentRef: { current: null },
+  virtualizer: defaultVirtualizer({
+    count: 10,
+    height: 40,
+    totalLength: 100,
+  }),
 };
 
 const renderComponent = (props: Partial<Props> = {}) => {

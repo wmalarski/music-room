@@ -11,12 +11,8 @@ import { PostgrestError, User } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  SignUpViewContext,
-  SignUpViewData,
-  signUpViewResolver,
-  useSignUpViewOptions,
-} from './SignUpView.utils';
+import { useErrorMessage } from '../../../../hooks/useErrorMessage';
+import { SignUpViewData, useSignUpViewOptions } from './SignUpView.utils';
 
 type Props = {
   isLoading: boolean;
@@ -27,18 +23,16 @@ type Props = {
 
 const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
   const { t } = useTranslation('auth');
-  const { t: tForm } = useTranslation('common');
-
-  const options = useSignUpViewOptions();
 
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<SignUpViewData, SignUpViewContext>({
-    resolver: signUpViewResolver,
-    context: { t: tForm },
-  });
+    watch,
+  } = useForm<SignUpViewData>();
+
+  const options = useSignUpViewOptions(watch);
+  const errorMessage = useErrorMessage({ error });
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -81,8 +75,8 @@ const SignUpView = ({ isLoading, error, onSubmit }: Props): ReactElement => {
           <FormError role="alert">{errors.confirmPassword.message}</FormError>
         )}
       </FormFieldset>
-      {error && <FormError role="alert">{error.message}</FormError>}
-      <Button isLoading={isLoading} type="submit">
+      {error && <FormError role="alert">{errorMessage}</FormError>}
+      <Button isLoading={isLoading} name="signUp" type="submit">
         <Typography size="sm">{t('signUpButton')}</Typography>
       </Button>
     </Form>
